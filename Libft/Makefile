@@ -12,6 +12,8 @@ SRC_STR = ft_strlen.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_strlcpy.c \
 SRC_MEM = ft_memset.c ft_memcpy.c ft_memmove.c ft_memchr.c ft_memcmp.c \
 		  ft_bzero.c
 
+SRC_MAL = ft_calloc.c ft_strdup.c
+
 SRCS = $(SRC_CHAR) $(SRC_STR) $(SRC_MEM)
 OBJS = $(SRCS:.c=.o)
 
