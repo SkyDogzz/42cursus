@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:32:30 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/05 15:47:59 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/06 12:24:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	ft_isspace(int c)
 {
-	return (c == ' ' || c == '\t' || c == '\r' || c == '\n' 
-	|| c == '\v' || c == '\f');
+	return (c == ' ' || c == '\t' || c == '\r' || c == '\n'
+		|| c == '\v' || c == '\f');
 }
 
 int	ft_atoi(const char *s)
 {
 	int	mult;
-	int nb;
+	int	nb;
 
 	mult = 1;
 	nb = 0;

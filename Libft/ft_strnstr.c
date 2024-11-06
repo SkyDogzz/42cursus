@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:26:37 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/05 15:31:26 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/06 12:21:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*strnstr(const char *big, const char *little, size_t len)
 {
 	int	flag;
 	int	pos;
+
 	while (*big && len)
 	{
 		flag = 0;

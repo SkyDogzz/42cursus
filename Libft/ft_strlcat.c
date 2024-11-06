@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:01:38 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/05 15:06:17 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/06 12:23:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ size_t	ft_strlcat(char *d, const char *s, size_t n)
 	size_t	len;
 
 	len = 0;
-	while (*d++);
+	while (*d++)
+		;
 	while (*s && n)
 	{
 		*d = *s;
