@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 14:47:31 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/06 16:29:48 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/06 15:46:08 by marvin            #+#    #+#             */
+/*   Updated: 2024/11/06 16:29:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	int		pos;
-	char	*dup;
+	char	*join;
 
-	dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
-	pos = 0;
-	while (*s)
+	join = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!join)
+		return (NULL);
+	while (*s1)
 	{
-		*(dup + pos) = *s;
-		s++;
-		pos++;
+		*join++ = *s1;
+		s1++;
 	}
-	*(dup + pos) = 0;
-	return (dup);
+	while (*s2)
+	{
+		*join++ = *s2;
+		s2++;
+	}
+	*join = 0;
+	return (join);
 }

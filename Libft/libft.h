@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:50 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/06 14:50:51 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/06 16:15:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,16 @@ void	ft_bzero(void *s, size_t n);
 // using malloc
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
+
+/*
+--------------------------------------------------------------------------------
+MORE FONCTIONS
+--------------------------------------------------------------------------------
+*/
+
+char	*ft_substr(const char *s, unsigned int start, size_t len);
+char	*ft_strjoin(const char *s1, const char *s2);
+char	*ft_strtrim(const char *s1, const char *set);
+char	**ft_split(const char *s, char c);
 
 #endif

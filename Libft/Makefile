@@ -3,18 +3,20 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 
-SRC_CHAR = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
+SRCS_CHAR = ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 		 ft_toupper.c ft_tolower.c
 
-SRC_STR = ft_strlen.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_strlcpy.c \
+SRCS_STR = ft_strlen.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_strlcpy.c \
 		  ft_strlcat.c ft_strnstr.c ft_atoi.c
 
-SRC_MEM = ft_memset.c ft_memcpy.c ft_memmove.c ft_memchr.c ft_memcmp.c \
+SRCS_MEM = ft_memset.c ft_memcpy.c ft_memmove.c ft_memchr.c ft_memcmp.c \
 		  ft_bzero.c
 
-SRC_MAL = ft_calloc.c ft_strdup.c
+SRCS_MAL = ft_calloc.c ft_strdup.c
 
-SRCS = $(SRC_CHAR) $(SRC_STR) $(SRC_MEM) $(SRC_MAL)
+SRCS_MORE = ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c
+
+SRCS = $(SRCS_CHAR) $(SRCS_STR) $(SRCS_MEM) $(SRCS_MAL) $(SRCS_MORE)
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

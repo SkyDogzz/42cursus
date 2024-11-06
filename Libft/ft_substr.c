@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 14:47:31 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/06 16:29:48 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/06 15:37:57 by marvin            #+#    #+#             */
+/*   Updated: 2024/11/06 16:30:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
 	int		pos;
-	char	*dup;
+	char	*sub;
 
-	dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	sub = (char *)malloc(sizeof(char) * (len + 1));
+	if (!sub)
+		return (NULL);
 	pos = 0;
-	while (*s)
+	while (*(s + start) && len)
 	{
-		*(dup + pos) = *s;
-		s++;
+		*(sub + pos) = *s;
+		len--;
 		pos++;
+		s++;
 	}
-	*(dup + pos) = 0;
-	return (dup);
+	*(sub + pos) = 0;
+	return (sub);
 }
