@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:16:02 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/06 16:42:00 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/07 12:46:58 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,91 @@
 
 int	ft_countwords(const char *s, char c)
 {
-	int	words;
+	int	count;
+	int	in_word;
 
-	words = 0;
-	s++;
+	count = 0;
+	in_word = 0;
 	while (*s)
 	{
-		if (*(s - 1) != c && *s == c)
-			words++;
+		if (*s != c && !in_word)
+		{
+			in_word = 1;
+			count++;
+		}
+		else if (*s == c)
+			in_word = 0;
 		s++;
 	}
-	if (*--s == c)
-		words--;
-	return (words);
+	return (count);
 }
 
-char	**ft_split(const char *s, char c)
+char	*ft_strndup(const char *s, int n)
 {
-	int		j;
-	int		pos;
-	int		words;
-	char	**split;
+	char	*str;
+	int		i;
 
+	str = (char *)malloc(sizeof(char) * (n + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i < n && s[i])
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = 0;
+	return (str);
+}
+
+void	free_split(char **split, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(split[i++]);
+	}
+	free(split);
+}
+
+char	*get_next_word(const char **s, char c)
+{
+	int	len;
+
+	while (**s && **s == c)
+		(*s)++;
+	len = 0;
+	while ((*s)[len] && (*s)[len] != c)
+		len++;
+	return (ft_strndup(*s, len));
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**split;
+	int		words;
+	int		i;
+
+	if (!s)
+		return (NULL);
 	words = ft_countwords(s, c);
 	split = (char **)malloc(sizeof(char *) * (words + 1));
 	if (!split)
 		return (NULL);
-	pos = 0;
-	while (pos < words)
+	i = 0;
+	while (i < words)
 	{
-		j = 0;
-		while (*s++ != c)
-			j++;
-		s -= j;
-		*split = (char *)malloc(sizeof(char) * (j + 1));
-		while (*s++ != c)
-			*split[pos]++ = *s++;
-		*split[pos] = 0;
-		pos++;
+		split[i] = get_next_word(&s, c);
+		if (!split[i++])
+		{
+			free_split(split, i - 1);
+			return (NULL);
+		}
+		s += ft_strlen(split[i]);
+		i++;
 	}
-	split[pos] = 0;
+	split[i] = NULL;
 	return (split);
 }
