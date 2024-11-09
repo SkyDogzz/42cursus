@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:50 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/09 10:32:31 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/09 14:46:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_strrchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlcpy(char *d, const char *s, size_t n);
 size_t	ft_strlcat(char *d, const char *s, size_t n);
-char	*strnstr(const char *big, const char *little, size_t len);
+char	*ft_strnstr(const char *big, const char *little, size_t len);
 int		ft_atoi(const char *s);
 
 // mem fonctions
