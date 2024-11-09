@@ -14,7 +14,9 @@ SRCS_MEM = ft_memset.c ft_memcpy.c ft_memmove.c ft_memchr.c ft_memcmp.c \
 
 SRCS_MAL = ft_calloc.c ft_strdup.c
 
-SRCS_MORE = ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c
+SRCS_MORE = ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
+			ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
+			ft_putendl_fd.c ft_putnbr_fd.c
 
 SRCS = $(SRCS_CHAR) $(SRCS_STR) $(SRCS_MEM) $(SRCS_MAL) $(SRCS_MORE)
 OBJS = $(SRCS:.c=.o)
