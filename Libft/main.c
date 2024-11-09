@@ -11,6 +11,7 @@
 #include <bsd/string.h>
 
 #include "libft.h"
+#include "libft_bonus.h"
 
 #define BUFFER_SIZE 1024
 
@@ -349,6 +350,14 @@ int main(int argc, char *argv[])
 
 	printf("FT_PUTNBR_FD\n");
 	ft_putendl_fd(ft_itoa(INT_MAX), 1);
+	
+	/*
+	* Test lst / bonus related functions
+	*/
+	printf("FT_LSTNEW\n");
+	t_list *lst;
+	lst = ft_lstnew(NULL);
+	printf("lst pointer : %p\n", lst);
 
 	free(test);
 	free(test2);
