@@ -40,7 +40,7 @@ clean:
 	rm -rf $(OBJS)
 
 clean_bonus:
-	rm -rf $(OBJS)
+	rm -rf $(OBJS_BONUS)
 
 fclean: clean clean_bonus
 	rm -rf $(NAME)
