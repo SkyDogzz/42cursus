@@ -318,6 +318,38 @@ int main(int argc, char *argv[])
 	char orig2[] = "Hello wo\0rld!";
 	printf("%s, %s, %s\n", orig2, strdup(orig2), ft_strdup(orig2));
 
+	printf("FT_SUBSTR\n");
+	char yap[] = "A huge str containing nothing but yapping";
+	printf("%s, %s, %s\n", ft_substr(yap, 10, 10), ft_substr(yap, 20, 10), ft_substr(yap, 0, 100));
+
+	printf("FT_STRJOIN\n");
+	printf("%s, %s, %s\n", ft_strjoin("Hello ", "world!"), ft_strjoin("Hel\0lo ", "world!"),ft_strjoin("Hello ", "wo\0rld!"));
+
+	printf("FT_STRTRIM\n");
+	printf("%s\n", ft_strtrim("!@#$%^FGTYFYTF$##^!@", "!@$#"));
+	printf("%s\n", ft_strtrim("!@#$%^FGTYFYTF$##^!@!@#!@#", "!@$#"));
+
+	printf("FT_SPLIT\n");
+	char **split;
+	split = ft_split("HELLO, i, need, to find, some, words, to yap", ',');
+	for(int i = 0; i < 7; i++)
+		printf("%s\n", split[i]);
+
+	printf("FT_ITOA\n");
+	printf("%s %s %s %s %s\n", ft_itoa(INT_MAX), ft_itoa(INT_MIN), ft_itoa(-1000), ft_itoa(0), ft_itoa(1000));
+
+	printf("FT_PUTCHAR_FD\n");
+	ft_putchar_fd('q', 2);
+	
+	printf("FT_PUTSTR_FD\n");
+	ft_putstr_fd("This is an error", 2);
+	
+	printf("FT_PUTENDL_FD\n");
+	ft_putendl_fd("This is an error", 1);
+
+	printf("FT_PUTNBR_FD\n");
+	ft_putendl_fd(ft_itoa(INT_MAX), 1);
+
 	free(test);
 	free(test2);
 	free(mem);

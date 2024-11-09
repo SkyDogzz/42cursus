@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:37:57 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/06 16:30:19 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/09 16:20:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	pos = 0;
 	while (*(s + start) && len)
 	{
-		*(sub + pos) = *s;
+		*(sub + pos) = *(s + start);
 		len--;
 		pos++;
 		s++;

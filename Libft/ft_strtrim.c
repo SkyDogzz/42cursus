@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:52:02 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/06 16:30:33 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/09 16:37:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_countsetend(const char *s, const char *set)
 	int	flag;
 
 	n = 0;
-	pos = ft_strlen(s);
+	pos = ft_strlen(s) - 1;
 	while (*(s + pos))
 	{
 		posset = 0;
@@ -82,10 +82,10 @@ char	*ft_strtrim(const char *s1, const char *set)
 		s1++;
 	pos = 0;
 	len = ft_strlen(s1) - pretrim - posttrim;
-	trim = (char *)malloc(sizeof(char) * (len + 1));
+	trim = (char *)malloc(sizeof(char) * (len));
 	if (!trim)
 		return (NULL);
-	while (len)
+	while (len - 1)
 	{
 		*(trim + pos++) = *s1++;
 		len--;
