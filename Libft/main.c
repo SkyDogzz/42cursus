@@ -114,7 +114,7 @@ void verif_test_2str_size_match_s(char *s1, char *s2, size_t n, size_t (*f)(char
 
 void verif_test_strnstr(char *big, char *little, size_t n, char *(*f)(const char *big, const char *little, size_t n), char *(*ft_f)(const char *big, const char *little, size_t n)){
 	char *f1, *f2;
-	
+
 	f1 = (char *)malloc(sizeof(char) * BUFFER_SIZE);
 	f2 = (char *)malloc(sizeof(char) * BUFFER_SIZE);
 	f1 = f(big, little, n);
@@ -252,6 +252,79 @@ int main(int argc, char *argv[])
 	verif_test_atoi("-42", &atoi, &ft_atoi);
 	verif_test_atoi("0", &atoi, &ft_atoi);
 	verif_test_atoi("42", &atoi, &ft_atoi);
+
+	/*
+	* Test mem related functions
+	*/
+	char *mem, *mem2, *mem3;
+	mem = (void *)malloc(sizeof(mem) * BUFFER_SIZE);
+	mem2 = (void *)malloc(sizeof(mem) * BUFFER_SIZE);
+	mem3 = (void *)malloc(sizeof(mem) * BUFFER_SIZE);
+
+	printf("FT_MEMSET\n");
+	n = 10;
+	memset(mem, 128, n);
+	ft_memset(mem2, 128, n);
+	for(int i = 0; i <= n; i++)
+		printf("%d %d\n", mem[i], mem2[i]);
+
+	printf("FT_MEMCPY\n");
+	for(int i = 0; i < n; i++)
+		mem[i] = i;
+	memcpy(mem2, mem, n);
+	ft_memcpy(mem3, mem, n);
+	for(int i = 0; i <= n; i++)
+		printf("%d %d\n", mem2[i], mem3[i]);
+
+	//ft_memmove flemme
+	
+	printf("FT_MEMCHR\n");
+	printf("%p %p \n", memchr(mem, 4, n), ft_memchr(mem, 4, n));
+	printf("%p %p \n", memchr(mem, 10, n), ft_memchr(mem, 10, n));
+
+	printf("FT_MEMCMP\n");
+	memcpy(mem2, mem, n);
+	printf("%d %d\n", memcmp(mem, mem2, n), ft_memcmp(mem, mem2, n));
+	mem[n - 1] += 10;
+	printf("%d %d\n", memcmp(mem, mem2, n), ft_memcmp(mem, mem2, n));
+
+	printf("FT_BZERO\n");
+	memset(mem, 10, n + 5);
+	memset(mem2, 10, n + 5);
+	bzero(mem, n);
+	ft_bzero(mem2, n);
+	for(int i = 0; i <= n + 5; i++)
+		printf("%d %d\n", mem[i], mem2[i]);
+
+	printf("FT_CALLOC");
+	void *huge1;
+	void *huge2;
+	huge1 = calloc(1000000000 + 1, 1000000000 - 1);
+	huge2 = ft_calloc(1000000000 + 1, 1000000000 - 1);
+	printf("%p %p\n", huge1, huge2);
+	huge1 = calloc(10000, 10000);
+	huge2 = ft_calloc(10000, 10000);
+	printf("%p %p\n", huge1, huge2);
+	huge1 = calloc(0, 10000);
+	huge2 = ft_calloc(0, 10000);
+	printf("%p %p\n", huge1, huge2);
+	huge1 = calloc(10000, 0);
+	huge2 = ft_calloc(10000, 0);
+	printf("%p %p\n", huge1, huge2);
+
+	printf("FT_STRDUP\n");
+	char orig[] = "Hello world!";
+	printf("%s, %s, %s\n", orig, strdup(orig), ft_strdup(orig));
+	char orig2[] = "Hello wo\0rld!";
+	printf("%s, %s, %s\n", orig2, strdup(orig2), ft_strdup(orig2));
+
+	free(test);
+	free(test2);
+	free(mem);
+	free(mem2);
+	free(mem3);
+	free(huge1);
+	free(huge2);
 
 	return EXIT_SUCCESS;
 }
