@@ -21,10 +21,17 @@ SRCS_MORE = ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
 SRCS = $(SRCS_CHAR) $(SRCS_STR) $(SRCS_MEM) $(SRCS_MAL) $(SRCS_MORE)
 OBJS = $(SRCS:.c=.o)
 
+SRCS_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
+			 ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
+
+bonus: $(OBJS) $(OBJS_BONUS)
+	$(AR) $(NAME) $?
 
 %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@
