@@ -398,5 +398,12 @@ int main(int argc, char *argv[])
 	free(huge1);
 	free(huge2);
 
+	char *testt1, *testt2;
+	testt1 = (char *)malloc(sizeof(char)*BUFFER_SIZE);
+	testt2 = (char *)malloc(sizeof(char)*BUFFER_SIZE);
+	ft_strlcpy(testt1, "#0- +'I", 7);
+	strlcpy(testt2, "#0- +'I", 7);
+	printf("ft %s orig %s\n", testt1, testt2);
+
 	return EXIT_SUCCESS;
 }
