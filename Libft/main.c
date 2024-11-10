@@ -278,7 +278,7 @@ int main(int argc, char *argv[])
 		printf("%d %d\n", mem2[i], mem3[i]);
 
 	//ft_memmove flemme
-	
+
 	printf("FT_MEMCHR\n");
 	printf("%p %p \n", memchr(mem, 4, n), ft_memchr(mem, 4, n));
 	printf("%p %p \n", memchr(mem, 10, n), ft_memchr(mem, 10, n));
@@ -341,16 +341,16 @@ int main(int argc, char *argv[])
 
 	printf("FT_PUTCHAR_FD\n");
 	ft_putchar_fd('q', 2);
-	
+
 	printf("FT_PUTSTR_FD\n");
 	ft_putstr_fd("This is an error", 2);
-	
+
 	printf("FT_PUTENDL_FD\n");
 	ft_putendl_fd("This is an error", 1);
 
 	printf("FT_PUTNBR_FD\n");
 	ft_putendl_fd(ft_itoa(INT_MAX), 1);
-	
+
 	/*
 	* Test lst / bonus related functions
 	*/
@@ -358,6 +358,37 @@ int main(int argc, char *argv[])
 	t_list *lst;
 	lst = ft_lstnew(NULL);
 	printf("lst pointer : %p\n", lst);
+
+	printf("FT_LSTADDFRONT\n");
+	ft_lstadd_front(&lst, ft_lstnew(NULL));
+	while(lst->next)
+	{
+		printf("address %p\n", lst);
+		lst = lst->next;
+	}
+	printf("address %p\n", lst);
+
+	printf("FT_LSTSIZE\n");
+	t_list *lst2;
+	lst2 = ft_lstnew(NULL);
+	ft_lstadd_front(&lst2, ft_lstnew(NULL));
+	ft_lstadd_front(&lst2, ft_lstnew(NULL));
+	printf("lst size: %d\n", ft_lstsize(lst2));
+
+	printf("FT_LSTLAST");
+	printf("last of lst %p\n", ft_lstlast(lst));
+
+	printf("FT_LSTADD_BACK\n");
+	t_list	*lst3;
+	lst3 = ft_lstnew(NULL);
+	printf("lst pointer : %p\n", lst3);
+	ft_lstadd_back(&lst3, ft_lstnew(NULL));
+	while(lst3->next)
+	{
+		printf("address %p\n", lst3);
+		lst3 = lst3->next;
+	}
+	printf("address %p\n", lst3);
 
 	free(test);
 	free(test2);

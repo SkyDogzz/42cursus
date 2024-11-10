@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:59:51 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/09 11:02:44 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/10 11:18:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,9 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	new->next = *lst;
+	t_list	*temp;
+
+	temp = *lst;
+	new->next = temp;
+	*lst = new;
 }
