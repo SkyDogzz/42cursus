@@ -39,7 +39,7 @@ bonus: $(OBJS) $(OBJS_BONUS)
 clean:
 	rm -rf $(OBJS)
 
-clean_bonus:
+clean_bonus: clean
 	rm -rf $(OBJS_BONUS)
 
 fclean: clean clean_bonus
