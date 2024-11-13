@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:58:50 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/12 12:43:17 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/13 23:16:11 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,21 @@
 
 size_t	ft_strlcpy(char *d, const char *s, size_t n)
 {
-	size_t	len;
+	size_t		len;
+	const char	*s_start = s;
 
 	len = 0;
-	while (*s && n)
-	{
-		*d++ = *s;
-		s++;
-		n--;
+	while (*s++)
 		len++;
+	s = s_start;
+	if (n > 0)
+	{
+		while (*s && n > 1)
+		{
+			*d++ = *s++;
+			n--;
+		}
+		*d = '\0';
 	}
-	*d = 0;
 	return (len);
 }

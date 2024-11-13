@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 11:05:37 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/10 11:26:47 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 00:19:56 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ int	ft_lstsize(t_list *lst)
 {
 	int	size;
 
-	if (!lst)
-		return (0);
-	while (lst->next)
+	size = 0;
+	while (lst)
 	{
 		size++;
 		lst = lst->next;
 	}
-	size++;
 	return (size);
 }

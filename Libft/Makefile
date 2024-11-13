@@ -22,7 +22,8 @@ SRCS = $(SRCS_CHAR) $(SRCS_STR) $(SRCS_MEM) $(SRCS_MAL) $(SRCS_MORE)
 OBJS = $(SRCS:.c=.o)
 
 SRCS_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-			 ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c
+			 ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
+			 ft_lstmap.c
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 10:33:00 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/09 10:37:59 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/13 23:41:00 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,21 @@ void	ft_putnbr_fd(int n, int fd)
 {
 	char	num;
 
-	if (n / 10 < 0 && n / 10 > -10)
-		write(1, "-", 1);
-	if (n / 10 > 0 | n / 10 < 0)
+	if (n < 0)
 	{
-		ft_putnbr_fd(n / 10, fd);
+		write(fd, "-", 1);
+		if (n == INT_MIN)
+		{
+			write(fd, "2", 1);
+			n = 147483648;
+		}
+		else
+		{
+			n = -n;
+		}
 	}
-	num = n % 10;
-	if (num < 0)
-		num *= -1;
-	num += 48;
+	if (n / 10 != 0)
+		ft_putnbr_fd(n / 10, fd);
+	num = (n % 10) + '0';
 	write(fd, &num, 1);
 }

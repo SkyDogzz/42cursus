@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:32:30 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/06 12:24:49 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/13 23:21:16 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,30 @@ int	ft_isspace(int c)
 		|| c == '\v' || c == '\f');
 }
 
+int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
+
 int	ft_atoi(const char *s)
 {
-	int	mult;
+	int	sign;
 	int	nb;
 
-	mult = 1;
+	sign = 1;
 	nb = 0;
 	while (ft_isspace((int) *s))
 		s++;
-	if (*s == '-')
+	if (*s == '-' || *s == '+')
 	{
-		mult = -1;
+		if (*s == '-')
+			sign = -1;
 		s++;
 	}
-	while (ft_isdigit(*s))
+	while (ft_isdigit((int)*s))
 	{
-		nb *= 10;
-		nb += *s - '0';
+		nb = nb * 10 + (*s - '0');
 		s++;
 	}
-	return (nb * mult);
+	return (nb * sign);
 }

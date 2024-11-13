@@ -6,59 +6,50 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 09:52:57 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/09 17:37:16 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 00:19:20 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrev(char *s)
+int	get_num_len(int n)
 {
-	char	*rev;
-	char	temp;
-	int		size;
-	int		pos;
+	int	len;
 
-	size = ft_strlen(s);
-	if (size == 0)
-		return ("0");
-	rev = (char *)malloc(sizeof(char) * (size + 1));
-	if (!rev)
-		return (NULL);
-	pos = 0;
-	rev[size] = 0;
-	while (size)
-		rev[size-- - 1] = s[pos++];
-	if (!rev)
-		return ("0");
-	return (rev);
+	len = 0;
+	if (n <= 0)
+		len++;
+	while (n)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*num;
-	int		pos;
-	int		neg;
+	char	*str;
+	int		len;
+	long	nb;
 
-	if (n == -2147483648)
-		return ("-2147483648");
-	num = (char *)malloc(sizeof(char) * 12);
-	if (!num)
+	nb = n;
+	len = get_num_len(n);
+	str = (char *)malloc(len + 1);
+	if (!str)
 		return (NULL);
-	neg = 0;
-	if (n < 0)
+	str[len--] = '\0';
+	if (nb < 0)
 	{
-		neg = 1;
-		n *= -1;
+		str[0] = '-';
+		nb = -nb;
 	}
-	pos = 0;
-	while (n)
+	while (nb > 0)
 	{
-		num[pos++] = n % 10 + '0';
-		n /= 10;
+		str[len--] = (nb % 10) + '0';
+		nb /= 10;
 	}
-	if (neg)
-		num[pos++] = '-';
-	num[pos] = 0;
-	return (ft_strrev(num));
+	if (n == 0)
+		str[0] = '0';
+	return (str);
 }

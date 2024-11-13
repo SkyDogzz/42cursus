@@ -6,90 +6,41 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:52:02 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/09 16:37:34 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/13 23:27:49 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_countsetend(const char *s, const char *set)
+int	is_in_set(char c, const char *set)
 {
-	int	n;
-	int	pos;
-	int	posset;
-	int	flag;
-
-	n = 0;
-	pos = ft_strlen(s) - 1;
-	while (*(s + pos))
-	{
-		posset = 0;
-		flag = 0;
-		while (*(set + posset))
-		{
-			if (*(s + pos) == *(set + posset))
-			{
-				flag = 1;
-				n++;
-			}
-			posset++;
-		}
-		if (flag == 0)
-			return (n);
-		pos--;
-	}
-	return (n);
-}
-
-int	ft_countsetstart(const char *s, const char *set)
-{
-	int	n;
-	int	flag;
-	int	posset;
-
-	n = 0;
-	while (*s)
-	{
-		posset = 0;
-		flag = 0;
-		while (*(set + posset))
-		{
-			if (*s == *(set + posset))
-			{
-				flag = 1;
-				n++;
-			}
-			posset++;
-		}
-		if (flag == 0)
-			return (n);
-		s++;
-	}
-	return (n);
+	while (*set)
+		if (c == *set++)
+			return (1);
+	return (0);
 }
 
 char	*ft_strtrim(const char *s1, const char *set)
 {
-	int		posttrim;
-	int		pretrim;
-	int		pos;
-	int		len;
+	int		start;
+	int		end;
 	char	*trim;
+	int		i;
 
-	posttrim = ft_countsetend(s1, set);
-	pretrim = ft_countsetstart(s1, set);
-	while (pretrim--)
-		s1++;
-	pos = 0;
-	len = ft_strlen(s1) - pretrim - posttrim;
-	trim = (char *)malloc(sizeof(char) * (len));
+	if (!s1 || !set)
+		return (NULL);
+	start = 0;
+	while (s1[start] && is_in_set(s1[start], set))
+		start++;
+	end = ft_strlen(s1);
+	while (end > start && is_in_set(s1[end - 1], set))
+		end--;
+	trim = (char *)malloc(sizeof(char) * (end - start + 1));
 	if (!trim)
 		return (NULL);
-	while (len - 1)
-	{
-		*(trim + pos++) = *s1++;
-		len--;
-	}
-	*(trim + pos) = 0;
+	i = 0;
+	while (start < end)
+		trim[i++] = s1[start++];
+	trim[i] = '\0';
 	return (trim);
 }
