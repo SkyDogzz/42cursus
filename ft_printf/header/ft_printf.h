@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:36:11 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 16:30:30 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:55:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,20 @@ void		ft_putnbr_fd_options(int i, int fd, struct s_option options);
 void		ft_putunbr_fd(unsigned int n, int fd);
 int			ft_countcharint(int n);
 void		ft_putnbr_width(struct s_width width);
-
-void		ft_puthex_fd(int n, char spe, int fd);
+ 
+// ft_char
 void		ft_addchar(int n, char c, int fd);
+void		ft_putchar_fd_options(char c, int fd, struct s_option options);
+
+// ft_parse
+char		*ft_parse_first(struct s_option *options, char *s);
+char		*ft_parse_second(struct s_option *options, char *s);
+
+// ft_printf
+void		ft_puthex_fd(int n, char spe, int fd);
 void		ft_print_with_option(struct s_option options, ...);
 int			ft_printf(const char *s, ...);
+
+void	ft_putstr_fd_options(char *s, int fd, struct s_option options);
 
 #endif

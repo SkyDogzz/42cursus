@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:38:49 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 16:42:44 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:55:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ void	ft_puthex_fd(int n, char spe, int fd)
 	write(fd, &num, 1);
 }
 
-void	ft_addchar(int n, char c, int fd)
-{
-	while (n-- > 0)
-		write(fd, &c, 1);
-}
-
 void	ft_print_with_option(struct s_option options, ...)
 {
 	va_list	ap;
@@ -53,9 +47,9 @@ void	ft_print_with_option(struct s_option options, ...)
 	if (options.specifier == 'd' || options.specifier == 'i')
 		ft_putnbr_fd_options((int) va_arg(ap, int), 1, options);
 	else if (options.specifier == 'c')
-		ft_putchar_fd((char) va_arg(ap, int), 1);
+		ft_putchar_fd_options((char) va_arg(ap, int), 1, options);
 	else if (options.specifier == 's')
-		ft_putstr_fd((char *) va_arg(ap, char *), 1);
+		ft_putstr_fd_options((char *) va_arg(ap, char *), 1, options);
 	else if (options.specifier == 'p')
 		ft_putptr_fd_options((void *) va_arg(ap, void *), 1, options);
 	else if (options.specifier == 'u')
@@ -78,52 +72,8 @@ int	ft_printf(const char *s, ...)
 	{
 		if (*s == '%')
 		{
-			s++;
-			options->flag = 0;
-			while (ft_isflag(*s))
-			{
-				ft_store_flag(&options->flag, *s);
-				s++;
-			}
-			options->width = 0;
-			while (*s >= '0' && *s <= '9')
-			{
-				ft_store_int(&options->width, *s);
-				s++;
-			}
-			options->precision = 0;
-			if (*s == '.')
-			{
-				s++;
-				while (*s >= '0' && *s <= '9')
-				{
-					ft_store_int(&options->precision, *s);
-					s++;
-				}
-			}
-			options->length = 0;
-			if (*s == 'h')
-			{
-				if (*(s + 1) == 'h')
-				{
-					options->length = SHORT_SHORT;
-					s++;
-				}
-				else
-					options->length = SHORT;
-				s++;
-			}
-			else if (*s == 'l')
-			{
-				if (*(s + 1) == 'l')
-				{
-					options->length = LONG_LONG;
-					s++;
-				}
-				else
-					options->length = LONG;
-				s++;
-			}
+			s = ft_parse_first(options, (char *)s);
+			s = ft_parse_second(options, (char *)s);
 			options->specifier = 0;
 			if (ft_isspecifier(*s))
 				options->specifier = *s;
