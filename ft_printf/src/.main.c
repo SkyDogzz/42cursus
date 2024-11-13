@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:37:03 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 18:05:58 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/13 18:12:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,7 @@ int	main(int argc, char *argv[])
 	ft_printf("|%20u|\n", UINT_MAX);
 	ft_printf("|%-20u|\n", UINT_MAX);
 	ft_printf("|%020u|\n", UINT_MAX);
+	printf("%x %X\n", 1000000, 1000000);
+	ft_printf("%x %X\n", 1000000, 1000000);
 	return (EXIT_SUCCESS);
 }
