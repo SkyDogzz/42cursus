@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:36:11 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 17:55:49 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/13 18:03:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void		ft_putptr_fd_options(void *p, int fd, struct s_option options);
 
 // ft_int.c
 void		ft_putnbr_fd_options(int i, int fd, struct s_option options);
+void		ft_putunbr_fd_options(unsigned int i, int fd, struct s_option options);
 void		ft_putunbr_fd(unsigned int n, int fd);
 int			ft_countcharint(int n);
 void		ft_putnbr_width(struct s_width width);

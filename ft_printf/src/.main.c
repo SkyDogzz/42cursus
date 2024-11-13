@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:37:03 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 17:58:10 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/13 18:05:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,15 @@ int	main(int argc, char *argv[])
 	ft_printf("point |%-20c|\n", c);
 	printf("|%20s|\n", "Hello world");
 	printf("|%-20s|\n", "Hello world");
-	printf("|%020s|\n", "Hello world");
 	ft_printf("|%20s|\n", "Hello world");
 	ft_printf("|%-20s|\n", "Hello world");
-	ft_printf("|%020s|\n", "Hello world");
+	printf("|%u|\n", UINT_MAX);
+	printf("|%20u|\n", UINT_MAX);
+	printf("|%-20u|\n", UINT_MAX);
+	printf("|%020u|\n", UINT_MAX);
+	ft_printf("|%u|\n", UINT_MAX);
+	ft_printf("|%20u|\n", UINT_MAX);
+	ft_printf("|%-20u|\n", UINT_MAX);
+	ft_printf("|%020u|\n", UINT_MAX);
 	return (EXIT_SUCCESS);
 }
