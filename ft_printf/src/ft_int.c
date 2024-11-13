@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:20:12 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 18:05:32 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/13 18:06:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	ft_putunbr_fd_options(unsigned int n, int fd, struct s_option options)
 		ft_putunbr_fd(n, fd);
 	}
 }
+
 int	ft_countcharint(int n)
 {
 	int	len;

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:38:49 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 18:01:20 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/13 18:08:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_print_with_option(struct s_option options, ...)
 	else if (options.specifier == 'u')
 		ft_putunbr_fd_options((unsigned int) va_arg(ap, int), 1, options);
 	else if (options.specifier == 'x' || options.specifier == 'X')
-		ft_puthex_fd((int) va_arg(ap, int), 1, options.specifier);
+		ft_puthex_fd_options((int) va_arg(ap, int), 1, options);
 	else if (options.specifier == '%')
 		write(STDIN_FILENO, "%", 1);
 	va_end(ap);
