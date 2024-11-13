@@ -3,7 +3,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror libft.a
 AR = ar rcs
 
-SRCS = ft_printf.c
+SRCS = src/ft_printf.c src/ft_option.c src/ft_ptr.c src/ft_int.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
