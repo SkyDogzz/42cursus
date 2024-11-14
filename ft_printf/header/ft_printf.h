@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:36:11 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 18:11:15 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 13:44:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 # define FT_PRINTF_H
 
 # include "libft.h"
+# include "libft_bonus.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
 
 # include <stdio.h>
+
+# define FLAGS "-+ 0#"
+# define SPECIFIERS "cspdiuxX%"
 
 typedef enum a_bool
 {

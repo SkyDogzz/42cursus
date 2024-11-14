@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:38:49 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 18:11:39 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 13:37:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	ft_printf(const char *s, ...)
 			write(STDOUT_FILENO, s, 1);
 		s++;
 	}
+	free(options);
 	va_end(ap);
 	return (0);
 }

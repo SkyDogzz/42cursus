@@ -6,27 +6,58 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:09:12 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 18:12:47 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 13:21:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-void	ft_puthex_fd_options(int n, int fd, struct s_option options)
+int	ft_countcharhex(int n)
 {
-	ft_puthex_fd(n, options.specifier, fd);
+	int	len;
+
+	if (n == 0)
+		return (1);
+	len = 0;
+	while (n)
+	{
+		n /= 16;
+		len++;
+	}
+	return (len);
 }
 
-// NEED FIX
+void	ft_puthex_fd_options(int n, int fd, struct s_option options)
+{
+	int	len;
+
+	len = ft_countcharhex(n);
+	if (!options.width)
+		ft_puthex_fd(n, options.specifier, fd);
+	else if (ft_getflag(options.flag, '-'))
+	{
+		ft_puthex_fd(n, options.specifier, fd);
+		ft_addchar(options.width - len, ' ', fd);
+	}
+	else if (ft_getflag(options.flag, '0') && !options.precision)
+	{
+		ft_addchar(options.width - len, '0', fd);
+		ft_puthex_fd(n, options.specifier, fd);
+	}
+	else
+	{
+		ft_addchar(options.width - len, ' ', fd);
+		ft_puthex_fd(n, options.specifier, fd);
+	}
+}
+
 void	ft_puthex_fd(int n, char spe, int fd)
 {
 	char	num;
 
-	if (n / 16 < 0 && n / 16 > -16)
-		write(1, "-", 1);
 	if (n / 16 > 0 | n / 16 < 0)
 	{
-		ft_puthex_fd(n / 16, fd, spe);
+		ft_puthex_fd(n / 16, spe, fd);
 	}
 	num = n % 16;
 	if (num < 0)

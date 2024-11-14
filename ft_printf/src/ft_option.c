@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:00:58 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 16:43:22 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 13:45:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,20 @@
 int	ft_isflag(char c)
 {
 	char	*set;
+	void	*start;
 
-	set = (char *)malloc(sizeof(char) * 6);
-	ft_strlcpy(set, "-+ 0#", 5);
+	set = ft_strdup(FLAGS);
+	start = set;
 	while (*set)
 	{
 		if (*set == c)
+		{
+			free(start);
 			return (1);
+		}
 		set++;
 	}
+	free(start);
 	return (0);
 }
 
@@ -31,35 +36,42 @@ void	ft_store_flag(int *flag, char c)
 {
 	int		pos;
 	char	*set;
+	void	*start;
 
-	set = (char *)malloc(sizeof(char) * 6);
-	ft_strlcpy(set, "-+ 0#", 5);
+	set = ft_strdup(FLAGS);
+	start = set;
 	pos = 0;
 	while (set[pos])
 	{
 		if (set[pos] == c)
 		{
-			if (*flag & (1 << pos))
-				return ;
-			*flag += (1 << pos);
+			if (!(*flag & (1 << pos)))
+				*flag += (1 << pos);
+			free(start);
 			return ;
 		}
 		pos++;
 	}
+	free(start);
 }
 
 int	ft_isspecifier(char c)
 {
 	char	*set;
+	void	*start;
 
-	set = (char *)malloc(sizeof(char) * 10);
-	ft_strlcpy(set, "cspdiuxX%", 10);
+	set = ft_strdup(SPECIFIERS);
+	start = set;
 	while (*set)
 	{
 		if (*set == c)
+		{
+			free(start);
 			return (1);
+		}
 		set++;
 	}
+	free(start);
 	return (0);
 }
 
@@ -67,14 +79,16 @@ enum a_bool	ft_getflag(int flag, char c)
 {
 	int		pos;
 	char	*set;
+	void	*start;
 
-	set = (char *)malloc(sizeof(char) * 6);
-	ft_strlcpy(set, "-+ 0#", 5);
+	set = ft_strdup(FLAGS);
+	start = set;
 	pos = 0;
 	while (set[pos])
 	{
 		if (set[pos] == c)
 		{
+			free(start);
 			if (flag & 1 << pos)
 				return (TRUE);
 			else
@@ -82,6 +96,7 @@ enum a_bool	ft_getflag(int flag, char c)
 		}
 		pos++;
 	}
+	free(start);
 	return (FALSE);
 }
 

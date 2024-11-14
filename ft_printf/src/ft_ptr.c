@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:10:21 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 16:43:03 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 13:38:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,8 @@
 void	ft_putptr_fd_options(void *p, int fd, struct s_option options)
 {
 	if (!options.width)
-	{
 		ft_putptr_fd(p, fd);
-		return ;
-	}
-	if (ft_getflag(options.flag, '-'))
+	else if (ft_getflag(options.flag, '-'))
 	{
 		ft_putptr_fd(p, fd);
 		ft_addchar(options.width - 14, ' ', fd);
@@ -58,4 +55,5 @@ void	ft_putptr_fd(void *p, int fd)
 		pos--;
 	}
 	ft_putstr_fd(res, fd);
+	free(res);
 }
