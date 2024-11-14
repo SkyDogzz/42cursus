@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:09:12 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/14 13:21:38 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 16:34:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_countcharhex(int n)
 	return (len);
 }
 
-void	ft_puthex_fd_options(int n, int fd, struct s_option options)
+int	ft_puthex_fd_options(int n, int fd, struct s_option options)
 {
 	int	len;
 
@@ -49,6 +49,9 @@ void	ft_puthex_fd_options(int n, int fd, struct s_option options)
 		ft_addchar(options.width - len, ' ', fd);
 		ft_puthex_fd(n, options.specifier, fd);
 	}
+	if (options.width > len)
+		return (options.width);
+	return (len);
 }
 
 void	ft_puthex_fd(int n, char spe, int fd)

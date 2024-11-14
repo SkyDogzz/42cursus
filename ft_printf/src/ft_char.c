@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:12:32 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/14 13:18:06 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 16:33:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_addchar(int n, char c, int fd)
 		write(fd, &c, 1);
 }
 
-void	ft_putchar_fd_options(char c, int fd, struct s_option options)
+int	ft_putchar_fd_options(char c, int fd, struct s_option options)
 {
 	int	len;
 
@@ -40,4 +40,7 @@ void	ft_putchar_fd_options(char c, int fd, struct s_option options)
 		ft_addchar(options.width - len, ' ', fd);
 		ft_putchar_fd(c, fd);
 	}
+	if (options.width > len)
+		return (options.width);
+	return (len);
 }

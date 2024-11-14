@@ -6,39 +6,46 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:38:49 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/14 13:37:39 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 16:53:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-void	ft_print_with_option(struct s_option options, ...)
+int	ft_print_with_option(struct s_option options, ...)
 {
+	int size;
 	va_list	ap;
 
 	va_start(ap, options);
 	if (options.specifier == 'd' || options.specifier == 'i')
-		ft_putnbr_fd_options((int) va_arg(ap, int), 1, options);
+		size = ft_putnbr_fd_options((int) va_arg(ap, int), 1, options);
 	else if (options.specifier == 'c')
-		ft_putchar_fd_options((char) va_arg(ap, int), 1, options);
+		size = ft_putchar_fd_options((char) va_arg(ap, int), 1, options);
 	else if (options.specifier == 's')
-		ft_putstr_fd_options((char *) va_arg(ap, char *), 1, options);
+		size = ft_putstr_fd_options((char *) va_arg(ap, char *), 1, options);
 	else if (options.specifier == 'p')
-		ft_putptr_fd_options((void *) va_arg(ap, void *), 1, options);
+		size = ft_putptr_fd_options((void *) va_arg(ap, void *), 1, options);
 	else if (options.specifier == 'u')
-		ft_putunbr_fd_options((unsigned int) va_arg(ap, int), 1, options);
+		size = ft_putunbr_fd_options((unsigned int) va_arg(ap, int), 1, options);
 	else if (options.specifier == 'x' || options.specifier == 'X')
-		ft_puthex_fd_options((int) va_arg(ap, int), 1, options);
+		size = ft_puthex_fd_options((int) va_arg(ap, int), 1, options);
 	else if (options.specifier == '%')
+	{
 		write(STDIN_FILENO, "%", 1);
+		size = 1;
+	}
 	va_end(ap);
+	return (size);
 }
 
 int	ft_printf(const char *s, ...)
 {
+	int				size;
 	va_list			ap;
 	struct s_option	*options;
 
+	size = 0;
 	options = (struct s_option *)malloc(sizeof(struct s_option));
 	va_start(ap, s);
 	while (*s)
@@ -52,13 +59,16 @@ int	ft_printf(const char *s, ...)
 				options->specifier = *s;
 			else
 				ft_putstr_fd("Specifier not known", STDERR_FILENO);
-			ft_print_with_option(*options, va_arg(ap, void *));
+			size += ft_print_with_option(*options, va_arg(ap, void *));
 		}
 		else
+	{
 			write(STDOUT_FILENO, s, 1);
+			size++;
+		}
 		s++;
 	}
 	free(options);
 	va_end(ap);
-	return (0);
+	return (size);
 }

@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:50:52 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/14 13:18:19 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 16:33:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-void	ft_putstr_fd_options(char *s, int fd, struct s_option options)
+int	ft_putstr_fd_options(char *s, int fd, struct s_option options)
 {
 	int	len;
 
@@ -34,4 +34,7 @@ void	ft_putstr_fd_options(char *s, int fd, struct s_option options)
 		ft_addchar(options.width - len, ' ', fd);
 		ft_putstr_fd(s, fd);
 	}
+	if (options.width > len)
+		return (options.width);
+	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:36:11 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/14 13:44:53 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 16:26:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ enum a_bool	ft_getflag(int flag, char c);
 
 // ft_ptr.c
 void		ft_putptr_fd(void *p, int fd);
-void		ft_putptr_fd_options(void *p, int fd, struct s_option options);
+int			ft_putptr_fd_options(void *p, int fd, struct s_option options);
 
 // ft_int.c
-void		ft_putnbr_fd_options(int i, int fd, struct s_option options);
-void		ft_putunbr_fd_options(unsigned int i, int fd,
+int			ft_putnbr_fd_options(int i, int fd, struct s_option options);
+int			ft_putunbr_fd_options(unsigned int i, int fd,
 				struct s_option options);
 void		ft_putunbr_fd(unsigned int n, int fd);
 int			ft_countcharint(int n);
@@ -77,29 +77,21 @@ void		ft_putnbr_width(struct s_width width);
 
 // ft_char
 void		ft_addchar(int n, char c, int fd);
-void		ft_putchar_fd_options(char c, int fd, struct s_option options);
+int			ft_putchar_fd_options(char c, int fd, struct s_option options);
 
 // ft_str
-void		ft_putstr_fd_options(char *s, int fd, struct s_option options);
+int			ft_putstr_fd_options(char *s, int fd, struct s_option options);
 
 // ft_hex
 void		ft_puthex_fd(int n, char spe, int fd);
-void		ft_puthex_fd_options(int n, int fd, struct s_option options);
+int			ft_puthex_fd_options(int n, int fd, struct s_option options);
 
 // ft_parse
 char		*ft_parse_first(struct s_option *options, char *s);
 char		*ft_parse_second(struct s_option *options, char *s);
 
 // ft_printf
-void		ft_puthex_fd(int n, char spe, int fd);
-void		ft_print_with_option(struct s_option options, ...);
-
-// ft_parse
-char		*ft_parse_first(struct s_option *options, char *s);
-char		*ft_parse_second(struct s_option *options, char *s);
-
-// ft_printf
-void		ft_print_with_option(struct s_option options, ...);
+int			ft_print_with_option(struct s_option options, ...);
 int			ft_printf(const char *s, ...);
 
 #endif

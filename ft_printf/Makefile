@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror libft.a
+CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 
 SRCS = src/ft_printf.c src/ft_option.c src/ft_ptr.c src/ft_int.c \
@@ -10,6 +10,9 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	@make -C libft 
+	@cp libft/libft.a .
+	@mv libft.a $(NAME)
 	$(AR) $(NAME) $(OBJS)
 
 %.o: %.c

@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 14:20:12 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/14 13:17:53 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 17:24:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-void	ft_putnbr_fd_options(int n, int fd, struct s_option options)
+int	ft_putnbr_fd_options(int n, int fd, struct s_option options)
 {
 	int			len;
 
@@ -34,9 +34,12 @@ void	ft_putnbr_fd_options(int n, int fd, struct s_option options)
 		ft_addchar(options.width - len, ' ', fd);
 		ft_putnbr_fd(n, fd);
 	}
+	if (options.width > len)
+		return (options.width);
+	return (len);
 }
 
-void	ft_putunbr_fd_options(unsigned int n, int fd, struct s_option options)
+int	ft_putunbr_fd_options(unsigned int n, int fd, struct s_option options)
 {
 	int			len;
 
@@ -58,6 +61,9 @@ void	ft_putunbr_fd_options(unsigned int n, int fd, struct s_option options)
 		ft_addchar(options.width - len, ' ', fd);
 		ft_putunbr_fd(n, fd);
 	}
+	if (options.width > len)
+		return (options.width);
+	return (len);
 }
 
 int	ft_countcharint(int n)
