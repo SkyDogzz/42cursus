@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:38:49 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/14 16:53:17 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 18:14:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,8 @@ int	ft_print_with_option(struct s_option options, ...)
 	else if (options.specifier == 'u')
 		size = ft_putunbr_fd_options((unsigned int) va_arg(ap, int), 1, options);
 	else if (options.specifier == 'x' || options.specifier == 'X')
-		size = ft_puthex_fd_options((int) va_arg(ap, int), 1, options);
-	else if (options.specifier == '%')
-	{
-		write(STDIN_FILENO, "%", 1);
-		size = 1;
-	}
+		size = ft_puthex_fd_options((unsigned int) va_arg(ap, int), 1, options);
+
 	va_end(ap);
 	return (size);
 }
@@ -59,6 +55,12 @@ int	ft_printf(const char *s, ...)
 				options->specifier = *s;
 			else
 				ft_putstr_fd("Specifier not known", STDERR_FILENO);
+			if (options->specifier == '%')
+			{
+				write(STDIN_FILENO, "\%", 1);
+				size += 1;
+			}
+			else
 			size += ft_print_with_option(*options, va_arg(ap, void *));
 		}
 		else

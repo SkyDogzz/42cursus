@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:36:11 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/14 16:26:37 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 17:46:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int			ft_putchar_fd_options(char c, int fd, struct s_option options);
 int			ft_putstr_fd_options(char *s, int fd, struct s_option options);
 
 // ft_hex
-void		ft_puthex_fd(int n, char spe, int fd);
-int			ft_puthex_fd_options(int n, int fd, struct s_option options);
+void		ft_puthex_fd(unsigned int n, char spe, int fd);
+int			ft_puthex_fd_options(unsigned int n, int fd, struct s_option options);
 
 // ft_parse
 char		*ft_parse_first(struct s_option *options, char *s);

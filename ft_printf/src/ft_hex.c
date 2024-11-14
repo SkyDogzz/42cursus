@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 18:09:12 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/14 16:34:42 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 17:53:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_printf.h"
 
-int	ft_countcharhex(int n)
+int	ft_countcharhex(unsigned int n)
 {
 	int	len;
 
@@ -27,7 +27,7 @@ int	ft_countcharhex(int n)
 	return (len);
 }
 
-int	ft_puthex_fd_options(int n, int fd, struct s_option options)
+int	ft_puthex_fd_options(unsigned int n, int fd, struct s_option options)
 {
 	int	len;
 
@@ -54,7 +54,7 @@ int	ft_puthex_fd_options(int n, int fd, struct s_option options)
 	return (len);
 }
 
-void	ft_puthex_fd(int n, char spe, int fd)
+void	ft_puthex_fd(unsigned int n, char spe, int fd)
 {
 	char	num;
 
@@ -63,8 +63,6 @@ void	ft_puthex_fd(int n, char spe, int fd)
 		ft_puthex_fd(n / 16, spe, fd);
 	}
 	num = n % 16;
-	if (num < 0)
-		num *= -1;
 	if (num <= 9)
 		num += '0';
 	else

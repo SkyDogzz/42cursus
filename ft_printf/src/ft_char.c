@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:12:32 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/14 16:33:19 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/14 18:09:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	ft_putchar_fd_options(char c, int fd, struct s_option options)
 {
 	int	len;
 
+	write(1, &c, 1);
 	len = 1;
 	if (!options.width)
 		ft_putchar_fd(c, fd);

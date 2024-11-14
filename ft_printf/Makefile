@@ -9,6 +9,8 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
+bonus: all
+
 $(NAME): $(OBJS)
 	@make -C libft 
 	@cp libft/libft.a .
