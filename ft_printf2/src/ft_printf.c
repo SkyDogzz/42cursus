@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/15 16:54:20 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/15 17:12:57 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	ft_isspecifier(const char c)
 	{
 		if (c == *set)
 		{
-			return (1);
 			free(start);
+			return (1);
 		}
 		set++;
 	}
@@ -181,7 +181,7 @@ int	ft_putpoptions_fd(unsigned long long p, int fd)
 {
 	ft_putstr_fd("0x", fd);
 	ft_putp_fd(p, fd, 0);
-	return (1);
+	return (18);
 }
 
 int	ft_putnbroptions_fd(int n, int fd)
