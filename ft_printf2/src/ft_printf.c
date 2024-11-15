@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/15 17:12:57 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/15 17:38:10 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,11 +177,31 @@ void	ft_putp_fd(unsigned long long p, int fd, int big)
 	ft_putchar_fd(digit, fd);
 }
 
+int	ft_countcharp(unsigned long long p)
+{
+	int	len;
+
+	len = 0;
+	while (p)
+	{
+		p /= 16;
+		len++;
+	}
+	return (len);
+}
+
 int	ft_putpoptions_fd(unsigned long long p, int fd)
 {
+	int	len;
+	if (p == 0)
+	{
+		ft_putstr_fd("(nil)", fd);
+		return (5);
+	}
+	len	= ft_countcharp(p) + 2;
 	ft_putstr_fd("0x", fd);
 	ft_putp_fd(p, fd, 0);
-	return (18);
+	return (len);
 }
 
 int	ft_putnbroptions_fd(int n, int fd)
