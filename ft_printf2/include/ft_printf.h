@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 17:20:55 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:28:22 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ size_t	ft_countcharp(unsigned long long p);
 void	ft_putp_fd(unsigned long long p, int fd, int big);
 
 // ft_str
-size_t	ft_putstroptions_fd(const char *s, int fd);
+size_t	ft_putstroptions_fd(const char *s, int fd, struct s_option options);
 
 // ft_nbr
 size_t	ft_putnbroptions_fd(int n, int fd);
