@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 18:00:56 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:31:11 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdio.h>
 
 # define SPECIFIERS "cspdiuxX%"
-# define FLAGS "-# +"
+# define FLAGS "-0"
 
 typedef struct s_option
 {

@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:46:41 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 18:15:18 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:40:28 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ size_t	ft_puthexbroptions_fd(unsigned int hex, int fd, struct s_option options)
 	{
 		ft_puthex_fd(hex, fd, maj);
 		ft_addchar(' ', fd, options.width - len);
+	}
+	else if(ft_getflag(options.flag, '0'))
+	{
+		ft_addchar('0', fd, options.width - len);
+		ft_puthex_fd(hex, fd, maj);
 	}
 	else
 	{

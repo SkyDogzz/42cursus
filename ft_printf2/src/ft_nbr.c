@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:43:03 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 18:05:21 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:36:31 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,32 @@ size_t	ft_countcharint(int n)
 	return (len);
 }
 
+void	ft_putnbrpadded(int n, int fd, int count, char c)
+{
+	char	num;
+
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		
+		if (n == INT_MIN)
+		{
+			write(fd, "2", 1);
+			n = 147483648;
+		}
+		else
+		{
+			n = -n;
+		}
+	}
+	while (count--)
+		ft_putchar_fd(c, 1);
+	if (n / 10 != 0)
+		ft_putnbr_fd(n / 10, fd);
+	num = (n % 10) + '0';
+	write(fd, &num, 1);
+}
+
 size_t	ft_putnbroptions_fd(int n, int fd, struct s_option options)
 {
 	int	len;
@@ -43,6 +69,10 @@ size_t	ft_putnbroptions_fd(int n, int fd, struct s_option options)
 	{
 		ft_putnbr_fd(n, fd);
 		ft_addchar(' ', fd, options.width - len);
+	}
+	else if (ft_getflag(options.flag, '0'))
+	{
+		ft_putnbrpadded(n, fd, options.width - len, '0');
 	}
 	else
 	{
