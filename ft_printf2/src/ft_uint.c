@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:46:41 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 18:40:28 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 19:43:09 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,35 +45,47 @@ void	ft_puthex_fd(unsigned int hex, int fd, int big)
 	ft_putchar_fd(digit, fd);
 }
 
+void	ft_putcharmodif(unsigned int hex, int fd, int big, enum e_bool modif)
+{
+	if (modif && hex)
+	{
+		if (big)
+			ft_putstr_fd("0X", fd);
+		else
+			ft_putstr_fd("0x", fd);
+	}
+	ft_puthex_fd(hex, fd, big);
+}
+
 size_t	ft_puthexbroptions_fd(unsigned int hex, int fd, struct s_option options)
 {
 	int	len;
 	enum e_bool maj;
 
-	len = ft_countcharhex(hex);
+	len = ft_countcharhex(hex) + (ft_getflag(options.flag, '#') && hex) * 2;
 	if (options.specifier == 'X')
 		maj = TRUE;
 	else
 		maj = FALSE;
 	if (!options.width || options.width < len)
 	{
-		ft_puthex_fd(hex, fd, maj);
+		ft_putcharmodif(hex, fd, maj, ft_getflag(options.flag, '#'));
 		return (len);
 	}
 	if (ft_getflag(options.flag, '-'))
 	{
-		ft_puthex_fd(hex, fd, maj);
+		ft_putcharmodif(hex, fd, maj, ft_getflag(options.flag, '#'));
 		ft_addchar(' ', fd, options.width - len);
 	}
 	else if(ft_getflag(options.flag, '0'))
 	{
 		ft_addchar('0', fd, options.width - len);
-		ft_puthex_fd(hex, fd, maj);
+		ft_putcharmodif(hex, fd, maj, ft_getflag(options.flag, '#'));
 	}
 	else
 	{
 		ft_addchar(' ', fd, options.width - len);
-		ft_puthex_fd(hex, fd, maj);
+		ft_putcharmodif(hex, fd, maj, ft_getflag(options.flag, '#'));
 	}
 	return (options.width);
 }
