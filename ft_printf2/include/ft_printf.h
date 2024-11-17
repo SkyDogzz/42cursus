@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 19:44:49 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:50:05 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ typedef enum e_bool
 	TRUE = 1
 }	t_bool;
 
+// ft_util
+int		ft_getmax(int count, ...);
+void	ft_addchar(const char c, int fd, int count);
+
 // ft_printf
 size_t	ft_printf(const char *fmt, ...);
 size_t	ft_handlespecifier(const char **fmt, va_list ap,
@@ -69,7 +73,6 @@ enum e_bool	ft_getflag(int flag, char c);
 
 // ft_char
 size_t	ft_putcharoptions_fd(const char c, int fd, struct s_option option);
-void	ft_addchar(const char c, int fd, int count);
 
 // ft_p
 size_t	ft_putpoptions_fd(unsigned long long p, int fd, struct s_option options);
