@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:43:03 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 22:43:47 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:51:03 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,6 @@ void	ft_putnbrsign(int n, int fd, enum e_bool sign)
 	}
 }
 
-int ft_getmax(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
-
 size_t	ft_putnbroptions_fd(int n, int fd, struct s_option options)
 {
 	int	len;
@@ -102,5 +95,5 @@ size_t	ft_putnbroptions_fd(int n, int fd, struct s_option options)
 		ft_addchar(' ', fd, options.width - len - ft_getflag(options.flag, '+'));
 		ft_putnbrsign(n, fd, ft_getflag(options.flag, '+'));
 	}
-	return (ft_getmax(options.width, len));
+	return (ft_getmax(2, options.width, len));
 }
