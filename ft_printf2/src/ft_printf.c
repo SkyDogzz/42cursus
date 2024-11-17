@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 14:56:15 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:05:19 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,11 @@ int	ft_putcharoptions_fd(const char c, int fd)
 
 int	ft_putstroptions_fd(const char *s, int fd)
 {
+	if(s == NULL)
+	{
+		ft_putstr_fd("(null)", fd);
+		return (6);
+	}
 	ft_putstr_fd((char *)s, 1);
 	return (ft_strlen(s));
 }
