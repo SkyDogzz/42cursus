@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:27:55 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 15:48:48 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:27:13 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_initoptions(struct s_option *options)
 	options->length = 0;
 }
 
-int	ft_isspecifier(const char c)
+t_bool	ft_isspecifier(const char c)
 {
 	char	*set;
 	void	*start;
@@ -33,15 +33,15 @@ int	ft_isspecifier(const char c)
 		if (c == *set)
 		{
 			free(start);
-			return (1);
+			return (TRUE);
 		}
 		set++;
 	}
 	free(start);
-	return (0);
+	return (FALSE);
 }
 
-int	ft_isflag(const char c)
+t_bool	ft_isflag(const char c)
 {
 	char	*set;
 	void	*start;
@@ -53,10 +53,10 @@ int	ft_isflag(const char c)
 		if (c == *set)
 		{
 			free(start);
-			return (1);
+			return (TRUE);
 		}
 		set++;
 	}
 	free(start);
-	return (0);
+	return (FALSE);
 }

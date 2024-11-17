@@ -6,13 +6,13 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:42:04 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 15:43:57 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:25:33 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_putstroptions_fd(const char *s, int fd)
+size_t	ft_putstroptions_fd(const char *s, int fd)
 {
 	if (s == NULL)
 	{

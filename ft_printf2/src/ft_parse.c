@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:27:24 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 16:05:52 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:07:52 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ size_t	ft_parse_precision(const char **fmt, struct s_option *options)
 	return (len);
 }
 
-int	ft_parseoptions(const char *fmt, struct s_option *options)
+size_t	ft_parseoptions(const char *fmt, struct s_option *options)
 {
 	size_t	len;
 

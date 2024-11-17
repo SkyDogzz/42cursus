@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:39:27 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 15:40:29 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:27:45 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	ft_putp_fd(unsigned long long p, int fd, int big)
 	ft_putchar_fd(digit, fd);
 }
 
-int	ft_countcharp(unsigned long long p)
+size_t	ft_countcharp(unsigned long long p)
 {
-	int	len;
+	size_t	len;
 
 	len = 0;
 	while (p)
@@ -43,9 +43,9 @@ int	ft_countcharp(unsigned long long p)
 	return (len);
 }
 
-int	ft_putpoptions_fd(unsigned long long p, int fd)
+size_t	ft_putpoptions_fd(unsigned long long p, int fd)
 {
-	int	len;
+	size_t	len;
 
 	if (p == 0)
 	{

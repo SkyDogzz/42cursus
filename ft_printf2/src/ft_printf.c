@@ -6,14 +6,14 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 16:00:08 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:31:06 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 #include <stdio.h>
 
-int	ft_printwithoptions(struct s_option options, ...)
+size_t	ft_printwithoptions(struct s_option options, ...)
 {
 	va_list	ap;
 	size_t	len;
@@ -38,9 +38,10 @@ int	ft_printwithoptions(struct s_option options, ...)
 	return (len);
 }
 
-int	ft_handlespecifier(const char **fmt, va_list ap, struct s_option *options)
+size_t	ft_handlespecifier(const char **fmt, va_list ap,
+							struct s_option *options)
 {
-	int	len;
+	size_t	len;
 
 	if (options->specifier == '%')
 		len = ft_putcharoptions_fd(options->specifier, 1);
@@ -49,7 +50,7 @@ int	ft_handlespecifier(const char **fmt, va_list ap, struct s_option *options)
 	return (len);
 }
 
-int	ft_printf(const char *fmt, ...)
+size_t	ft_printf(const char *fmt, ...)
 {
 	va_list			ap;
 	size_t			len;

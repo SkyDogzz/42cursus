@@ -6,13 +6,13 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:43:03 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 15:44:05 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:26:14 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_countcharint(int n)
+size_t	ft_countcharint(int n)
 {
 	int	len;
 
@@ -29,7 +29,7 @@ int	ft_countcharint(int n)
 	return (len);
 }
 
-int	ft_putnbroptions_fd(int n, int fd)
+size_t	ft_putnbroptions_fd(int n, int fd)
 {
 	int	len;
 

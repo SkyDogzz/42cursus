@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:47:27 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 15:48:42 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:24:18 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_storeint(const char c, int *n)
 	*n += c - '0';
 }
 
-int	ft_storelength(const char *s, int *length)
+size_t	ft_storelength(const char *s, int *length)
 {
 	if (*s == 'l')
 	{

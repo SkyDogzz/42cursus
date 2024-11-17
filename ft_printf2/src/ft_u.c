@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:44:35 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 15:44:51 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:32:05 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	ft_putu_fd(unsigned int u, int fd)
 	ft_putchar_fd(digit, fd);
 }
 
-int	ft_countcharu(unsigned int u)
+size_t	ft_countcharu(unsigned int u)
 {
-	int	len;
+	size_t	len;
 
 	if (u == 0)
 		return (1);
@@ -37,9 +37,9 @@ int	ft_countcharu(unsigned int u)
 	return (len);
 }
 
-int	ft_putuoptions_fd(unsigned int u, int fd)
+size_t	ft_putuoptions_fd(unsigned int u, int fd)
 {
-	int	len;
+	size_t	len;
 
 	len = ft_countcharu(u);
 	ft_putu_fd(u, fd);
