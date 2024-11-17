@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 22:44:50 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 22:49:15 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 23:08:16 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_addchar(const char c, int fd, int count)
 {
-	while (count--)
+	while (count >= 0 && count--)
 		ft_putchar_fd(c, fd);
 }
 
