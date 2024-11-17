@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:39:27 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 16:27:45 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 17:51:47 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ size_t	ft_countcharp(unsigned long long p)
 	return (len);
 }
 
-size_t	ft_putpoptions_fd(unsigned long long p, int fd)
+size_t	ft_putpoptions_fd(unsigned long long p, int fd, struct s_option options)
 {
 	size_t	len;
 
@@ -53,7 +53,23 @@ size_t	ft_putpoptions_fd(unsigned long long p, int fd)
 		return (5);
 	}
 	len = ft_countcharp(p) + 2;
+	if (!options.width || options.width <= len)
+	{
 	ft_putstr_fd("0x", fd);
 	ft_putp_fd(p, fd, 0);
 	return (len);
+	}
+	if (ft_getflag(options.flag, '-'))
+	{
+		ft_putstr_fd("0x", fd);
+		ft_putp_fd(p, fd, 0);
+		ft_addchar(' ', fd, options.width - len);
+	}
+	else
+	{
+		ft_addchar(' ', fd, options.width - len);
+		ft_putstr_fd("0x", fd);
+		ft_putp_fd(p, fd, 0);
+	}
+	return (options.width);
 }

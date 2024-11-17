@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 17:28:22 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:00:56 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ size_t	ft_putcharoptions_fd(const char c, int fd, struct s_option option);
 void	ft_addchar(const char c, int fd, int count);
 
 // ft_p
-size_t	ft_putpoptions_fd(unsigned long long p, int fd);
+size_t	ft_putpoptions_fd(unsigned long long p, int fd, struct s_option options);
 size_t	ft_countcharp(unsigned long long p);
 void	ft_putp_fd(unsigned long long p, int fd, int big);
 
@@ -80,11 +80,11 @@ void	ft_putp_fd(unsigned long long p, int fd, int big);
 size_t	ft_putstroptions_fd(const char *s, int fd, struct s_option options);
 
 // ft_nbr
-size_t	ft_putnbroptions_fd(int n, int fd);
+size_t	ft_putnbroptions_fd(int n, int fd, struct s_option options);
 size_t	ft_countcharint(int n);
 
 // ft_u
-size_t	ft_putuoptions_fd(unsigned int u, int fd);
+size_t	ft_putuoptions_fd(unsigned int u, int fd, struct s_option options);
 size_t	ft_countcharu(unsigned int u);
 void	ft_putu_fd(unsigned int u, int fd);
 
