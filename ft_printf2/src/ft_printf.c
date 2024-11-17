@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/15 17:38:10 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 14:56:15 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,35 +204,110 @@ int	ft_putpoptions_fd(unsigned long long p, int fd)
 	return (len);
 }
 
+int	ft_countcharint(int n)
+{
+	int	len;
+
+	len = 0;
+
+	if (n == 0)
+		return (1);
+	if (n < 0)
+		len++;
+	while (n)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
+}
+
 int	ft_putnbroptions_fd(int n, int fd)
 {
+	int	len;
+
+	len = ft_countcharint(n);
 	ft_putnbr_fd(n, fd);
-	return (1);
+	return (len);
 }
 
 void	ft_putu_fd(unsigned int	u, int fd)
 {
 	char	digit;
 
-	if (u / 8 > 0)
-		ft_putp_fd(u / 16, fd, 0);
-	digit = (u % 8) + '0';
+	if (u / 10 > 0)
+		ft_putu_fd(u / 10, fd);
+	digit = (u % 10) + '0';
 	ft_putchar_fd(digit, fd);
+}
+
+int	ft_countcharu(unsigned int u)
+{
+	int	len;
+
+	if (u == 0)
+		return (1);
+	len = 0;
+	while (u)
+	{
+		u /= 10;
+		len++;
+	}
+	return (len);
 }
 
 int	ft_putuoptions_fd(unsigned int u, int fd)
 {
+	int	len;
+
+	len = ft_countcharu(u);
 	ft_putu_fd(u, fd);
-	return (1);
+	return (len);
 }
 
-int	ft_puthexbroptions_fd(unsigned long long hex, int fd, struct s_option options)
+int	ft_countcharx(unsigned int hex)
 {
-	if (options.specifier == 'X')
-		ft_putp_fd(hex, fd, 1);
+	int	len;
+
+	if (hex == 0)
+		return (1);
+	len = 0;
+	while (hex)
+	{
+		hex /= 16;
+		len++;
+	}
+	return (len);
+}
+
+void	ft_putx_fd(unsigned int hex, int fd, int big)
+{
+	char	digit;
+
+	if (hex / 16 > 0)
+		ft_putx_fd(hex / 16, fd, big);
+	if (hex % 16 <= 9)
+		digit = (hex % 16) + '0';
 	else
-		ft_putp_fd(hex, fd, 0);
-	return (1);
+	{
+		if (big)
+			digit = (hex % 16) + 'A' - 10;
+		else
+			digit = (hex % 16) + 'a' - 10;
+	}
+	ft_putchar_fd(digit, fd);
+}
+
+int	ft_puthexbroptions_fd(unsigned int hex, int fd, struct s_option options)
+{
+	int	len;
+
+	len = ft_countcharx(hex);
+	if (options.specifier == 'X')
+		ft_putx_fd(hex, fd, 1);
+	else
+		ft_putx_fd(hex, fd, 0);
+	return (len);
 }
 
 int	ft_printwithoptions(struct s_option options, ...)
@@ -255,7 +330,7 @@ int	ft_printwithoptions(struct s_option options, ...)
 	else if (options.specifier == 'u')
 		len += ft_putuoptions_fd((unsigned int)va_arg(ap, unsigned int), 1);
 	else if (options.specifier == 'x' || options.specifier == 'X')
-		len += ft_puthexbroptions_fd((unsigned long long)va_arg(ap, unsigned long long), 1, options);
+		len += ft_puthexbroptions_fd((unsigned int)va_arg(ap, unsigned int), 1, options);
 	va_end(ap);
 	return (len);
 }
