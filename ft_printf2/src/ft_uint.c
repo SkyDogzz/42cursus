@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:46:41 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 16:34:33 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:15:18 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,27 @@ void	ft_puthex_fd(unsigned int hex, int fd, int big)
 size_t	ft_puthexbroptions_fd(unsigned int hex, int fd, struct s_option options)
 {
 	int	len;
+	enum e_bool maj;
 
 	len = ft_countcharhex(hex);
 	if (options.specifier == 'X')
-		ft_puthex_fd(hex, fd, 1);
+		maj = TRUE;
 	else
-		ft_puthex_fd(hex, fd, 0);
-	return (len);
+		maj = FALSE;
+	if (!options.width || options.width < len)
+	{
+		ft_puthex_fd(hex, fd, maj);
+		return (len);
+	}
+	if (ft_getflag(options.flag, '-'))
+	{
+		ft_puthex_fd(hex, fd, maj);
+		ft_addchar(' ', fd, options.width - len);
+	}
+	else
+	{
+		ft_addchar(' ', fd, options.width - len);
+		ft_puthex_fd(hex, fd, maj);
+	}
+	return (options.width);
 }
