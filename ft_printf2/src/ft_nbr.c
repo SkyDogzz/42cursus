@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:43:03 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 21:55:57 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/17 22:43:47 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	ft_putnbrpadded(int n, int fd, int count, char c, enum e_bool sign)
 			n = -n;
 		}
 	}
-	else
+	else if (sign)
 	{
 		ft_putchar_fd('+', fd);
 		count--;
 	}
-	while (count--)
+	while (count >= 0 && count--)
 		ft_putchar_fd(c, 1);
 	if (n / 10 != 0)
 		ft_putnbr_fd(n / 10, fd);
@@ -63,11 +63,18 @@ void	ft_putnbrsign(int n, int fd, enum e_bool sign)
 {
 	if (!sign || n < 0)
 		ft_putnbr_fd(n, fd);
-	else if (n >= 0)
+	else if (sign && n >= 0)
 	{
 		ft_putchar_fd('+', fd);
 		ft_putnbr_fd(n, fd);
 	}
+}
+
+int ft_getmax(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
 }
 
 size_t	ft_putnbroptions_fd(int n, int fd, struct s_option options)
@@ -81,13 +88,6 @@ size_t	ft_putnbroptions_fd(int n, int fd, struct s_option options)
 			ft_putchar_fd(' ', fd);
 			len--;
 		}
-	if (!options.width || options.width <= len)
-	{
-		ft_putnbrsign(n, fd, ft_getflag(options.flag, '+'));
-		if (n < 0)
-			return (len);
-		return (len + ft_getflag(options.flag, '+') + 2);
-	}
 	if (ft_getflag(options.flag, '-'))
 	{
 		ft_putnbrsign(n, fd, ft_getflag(options.flag, '+'));
@@ -102,5 +102,5 @@ size_t	ft_putnbroptions_fd(int n, int fd, struct s_option options)
 		ft_addchar(' ', fd, options.width - len - ft_getflag(options.flag, '+'));
 		ft_putnbrsign(n, fd, ft_getflag(options.flag, '+'));
 	}
-	return (options.width);
+	return (ft_getmax(options.width, len));
 }
