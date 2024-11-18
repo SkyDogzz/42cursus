@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:42:04 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 01:13:37 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:47:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ size_t	ft_getsize(int precision, int len)
 		return (precision);
 	return (len);
 }
+
 size_t	ft_putstroptions_fd(const char *s, int fd, struct s_option options)
 {
 	char	*dup;
@@ -49,7 +50,7 @@ size_t	ft_putstroptions_fd(const char *s, int fd, struct s_option options)
 	size = ft_getsize(options.precision, ft_strlen(s));
 	if (!options.width || options.width <= size)
 	{
-		dup  = ft_strldup(s, size);
+		dup = ft_strldup(s, size);
 		ft_putstr_fd(dup, fd);
 		free(dup);
 		return (ft_getmax(2, size, options.width));

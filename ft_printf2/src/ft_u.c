@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:44:35 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 13:35:50 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/18 13:50:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ size_t	ft_countcharu(unsigned int u)
 size_t	ft_getsizeb(unsigned int u, struct s_option options)
 {
 	size_t	len;
-	
+
 	if (options.precision < 0)
 		len = options.width - ft_countcharu(u);
-	else {
+	else
+	{
 		len = options.precision - ft_countcharu(u);
 	}
 	return (len);

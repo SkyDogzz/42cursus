@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:46:41 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 13:42:33 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/18 13:50:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,11 @@ void	ft_puthexpadded(unsigned int hex, int fd, int count, char c, int big)
 size_t	ft_getsizec(unsigned int hex, struct s_option options)
 {
 	size_t	len;
-	
+
 	if (options.precision < 0)
 		len = options.width - ft_countcharhex(hex);
-	else {
+	else
+	{
 		len = options.precision - ft_countcharhex(hex);
 	}
 	return (len);
@@ -77,9 +78,9 @@ size_t	ft_getsizec(unsigned int hex, struct s_option options)
 
 size_t	ft_puthexbroptions_fd(unsigned int hex, int fd, struct s_option options)
 {
-	int	len;
-	int padded;
-	enum e_bool maj;
+	int			len;
+	int			padded;
+	enum e_bool	maj;
 
 	len = ft_countcharhex(hex) + (ft_getflag(options.flag, '#') && hex) * 2;
 	padded = ft_getsizec(hex, options);
@@ -87,21 +88,13 @@ size_t	ft_puthexbroptions_fd(unsigned int hex, int fd, struct s_option options)
 		maj = TRUE;
 	else
 		maj = FALSE;
-	/*if (!options.width || options.width < len)*/
-	/*{*/
-	/*	printf("here 1\n");*/
-	/*	ft_putcharmodif(hex, fd, maj, ft_getflag(options.flag, '#'));*/
-	/*	return (len);*/
-	/*}*/
 	if (ft_getflag(options.flag, '-'))
 	{
-		/*printf("here 2\n");*/
 		ft_putcharmodif(hex, fd, maj, ft_getflag(options.flag, '#'));
 		ft_addchar(' ', fd, options.width - len);
 	}
 	else if (ft_getflag(options.flag, '0'))
 	{
-		/*printf("here 3\n");*/
 		ft_addchar('0', fd, options.width - len);
 		ft_putcharmodif(hex, fd, maj, ft_getflag(options.flag, '#'));
 	}
@@ -111,7 +104,6 @@ size_t	ft_puthexbroptions_fd(unsigned int hex, int fd, struct s_option options)
 	}
 	else
 	{
-		/*printf("here 4\n");*/
 		ft_addchar(' ', fd, options.width - len);
 		ft_putcharmodif(hex, fd, maj, ft_getflag(options.flag, '#'));
 	}

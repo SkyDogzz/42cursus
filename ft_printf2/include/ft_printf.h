@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 01:32:15 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:49:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_bool	ft_isflag(const char c);
 void	ft_storeflag(const char c, int *flag);
 void	ft_storeint(const char c, int *n);
 size_t	ft_storelength(const char *s, int *length);
-enum e_bool	ft_getflag(int flag, char c);
+t_bool	ft_getflag(int flag, char c);
 
 // ft_char
 size_t	ft_putcharoptions_fd(const char c, int fd, struct s_option option);
