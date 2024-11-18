@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:42:04 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 13:47:37 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/18 14:30:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,6 @@ size_t	ft_putstroptions_fd(const char *s, int fd, struct s_option options)
 		return (6);
 	}
 	size = ft_getsize(options.precision, ft_strlen(s));
-	if (!options.width || options.width <= size)
-	{
-		dup = ft_strldup(s, size);
-		ft_putstr_fd(dup, fd);
-		free(dup);
-		return (ft_getmax(2, size, options.width));
-	}
 	if (ft_getflag(options.flag, '-'))
 	{
 		dup = ft_strldup(s, options.precision);
