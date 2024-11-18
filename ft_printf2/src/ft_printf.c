@@ -6,12 +6,11 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 23:59:02 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/18 01:14:49 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
-#include <stdio.h>
 
 size_t	ft_printwithoptions(struct s_option options, ...)
 {

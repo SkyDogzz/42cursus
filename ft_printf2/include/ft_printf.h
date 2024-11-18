@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 23:36:12 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/18 01:32:15 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../libft/libft.h"
 # include <stdarg.h>
-
 # include <stdio.h>
 
 # define SPECIFIERS "cspdiuxX%"
@@ -84,7 +83,7 @@ size_t	ft_putstroptions_fd(const char *s, int fd, struct s_option options);
 
 // ft_nbr
 size_t	ft_putnbroptions_fd(int n, int fd, struct s_option options);
-size_t	ft_countcharint(int n);
+size_t	ft_countcharint(int n, enum e_bool sign);
 
 // ft_u
 size_t	ft_putuoptions_fd(unsigned int u, int fd, struct s_option options);

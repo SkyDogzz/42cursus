@@ -6,20 +6,22 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:43:03 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 00:58:00 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/18 01:49:50 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-size_t	ft_countcharint(int n)
+size_t	ft_countcharint(int n, enum e_bool sign)
 {
 	int	len;
 
 	len = 0;
 	if (n == 0)
-		return (1);
+		return (1 + sign);
 	if (n < 0)
+		len++;
+	else if (sign)
 		len++;
 	while (n)
 	{
@@ -70,13 +72,18 @@ void	ft_putnbrsign(int n, int fd, enum e_bool sign)
 	}
 }
 
-size_t	ft_getsizea(int n, int precision)
+size_t	ft_getsizea(int n, struct s_option options)
 {
 	size_t len;
 
-	len = precision - ft_countcharint(n);
-	if (n < 0)
-		len++;
+	if (options.precision < 0)
+		len = options.width - ft_countcharint(n, ft_getflag(options.flag, '+'));
+	else
+	{
+		len = options.precision - ft_countcharint(n, ft_getflag(options.flag, '+'));
+		if (n < 0)
+			len++;
+	}
 	return (len);
 }
 
@@ -85,8 +92,8 @@ size_t	ft_putnbroptions_fd(int n, int fd, struct s_option options)
 	int	len;
 	int	padded;
 
-	len = ft_countcharint(n);
-	padded = ft_getsizea(n, options.precision);
+	len = ft_countcharint(n, ft_getflag(options.flag, '+'));
+	padded = ft_getsizea(n, options);
 	if (ft_getflag(options.flag, ' '))
 		if (n >= 0)
 		{
