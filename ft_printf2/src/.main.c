@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:24:45 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 13:18:30 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/18 13:42:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,50 +20,52 @@ int	main(int argc, char *argv[])
 
 	int a, b;
 
-	ft_printf(" %-1u ", 0);
-	ft_printf(" %-2u ", -1);
-	ft_printf(" %-3u ", 1);
-	ft_printf(" %-4u ", 9);
-	ft_printf(" %-1u ", 10);
-	ft_printf(" %-2u ", 11);
-	ft_printf(" %-3u ", 15);
-	ft_printf(" %-4u ", 16);
-	ft_printf(" %-5u ", 17);
-	ft_printf(" %-1u ", 99);
-	ft_printf(" %-2u ", 100);
-	ft_printf(" %-3u ", 101);
-	ft_printf(" %-1u ", -9);
-	ft_printf(" %-2u ", -10);
-	ft_printf(" %-3u ", -11);
-	ft_printf(" %-4u ", -14);
-	ft_printf(" %-5u ", -15);
-	ft_printf(" %-6u ", -16);
-	ft_printf(" %-1u ", -99);
-	ft_printf(" %-2u ", -100);
-	ft_printf(" %-3u ", -101);
+	a = ft_printf("| %x |", 0);
+	ft_printf(" %x ", -1);
+	ft_printf(" %x ", 1);
+	ft_printf(" %x ", 9);
+	ft_printf(" %x ", 10);
+	ft_printf(" %x ", 11);
+	ft_printf(" %x ", 15);
+	ft_printf(" %x ", 16);
+	ft_printf(" %x ", 17);
+	ft_printf(" %x ", 99);
+	ft_printf(" %x ", 100);
+	ft_printf(" %x ", 101);
+	ft_printf(" %x ", -9);
+	ft_printf(" %x ", -10);
+	ft_printf(" %x ", -11);
+	ft_printf(" %x ", -14);
+	ft_printf(" %x ", -15);
+	ft_printf(" %x ", -16);
+	ft_printf(" %x ", -99);
+	ft_printf(" %x ", -100);
+	ft_printf(" %x ", -101);
+
 	printf("\n");
-	printf(" %-1u ", 0);
-	printf(" %-2u ", -1);
-	printf(" %-3u ", 1);
-	printf(" %-4u ", 9);
-	printf(" %-1u ", 10);
-	printf(" %-2u ", 11);
-	printf(" %-3u ", 15);
-	printf(" %-4u ", 16);
-	printf(" %-5u ", 17);
-	printf(" %-1u ", 99);
-	printf(" %-2u ", 100);
-	printf(" %-3u ", 101);
-	printf(" %-1u ", -9);
-	printf(" %-2u ", -10);
-	printf(" %-3u ", -11);
-	printf(" %-4u ", -14);
-	printf(" %-5u ", -15);
-	printf(" %-6u ", -16);
-	printf(" %-1u ", -99);
-	printf(" %-2u ", -100);
-	printf(" %-3u ", -101);
-	
+
+	b = printf("| %x |", 0);
+	printf(" %x ", -1);
+	printf(" %x ", 1);
+	printf(" %x ", 9);
+	printf(" %x ", 10);
+	printf(" %x ", 11);
+	printf(" %x ", 15);
+	printf(" %x ", 16);
+	printf(" %x ", 17);
+	printf(" %x ", 99);
+	printf(" %x ", 100);
+	printf(" %x ", 101);
+	printf(" %x ", -9);
+	printf(" %x ", -10);
+	printf(" %x ", -11);
+	printf(" %x ", -14);
+	printf(" %x ", -15);
+	printf(" %x ", -16);
+	printf(" %x ", -99);
+	printf(" %x ", -100);
+	printf(" %x ", -101);
+
 	printf("\n\n%d, %d\n\n", a, b);
 	
 	return EXIT_SUCCESS;

@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:44:35 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 13:20:59 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/18 13:35:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,6 @@ size_t	ft_putuoptions_fd(unsigned int u, int fd, struct s_option options)
 
 	len = ft_countcharu(u);
 	padded = ft_getsizeb(u, options);
-	/*if (!options.width || options.width <= len)*/
-	/*{*/
-	/*	printf("here1\n");*/
-	/*	ft_putu_fd(u, fd);*/
-	/*	return (len);*/
-	/*}*/
 	if (ft_getflag(options.flag, '-'))
 	{
 		ft_putu_fd(u, fd);
