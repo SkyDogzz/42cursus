@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:46:41 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 13:50:08 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/18 16:48:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	ft_putcharmodif(unsigned int hex, int fd, int big, enum e_bool modif)
 	ft_puthex_fd(hex, fd, big);
 }
 
-void	ft_puthexpadded(unsigned int hex, int fd, int count, char c, int big)
+void	ft_puthexpadded(unsigned int hex, int count, char c, int big)
 {
-	ft_addchar(c, fd, count);
-	ft_puthex_fd(hex, fd, big);
+	ft_addchar(c, 1, count);
+	ft_puthex_fd(hex, 1, big);
 }
 
 size_t	ft_getsizec(unsigned int hex, struct s_option options)
@@ -76,36 +76,38 @@ size_t	ft_getsizec(unsigned int hex, struct s_option options)
 	return (len);
 }
 
+enum e_bool	ft_ismaj(char c)
+{
+	if (c == 'X')
+		return (TRUE);
+	return (FALSE);
+}
+
 size_t	ft_puthexbroptions_fd(unsigned int hex, int fd, struct s_option options)
 {
-	int			len;
-	int			padded;
-	enum e_bool	maj;
+	struct s_size	sizes;
+	enum e_bool		maj;
 
-	len = ft_countcharhex(hex) + (ft_getflag(options.flag, '#') && hex) * 2;
-	padded = ft_getsizec(hex, options);
-	if (options.specifier == 'X')
-		maj = TRUE;
-	else
-		maj = FALSE;
+	sizes.len = ft_countcharhex(hex) + (ft_getflag(options.flag, '#')
+			&& hex) * 2;
+	sizes.padded = ft_getsizec(hex, options);
+	maj = ft_ismaj(options.specifier);
 	if (ft_getflag(options.flag, '-'))
 	{
 		ft_putcharmodif(hex, fd, maj, ft_getflag(options.flag, '#'));
-		ft_addchar(' ', fd, options.width - len);
+		ft_addchar(' ', fd, options.width - sizes.len);
 	}
 	else if (ft_getflag(options.flag, '0'))
 	{
-		ft_addchar('0', fd, options.width - len);
+		ft_addchar('0', fd, options.width - sizes.len);
 		ft_putcharmodif(hex, fd, maj, ft_getflag(options.flag, '#'));
 	}
 	else if (ft_getflag(options.flag, '0') || options.precision >= 0)
-	{
-		ft_puthexpadded(hex, fd, padded, '0', maj);
-	}
+		ft_puthexpadded(hex, sizes.padded, '0', maj);
 	else
 	{
-		ft_addchar(' ', fd, options.width - len);
+		ft_addchar(' ', fd, options.width - sizes.len);
 		ft_putcharmodif(hex, fd, maj, ft_getflag(options.flag, '#'));
 	}
-	return (ft_getmax(3, options.width, len, options.precision));
+	return (ft_getmax(3, options.width, sizes.len, options.precision));
 }

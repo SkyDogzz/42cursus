@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:43:03 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 14:56:21 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/18 15:42:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ size_t	ft_countcharint(int n, enum e_bool sign)
 	return (len);
 }
 
-void	ft_putnbrpadded(int n, int fd, int count, char c, enum e_bool sign)
+void	ft_putnbrpadded(int n, int fd, int count, enum e_bool sign)
 {
 	char	num;
 
@@ -52,7 +52,7 @@ void	ft_putnbrpadded(int n, int fd, int count, char c, enum e_bool sign)
 		count--;
 	}
 	while (count >= 0 && count--)
-		ft_putchar_fd(c, 1);
+		ft_putchar_fd('0', 1);
 	if (n / 10 != 0)
 		ft_putnbr_fd(n / 10, fd);
 	num = (n % 10) + '0';
@@ -88,30 +88,29 @@ size_t	ft_getsizea(int n, struct s_option options)
 
 size_t	ft_putnbroptions_fd(int n, int fd, struct s_option options)
 {
-	int	len;
-	int	padded;
+	struct s_size	siz;
 
-	len = ft_countcharint(n, ft_getflag(options.flag, '+'));
-	padded = ft_getsizea(n, options);
+	siz.len = ft_countcharint(n, ft_getflag(options.flag, '+'));
+	siz.padded = ft_getsizea(n, options);
 	if (ft_getflag(options.flag, ' ') && n >= 0)
 	{
 		ft_putchar_fd(' ', fd);
-		len++;
+		siz.len++;
 	}
 	if (ft_getflag(options.flag, '-'))
 	{
 		ft_putnbrsign(n, fd, ft_getflag(options.flag, '+'));
-		ft_addchar(' ', fd, options.width - len
+		ft_addchar(' ', fd, options.width - siz.len
 			- ft_getflag(options.flag, '+'));
 	}
 	else if (ft_getflag(options.flag, '0') || options.precision >= 0)
-		ft_putnbrpadded(n, fd, padded, '0', ft_getflag(options.flag, '+'));
+		ft_putnbrpadded(n, fd, siz.padded, ft_getflag(options.flag, '+'));
 	else
 	{
-		ft_addchar(' ', fd, options.width - len
+		ft_addchar(' ', fd, options.width - siz.len
 			- ft_getflag(options.flag, '+'));
 		ft_putnbrsign(n, fd, ft_getflag(options.flag, '+'));
 	}
-	return (ft_getmax(3, options.width, len, options.precision
+	return (ft_getmax(3, options.width, siz.len, options.precision
 			+ ((n & (1 << (sizeof(int) * 8 - 1))) != 0)));
 }

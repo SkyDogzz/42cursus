@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 13:55:52 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/18 15:44:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ typedef enum e_bool
 	FALSE = 0,
 	TRUE = 1
 }	t_bool;
+
+typedef struct s_size
+{
+	int	len;
+	int	padded;
+}	t_size;
 
 // ft_util
 int		ft_getmax(int count, ...);

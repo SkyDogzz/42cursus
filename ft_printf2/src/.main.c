@@ -6,12 +6,13 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:24:45 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 13:42:04 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/18 16:47:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 #include <limits.h>
+#include <stdio.h>
 
 int	main(int argc, char *argv[])
 {
@@ -20,53 +21,30 @@ int	main(int argc, char *argv[])
 
 	int a, b;
 
-	a = ft_printf("| %x |", 0);
-	ft_printf(" %x ", -1);
-	ft_printf(" %x ", 1);
-	ft_printf(" %x ", 9);
-	ft_printf(" %x ", 10);
-	ft_printf(" %x ", 11);
-	ft_printf(" %x ", 15);
-	ft_printf(" %x ", 16);
-	ft_printf(" %x ", 17);
-	ft_printf(" %x ", 99);
-	ft_printf(" %x ", 100);
-	ft_printf(" %x ", 101);
-	ft_printf(" %x ", -9);
-	ft_printf(" %x ", -10);
-	ft_printf(" %x ", -11);
-	ft_printf(" %x ", -14);
-	ft_printf(" %x ", -15);
-	ft_printf(" %x ", -16);
-	ft_printf(" %x ", -99);
-	ft_printf(" %x ", -100);
-	ft_printf(" %x ", -101);
+	ft_printf(" %.1x ", 0);
+	ft_printf(" %.2x ", -1);
+	ft_printf(" %.2x ", 1);
+	ft_printf(" %.1x ", 9);
+	ft_printf(" %.2x ", 10);
+	ft_printf(" %.3x ", 11);
+	ft_printf(" %.4x ", 15);
+	ft_printf(" %.5x ", 16);
+	ft_printf(" %.6x ", 17);
+	ft_printf(" %.1x ", 99);
 
 	printf("\n");
 
-	b = printf("| %x |", 0);
-	printf(" %x ", -1);
-	printf(" %x ", 1);
-	printf(" %x ", 9);
-	printf(" %x ", 10);
-	printf(" %x ", 11);
-	printf(" %x ", 15);
-	printf(" %x ", 16);
-	printf(" %x ", 17);
-	printf(" %x ", 99);
-	printf(" %x ", 100);
-	printf(" %x ", 101);
-	printf(" %x ", -9);
-	printf(" %x ", -10);
-	printf(" %x ", -11);
-	printf(" %x ", -14);
-	printf(" %x ", -15);
-	printf(" %x ", -16);
-	printf(" %x ", -99);
-	printf(" %x ", -100);
-	printf(" %x ", -101);
-
-	printf("\n\n%d, %d\n\n", a, b);
+	printf(" %.1x ", 0);
+	printf(" %.2x ", -1);
+	printf(" %.2x ", 1);
+	printf(" %.1x ", 9);
+	printf(" %.2x ", 10);
+	printf(" %.3x ", 11);
+	printf(" %.4x ", 15);
+	printf(" %.5x ", 16);
+	printf(" %.6x ", 17);
+	printf(" %.1x ", 99);
+		printf("\n\n%d, %d\n\n", a, b);
 	
 	return EXIT_SUCCESS;
 }
