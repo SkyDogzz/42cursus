@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:27:24 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 16:54:11 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/18 00:13:28 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ size_t	ft_parse_precision(const char **fmt, struct s_option *options)
 	if (**fmt == '.')
 	{
 		(*fmt)++;
+		len++;
+		options->precision = 0;
 		while (**fmt >= '0' && **fmt <= '9')
 		{
 			ft_storeint(**fmt, &options->precision);
