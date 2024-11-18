@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 22:44:50 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 01:44:22 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:53:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,22 @@ int	ft_getmax(int count, ...)
 			max = act;
 	}
 	return (max);
+}
+
+void	ft_putcharmodif(unsigned int hex, int fd, int big, enum e_bool modif)
+{
+	if (modif && hex)
+	{
+		if (big)
+			ft_putstr_fd("0X", fd);
+		else
+			ft_putstr_fd("0x", fd);
+	}
+	ft_puthex_fd(hex, fd, big);
+}
+
+void	ft_puthexpadded(unsigned int hex, int count, char c, int big)
+{
+	ft_addchar(c, 1, count);
+	ft_puthex_fd(hex, 1, big);
 }

@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:46:41 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 16:48:56 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/18 16:52:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,6 @@ void	ft_puthex_fd(unsigned int hex, int fd, int big)
 			digit = (hex % 16) + 'a' - 10;
 	}
 	ft_putchar_fd(digit, fd);
-}
-
-void	ft_putcharmodif(unsigned int hex, int fd, int big, enum e_bool modif)
-{
-	if (modif && hex)
-	{
-		if (big)
-			ft_putstr_fd("0X", fd);
-		else
-			ft_putstr_fd("0x", fd);
-	}
-	ft_puthex_fd(hex, fd, big);
-}
-
-void	ft_puthexpadded(unsigned int hex, int count, char c, int big)
-{
-	ft_addchar(c, 1, count);
-	ft_puthex_fd(hex, 1, big);
 }
 
 size_t	ft_getsizec(unsigned int hex, struct s_option options)

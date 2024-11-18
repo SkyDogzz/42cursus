@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 15:44:19 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/18 16:53:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_size
 // ft_util
 int		ft_getmax(int count, ...);
 void	ft_addchar(const char c, int fd, int count);
+void	ft_putcharmodif(unsigned int hex, int fd, int big, enum e_bool modif);
+void	ft_puthexpadded(unsigned int hex, int count, char c, int big);
 
 // ft_printf
 size_t	ft_printf(const char *fmt, ...);
@@ -100,6 +102,6 @@ void	ft_putu_fd(unsigned int u, int fd);
 size_t	ft_puthexbroptions_fd(unsigned int hex, int fd,
 			struct s_option options);
 size_t	ft_countcharx(unsigned int hex);
-void	ft_putx_fd(unsigned int hex, int fd, int big);
+void	ft_puthex_fd(unsigned int hex, int fd, int big);
 
 #endif
