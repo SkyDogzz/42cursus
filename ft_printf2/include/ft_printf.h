@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 13:49:23 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/18 13:52:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ t_bool	ft_getflag(int flag, char c);
 size_t	ft_putcharoptions_fd(const char c, int fd, struct s_option option);
 
 // ft_p
-size_t	ft_putpoptions_fd(unsigned long long p, int fd, struct s_option options);
+size_t	ft_putpoptions_fd(unsigned long long p, int fd,
+			struct s_option options);
 size_t	ft_countcharp(unsigned long long p);
 void	ft_putp_fd(unsigned long long p, int fd, int big);
 
