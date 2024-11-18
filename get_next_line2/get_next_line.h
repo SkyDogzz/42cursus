@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:10:28 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/18 17:42:40 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/18 17:50:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define GET_NEXT_LINE_H
 
 # include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42

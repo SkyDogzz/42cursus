@@ -6,7 +6,7 @@
 int	main(int argc, char *argv[])
 {
 	int		fd;
-	char	*buffer;
+	char	*line;
 
 	printf("%d\n", argc);
 	if (argc != 2)
@@ -22,13 +22,9 @@ int	main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	}
 
-	printf("%d\n", BUFFER_SIZE);
-	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE);
-	while ((buffer = get_next_line(fd)))
-	{
-		printf("%s", buffer);
-	}
-	
-
+	line = (char *)malloc(sizeof(char) * 1 << 32);
+	line = get_next_line(fd);
+	printf("%s", line);
+	free(line);
 	return (0);
 }
