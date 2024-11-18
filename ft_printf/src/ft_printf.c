@@ -3,74 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/10 13:38:49 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/14 18:14:22 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/15 14:17:59 by skydogzz          #+#    #+#             */
+/*   Updated: 2024/11/18 14:35:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_printf.h"
+#include "../include/ft_printf.h"
 
-int	ft_print_with_option(struct s_option options, ...)
+size_t	ft_printwithoptions(struct s_option options, ...)
 {
-	int size;
 	va_list	ap;
+	size_t	len;
 
 	va_start(ap, options);
-	if (options.specifier == 'd' || options.specifier == 'i')
-		size = ft_putnbr_fd_options((int) va_arg(ap, int), 1, options);
-	else if (options.specifier == 'c')
-		size = ft_putchar_fd_options((char) va_arg(ap, int), 1, options);
+	len = 0;
+	if (options.specifier == 'c')
+		len += ft_putcharoptions_fd((const char)va_arg(ap, int), 1, options);
 	else if (options.specifier == 's')
-		size = ft_putstr_fd_options((char *) va_arg(ap, char *), 1, options);
+		len += ft_putstroptions_fd((const char *)va_arg(ap, char *), 1,
+				options);
 	else if (options.specifier == 'p')
-		size = ft_putptr_fd_options((void *) va_arg(ap, void *), 1, options);
+		len += ft_putpoptions_fd((unsigned long long)va_arg(ap,
+					unsigned long long), 1, options);
+	else if (options.specifier == 'd' || options.specifier == 'i')
+		len += ft_putnbroptions_fd((int)va_arg(ap, int), 1, options);
 	else if (options.specifier == 'u')
-		size = ft_putunbr_fd_options((unsigned int) va_arg(ap, int), 1, options);
+		len += ft_putuoptions_fd((unsigned int)va_arg(ap, unsigned int), 1,
+				options);
 	else if (options.specifier == 'x' || options.specifier == 'X')
-		size = ft_puthex_fd_options((unsigned int) va_arg(ap, int), 1, options);
-
+		len += ft_puthexbroptions_fd((unsigned int)va_arg(ap,
+					unsigned int), 1, options);
 	va_end(ap);
-	return (size);
+	return (len);
 }
 
-int	ft_printf(const char *s, ...)
+size_t	ft_handlespecifier(const char **fmt, va_list ap,
+							struct s_option *options)
 {
-	int				size;
-	va_list			ap;
-	struct s_option	*options;
+	size_t	len;
 
-	size = 0;
-	options = (struct s_option *)malloc(sizeof(struct s_option));
-	va_start(ap, s);
-	while (*s)
+	if (options->specifier == '%')
+		len = ft_putcharoptions_fd(options->specifier, 1, *options);
+	else
+		len = ft_printwithoptions(*options, va_arg(ap, void *));
+	return (len);
+}
+
+size_t	ft_printf(const char *fmt, ...)
+{
+	va_list			ap;
+	size_t			len;
+	struct s_option	options;
+
+	if (!fmt)
+		return (-1);
+	va_start(ap, fmt);
+	len = 0;
+	while (*fmt)
 	{
-		if (*s == '%')
+		if (*fmt == '%')
 		{
-			s = ft_parse_first(options, (char *)s);
-			s = ft_parse_second(options, (char *)s);
-			options->specifier = 0;
-			if (ft_isspecifier(*s))
-				options->specifier = *s;
-			else
-				ft_putstr_fd("Specifier not known", STDERR_FILENO);
-			if (options->specifier == '%')
-			{
-				write(STDIN_FILENO, "\%", 1);
-				size += 1;
-			}
-			else
-			size += ft_print_with_option(*options, va_arg(ap, void *));
+			ft_initoptions(&options);
+			fmt += ft_parseoptions(fmt, &options);
+			len += ft_handlespecifier(&fmt, ap, &options);
 		}
 		else
-	{
-			write(STDOUT_FILENO, s, 1);
-			size++;
+		{
+			ft_putchar_fd(*fmt, 1);
+			len++;
 		}
-		s++;
+		fmt++;
 	}
-	free(options);
 	va_end(ap);
-	return (size);
+	return (len);
 }

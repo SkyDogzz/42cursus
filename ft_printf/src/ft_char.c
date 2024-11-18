@@ -3,45 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_char.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 17:12:32 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/14 18:09:11 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/17 15:31:39 by skydogzz          #+#    #+#             */
+/*   Updated: 2024/11/17 22:49:12 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_printf.h"
+#include "../include/ft_printf.h"
 
-void	ft_addchar(int n, char c, int fd)
+size_t	ft_putcharoptions_fd(const char c, int fd, struct s_option options)
 {
-	while (n-- > 0)
-		write(fd, &c, 1);
-}
-
-int	ft_putchar_fd_options(char c, int fd, struct s_option options)
-{
-	int	len;
-
-	write(1, &c, 1);
-	len = 1;
-	if (!options.width)
-		ft_putchar_fd(c, fd);
-	else if (ft_getflag(options.flag, '-'))
+	if (!options.width || options.width <= 1)
 	{
 		ft_putchar_fd(c, fd);
-		ft_addchar(options.width - len, ' ', fd);
+		return (1);
 	}
-	else if (ft_getflag(options.flag, '0') && !options.precision)
+	if (ft_getflag(options.flag, '-'))
 	{
-		ft_addchar(options.width - len, '0', fd);
 		ft_putchar_fd(c, fd);
+		ft_addchar(' ', fd, options.width - 1);
 	}
 	else
 	{
-		ft_addchar(options.width - len, ' ', fd);
+		ft_addchar(' ', fd, options.width - 1);
 		ft_putchar_fd(c, fd);
 	}
-	if (options.width > len)
-		return (options.width);
-	return (len);
+	return (options.width);
 }

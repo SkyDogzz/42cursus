@@ -3,59 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_option.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 14:00:58 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/14 13:45:00 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/17 15:27:55 by skydogzz          #+#    #+#             */
+/*   Updated: 2024/11/18 00:11:57 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_printf.h"
+#include "../include/ft_printf.h"
 
-int	ft_isflag(char c)
+void	ft_initoptions(struct s_option *options)
 {
-	char	*set;
-	void	*start;
-
-	set = ft_strdup(FLAGS);
-	start = set;
-	while (*set)
-	{
-		if (*set == c)
-		{
-			free(start);
-			return (1);
-		}
-		set++;
-	}
-	free(start);
-	return (0);
+	options->specifier = 0;
+	options->flag = 0;
+	options->width = 0;
+	options->precision = -1;
+	options->length = 0;
 }
 
-void	ft_store_flag(int *flag, char c)
-{
-	int		pos;
-	char	*set;
-	void	*start;
-
-	set = ft_strdup(FLAGS);
-	start = set;
-	pos = 0;
-	while (set[pos])
-	{
-		if (set[pos] == c)
-		{
-			if (!(*flag & (1 << pos)))
-				*flag += (1 << pos);
-			free(start);
-			return ;
-		}
-		pos++;
-	}
-	free(start);
-}
-
-int	ft_isspecifier(char c)
+t_bool	ft_isspecifier(const char c)
 {
 	char	*set;
 	void	*start;
@@ -64,44 +30,33 @@ int	ft_isspecifier(char c)
 	start = set;
 	while (*set)
 	{
-		if (*set == c)
+		if (c == *set)
 		{
 			free(start);
-			return (1);
+			return (TRUE);
 		}
 		set++;
-	}
-	free(start);
-	return (0);
-}
-
-enum a_bool	ft_getflag(int flag, char c)
-{
-	int		pos;
-	char	*set;
-	void	*start;
-
-	set = ft_strdup(FLAGS);
-	start = set;
-	pos = 0;
-	while (set[pos])
-	{
-		if (set[pos] == c)
-		{
-			free(start);
-			if (flag & 1 << pos)
-				return (TRUE);
-			else
-				return (FALSE);
-		}
-		pos++;
 	}
 	free(start);
 	return (FALSE);
 }
 
-void	ft_store_int(int *len, char c)
+t_bool	ft_isflag(const char c)
 {
-	*len *= 10;
-	*len += c - '0';
+	char	*set;
+	void	*start;
+
+	set = ft_strdup(FLAGS);
+	start = set;
+	while (*set)
+	{
+		if (c == *set)
+		{
+			free(start);
+			return (TRUE);
+		}
+		set++;
+	}
+	free(start);
+	return (FALSE);
 }

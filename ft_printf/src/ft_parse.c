@@ -3,67 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 17:41:09 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 17:48:42 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/17 15:27:24 by skydogzz          #+#    #+#             */
+/*   Updated: 2024/11/18 00:13:28 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/ft_printf.h"
+#include "../include/ft_printf.h"
 
-char	*ft_parse_first(struct s_option *options, char *s)
+size_t	ft_parse_flags(const char **fmt, struct s_option *options)
 {
-	s++;
-	options->flag = 0;
-	while (ft_isflag(*s))
+	size_t	len;
+
+	len = 0;
+	while (ft_isflag(**fmt))
 	{
-		ft_store_flag(&options->flag, *s);
-		s++;
+		ft_storeflag(**fmt, &options->flag);
+		(*fmt)++;
+		len++;
 	}
-	options->width = 0;
-	while (*s >= '0' && *s <= '9')
-	{
-		ft_store_int(&options->width, *s);
-		s++;
-	}
-	options->precision = 0;
-	if (*s == '.')
-	{
-		s++;
-		while (*s >= '0' && *s <= '9')
-		{
-			ft_store_int(&options->precision, *s);
-			s++;
-		}
-	}
-	return (s);
+	return (len);
 }
 
-char	*ft_parse_second(struct s_option *options, char *s)
+size_t	ft_parse_width(const char **fmt, struct s_option *options)
 {
-	options->length = 0;
-	if (*s == 'h')
+	size_t	len;
+
+	len = 0;
+	while (**fmt >= '0' && **fmt <= '9')
 	{
-		if (*(s + 1) == 'h')
-		{
-			options->length = SHORT_SHORT;
-			s++;
-		}
-		else
-			options->length = SHORT;
-		s++;
+		ft_storeint(**fmt, &options->width);
+		(*fmt)++;
+		len++;
 	}
-	else if (*s == 'l')
+	return (len);
+}
+
+size_t	ft_parse_precision(const char **fmt, struct s_option *options)
+{
+	size_t	len;
+
+	len = 0;
+	if (**fmt == '.')
 	{
-		if (*(s + 1) == 'l')
+		(*fmt)++;
+		len++;
+		options->precision = 0;
+		while (**fmt >= '0' && **fmt <= '9')
 		{
-			options->length = LONG_LONG;
-			s++;
+			ft_storeint(**fmt, &options->precision);
+			(*fmt)++;
+			len++;
 		}
-		else
-			options->length = LONG;
-		s++;
 	}
-	return (s);
+	return (len);
+}
+
+size_t	ft_parseoptions(const char *fmt, struct s_option *options)
+{
+	size_t	len;
+
+	len = 0;
+	fmt++;
+	len += ft_parse_flags(&fmt, options);
+	len += ft_parse_width(&fmt, options);
+	len += ft_parse_precision(&fmt, options);
+	len += ft_storelength(fmt, &options->length);
+	if (ft_isspecifier(*fmt))
+	{
+		options->specifier = *fmt;
+		len++;
+	}
+	return (len);
 }
