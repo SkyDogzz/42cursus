@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:43:03 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 13:54:57 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/18 14:56:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ void	ft_putnbrpadded(int n, int fd, int count, char c, enum e_bool sign)
 			n = 147483648;
 		}
 		else
-		{
 			n = -n;
-		}
 	}
 	else if (sign)
 	{
@@ -95,13 +93,10 @@ size_t	ft_putnbroptions_fd(int n, int fd, struct s_option options)
 
 	len = ft_countcharint(n, ft_getflag(options.flag, '+'));
 	padded = ft_getsizea(n, options);
-	if (ft_getflag(options.flag, ' '))
+	if (ft_getflag(options.flag, ' ') && n >= 0)
 	{
-		if (n >= 0)
-		{
-			ft_putchar_fd(' ', fd);
-			len++;
-		}
+		ft_putchar_fd(' ', fd);
+		len++;
 	}
 	if (ft_getflag(options.flag, '-'))
 	{
@@ -110,9 +105,7 @@ size_t	ft_putnbroptions_fd(int n, int fd, struct s_option options)
 			- ft_getflag(options.flag, '+'));
 	}
 	else if (ft_getflag(options.flag, '0') || options.precision >= 0)
-	{
 		ft_putnbrpadded(n, fd, padded, '0', ft_getflag(options.flag, '+'));
-	}
 	else
 	{
 		ft_addchar(' ', fd, options.width - len
