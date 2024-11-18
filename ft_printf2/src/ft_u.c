@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:44:35 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 18:38:38 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:16:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,58 @@ size_t	ft_countcharu(unsigned int u)
 	return (len);
 }
 
+size_t	ft_getsizeb(unsigned int u, struct s_option options)
+{
+	size_t	len;
+	
+	if (options.precision < 0)
+		len = options.width - ft_countcharu(u);
+	else {
+		len = options.precision - ft_countcharu(u);
+	}
+	return (len);
+}
+
+void	ft_putupadded(unsigned int u, int fd, int count, char c)
+{
+	ft_addchar(c, fd, count);
+	ft_putu_fd(u, fd);
+}
+
 size_t	ft_putuoptions_fd(unsigned int u, int fd, struct s_option options)
 {
 	size_t	len;
+	int		padded;
 
 	len = ft_countcharu(u);
-	if (!options.width || options.width <= len)
-	{
-		ft_putu_fd(u, fd);
-		return (len);
-	}
+	padded = ft_getsizeb(u, options);
+	/*if (!options.width || options.width <= len)*/
+	/*{*/
+	/*	printf("here1\n");*/
+	/*	ft_putu_fd(u, fd);*/
+	/*	return (len);*/
+	/*}*/
 	if (ft_getflag(options.flag, '-'))
 	{
+		printf("here2\n");
 		ft_putu_fd(u, fd);
 		ft_addchar(' ', fd, options.width - len);
 	}
 	else if (ft_getflag(options.flag, '0'))
 	{
+		printf("here3\n");
 		ft_addchar('0', fd, options.width - len);
 		ft_putu_fd(u, fd);
 	}
+	else if (ft_getflag(options.flag, '0') || options.precision >= 0)
+	{
+		ft_putupadded(u, fd, padded, '0');
+	}
 	else
 	{
+		printf("here4\n");
 		ft_addchar(' ', fd, options.width - len);
 		ft_putu_fd(u, fd);
 	}
-	return (options.width);
+	return (ft_getmax(3, options.width, len, options.precision));
 }
