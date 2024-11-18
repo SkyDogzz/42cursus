@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 13:47:23 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/18 14:35:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ size_t	ft_printf(const char *fmt, ...)
 	size_t			len;
 	struct s_option	options;
 
+	if (!fmt)
+		return (-1);
 	va_start(ap, fmt);
 	len = 0;
 	while (*fmt)
