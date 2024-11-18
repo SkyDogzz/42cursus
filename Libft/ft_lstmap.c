@@ -6,11 +6,11 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 00:11:48 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/14 00:20:04 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:34:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_bonus.h"
+#include "libft.h"
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
