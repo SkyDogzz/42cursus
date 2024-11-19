@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:47:31 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/06 16:29:48 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/19 12:53:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *s)
 	char	*dup;
 
 	dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!dup)
+		return (NULL);
 	pos = 0;
 	while (*s)
 	{

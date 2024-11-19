@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:16:02 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/09 17:17:54 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/19 13:27:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,11 @@ char	**ft_split(char const *s, char c)
 	while (i < words)
 	{
 		split[i] = get_next_word(&s, c);
+		if (!split[i])
+		{
+			free_split(split, i);
+			return (NULL);
+		}
 		s += ft_strlen(split[i]);
 		i++;
 	}

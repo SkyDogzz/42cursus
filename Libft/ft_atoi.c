@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:32:30 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 23:21:16 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/19 12:38:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@ int	ft_isspace(int c)
 {
 	return (c == ' ' || c == '\t' || c == '\r' || c == '\n'
 		|| c == '\v' || c == '\f');
-}
-
-int	ft_isdigit(int c)
-{
-	return (c >= '0' && c <= '9');
 }
 
 int	ft_atoi(const char *s)
