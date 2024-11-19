@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:43:03 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 15:42:19 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/19 16:34:04 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_putnbrpadded(int n, int fd, int count, enum e_bool sign)
 	if (n < 0)
 	{
 		write(fd, "-", 1);
-		if (n == INT_MIN)
+		if (n == -2147483648)
 		{
 			write(fd, "2", 1);
 			n = 147483648;

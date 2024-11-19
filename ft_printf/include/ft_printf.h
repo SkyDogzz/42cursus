@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 16:53:33 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/19 15:45:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ void	ft_puthexpadded(unsigned int hex, int count, char c, int big);
 
 // ft_printf
 size_t	ft_printf(const char *fmt, ...);
-size_t	ft_handlespecifier(const char **fmt, va_list ap,
-			struct s_option *options);
+size_t	ft_handlespecifier(va_list ap, struct s_option *options);
 size_t	ft_printwithoptions(t_option options, ...);
 
 // ft_parse
