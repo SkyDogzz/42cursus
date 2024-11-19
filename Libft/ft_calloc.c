@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:51:19 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/19 13:31:43 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/19 13:42:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 	if (nmemb == 0 || size == 0)
 	{
-		p = (unsigned char *)malloc(1);
+		p = (unsigned char *)malloc(0);
 		if (!p)
 			return (NULL);
 		return (p);
