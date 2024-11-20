@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 12:51:10 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/06 14:19:19 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/20 23:09:47 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memoverlap(void *p1, void *p2, size_t n)
+static int	ft_memoverlap(void *p1, void *p2, size_t n)
 {
 	if (p1 < p2 && p1 + sizeof(char) * n > p2)
 		return (1);
@@ -21,9 +21,7 @@ int	ft_memoverlap(void *p1, void *p2, size_t n)
 	return (0);
 }
 
-// si s overlap d on copy depuis la fin
-// sinon on copy normalement
-void	*ft_memcpyrev(void *dest, const void *src, size_t n)
+static void	*ft_memcpyrev(void *dest, const void *src, size_t n)
 {
 	unsigned char	*destuc;
 	unsigned char	*srcuc;

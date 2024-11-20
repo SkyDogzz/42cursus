@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:16:02 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/19 13:27:12 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/20 23:10:51 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_countwords(const char *s, char c)
+static int	ft_countwords(const char *s, char c)
 {
 	int	count;
 	int	in_word;
@@ -33,7 +33,7 @@ int	ft_countwords(const char *s, char c)
 	return (count);
 }
 
-char	*ft_strndup(const char *s, int n)
+static char	*ft_strndup(const char *s, int n)
 {
 	char	*str;
 	int		i;
@@ -51,7 +51,7 @@ char	*ft_strndup(const char *s, int n)
 	return (str);
 }
 
-void	free_split(char **split, int size)
+static void	free_split(char **split, int size)
 {
 	int	i;
 
@@ -63,7 +63,7 @@ void	free_split(char **split, int size)
 	free(split);
 }
 
-char	*get_next_word(const char **s, char c)
+static char	*get_next_word(const char **s, char c)
 {
 	int	len;
 

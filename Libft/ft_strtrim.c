@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:52:02 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 23:27:49 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/20 23:11:37 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	is_in_set(char c, const char *set)
+static int	is_in_set(char c, const char *set)
 {
 	while (*set)
 		if (c == *set++)
