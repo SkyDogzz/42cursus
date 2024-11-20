@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:26:07 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/20 18:54:54 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/21 00:08:49 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	ft_putdioptions_fd(int d, struct s_option options, int fd)
 {
 	struct s_carac	caracs;
 
+	if (d == 0 && options.precision == 0)
+		return (0);
 	ft_initcaracs(&caracs);
 	caracs.size = ft_countdichar(d);
 	caracs.pad = options.width - caracs.size;
