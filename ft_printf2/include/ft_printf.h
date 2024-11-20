@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/20 14:42:57 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:17:14 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	ft_initcaracs(struct s_carac *caracs);
 int	ft_getmax(int count, ...);
 int	ft_putcoptions_fd(const char c, struct s_option options, int fd);
 int	ft_putsoptions_fd(const char *s, struct s_option options, int fd);
+int	ft_putpoptions_fd(unsigned long long p, struct s_option options, int fd);
 void	ft_addchar(int count, int zero);
+void	ft_putstr_padded(const char *s, int count, int left);
 
 #endif

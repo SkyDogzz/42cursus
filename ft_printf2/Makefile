@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror -I/include
 AR = ar rcs
 
 SRCS = src/ft_printf.c src/ft_option.c src/ft_parse.c src/ft_store.c \
-	   src/ft_util.c src/ft_carac.c src/ft_c.c src/ft_s.c
+	   src/ft_util.c src/ft_carac.c src/ft_c.c src/ft_s.c src/ft_p.c
 OBJS = $(SRCS:.c=.o)
 
 LIBFT_DIR = libft

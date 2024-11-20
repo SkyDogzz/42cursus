@@ -6,13 +6,13 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:56:38 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/20 14:51:28 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:18:52 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static void	ft_putstr_padded(const char *s, int count, int left)
+void	ft_putstr_padded(const char *s, int count, int left)
 {
 	if (!left)
 	{
@@ -32,8 +32,6 @@ int	ft_putsoptions_fd(const char *s, struct s_option options, int fd)
 {
 	struct s_carac caracs;
 
-	(void) options;
-	
 	ft_initcaracs(&caracs);
 	caracs.padLeft = options.minus;
 	if (!s)
