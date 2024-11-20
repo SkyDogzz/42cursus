@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:24:32 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 23:02:57 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/20 23:35:10 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	int				pos;
+	size_t			pos;
 	unsigned char	*suc;
 	unsigned char	uc;
 
