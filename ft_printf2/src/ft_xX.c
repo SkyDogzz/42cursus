@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:09:32 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/20 17:48:27 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:11:30 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,13 @@ int	ft_putxoptions_fd(unsigned int u, struct s_option options, int fd)
 	if (options.precision >= 0 && options.precision > caracs.size)
 	{
 		ft_addchar(options.precision - caracs.size, 1);
+		if (options.sharp && u != 0)
+		{
+			if (maj)
+				ft_putstr_fd("0X", 1);
+			else
+				ft_putstr_fd("0x", 1);
+		}
 		ft_putxnbr(u, maj);
 		return (ft_getmax(3, caracs.size, options.width, options.precision));
 	}
@@ -79,14 +86,28 @@ int	ft_putxoptions_fd(unsigned int u, struct s_option options, int fd)
 	}
 	if(caracs.padLeft)
 	{
+		if (options.sharp && u != 0)
+		{
+			if (maj)
+				ft_putstr_fd("0X", 1);
+			else
+				ft_putstr_fd("0x", 1);
+		}
 		ft_putxnbr(u, maj);
 		ft_addchar(caracs.pad, options.zero);
 	}
 	else
 	{
+		if (options.sharp && u != 0)
+		{
+			if (maj)
+				ft_putstr_fd("0X", 1);
+			else
+				ft_putstr_fd("0x", 1);
+		}
 		ft_addchar(caracs.pad, options.zero);
 		ft_putxnbr(u, maj);
 	}
-	return (ft_getmax(2, caracs.size, options.width));
+	return (ft_getmax(2, caracs.size, options.width) + (options.sharp && u != 0) * 2);
 	(void) fd;
 }
