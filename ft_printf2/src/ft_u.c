@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:45:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/20 18:40:23 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:57:31 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_countuchar(unsigned int u)
 {
-	int len;
+	int	len;
 
 	if (u == 0)
 		return (1);
@@ -39,17 +39,17 @@ void	ft_putunbr(unsigned int u)
 
 int	ft_putuoptions_fd(unsigned int u, struct s_option options, int fd)
 {
-	struct s_carac caracs;
+	struct s_carac	caracs;
 
 	ft_initcaracs(&caracs);
 	caracs.size = ft_countuchar(u);
 	caracs.pad = options.width - caracs.size;
-	caracs.padLeft = options.minus;
+	caracs.padleft = options.minus;
 	if (options.precision >= 0 && options.precision > options.width)
 	{
 		ft_addchar(options.precision - caracs.size, 1);
 	}
-	if (caracs.padLeft)
+	if (caracs.padleft)
 	{
 		ft_putunbr(u);
 		ft_addchar(caracs.pad, options.zero);

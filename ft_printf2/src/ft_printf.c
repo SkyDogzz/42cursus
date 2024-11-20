@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/20 17:31:16 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:57:47 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_printwithoptions(struct s_option options, ...)
 	else if (options.specifier == 's')
 		len += ft_putsoptions_fd((const char *)va_arg(ap, char *), options, 1);
 	else if (options.specifier == 'p')
-	 	len += ft_putpoptions_fd(va_arg(ap, unsigned long long), options, 1);
+		len += ft_putpoptions_fd(va_arg(ap, unsigned long long), options, 1);
 	else if (options.specifier == 'd' || options.specifier == 'i')
 		len += ft_putdioptions_fd((int)va_arg(ap, int), options, 1);
 	else if (options.specifier == 'u')
@@ -42,7 +42,7 @@ size_t	ft_handlespecifier(va_list ap, struct s_option *options)
 	if (options->specifier == '%')
 		len = ft_putcoptions_fd(options->specifier, *options, 1);
 	else
-	 	len = ft_printwithoptions(*options, va_arg(ap, void *));
+		len = ft_printwithoptions(*options, va_arg(ap, void *));
 	return (len);
 }
 

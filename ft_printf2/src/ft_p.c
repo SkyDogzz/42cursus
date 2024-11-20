@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:55:08 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/20 18:11:15 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:55:39 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_countcharull(unsigned long long p)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (p)
@@ -27,7 +27,7 @@ static int	ft_countcharull(unsigned long long p)
 
 static void	ft_putull_fd(unsigned long long p, int fd)
 {
-	char letter;
+	char	letter;
 
 	if (p / 16 > 0)
 		ft_putull_fd(p / 16, fd);
@@ -40,19 +40,19 @@ static void	ft_putull_fd(unsigned long long p, int fd)
 
 int	ft_putpoptions_fd(unsigned long long p, struct s_option options, int fd)
 {
-	struct s_carac caracs;
+	struct s_carac	caracs;
 
 	ft_initcaracs(&caracs);
-	caracs.padLeft = options.minus;
+	caracs.padleft = options.minus;
 	if (p == 0)
 	{
 		caracs.pad = options.width - 5;
-		ft_putstr_padded("(nil)", caracs.pad, caracs.padLeft);
+		ft_putstr_padded("(nil)", caracs.pad, caracs.padleft);
 		return (ft_getmax(2, 5, options.width));
 	}
 	caracs.size = ft_countcharull(p) + 2;
 	caracs.pad = options.width - caracs.size;
-	if (caracs.padLeft)
+	if (caracs.padleft)
 	{
 		ft_putstr_fd("0x", fd);
 		ft_putull_fd(p, fd);

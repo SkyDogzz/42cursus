@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/20 17:31:23 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:57:03 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 # include <stdarg.h>
-#include <stdio.h>
+# include <stdio.h>
 
 # define SPECIFIERS "cspdiuxX%"
 # define FLAGS "# +-0"
@@ -42,9 +42,9 @@ typedef struct s_option
 typedef struct s_carac
 {
 	int	size;
-	int pad;
-	int padLeft;
-}	s_carac;
+	int	pad;
+	int	padleft;
+}	t_carac;
 
 typedef enum e_length
 {
@@ -83,14 +83,15 @@ size_t	ft_storelength(const char *s, int *length);
 t_bool	ft_getflag(int flag, char c);
 
 void	ft_initcaracs(struct s_carac *caracs);
-int	ft_getmax(int count, ...);
-int	ft_putcoptions_fd(const char c, struct s_option options, int fd);
-int	ft_putsoptions_fd(const char *s, struct s_option options, int fd);
-int	ft_putpoptions_fd(unsigned long long p, struct s_option options, int fd);
+int		ft_getmax(int count, ...);
+int		ft_putcoptions_fd(const char c, struct s_option options, int fd);
+int		ft_putsoptions_fd(const char *s, struct s_option options, int fd);
+int		ft_putpoptions_fd(unsigned long long p, struct s_option options,
+			int fd);
 void	ft_addchar(int count, int zero);
 void	ft_putstr_padded(const char *s, int count, int left);
-int	ft_putdioptions_fd(int d, struct s_option options, int fd);
-int	ft_putuoptions_fd(unsigned int u, struct s_option options, int fd);
-int	ft_putxoptions_fd(unsigned int u, struct s_option options, int fd);
+int		ft_putdioptions_fd(int d, struct s_option options, int fd);
+int		ft_putuoptions_fd(unsigned int u, struct s_option options, int fd);
+int		ft_putxoptions_fd(unsigned int u, struct s_option options, int fd);
 
 #endif

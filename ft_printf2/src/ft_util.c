@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:41:56 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/20 15:23:44 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:53:25 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_getmax(int count, ...)
 	va_list	ap;
 	int		max;
 	int		act;
-	
+
 	if (count <= 0)
 		return (0);
 	va_start(ap, count);

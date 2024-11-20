@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:26:07 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/20 18:08:01 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:54:54 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,25 @@ static void	ft_putdioptions(int d, int fd, int count, int plus, int space)
 
 int	ft_putdioptions_fd(int d, struct s_option options, int fd)
 {
-	struct s_carac caracs;
+	struct s_carac	caracs;
 
 	ft_initcaracs(&caracs);
 	caracs.size = ft_countdichar(d);
 	caracs.pad = options.width - caracs.size;
-	caracs.padLeft = options.minus;
-	if (caracs.padLeft)
+	caracs.padleft = options.minus;
+	if (caracs.padleft)
 	{	
-		ft_putdioptions(d, fd, options.precision - caracs.size, options.plus, options.space);
+		ft_putdioptions(d, fd, options.precision - caracs.size, options.plus,
+			options.space);
 		ft_addchar(caracs.pad, options.zero);
 	}
 	else
 	{	
 		ft_addchar(caracs.pad, options.zero);
-		ft_putdioptions(d, fd, options.precision - caracs.size, options.plus, options.space);
+		ft_putdioptions(d, fd, options.precision - caracs.size, options.plus,
+			options.space);
 	}
-	return (ft_getmax(3, caracs.size, options.width, options.precision + (1 && d < 0))
-	 + (options.plus && d >= 0) + (options.space && d >= 0));
+	return (ft_getmax(3, caracs.size, options.width, options.precision
+			+ (1 && d < 0)) + (options.plus && d >= 0)
+		+ (options.space && d >= 0));
 }

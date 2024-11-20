@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:13:36 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/20 13:54:42 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:55:23 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	ft_putcoptions_fd(const char c, struct s_option options, int fd)
 {
-	struct s_carac caracs;
+	struct s_carac	caracs;
 
 	(void) options;
 	ft_initcaracs(&caracs);
 	caracs.size = 1;
 	caracs.pad = options.width - caracs.size;
-	caracs.padLeft = options.minus;
-	if (caracs.padLeft)
+	caracs.padleft = options.minus;
+	if (caracs.padleft)
 	{
 		ft_putchar_fd(c, fd);
 		ft_addchar(caracs.pad, options.zero);

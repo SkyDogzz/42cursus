@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:09:32 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/20 18:11:30 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:56:56 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	ft_countxchar(unsigned int x)
 {
-	int len;
+	int		len;
 
-	if(x == 0)
+	if (x == 0)
 		return (1);
 	len = 0;
-	while(x > 0)
+	while (x > 0)
 	{
 		x /= 16;
 		len++;
@@ -27,9 +27,9 @@ int	ft_countxchar(unsigned int x)
 	return (len);
 }
 
-void ft_putxnbr(unsigned int x, int maj)
+void	ft_putxnbr(unsigned int x, int maj)
 {
-	char letter;
+	char	letter;
 
 	if (x / 16 > 0)
 		ft_putxnbr(x / 16, maj);
@@ -40,9 +40,9 @@ void ft_putxnbr(unsigned int x, int maj)
 	write(1, &letter, 1);
 }
 
-void ft_putxnbr_lim(unsigned int x, int maj, int lim)
+void	ft_putxnbr_lim(unsigned int x, int maj, int lim)
 {
-	char letter;
+	char	letter;
 
 	if (!lim)
 		return ;
@@ -57,13 +57,13 @@ void ft_putxnbr_lim(unsigned int x, int maj, int lim)
 
 int	ft_putxoptions_fd(unsigned int u, struct s_option options, int fd)
 {
-	struct s_carac caracs;
-	int maj;
+	struct s_carac	caracs;
+	int				maj;
 
 	ft_initcaracs(&caracs);
 	caracs.size = ft_countxchar(u);
 	caracs.pad = options.width - caracs.size;
-	caracs.padLeft = options.minus;
+	caracs.padleft = options.minus;
 	maj = 0;
 	maj = options.specifier == 'X';
 	if (options.precision >= 0 && options.precision > caracs.size)
@@ -79,12 +79,7 @@ int	ft_putxoptions_fd(unsigned int u, struct s_option options, int fd)
 		ft_putxnbr(u, maj);
 		return (ft_getmax(3, caracs.size, options.width, options.precision));
 	}
-	if (options.precision >= 0 && options.precision < caracs.size)
-	{
-		// ft_putxnbr_lim(u, maj, options.precision);
-		// return (options.precision);
-	}
-	if(caracs.padLeft)
+	if (caracs.padleft)
 	{
 		if (options.sharp && u != 0)
 		{
@@ -108,6 +103,7 @@ int	ft_putxoptions_fd(unsigned int u, struct s_option options, int fd)
 		ft_addchar(caracs.pad, options.zero);
 		ft_putxnbr(u, maj);
 	}
-	return (ft_getmax(2, caracs.size, options.width) + (options.sharp && u != 0) * 2);
+	return (ft_getmax(2, caracs.size, options.width)
+		+ (options.sharp && u != 0) * 2);
 	(void) fd;
 }
