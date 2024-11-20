@@ -1,68 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p.c                                             :+:      :+:    :+:   */
+/*   ft_u.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 14:55:08 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/20 15:28:23 by tstephan         ###   ########.fr       */
+/*   Created: 2024/11/20 16:45:37 by tstephan          #+#    #+#             */
+/*   Updated: 2024/11/20 17:03:15 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static int	ft_countcharull(unsigned long long p)
+int	ft_countuchar(unsigned int u)
 {
 	int len;
 
+	if (u == 0)
+		return (1);
 	len = 0;
-	while (p)
+	while (u)
 	{
-		p /= 16;
+		u /= 10;
 		len++;
 	}
 	return (len);
 }
 
-static void	ft_putull_fd(unsigned long long p, int fd)
+void	ft_putunbr(unsigned int u)
 {
-	char letter;
+	char	letter;
 
-	if (p / 16 > 0)
-		ft_putull_fd(p / 16, fd);
-	if (p % 16 <= 9)
-		letter = p % 16 + '0';
-	else
-		letter = p % 16 + 'a' - 10;
-	write(fd, &letter, 1);
+	if (u / 10 > 0)
+		ft_putunbr(u / 10);
+	letter = u % 10 + '0';
+	write(1, &letter, 1);
 }
 
-int	ft_putpoptions_fd(unsigned long long p, struct s_option options, int fd)
+int	ft_putuoptions_fd(unsigned int u, struct s_option options, int fd)
 {
 	struct s_carac caracs;
 
 	ft_initcaracs(&caracs);
-	caracs.padLeft = options.minus;
-	if (p == 0)
-	{
-		caracs.pad = options.width - 5;
-		ft_putstr_padded("(nil)", caracs.pad, caracs.padLeft);
-		return (ft_getmax(2, 5, options.width));
-	}
-	caracs.size = ft_countcharull(p) + 2;
+	caracs.size = ft_countuchar(u);
 	caracs.pad = options.width - caracs.size;
+	caracs.padLeft = options.minus;
 	if (caracs.padLeft)
 	{
-		ft_putstr_fd("0x", fd);
-		ft_putull_fd(p, fd);
 		ft_addchar(caracs.pad, options.zero);
+		ft_putunbr(u);
 	}
 	else
 	{
 		ft_addchar(caracs.pad, options.zero);
-		ft_putstr_fd("0x", fd);
-		ft_putull_fd(p, fd);
+		ft_putunbr(u);
 	}
 	return (ft_getmax(2, caracs.size, options.width));
+	(void) fd;
 }

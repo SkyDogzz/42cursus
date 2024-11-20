@@ -6,27 +6,11 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:56:38 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/20 15:18:52 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:24:50 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
-
-void	ft_putstr_padded(const char *s, int count, int left)
-{
-	if (!left)
-	{
-		while (count-- > 0)
-			ft_putchar_fd(' ', 1);
-		ft_putstr_fd((char *)s, 1);
-	}
-	else
-	{
-		ft_putstr_fd((char *)s, 1);
-		while (count-- > 0)
-			ft_putchar_fd(' ', 1);
-	}
-}
 
 int	ft_putsoptions_fd(const char *s, struct s_option options, int fd)
 {

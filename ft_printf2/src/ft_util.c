@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:41:56 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/20 13:53:03 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:23:44 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,20 @@ int	ft_getmax(int count, ...)
 	}
 	va_end(ap);
 	return (max);
+}
+
+void	ft_putstr_padded(const char *s, int count, int left)
+{
+	if (!left)
+	{
+		while (count-- > 0)
+			ft_putchar_fd(' ', 1);
+		ft_putstr_fd((char *)s, 1);
+	}
+	else
+	{
+		ft_putstr_fd((char *)s, 1);
+		while (count-- > 0)
+			ft_putchar_fd(' ', 1);
+	}
 }
