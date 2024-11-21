@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:09:32 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/21 02:12:56 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/21 02:30:37 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ft_put_hex_fd(unsigned int x, int uppercase, int fd)
 	write(fd, &hex_digit, 1);
 }
 
-void	ft_compute_caracs_hex(t_carac *caracs, t_option *options,
+static void	ft_compute_caracs_hex(t_carac *caracs, t_option *options,
 	unsigned int x)
 {
 	caracs->sign_char = '\0';

@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:55:08 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/21 02:14:09 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/21 02:32:21 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ static void	ft_compute_caracs_pointer(t_carac *caracs, t_option *options,
 	caracs->padleft = options->minus;
 }
 
-void	ft_print_pointer_content(t_carac *caracs, unsigned long long p, int fd)
+static void	ft_print_pointer_content(t_carac *caracs, unsigned long long p,
+	int fd)
 {
 	if (caracs->content)
 		ft_putstr_fd(caracs->content, fd);

@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/21 02:12:08 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/21 02:42:28 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,38 +65,26 @@ typedef struct s_size
 	int	padded;
 }	t_size;
 
-// ft_printf
-size_t	ft_printf(const char *fmt, ...);
-size_t	ft_handlespecifier(va_list ap, struct s_option *options);
-size_t	ft_printwithoptions(t_option options, ...);
-
-// ft_parse
-size_t	ft_parse_flags(const char **fmt, t_option *options);
-size_t	ft_parse_width(const char **fmt, struct s_option *options);
-size_t	ft_parse_precision(const char **fmt, struct s_option *options);
-size_t	ft_parseoptions(const char *fmt, struct s_option *options);
-
-// ft_option
-void	ft_initoptions(struct s_option *options);
-t_bool	ft_isspecifier(const char c);
-t_bool	ft_isflag(const char c);
-
-// ft_store
-void	ft_storeflag(const char c, struct s_option *options);
-void	ft_storeint(const char c, int *n);
-size_t	ft_storelength(const char *s, int *length);
-t_bool	ft_getflag(int flag, char c);
-
-void	ft_initcaracs(struct s_carac *caracs);
-int		ft_getmax(int count, ...);
-int		ft_putcoptions_fd(const char c, struct s_option options, int fd);
-int		ft_putsoptions_fd(const char *s, struct s_option options, int fd);
-int		ft_putpoptions_fd(unsigned long long p, struct s_option options,
-			int fd);
-void	ft_addchar(int count, int zero);
-void	ft_putstr_padded(const char *s, int count, int left);
-int		ft_putdioptions_fd(int d, struct s_option options, int fd);
-int		ft_putuoptions_fd(unsigned int u, struct s_option options, int fd);
-int		ft_putxoptions_fd(unsigned int u, struct s_option options, int fd);
+void		ft_initoptions(struct s_option *options);
+t_bool		ft_isspecifier(const char c);
+t_bool		ft_isflag(const char c);
+void		ft_addchar(int count, int zero);
+void		ft_addchar(int count, int zero);
+int			ft_getmax(int count, ...);
+size_t		ft_parse_flags(const char **fmt, struct s_option *options);
+size_t		ft_parse_width(const char **fmt, struct s_option *options);
+size_t		ft_parse_precision(const char **fmt, struct s_option *options);
+size_t		ft_parseoptions(const char *fmt, struct s_option *options);
+void		ft_storeflag(const char c, struct s_option *options);
+void		ft_storeint(const char c, int *n);
+size_t		ft_storelength(const char *s, int *length);
+enum e_bool	ft_getflag(int flag, char c);
+int			ft_putcoptions_fd(const char c, struct s_option options, int fd);
+int			ft_putdioptions_fd(int n, struct s_option options, int fd);
+int			ft_putpoptions_fd(unsigned long long p, struct s_option options,
+				int fd);
+int			ft_putsoptions_fd(const char *s, struct s_option options, int fd);
+int			ft_putuoptions_fd(unsigned int u, struct s_option options, int fd);
+int			ft_putxoptions_fd(unsigned int x, struct s_option options, int fd);
 
 #endif

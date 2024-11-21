@@ -6,13 +6,13 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/20 18:57:47 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/21 02:37:52 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-size_t	ft_printwithoptions(struct s_option options, ...)
+static size_t	ft_printwithoptions(struct s_option options, ...)
 {
 	va_list	ap;
 	size_t	len;
@@ -35,7 +35,7 @@ size_t	ft_printwithoptions(struct s_option options, ...)
 	return (len);
 }
 
-size_t	ft_handlespecifier(va_list ap, struct s_option *options)
+static size_t	ft_handlespecifier(va_list ap, struct s_option *options)
 {
 	size_t	len;
 
