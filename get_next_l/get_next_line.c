@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:12:40 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/21 15:28:34 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:38:37 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ char	*ft_strchrnn(const char *s)
 		s++;
 	while (*s)
 		memory[pos++] = *s++;
+	if (pos == 0)
+		return (NULL);
 	return (memory);
 }
 
@@ -71,7 +73,8 @@ char	*ft_appendton(char *dest, char *src)
 	char	*new;
 	int		pos;
 
-	if (!dest)
+	printf("here %s %d\n", dest, !dest);
+	if (!dest || dest == NULL)
 	{
 		new = (char *)malloc(sizeof(char) * (ft_strclen(src, '\n') + 1));
 		pos = 0;
@@ -82,17 +85,16 @@ char	*ft_appendton(char *dest, char *src)
 		new[pos] = 0;
 		return (new);
 	}
-	// new = (char *)malloc(sizeof(char) * (ft_strclen(dest, 0) + ft_strclen(src, '\n') + 1));
-	// pos = 0;
-	// while (*dest)
-	// 	new[pos++] = *dest++;
-	// while (*src && *src != '\n')
-	// 	new[pos++] = *src++;
-	// if (*src == '\n')
-	// 	new[pos++] = '\n';
-	// new[pos] = 0;
-	// return (new);
-	return (NULL);
+	new = (char *)malloc(sizeof(char) * (ft_strclen(dest, 0) + ft_strclen(src, '\n') + 1));
+	pos = 0;
+	while (*dest)
+		new[pos++] = *dest++;
+	while (*src && *src != '\n')
+		new[pos++] = *src++;
+	if (*src == '\n')
+		new[pos++] = '\n';
+	new[pos] = 0;
+	return (new);
 }
 
 char	*get_next_line(int fd)
@@ -115,6 +117,7 @@ char	*get_next_line(int fd)
 		read(fd, buffer, BUFFER_SIZE);
 		current = ft_appendton(current, buffer);
 		memory = ft_strchrnn(buffer);
+		usleep(1000000);
 	}
 	return (current);
 }
