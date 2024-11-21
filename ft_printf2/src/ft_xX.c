@@ -6,20 +6,20 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:09:32 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/21 01:09:01 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/21 02:00:58 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_countxchar(unsigned int x)
+static int	ft_count_hex_digits(unsigned int x)
 {
 	int	len;
 
 	if (x == 0)
 		return (1);
 	len = 0;
-	while (x > 0)
+	while (x)
 	{
 		x /= 16;
 		len++;
@@ -27,66 +27,60 @@ int	ft_countxchar(unsigned int x)
 	return (len);
 }
 
-void	ft_putxnbr_fd(unsigned int x, int maj, int fd)
+static void	ft_put_hex_fd(unsigned int x, int uppercase, int fd)
 {
-	char	letter;
+	char	hex_digit;
 
 	if (x / 16 > 0)
-		ft_putxnbr_fd(x / 16, maj, fd);
-	if (x % 16 <= 9)
+		ft_put_hex_fd(x / 16, uppercase, fd);
+	hex_digit = x % 16;
+	if (hex_digit < 10)
+		hex_digit += '0';
+	else
+		hex_digit += (uppercase ? 'A' - 10 : 'a' - 10);
+	write(fd, &hex_digit, 1);
+}
+
+void	ft_compute_caracs_hex(t_carac *caracs, t_option *options, unsigned int x)
+{
+	caracs->sign_char = '\0';
+	caracs->size = (x == 0 && options->precision == 0) ? 0 : ft_count_hex_digits(x);
+	caracs->zeros = (options->precision > caracs->size) ? options->precision - caracs->size : 0;
+	if (options->sharp && x != 0)
 	{
-		letter = x % 16 + '0';
+		if (options->specifier == 'X')
+			ft_strlcpy(caracs->prefix, "0X", 3);
+		else
+			ft_strlcpy(caracs->prefix, "0x", 3);
 	}
 	else
-	{
-		if (maj)
-			letter = x % 16 + 'A' - 10;
-		else
-			letter = x % 16 + 'a' - 10;
-	}
-	write(fd, &letter, 1);
+		caracs->prefix[0] = '\0';
+	caracs->total_length = caracs->size + caracs->zeros + ft_strlen(caracs->prefix);
+	caracs->pad = options->width - caracs->total_length;
+	if (caracs->pad < 0)
+		caracs->pad = 0;
+	caracs->padleft = options->minus;
 }
 
 int	ft_putxoptions_fd(unsigned int x, struct s_option options, int fd)
 {
-	struct s_carac	caracs;
-	int				maj;
-	int				result;
+	t_carac	caracs;
+	int		uppercase;
+	int		pad_with_zero;
 
-	ft_initcaracs(&caracs);
-	if (x == 0 && options.precision == 0)
-		caracs.size = 0;
-	else
-		caracs.size = ft_countxchar(x);
-	caracs.pad = options.width - ft_getmax(2, caracs.size, options.precision);
-	if (options.sharp && x != 0)
-		caracs.pad -= 2;
-	if (caracs.pad < 0)
-		caracs.pad = 0;
-	caracs.padleft = options.minus;
-	maj = (options.specifier == 'X');
-	if (!caracs.padleft)
-	{
-		if (!options.zero || options.precision >= 0)
-			ft_addchar(caracs.pad, 0);
-	}
-	if (options.sharp && x != 0)
-	{
-		if (maj)
-			ft_putstr_fd("0X", fd);
-		else
-			ft_putstr_fd("0x", fd);
-	}
-	if (options.precision > caracs.size)
-		ft_addchar(options.precision - caracs.size, 1);
-	if (!caracs.padleft && options.zero && options.precision < 0)
+	ft_compute_caracs_hex(&caracs, &options, x);
+	uppercase = (options.specifier == 'X');
+	pad_with_zero = options.zero && options.precision < 0 && !options.minus;
+	if (!caracs.padleft && !pad_with_zero)
+		ft_addchar(caracs.pad, 0);
+	if (caracs.prefix[0] != '\0')
+		ft_putstr_fd(caracs.prefix, fd);
+	if (!caracs.padleft && pad_with_zero)
 		ft_addchar(caracs.pad, 1);
+	ft_addchar(caracs.zeros, 1);
 	if (caracs.size > 0)
-		ft_putxnbr_fd(x, maj, fd);
+		ft_put_hex_fd(x, uppercase, fd);
 	if (caracs.padleft)
 		ft_addchar(caracs.pad, 0);
-	result = ft_getmax(3, caracs.size, options.width, options.precision);
-	if (options.sharp && x != 0)
-		result += 2;
-	return (result);
+	return (caracs.total_length + caracs.pad);
 }

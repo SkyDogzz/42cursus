@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/20 18:57:03 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/21 01:22:24 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,15 @@ typedef struct s_option
 
 typedef struct s_carac
 {
-	int	size;
-	int	pad;
-	int	padleft;
-}	t_carac;
+    int		size;
+    int		pad;
+    int		padleft;
+    int		zeros;
+    char	sign_char;
+    char	prefix[3];
+    int		total_length;
+    char    *content;
+}   t_carac;
 
 typedef enum e_length
 {

@@ -6,16 +6,18 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:55:08 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/20 18:55:39 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/21 01:42:54 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static int	ft_countcharull(unsigned long long p)
+static int	ft_count_hex_digits_ull(unsigned long long p)
 {
 	int	len;
 
+	if (p == 0)
+		return (1);
 	len = 0;
 	while (p)
 	{
@@ -25,44 +27,65 @@ static int	ft_countcharull(unsigned long long p)
 	return (len);
 }
 
-static void	ft_putull_fd(unsigned long long p, int fd)
+static void	ft_put_hex_ull_fd(unsigned long long p, int fd)
 {
-	char	letter;
+	char	hex_digit;
 
 	if (p / 16 > 0)
-		ft_putull_fd(p / 16, fd);
-	if (p % 16 <= 9)
-		letter = p % 16 + '0';
+		ft_put_hex_ull_fd(p / 16, fd);
+	hex_digit = "0123456789abcdef"[p % 16];
+	write(fd, &hex_digit, 1);
+}
+
+static void	ft_compute_caracs_pointer(t_carac *caracs, t_option *options,
+	unsigned long long p)
+{
+	if (p == 0)
+	{
+		caracs->content = "(nil)";
+		caracs->size = 5;
+		caracs->prefix[0] = '\0';
+	}
 	else
-		letter = p % 16 + 'a' - 10;
-	write(fd, &letter, 1);
+	{
+		caracs->size = ft_count_hex_digits_ull(p);
+		ft_strlcpy(caracs->prefix, "0x", 3);
+		caracs->content = NULL;
+	}
+	caracs->zeros = 0;
+	caracs->total_length = caracs->size + ft_strlen(caracs->prefix);
+	caracs->pad = options->width - caracs->total_length;
+	if (caracs->pad < 0)
+		caracs->pad = 0;
+	caracs->padleft = options->minus;
 }
 
 int	ft_putpoptions_fd(unsigned long long p, struct s_option options, int fd)
 {
-	struct s_carac	caracs;
+	t_carac	caracs;
 
-	ft_initcaracs(&caracs);
-	caracs.padleft = options.minus;
-	if (p == 0)
-	{
-		caracs.pad = options.width - 5;
-		ft_putstr_padded("(nil)", caracs.pad, caracs.padleft);
-		return (ft_getmax(2, 5, options.width));
-	}
-	caracs.size = ft_countcharull(p) + 2;
-	caracs.pad = options.width - caracs.size;
+	ft_compute_caracs_pointer(&caracs, &options, p);
 	if (caracs.padleft)
 	{
-		ft_putstr_fd("0x", fd);
-		ft_putull_fd(p, fd);
+		if (caracs.content)
+			ft_putstr_fd(caracs.content, fd);
+		else
+		{
+			ft_putstr_fd(caracs.prefix, fd);
+			ft_put_hex_ull_fd(p, fd);
+		}
 		ft_addchar(caracs.pad, options.zero);
 	}
 	else
 	{
 		ft_addchar(caracs.pad, options.zero);
-		ft_putstr_fd("0x", fd);
-		ft_putull_fd(p, fd);
+		if (caracs.content)
+			ft_putstr_fd(caracs.content, fd);
+		else
+		{
+			ft_putstr_fd(caracs.prefix, fd);
+			ft_put_hex_ull_fd(p, fd);
+		}
 	}
-	return (ft_getmax(2, caracs.size, options.width));
+	return (caracs.total_length + caracs.pad);
 }

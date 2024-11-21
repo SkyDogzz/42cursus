@@ -6,54 +6,65 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:56:38 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/20 18:57:24 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/21 02:05:03 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_putsoptions_fd(const char *s, struct s_option options, int fd)
+static void	ft_compute_caracs_string(t_carac *caracs, t_option *options,
+	const char *s)
 {
-	struct s_carac	caracs;
+	int	actual_length;
 
-	ft_initcaracs(&caracs);
-	caracs.padleft = options.minus;
-	if (!s)
+	if (s == NULL)
 	{
-		caracs.pad = options.width - 6;
-		if (options.precision >= 0 && options.precision < 6)
+		caracs->content = "(null)";
+		if (options->precision >= 0)
 		{
-			write(1, s, options.precision);
-			return (0);
-		}
-		ft_putstr_padded("(null)", caracs.pad, caracs.padleft);
-		return (ft_getmax(2, 6, options.width));
-	}
-	caracs.size = ft_strlen(s);
-	caracs.pad = options.width - caracs.size;
-	if (options.precision >= 0 && options.precision < caracs.size)
-	{
-		if (options.width > options.precision)
-		{
-			if (!caracs.padleft)
-				ft_addchar(options.width - options.precision, options.zero);
-			write(1, s, options.precision);
-			if (caracs.padleft)
-				ft_addchar(options.width - options.precision, options.zero);
+			if (options->precision < 6)
+				caracs->size = 0;
+			else
+			{
+				if (options->precision < 6)
+					caracs->size = options->precision;
+				else
+					caracs->size = 6;
+			}
 		}
 		else
-			write(1, s, options.precision);
-		return (ft_getmax(2, options.precision, options.width));
-	}
-	if (caracs.padleft)
-	{
-		ft_putstr_fd((char *)s, fd);
-		ft_addchar(caracs.pad, options.zero);
+		{
+			caracs->size = 6;
+		}
 	}
 	else
 	{
-		ft_addchar(caracs.pad, options.zero);
-		ft_putstr_fd((char *)s, fd);
+		caracs->content = (char *)s;
+		actual_length = ft_strlen(caracs->content);
+		if (options->precision >= 0 && options->precision < actual_length)
+			caracs->size = options->precision;
+		else
+			caracs->size = actual_length;
 	}
-	return (ft_getmax(2, caracs.size, options.width));
+	caracs->zeros = 0;
+	caracs->sign_char = '\0';
+	caracs->total_length = caracs->size;
+	caracs->pad = options->width - caracs->total_length;
+	if (caracs->pad < 0)
+		caracs->pad = 0;
+	caracs->padleft = options->minus;
+}
+
+int	ft_putsoptions_fd(const char *s, struct s_option options, int fd)
+{
+	t_carac	caracs;
+
+	ft_compute_caracs_string(&caracs, &options, s);
+	if (!caracs.padleft)
+		ft_addchar(caracs.pad, 0);
+	if (caracs.size > 0)
+		write(fd, caracs.content, caracs.size);
+	if (caracs.padleft)
+		ft_addchar(caracs.pad, 0);
+	return (caracs.total_length + caracs.pad);
 }

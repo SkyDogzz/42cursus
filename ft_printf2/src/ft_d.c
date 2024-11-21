@@ -6,96 +6,74 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:26:07 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/21 01:11:37 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/21 01:42:04 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static int	ft_countdichar_abs(unsigned int n)
+static int	ft_count_digits(int n)
 {
-	int	len;
+	int				len;
+	unsigned int	abs_n;
 
-	len = 1;
-	while (n >= 10)
+	if (n == 0)
+		return (1);
+	len = 0;
+	abs_n = (n < 0) ? -n : n;
+	while (abs_n)
 	{
-		n /= 10;
+		abs_n /= 10;
 		len++;
 	}
 	return (len);
 }
 
-void	ft_putnbr_unsigned_fd(unsigned int n, int fd)
+static void	ft_put_unsigned_fd(unsigned int n, int fd)
 {
 	if (n >= 10)
-		ft_putnbr_unsigned_fd(n / 10, fd);
+		ft_put_unsigned_fd(n / 10, fd);
 	ft_putchar_fd((n % 10) + '0', fd);
 }
 
-int	ft_putdioptions_fd(int d, struct s_option options, int fd)
+static void	ft_compute_caracs_int(t_carac *caracs, t_option *options, int n)
 {
-	char			sign_char;
-	unsigned int	abs_d;
-	int				num_digits;
-	int				zeros;
-	int				total_length;
-	int				padding;
+	caracs->size = (n == 0 && options->precision == 0) ? 0 : ft_count_digits(n);
+	if (n < 0)
+		caracs->sign_char = '-';
+	else if (options->plus)
+		caracs->sign_char = '+';
+	else if (options->space)
+		caracs->sign_char = ' ';
+	else
+		caracs->sign_char = '\0';
+	caracs->zeros = (options->precision > caracs->size) ? options->precision - caracs->size : 0;
+	caracs->total_length = caracs->size + caracs->zeros + (caracs->sign_char ? 1 : 0);
+	caracs->pad = options->width - caracs->total_length;
+	if (caracs->pad < 0)
+		caracs->pad = 0;
+	caracs->padleft = options->minus;
+}
 
-	sign_char = 0;
-	zeros = 0;
-	if (d == 0 && options.precision == 0)
-	{
-		ft_addchar(options.width, 0);
-		return (options.width);
-	}
-	if (d < 0)
-		sign_char = '-';
-	else if (options.plus)
-		sign_char = '+';
-	else if (options.space)
-		sign_char = ' ';
-	if (d < 0)
-		abs_d = -(unsigned int)d;
-	else
-		abs_d = (unsigned int)d;
-	num_digits = ft_countdichar_abs(abs_d);
-	if (options.precision >= 0)
-	{
-		options.zero = 0;
-		zeros = options.precision - num_digits;
-		if (zeros < 0)
-			zeros = 0;
-	}
-	total_length = num_digits + zeros;
-	if (sign_char != 0)
-		total_length += 1;
-	padding = options.width - total_length;
-	if (padding < 0)
-		padding = 0;
-	if (options.minus)
-	{
-		if (sign_char != 0)
-			ft_putchar_fd(sign_char, fd);
-		ft_addchar(zeros, 1);
-		ft_putnbr_unsigned_fd(abs_d, fd);
-		ft_addchar(padding, 0);
-	}
-	else
-	{
-		if (options.zero)
-		{
-			if (sign_char != 0)
-				ft_putchar_fd(sign_char, fd);
-			ft_addchar(padding, 1);
-		}
-		else
-		{
-			ft_addchar(padding, 0);
-			if (sign_char != 0)
-				ft_putchar_fd(sign_char, fd);
-		}
-		ft_addchar(zeros, 1);
-		ft_putnbr_unsigned_fd(abs_d, fd);
-	}
-	return (total_length + padding);
+int	ft_putdioptions_fd(int n, struct s_option options, int fd)
+{
+	t_carac			caracs;
+	unsigned int	abs_n;
+	int				pad_with_zero;
+
+	ft_compute_caracs_int(&caracs, &options, n);
+	abs_n = (n < 0) ? -n : n;
+	pad_with_zero = options.zero && options.precision < 0 && !options.minus;
+	if (!caracs.padleft && !pad_with_zero)
+		ft_addchar(caracs.pad, 0);
+	if (caracs.sign_char)
+		ft_putchar_fd(caracs.sign_char, fd);
+	if (!caracs.padleft && pad_with_zero)
+		ft_addchar(caracs.pad, 1);
+	ft_addchar(caracs.zeros, 1);
+	if (caracs.size > 0)
+		ft_put_unsigned_fd(abs_n, fd);
+	if (caracs.padleft)
+		ft_addchar(caracs.pad, 0);
+	return (caracs.total_length + caracs.pad);
 }
