@@ -6,129 +6,112 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:12:40 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/21 18:00:42 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/22 00:22:26 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strclen(const char *s, char c)
+static char	*read_and_store(int fd, char *store)
 {
-	size_t	len;
-
-	len = 0;
-	while (s[len] != 0 && s[len] != c)
-		len++;
-	if (s[len] == c)
-		len++;
-	return (len);
-}
-
-char	*ft_getmemory(char **s)
-{
-	char	*new;
-	int		pos;
+	char	*buffer;
 	char	*temp;
+	size_t	bytes_read;
 
-	if (!**s)
-		return (NULL);
-	new = (char *)malloc(sizeof(char) * (ft_strclen(*s, '\n') + 1));
-	if (!new)
-		return (NULL);
-	pos = 0;
-	temp = *s;
-	while (*temp != 0 && *temp != '\n')
-		new[pos++] = *temp++;
-	if (*temp == '\n')
-		new[pos++] = *temp++;
-	new[pos] = 0;
-	*s = temp;
-	return (new);
-}
-
-char	*ft_strchrnn(const char *s)
-{
-	char	*memory;
-	int		pos;
-	int		len;
-
-	while (*s && *s != '\n')
-		s++;
-	if (*s == '\n')
-		s++;
-	len = ft_strclen(s, '\n');
-	memory = (char *)malloc(sizeof(char) * (len + 1));
-	if (!memory)
-		return (NULL);
-	pos = 0;
-	while (*s)
-		memory[pos++] = *s++;
-	memory[pos] = 0;
-	return (memory);
-}
-
-char	*ft_appendton(char *dest, char *src)
-{
-	char	*new;
-	int		pos;
-	int		i;
-
-	if (!src)
-		return (dest);
-	if (!dest || dest == NULL)
+	bytes_read = 1;
+	while (!ft_strchr(store, '\n') && bytes_read != 0)
 	{
-		new = (char *)malloc(sizeof(char) * (ft_strclen(src, '\n') + 1));
-		if (!new)
-			return (NULL);
-		pos = 0;
-		while (src[pos] && src[pos] != '\n')
+		buffer = read_to_buffer(fd, &bytes_read);
+		if (!buffer)
 		{
-			new[pos] = src[pos];
-			pos++;
+			return (NULL);
 		}
-		if (src[pos] == '\n')
-			new[pos++] = '\n';
-		new[pos] = 0;
-		return (new);
+		temp = ft_strjoin(store, buffer);
+		free(store);
+		free(buffer);
+		if (!temp)
+			return (NULL);
+		store = temp;
 	}
-	new = (char *)malloc(sizeof(char) * (ft_strclen(dest, 0)
-				+ ft_strclen(src, '\n') + 1));
-	if (!new)
+	return (store);
+}
+
+static size_t	calculate_line_length(char *store)
+{
+	size_t	i;
+
+	if (!store)
+		return (0);
+	i = 0;
+	while (store[i] && store[i] != '\n')
+		i++;
+	if (store[i] == '\n')
+		i++;
+	return (i);
+}
+
+static char	*extract_line(char *store)
+{
+	char	*line;
+	size_t	line_length;
+	size_t	i;
+
+	if (!store || !*store)
 		return (NULL);
-	pos = 0;
+	line_length = calculate_line_length(store);
+	line = (char *)malloc(sizeof(char) * (line_length + 1));
+	if (!line)
+		return (NULL);
 	i = 0;
-	while (dest[i])
-		new[pos++] = dest[i++];
+	while (i < line_length && store[i])
+	{
+		line[i] = store[i];
+		i++;
+	}
+	line[i] = '\0';
+	return (line);
+}
+
+static char	*save_remaining(char *store)
+{
+	char	*remaining;
+	size_t	i;
+	size_t	j;
+
 	i = 0;
-	while (src[1] != '\n')
-		new[pos++] = src[i++];
-	if (*src == '\n')
-		new[pos++] = '\n';
-	new[pos] = 0;
-	free(dest);
-	return (new);
+	while (store[i] && store[i] != '\n')
+		i++;
+	if (!store[i])
+	{
+		free(store);
+		return (NULL);
+	}
+	remaining = (char *)malloc(sizeof(char) * (ft_strlen(store) - i + 1));
+	if (!remaining)
+	{
+		free(store);
+		return (NULL);
+	}
+	i++;
+	j = 0;
+	while (store[i])
+		remaining[j++] = store[i++];
+	remaining[j] = '\0';
+	free(store);
+	return (remaining);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*memory;
-	char		*current;
-	char		*buffer;
+	static char	*store;
+	char		*line;
 
-	if (memory)
-	{
-		current = ft_getmemory(&memory);
-		if (current)
-			return (current);
-	}
-	memory = NULL;
-	current = NULL;
-	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	while (!memory)
-	{
-		read(fd, buffer, BUFFER_SIZE);
-		current = ft_appendton(current, buffer);
-		memory = ft_strchrnn(buffer);
-	}
-	return (current);
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	store = read_and_store(fd, store);
+	if (!store)
+		return (NULL);
+	line = extract_line(store);
+	store = save_remaining(store);
+	return (line);
 }

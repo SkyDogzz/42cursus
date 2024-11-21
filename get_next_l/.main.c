@@ -12,12 +12,8 @@ int main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	}
 	fd = open(argv[1], O_RDONLY);
-	int loop = 1;
 	while ((line = get_next_line(fd)) && *line != 0)
-	{
-		// printf("%s", line);
-		printf("loop %d %s", loop++, line);
-	}
+		printf("%s", line);
 
 	return EXIT_SUCCESS;
 }
