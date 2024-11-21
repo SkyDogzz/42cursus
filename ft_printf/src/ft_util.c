@@ -3,27 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_util.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
+/*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 22:44:50 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 16:53:40 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/20 13:41:56 by tstephan          #+#    #+#             */
+/*   Updated: 2024/11/21 02:33:03 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-void	ft_addchar(const char c, int fd, int count)
+void	ft_addchar(int count, int zero)
 {
-	while (count >= 0 && count--)
-		ft_putchar_fd(c, fd);
+	char	c;
+
+	c = ' ';
+	if (zero)
+		c = '0';
+	while (count-- > 0)
+		ft_putchar_fd(c, 1);
 }
 
 int	ft_getmax(int count, ...)
 {
-	int		act;
-	int		max;
 	va_list	ap;
+	int		max;
+	int		act;
 
+	if (count <= 0)
+		return (0);
 	va_start(ap, count);
 	max = va_arg(ap, int);
 	while (--count)
@@ -32,23 +39,6 @@ int	ft_getmax(int count, ...)
 		if (act > max)
 			max = act;
 	}
+	va_end(ap);
 	return (max);
-}
-
-void	ft_putcharmodif(unsigned int hex, int fd, int big, enum e_bool modif)
-{
-	if (modif && hex)
-	{
-		if (big)
-			ft_putstr_fd("0X", fd);
-		else
-			ft_putstr_fd("0x", fd);
-	}
-	ft_puthex_fd(hex, fd, big);
-}
-
-void	ft_puthexpadded(unsigned int hex, int count, char c, int big)
-{
-	ft_addchar(c, 1, count);
-	ft_puthex_fd(hex, 1, big);
 }

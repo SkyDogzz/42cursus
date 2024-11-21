@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:27:55 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 00:11:57 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/21 02:33:26 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 void	ft_initoptions(struct s_option *options)
 {
 	options->specifier = 0;
-	options->flag = 0;
+	options->sharp = FALSE;
+	options->space = FALSE;
+	options->plus = FALSE;
+	options->minus = FALSE;
+	options->zero = FALSE;
 	options->width = 0;
 	options->precision = -1;
 	options->length = 0;

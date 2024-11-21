@@ -3,9 +3,9 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -I/include
 AR = ar rcs
 
-SRCS = src/ft_printf.c src/ft_char.c src/ft_option.c src/ft_parse.c \
-	   	   src/ft_str.c src/ft_uint.c src/ft_p.c src/ft_nbr.c src/ft_store.c \
-		   	   src/ft_u.c src/ft_util.c
+SRCS = src/ft_printf.c src/ft_option.c src/ft_parse.c src/ft_store.c \
+	   src/ft_util.c src/ft_c.c src/ft_s.c src/ft_p.c \
+	   src/ft_d.c src/ft_u.c src/ft_xX.c
 OBJS = $(SRCS:.c=.o)
 
 LIBFT_DIR = libft

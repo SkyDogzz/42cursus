@@ -3,37 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_p.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
+/*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 15:39:27 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/19 17:28:08 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/20 14:55:08 by tstephan          #+#    #+#             */
+/*   Updated: 2024/11/21 02:32:21 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-void	ft_putp_fd(unsigned long long p, int fd, int big)
+static int	ft_count_hex_digits_ull(unsigned long long p)
 {
-	char	digit;
+	int	len;
 
-	if (p / 16 > 0)
-		ft_putp_fd(p / 16, fd, big);
-	if (p % 16 <= 9)
-		digit = (p % 16) + '0';
-	else
-	{
-		if (big)
-			digit = (p % 16) + 'A' - 10;
-		else
-			digit = (p % 16) + 'a' - 10;
-	}
-	ft_putchar_fd(digit, fd);
-}
-
-size_t	ft_countcharp(unsigned long long p)
-{
-	size_t	len;
-
+	if (p == 0)
+		return (1);
 	len = 0;
 	while (p)
 	{
@@ -43,27 +27,65 @@ size_t	ft_countcharp(unsigned long long p)
 	return (len);
 }
 
-size_t	ft_putpoptions_fd(unsigned long long p, int fd, struct s_option options)
+static void	ft_put_hex_ull_fd(unsigned long long p, int fd)
 {
-	size_t	len;
+	char	hex_digit;
 
+	if (p / 16 > 0)
+		ft_put_hex_ull_fd(p / 16, fd);
+	hex_digit = "0123456789abcdef"[p % 16];
+	write(fd, &hex_digit, 1);
+}
+
+static void	ft_compute_caracs_pointer(t_carac *caracs, t_option *options,
+	unsigned long long p)
+{
 	if (p == 0)
 	{
-		ft_putstr_fd("(nil)", fd);
-		return (5);
-	}
-	len = ft_countcharp(p) + 2;
-	if (ft_getflag(options.flag, '-'))
-	{
-		ft_putstr_fd("0x", fd);
-		ft_putp_fd(p, fd, 0);
-		ft_addchar(' ', fd, options.width - len);
+		caracs->content = "(nil)";
+		caracs->size = 5;
+		caracs->prefix[0] = '\0';
 	}
 	else
-{
-		ft_addchar(' ', fd, options.width - len);
-		ft_putstr_fd("0x", fd);
-		ft_putp_fd(p, fd, 0);
+	{
+		caracs->size = ft_count_hex_digits_ull(p);
+		ft_strlcpy(caracs->prefix, "0x", 3);
+		caracs->content = NULL;
 	}
-	return (ft_getmax(2, options.width, len));
+	caracs->zeros = 0;
+	caracs->total_length = caracs->size + ft_strlen(caracs->prefix);
+	caracs->pad = options->width - caracs->total_length;
+	if (caracs->pad < 0)
+		caracs->pad = 0;
+	caracs->padleft = options->minus;
+}
+
+static void	ft_print_pointer_content(t_carac *caracs, unsigned long long p,
+	int fd)
+{
+	if (caracs->content)
+		ft_putstr_fd(caracs->content, fd);
+	else
+	{
+		ft_putstr_fd(caracs->prefix, fd);
+		ft_put_hex_ull_fd(p, fd);
+	}
+}
+
+int	ft_putpoptions_fd(unsigned long long p, struct s_option options, int fd)
+{
+	t_carac	caracs;
+
+	ft_compute_caracs_pointer(&caracs, &options, p);
+	if (caracs.padleft)
+	{
+		ft_print_pointer_content(&caracs, p, fd);
+		ft_addchar(caracs.pad, options.zero);
+	}
+	else
+	{
+		ft_addchar(caracs.pad, options.zero);
+		ft_print_pointer_content(&caracs, p, fd);
+	}
+	return (caracs.total_length + caracs.pad);
 }

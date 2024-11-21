@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:27:24 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 00:13:28 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/20 13:09:53 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_parse_flags(const char **fmt, struct s_option *options)
 	len = 0;
 	while (ft_isflag(**fmt))
 	{
-		ft_storeflag(**fmt, &options->flag);
+		ft_storeflag(**fmt, options);
 		(*fmt)++;
 		len++;
 	}

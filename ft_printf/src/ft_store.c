@@ -6,32 +6,24 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:47:27 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/17 17:19:51 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/21 02:33:54 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-void	ft_storeflag(const char c, int *flag)
+void	ft_storeflag(const char c, struct s_option *options)
 {
-	char	*set;
-	void	*start;
-	int		pos;
-
-	set = ft_strdup(FLAGS);
-	start = set;
-	pos = 0;
-	while (set[pos])
-	{
-		if (c == set[pos])
-		{
-			if (!(*flag & (1 << pos)))
-				*flag += (1 << pos);
-			free(start);
-			return ;
-		}
-		pos++;
-	}
+	if (c == '#')
+		options->sharp = TRUE;
+	else if (c == ' ')
+		options->space = TRUE;
+	else if (c == '+')
+		options->plus = TRUE;
+	else if (c == '-')
+		options->minus = TRUE;
+	else if (c == '0')
+		options->zero = TRUE;
 }
 
 void	ft_storeint(const char c, int *n)

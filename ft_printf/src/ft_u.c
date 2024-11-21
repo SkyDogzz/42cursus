@@ -3,28 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_u.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
+/*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 15:44:35 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/18 15:42:46 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/20 16:45:37 by tstephan          #+#    #+#             */
+/*   Updated: 2024/11/21 02:12:33 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-void	ft_putu_fd(unsigned int u, int fd)
+static int	ft_count_unsigned_digits(unsigned int u)
 {
-	char	digit;
-
-	if (u / 10 > 0)
-		ft_putu_fd(u / 10, fd);
-	digit = (u % 10) + '0';
-	ft_putchar_fd(digit, fd);
-}
-
-size_t	ft_countcharu(unsigned int u)
-{
-	size_t	len;
+	int	len;
 
 	if (u == 0)
 		return (1);
@@ -37,49 +27,49 @@ size_t	ft_countcharu(unsigned int u)
 	return (len);
 }
 
-size_t	ft_getsizeb(unsigned int u, struct s_option options)
+static void	ft_put_unsigned_fd(unsigned int u, int fd)
 {
-	size_t	len;
-
-	if (options.precision < 0)
-		len = options.width - ft_countcharu(u);
-	else
-	{
-		len = options.precision - ft_countcharu(u);
-	}
-	return (len);
+	if (u >= 10)
+		ft_put_unsigned_fd(u / 10, fd);
+	ft_putchar_fd((u % 10) + '0', fd);
 }
 
-void	ft_putupadded(unsigned int u, int fd, int count, char c)
+static void	ft_compute_caracs_unsigned(t_carac *caracs, t_option *options,
+	unsigned int u)
 {
-	ft_addchar(c, fd, count);
-	ft_putu_fd(u, fd);
+	caracs->sign_char = '\0';
+	if (u == 0 && options->precision == 0)
+		caracs->size = 0;
+	else
+		caracs->size = ft_count_unsigned_digits(u);
+	if (options->precision > caracs->size)
+		caracs->zeros = options->precision - caracs->size;
+	else
+		caracs->zeros = 0;
+	caracs->total_length = caracs->size + caracs->zeros;
+	caracs->pad = options->width - caracs->total_length;
+	if (caracs->pad < 0)
+		caracs->pad = 0;
+	caracs->padleft = options->minus;
 }
 
-size_t	ft_putuoptions_fd(unsigned int u, int fd, struct s_option options)
+int	ft_putuoptions_fd(unsigned int u, struct s_option options, int fd)
 {
-	size_t	len;
-	int		padded;
+	t_carac	caracs;
+	int		pad_with_zero;
 
-	len = ft_countcharu(u);
-	padded = ft_getsizeb(u, options);
-	if (ft_getflag(options.flag, '-'))
-	{
-		ft_putu_fd(u, fd);
-		ft_addchar(' ', fd, options.width - len);
-		return (ft_getmax(2, options.width, len));
-	}
-	else if (ft_getflag(options.flag, '0'))
-	{
-		ft_addchar('0', fd, options.width - len);
-		ft_putu_fd(u, fd);
-	}
-	else if (ft_getflag(options.flag, '0') || options.precision >= 0)
-		ft_putupadded(u, fd, padded, '0');
-	else
-	{
-		ft_addchar(' ', fd, options.width - len);
-		ft_putu_fd(u, fd);
-	}
-	return (ft_getmax(3, options.width, len, options.precision));
+	ft_compute_caracs_unsigned(&caracs, &options, u);
+	pad_with_zero = options.zero && options.precision < 0 && !options.minus;
+	if (!caracs.padleft && !pad_with_zero)
+		ft_addchar(caracs.pad, 0);
+	if (caracs.sign_char)
+		ft_putchar_fd(caracs.sign_char, fd);
+	if (!caracs.padleft && pad_with_zero)
+		ft_addchar(caracs.pad, 1);
+	ft_addchar(caracs.zeros, 1);
+	if (caracs.size > 0)
+		ft_put_unsigned_fd(u, fd);
+	if (caracs.padleft)
+		ft_addchar(caracs.pad, 0);
+	return (caracs.total_length + caracs.pad);
 }
