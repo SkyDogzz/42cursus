@@ -6,92 +6,96 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:26:07 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/21 00:27:46 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/21 01:11:37 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static int	ft_countdichar(int d)
+static int	ft_countdichar_abs(unsigned int n)
 {
 	int	len;
 
-	if (d == 0)
-		return (1);
-	len = 0;
-	if (d < 0)
-		len++;
-	while (d)
+	len = 1;
+	while (n >= 10)
 	{
-		d /= 10;
+		n /= 10;
 		len++;
 	}
 	return (len);
 }
 
-static void	ft_putdioptions(int d, int fd, int count, int plus, int space)
+void	ft_putnbr_unsigned_fd(unsigned int n, int fd)
 {
-	if (d < 0)
-	{
-		count++;
-		ft_putchar_fd('-', fd);
-	}
-	if (d >= 0 && plus)
-	{
-		count++;
-		ft_putchar_fd('+', fd);
-	}
-	if (d >= 0 && space)
-	{
-		count++;
-		ft_putchar_fd(' ', fd);
-	}
-	while (count-- > 0)
-		ft_putchar_fd('0', fd);
-	if (d < 0)
-	{
-		if (d == -2147483648)
-		{
-			ft_putchar_fd('2', fd);
-			ft_putnbr_fd(147483648, fd);
-		}
-		else
-			ft_putnbr_fd(-d, fd);
-	}
-	else
-		ft_putnbr_fd(d, fd);
-	(void) count;
+	if (n >= 10)
+		ft_putnbr_unsigned_fd(n / 10, fd);
+	ft_putchar_fd((n % 10) + '0', fd);
 }
 
 int	ft_putdioptions_fd(int d, struct s_option options, int fd)
 {
-	struct s_carac	caracs;
+	char			sign_char;
+	unsigned int	abs_d;
+	int				num_digits;
+	int				zeros;
+	int				total_length;
+	int				padding;
 
+	sign_char = 0;
+	zeros = 0;
 	if (d == 0 && options.precision == 0)
 	{
 		ft_addchar(options.width, 0);
 		return (options.width);
 	}
-	ft_initcaracs(&caracs);
-	caracs.size = ft_countdichar(d);
-	caracs.pad = options.width - ft_getmax(3, caracs.size, options.precision)
-		- (options.plus && d >= 0) - (options.space && d >= 0);
 	if (d < 0)
-		caracs.pad--;
-	caracs.padleft = options.minus;
-	if (caracs.padleft)
+		sign_char = '-';
+	else if (options.plus)
+		sign_char = '+';
+	else if (options.space)
+		sign_char = ' ';
+	if (d < 0)
+		abs_d = -(unsigned int)d;
+	else
+		abs_d = (unsigned int)d;
+	num_digits = ft_countdichar_abs(abs_d);
+	if (options.precision >= 0)
 	{
-		ft_putdioptions(d, fd, options.precision - caracs.size, options.plus,
-				  options.space);
-		ft_addchar(caracs.pad, options.zero);
+		options.zero = 0;
+		zeros = options.precision - num_digits;
+		if (zeros < 0)
+			zeros = 0;
+	}
+	total_length = num_digits + zeros;
+	if (sign_char != 0)
+		total_length += 1;
+	padding = options.width - total_length;
+	if (padding < 0)
+		padding = 0;
+	if (options.minus)
+	{
+		if (sign_char != 0)
+			ft_putchar_fd(sign_char, fd);
+		ft_addchar(zeros, 1);
+		ft_putnbr_unsigned_fd(abs_d, fd);
+		ft_addchar(padding, 0);
 	}
 	else
-	{	
-		ft_addchar(caracs.pad, options.zero);
-		ft_putdioptions(d, fd, options.precision - caracs.size, options.plus,
-				  options.space);
+	{
+		if (options.zero)
+		{
+			if (sign_char != 0)
+				ft_putchar_fd(sign_char, fd);
+			ft_addchar(padding, 1);
+		}
+		else
+		{
+			ft_addchar(padding, 0);
+			if (sign_char != 0)
+				ft_putchar_fd(sign_char, fd);
+		}
+		ft_addchar(zeros, 1);
+		ft_putnbr_unsigned_fd(abs_d, fd);
 	}
-	return (ft_getmax(3, caracs.size, options.width, options.precision
-				   + (1 && d < 0)) + (options.plus && d >= 0)
-	+ (options.space && d >= 0));
+	return (total_length + padding);
 }
