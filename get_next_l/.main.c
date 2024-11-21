@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
 	int loop = 1;
 	while ((line = get_next_line(fd)) && *line != 0)
 	{
+		// printf("%s", line);
 		printf("loop %d %s", loop++, line);
 	}
 
