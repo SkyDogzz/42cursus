@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:12:40 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/21 17:38:37 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:00:42 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,9 @@ size_t	ft_strclen(const char *s, char c)
 	size_t	len;
 
 	len = 0;
-	while (*s != 0 && *s != c)
-	{
+	while (s[len] != 0 && s[len] != c)
 		len++;
-		s++;
-	}
-	if (*s != 0 && *s == c)
+	if (s[len] == c)
 		len++;
 	return (len);
 }
@@ -31,22 +28,21 @@ char	*ft_getmemory(char **s)
 {
 	char	*new;
 	int		pos;
+	char	*temp;
 
 	if (!**s)
 		return (NULL);
 	new = (char *)malloc(sizeof(char) * (ft_strclen(*s, '\n') + 1));
+	if (!new)
+		return (NULL);
 	pos = 0;
-	while (**s != 0 && **s != '\n')
-	{
-		new[pos++] = **s;
-		(*s)++;
-	}
-	if (**s == '\n')
-	{
-		new[pos++] = '\n';
-		(*s)++;
-	}
+	temp = *s;
+	while (*temp != 0 && *temp != '\n')
+		new[pos++] = *temp++;
+	if (*temp == '\n')
+		new[pos++] = *temp++;
 	new[pos] = 0;
+	*s = temp;
 	return (new);
 }
 
@@ -54,17 +50,20 @@ char	*ft_strchrnn(const char *s)
 {
 	char	*memory;
 	int		pos;
+	int		len;
 
-	memory = (char *)malloc(sizeof(char) * ft_strclen(s, 0));
-	pos = 0;
 	while (*s && *s != '\n')
 		s++;
 	if (*s == '\n')
 		s++;
+	len = ft_strclen(s, '\n');
+	memory = (char *)malloc(sizeof(char) * (len + 1));
+	if (!memory)
+		return (NULL);
+	pos = 0;
 	while (*s)
 		memory[pos++] = *s++;
-	if (pos == 0)
-		return (NULL);
+	memory[pos] = 0;
 	return (memory);
 }
 
@@ -72,28 +71,41 @@ char	*ft_appendton(char *dest, char *src)
 {
 	char	*new;
 	int		pos;
+	int		i;
 
-	printf("here %s %d\n", dest, !dest);
+	if (!src)
+		return (dest);
 	if (!dest || dest == NULL)
 	{
 		new = (char *)malloc(sizeof(char) * (ft_strclen(src, '\n') + 1));
+		if (!new)
+			return (NULL);
 		pos = 0;
-		while (*src && *src != '\n')
-			new[pos++] = *src++;
-		if (*src == '\n')
+		while (src[pos] && src[pos] != '\n')
+		{
+			new[pos] = src[pos];
+			pos++;
+		}
+		if (src[pos] == '\n')
 			new[pos++] = '\n';
 		new[pos] = 0;
 		return (new);
 	}
-	new = (char *)malloc(sizeof(char) * (ft_strclen(dest, 0) + ft_strclen(src, '\n') + 1));
+	new = (char *)malloc(sizeof(char) * (ft_strclen(dest, 0)
+				+ ft_strclen(src, '\n') + 1));
+	if (!new)
+		return (NULL);
 	pos = 0;
-	while (*dest)
-		new[pos++] = *dest++;
-	while (*src && *src != '\n')
-		new[pos++] = *src++;
+	i = 0;
+	while (dest[i])
+		new[pos++] = dest[i++];
+	i = 0;
+	while (src[1] != '\n')
+		new[pos++] = src[i++];
 	if (*src == '\n')
 		new[pos++] = '\n';
 	new[pos] = 0;
+	free(dest);
 	return (new);
 }
 
@@ -117,7 +129,6 @@ char	*get_next_line(int fd)
 		read(fd, buffer, BUFFER_SIZE);
 		current = ft_appendton(current, buffer);
 		memory = ft_strchrnn(buffer);
-		usleep(1000000);
 	}
 	return (current);
 }
