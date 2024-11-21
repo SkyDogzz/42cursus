@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:45:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/21 01:44:13 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/21 02:12:33 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,18 @@ static void	ft_put_unsigned_fd(unsigned int u, int fd)
 	ft_putchar_fd((u % 10) + '0', fd);
 }
 
-static void	ft_compute_caracs_unsigned(t_carac *caracs, t_option *options, unsigned int u)
+static void	ft_compute_caracs_unsigned(t_carac *caracs, t_option *options,
+	unsigned int u)
 {
 	caracs->sign_char = '\0';
-	caracs->size = (u == 0 && options->precision == 0) ? 0 : ft_count_unsigned_digits(u);
-	caracs->zeros = (options->precision > caracs->size) ? options->precision - caracs->size : 0;
+	if (u == 0 && options->precision == 0)
+		caracs->size = 0;
+	else
+		caracs->size = ft_count_unsigned_digits(u);
+	if (options->precision > caracs->size)
+		caracs->zeros = options->precision - caracs->size;
+	else
+		caracs->zeros = 0;
 	caracs->total_length = caracs->size + caracs->zeros;
 	caracs->pad = options->width - caracs->total_length;
 	if (caracs->pad < 0)

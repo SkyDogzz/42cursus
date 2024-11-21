@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:55:08 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/21 01:42:54 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/21 02:14:09 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,17 @@ static void	ft_compute_caracs_pointer(t_carac *caracs, t_option *options,
 	caracs->padleft = options->minus;
 }
 
+void	ft_print_pointer_content(t_carac *caracs, unsigned long long p, int fd)
+{
+	if (caracs->content)
+		ft_putstr_fd(caracs->content, fd);
+	else
+	{
+		ft_putstr_fd(caracs->prefix, fd);
+		ft_put_hex_ull_fd(p, fd);
+	}
+}
+
 int	ft_putpoptions_fd(unsigned long long p, struct s_option options, int fd)
 {
 	t_carac	caracs;
@@ -67,25 +78,13 @@ int	ft_putpoptions_fd(unsigned long long p, struct s_option options, int fd)
 	ft_compute_caracs_pointer(&caracs, &options, p);
 	if (caracs.padleft)
 	{
-		if (caracs.content)
-			ft_putstr_fd(caracs.content, fd);
-		else
-		{
-			ft_putstr_fd(caracs.prefix, fd);
-			ft_put_hex_ull_fd(p, fd);
-		}
+		ft_print_pointer_content(&caracs, p, fd);
 		ft_addchar(caracs.pad, options.zero);
 	}
 	else
 	{
 		ft_addchar(caracs.pad, options.zero);
-		if (caracs.content)
-			ft_putstr_fd(caracs.content, fd);
-		else
-		{
-			ft_putstr_fd(caracs.prefix, fd);
-			ft_put_hex_ull_fd(p, fd);
-		}
+		ft_print_pointer_content(&caracs, p, fd);
 	}
 	return (caracs.total_length + caracs.pad);
 }
