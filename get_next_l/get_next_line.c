@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:12:40 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/21 14:49:47 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:50:33 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_getmemory(char **s)
 
 char	*get_next_line(int fd)
 {
-	static char	*memory = "test\navec\nplusieurs\nlignes";
+	static char	*memory = "test\navec\n\nplusieurs\nlignes";
 	char		*current;
 
 	current = ft_getmemory(&memory);
