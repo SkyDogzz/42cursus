@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/21 02:42:28 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/22 18:04:55 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ int			ft_putpoptions_fd(unsigned long long p, struct s_option options,
 int			ft_putsoptions_fd(const char *s, struct s_option options, int fd);
 int			ft_putuoptions_fd(unsigned int u, struct s_option options, int fd);
 int			ft_putxoptions_fd(unsigned int x, struct s_option options, int fd);
+int			ft_printf(const char *fmt, ...);
 
 #endif

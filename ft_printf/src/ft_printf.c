@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/21 02:37:52 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/22 18:04:46 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ static size_t	ft_handlespecifier(va_list ap, struct s_option *options)
 	return (len);
 }
 
-size_t	ft_printf(const char *fmt, ...)
+int	ft_printf(const char *, ...);
 {
 	va_list			ap;
-	size_t			len;
+	int				len;
 	struct s_option	options;
 
 	if (!fmt)

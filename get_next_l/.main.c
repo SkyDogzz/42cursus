@@ -13,7 +13,10 @@ int main(int argc, char *argv[])
 	}
 	fd = open(argv[1], O_RDONLY);
 	while ((line = get_next_line(fd)) && *line != 0)
+	{
 		printf("%s", line);
+		free(line);
+	}
 
 	return EXIT_SUCCESS;
 }
