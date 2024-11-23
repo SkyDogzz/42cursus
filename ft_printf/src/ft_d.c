@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:26:07 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/21 02:20:06 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/23 18:09:14 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	ft_putdioptions_fd(int n, struct s_option options, int fd)
 	abs_n = n;
 	if (n < 0)
 		abs_n = -n;
-	pad_with_zero = options.zero && options.precision < 0 && !options.minus;
+	pad_with_zero = (options.zero && options.precision < 0 && !options.minus);
 	if (!caracs.padleft && !pad_with_zero)
 		ft_addchar(caracs.pad, 0);
 	if (caracs.sign_char)

@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 16:45:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/21 02:12:33 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/23 18:09:29 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_putuoptions_fd(unsigned int u, struct s_option options, int fd)
 	int		pad_with_zero;
 
 	ft_compute_caracs_unsigned(&caracs, &options, u);
-	pad_with_zero = options.zero && options.precision < 0 && !options.minus;
+	pad_with_zero = (options.zero && options.precision < 0 && !options.minus);
 	if (!caracs.padleft && !pad_with_zero)
 		ft_addchar(caracs.pad, 0);
 	if (caracs.sign_char)

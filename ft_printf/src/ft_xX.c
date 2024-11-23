@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:09:32 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/21 02:30:37 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/23 18:09:39 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	ft_putxoptions_fd(unsigned int x, struct s_option options, int fd)
 
 	ft_compute_caracs_hex(&caracs, &options, x);
 	uppercase = (options.specifier == 'X');
-	pad_with_zero = options.zero && options.precision < 0 && !options.minus;
+	pad_with_zero = (options.zero && options.precision < 0 && !options.minus);
 	if (!caracs.padleft && !pad_with_zero)
 		ft_addchar(caracs.pad, 0);
 	if (caracs.prefix[0] != '\0')
