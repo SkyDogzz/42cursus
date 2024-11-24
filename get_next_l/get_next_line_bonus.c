@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:12:40 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/22 14:44:14 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/24 20:56:31 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,24 @@
 
 static char	*read_and_store(int fd, char *store)
 {
-	char	*buffer;
+	char	buffer[BUFFER_SIZE + 1];
 	char	*temp;
-	size_t	bytes_read;
+	ssize_t	bytes_read;
 
 	bytes_read = 1;
 	while (!ft_strchr(store, '\n') && bytes_read != 0)
 	{
-		buffer = read_to_buffer(fd, &bytes_read);
-		if (!buffer)
-		{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read == -1)
 			return (NULL);
+		buffer[bytes_read] = '\0';
+		if (!store)
+		{
+			store = (char *)malloc(1);
+			store[0] = '\0';
 		}
 		temp = ft_strjoin(store, buffer);
 		free(store);
-		free(buffer);
 		if (!temp)
 			return (NULL);
 		store = temp;
@@ -36,41 +39,24 @@ static char	*read_and_store(int fd, char *store)
 	return (store);
 }
 
-static size_t	calculate_line_length(char *store)
+static char	*extract_line(char *store)
 {
+	char	*line;
 	size_t	i;
 
-	if (!store)
-		return (0);
+	if (!store || !*store)
+		return (NULL);
 	i = 0;
 	while (store[i] && store[i] != '\n')
 		i++;
 	if (store[i] == '\n')
 		i++;
-	return (i);
-}
-
-static char	*extract_line(char *store)
-{
-	char	*line;
-	size_t	line_length;
-	size_t	i;
-
-	if (!store || !*store)
-		return (NULL);
-	line_length = calculate_line_length(store);
-	if (line_length == 0)
-		return (NULL);
-	line = (char *)malloc(sizeof(char) * (line_length + 1));
+	line = (char *)malloc(sizeof(char) * (i + 1));
 	if (!line)
 		return (NULL);
-	i = 0;
-	while (i < line_length && store[i])
-	{
-		line[i] = store[i];
-		i++;
-	}
 	line[i] = '\0';
+	while (i--)
+		line[i] = store[i];
 	return (line);
 }
 
@@ -88,7 +74,7 @@ static char	*save_remaining(char *store)
 		free(store);
 		return (NULL);
 	}
-	remaining = (char *)malloc(sizeof(char) * (ft_strlen(store) - i + 1));
+	remaining = (char *)malloc(sizeof(char) * (ft_strlen(store) - i));
 	if (!remaining)
 	{
 		free(store);
@@ -105,15 +91,24 @@ static char	*save_remaining(char *store)
 
 char	*get_next_line(int fd)
 {
-	static char	*store;
-	char		*line;
+	static t_fd_node	*fd_list;
+	t_fd_node			*node;
+	char				*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	store = read_and_store(fd, store);
-	if (!store)
+	node = get_fd_node(&fd_list, fd);
+	if (!node)
 		return (NULL);
-	line = extract_line(store);
-	store = save_remaining(store);
+	node->store = read_and_store(fd, node->store);
+	if (!node->store)
+	{
+		remove_fd_node(&fd_list, fd);
+		return (NULL);
+	}
+	line = extract_line(node->store);
+	node->store = save_remaining(node->store);
+	if (!node->store)
+		remove_fd_node(&fd_list, fd);
 	return (line);
 }
