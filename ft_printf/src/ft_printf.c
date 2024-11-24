@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/24 14:04:28 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:06:43 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_printf(const char *fmt, ...)
 	int		len;
 
 	va_start(ap, fmt);
-	len = ft_vfprintf(1, fmt, ap);
+	len = ft_vdprintf(1, fmt, ap);
 	va_end(ap);
 	return (len);
 }
@@ -55,12 +55,12 @@ int	ft_dprintf(int fd, const char *fmt, ...)
 	int		len;
 
 	va_start(ap, fmt);
-	len = ft_vfprintf(fd, fmt, ap);
+	len = ft_vdprintf(fd, fmt, ap);
 	va_end(ap);
 	return (len);
 }
 
 int	ft_vprintf(const char *fmt, va_list ap)
 {
-	return (ft_vfprintf(1, fmt, ap));
+	return (ft_vdprintf(1, fmt, ap));
 }
