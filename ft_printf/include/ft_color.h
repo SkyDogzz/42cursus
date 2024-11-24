@@ -6,12 +6,14 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 13:53:04 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/24 14:41:55 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/24 16:43:40 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_COLOR_H
 # define FT_COLOR_H
+
+# include <stdbool.h>
 
 # define COLOR_RESET	"\x1B[0m"
 # define COLOR_RED		"\x1B[31m"
@@ -21,5 +23,10 @@
 # define COLOR_MAGENTA	"\x1B[35m"
 # define COLOR_CYAN		"\x1B[36m"
 # define COLOR_WHITE	"\x1B[37m"
+
+# define ANSI_COLOR_ESCAPE "\x1B["
+
+void	ft_setcolor(int r, int g, int b, bool is_background);
+void	ft_resetcolor(void);
 
 #endif
