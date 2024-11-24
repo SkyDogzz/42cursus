@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:47:27 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/21 02:33:54 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/24 13:15:58 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void	ft_storeflag(const char c, struct s_option *options)
 {
 	if (c == '#')
-		options->sharp = TRUE;
+		options->sharp = true;
 	else if (c == ' ')
-		options->space = TRUE;
+		options->space = true;
 	else if (c == '+')
-		options->plus = TRUE;
+		options->plus = true;
 	else if (c == '-')
-		options->minus = TRUE;
+		options->minus = true;
 	else if (c == '0')
-		options->zero = TRUE;
+		options->zero = true;
 }
 
 void	ft_storeint(const char c, int *n)
@@ -57,7 +57,7 @@ size_t	ft_storelength(const char *s, int *length)
 	return (0);
 }
 
-enum e_bool	ft_getflag(int flag, char c)
+bool	ft_getflag(int flag, char c)
 {
 	char	*set;
 	void	*start;
@@ -73,13 +73,13 @@ enum e_bool	ft_getflag(int flag, char c)
 			if (flag & (1 << pos))
 			{
 				free(start);
-				return (TRUE);
+				return (true);
 			}
 			free(start);
-			return (FALSE);
+			return (false);
 		}
 		pos++;
 	}
 	free(start);
-	return (FALSE);
+	return (false);
 }
