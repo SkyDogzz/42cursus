@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/24 14:04:47 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:15:06 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ int			ft_vdprintf(int fd, const char *fmt, va_list ap);
 int			ft_printf(const char *fmt, ...);
 int			ft_dprintf(int fd, const char *fmt, ...);
 int			ft_vprintf(const char *fmt, va_list ap);
+int			ft_debug(const char *fmt, ...);
 
 #endif

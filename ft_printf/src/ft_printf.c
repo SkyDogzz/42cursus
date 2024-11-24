@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/24 14:06:43 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:15:59 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,16 @@ int	ft_dprintf(int fd, const char *fmt, ...)
 int	ft_vprintf(const char *fmt, va_list ap)
 {
 	return (ft_vdprintf(1, fmt, ap));
+}
+
+int	ft_debug(const char *fmt, ...)
+{
+	va_list	ap;
+	int		len;
+
+	len = ft_dprintf(2, "[DEBUG] %s:%d: ", __FILE__, __LINE__);
+	va_start(ap, fmt);
+	len += ft_vdprintf(2, fmt, ap);
+	va_end(ap);
+	return (len);
 }
