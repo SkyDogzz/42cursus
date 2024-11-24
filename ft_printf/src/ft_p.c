@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:55:08 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/21 02:32:21 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/24 16:07:03 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	ft_put_hex_ull_fd(unsigned long long p, int fd)
 	if (p / 16 > 0)
 		ft_put_hex_ull_fd(p / 16, fd);
 	hex_digit = "0123456789abcdef"[p % 16];
-	write(fd, &hex_digit, 1);
+	ft_putchar_fd(hex_digit, fd);
 }
 
 static void	ft_compute_caracs_pointer(t_carac *caracs, t_option *options,
