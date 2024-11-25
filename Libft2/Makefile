@@ -50,7 +50,17 @@ OBJ_GET_NEXT_LINE = $(addprefix $(OBJ_DIR)/, $(SRC_GET_NEXT_LINE:.c=.o))
 
 NAME = libft.a
 
-all: $(NAME)
+ascii:
+	@echo $(_CYAN)$(_BOLD)
+	@echo " _      _____ ______ ______  _____ " 
+	@echo "| |    |_   _|| ___ \|  ___||_   _|"
+	@echo "| |      | |  | |_/ /| |_     | |  " 
+	@echo "| |      | |  | ___ \|  _|    | |  " 
+	@echo "| |____ _| |_ | |_/ /| |      | |  " 
+	@echo "\_____/ \___/ \____/ \_|      \_/  " 
+	@echo $(_END)
+
+all: ascii $(NAME)
 	@echo "$(_CYAN)[BUILD COMPLET]$(_END) $(NAME) est prêt !"
 
 $(NAME): $(OBJ_LIBFT_BASE) $(OBJ_FT_PRINTF) $(OBJ_GET_NEXT_LINE)
