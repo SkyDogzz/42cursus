@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -std=c99 -I/include
+CFLAGS = -Wall -Wextra -Werror -std=c99 -fPIE -I/include
 AR = ar rcs
 
 SRCS = src/ft_printf.c src/ft_option.c src/ft_parse.c src/ft_store.c \

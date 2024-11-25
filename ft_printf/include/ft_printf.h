@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/24 14:15:06 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:45:05 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include "../libft/libft.h"
 # include "ft_color.h"
+# include "ft_bool.h"
 # include <stdarg.h>
 # include <stdio.h>
-# include <stdbool.h>
 
 # define SPECIFIERS "cspdiuxX%"
 # define FLAGS "# +-0"
@@ -25,11 +25,11 @@
 typedef struct s_option
 {
 	char	specifier;
-	bool	sharp;
-	bool	space;
-	bool	plus;
-	bool	minus;
-	bool	zero;
+	t_bool	sharp;
+	t_bool	space;
+	t_bool	plus;
+	t_bool	minus;
+	t_bool	zero;
 	int		width;
 	int		precision;
 	int		length;
@@ -62,8 +62,8 @@ typedef struct s_size
 }	t_size;
 
 void		ft_initoptions(struct s_option *options);
-bool		ft_isspecifier(const char c);
-bool		ft_isflag(const char c);
+t_bool		ft_isspecifier(const char c);
+t_bool		ft_isflag(const char c);
 void		ft_addchar(int count, int zero);
 void		ft_addchar(int count, int zero);
 int			ft_getmax(int count, ...);
@@ -74,7 +74,7 @@ size_t		ft_parseoptions(const char *fmt, struct s_option *options);
 void		ft_storeflag(const char c, struct s_option *options);
 void		ft_storeint(const char c, int *n);
 size_t		ft_storelength(const char *s, int *length);
-bool		ft_getflag(int flag, char c);
+t_bool		ft_getflag(int flag, char c);
 int			ft_putcoptions_fd(const char c, struct s_option options, int fd);
 int			ft_putdioptions_fd(int n, struct s_option options, int fd);
 int			ft_putpoptions_fd(unsigned long long p, struct s_option options,

@@ -6,13 +6,13 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 16:39:03 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/24 16:44:57 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:44:52 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-void	ft_setcolor(int r, int g, int b, bool is_background)
+void	ft_setcolor(int r, int g, int b, t_bool is_background)
 {
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 	{
