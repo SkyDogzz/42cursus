@@ -2,14 +2,6 @@ Catégories et fonctions
 
 1. char/ (Fonctions liées aux caractères)
 
-ft_isupper : Vérifie si un caractère est en majuscule.
-int ft_isupper(int c);
-
-ft_islower : Vérifie si un caractère est en minuscule.
-int ft_islower(int c);
-
-ft_isblank : Vérifie si un caractère est un espace ou une tabulation.
-int ft_isblank(int c);
 
 ft_swapcase : Alterne entre majuscule et minuscule.
 char *ft_swapcase(const char *s);
