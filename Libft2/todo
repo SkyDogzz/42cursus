@@ -1,17 +1,5 @@
 Catégories et fonctions
-
-1. char/ (Fonctions liées aux caractères)
-
-
-ft_swapcase : Alterne entre majuscule et minuscule.
-char *ft_swapcase(const char *s);
-
 2. str/ (Fonctions liées aux chaînes)
-
-ft_strrev : Inverse une chaîne.
-
-ft_strpad : Ajoute des caractères à gauche ou à droite d'une chaîne pour atteindre une certaine longueur.
-char *ft_strpad(const char *s, char pad, size_t len, int left);
 
 ft_strsplitlen : Compte le nombre de sous-chaînes après un split.
 size_t ft_strsplitlen(char **split);

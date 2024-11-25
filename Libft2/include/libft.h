@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:50 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/25 13:00:19 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:22:51 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,13 @@ int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
+// all functions under => to test
 int		ft_toupper(int c);
 int		ft_tolower(int c);
-int		ft_islower(int c);
+int		ft_isupper(int c);
+int		ft_isblank(int c);
+int		ft_isspace(int c);
+char	*ft_swapcase(const char *s);
 
 // str fonctions
 size_t	ft_strlen(const char *s);
@@ -42,6 +46,9 @@ size_t	ft_strlcpy(char *d, const char *s, size_t n);
 size_t	ft_strlcat(char *d, const char *s, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 int		ft_atoi(const char *s);
+// all functions under => to test
+char	*ft_strrev(const char *s);
+char	*ft_strpad(const char *s, char pad, size_t len, int left);
 
 // mem fonctions
 void	*ft_memset(void *s, int c, size_t n);
