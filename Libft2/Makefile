@@ -56,7 +56,11 @@ SRC_FT_PRINTF = ft_printf/ft_printf.c ft_printf/ft_option.c \
 				ft_printf/ft_d.c ft_printf/ft_u.c ft_printf/ft_xX.c \
 				ft_printf/ft_color.c
 
-SRC_FILES = $(SRC_CHAR) $(SRC_FD) $(SRC_LST) $(SRC_NUM) $(SRC_MEM) $(SRC_FT_PRINTF)
+SRC_GET_NEXT_LINE = get_next_line/get_next_line.c \
+					get_next_line/get_next_line_utils.c
+
+SRC_FILES = $(SRC_CHAR) $(SRC_FD) $(SRC_LST) $(SRC_NUM) $(SRC_MEM) \
+			$(SRC_FT_PRINTF) $(SRC_GET_NEXT_LINE)
 
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
