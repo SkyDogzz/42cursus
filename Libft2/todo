@@ -1,0 +1,79 @@
+Catégories et fonctions
+
+1. char/ (Fonctions liées aux caractères)
+
+ft_isupper : Vérifie si un caractère est en majuscule.
+int ft_isupper(int c);
+
+ft_islower : Vérifie si un caractère est en minuscule.
+int ft_islower(int c);
+
+ft_isblank : Vérifie si un caractère est un espace ou une tabulation.
+int ft_isblank(int c);
+
+ft_swapcase : Alterne entre majuscule et minuscule.
+char *ft_swapcase(const char *s);
+
+2. str/ (Fonctions liées aux chaînes)
+
+ft_strrev : Inverse une chaîne.
+
+ft_strpad : Ajoute des caractères à gauche ou à droite d'une chaîne pour atteindre une certaine longueur.
+char *ft_strpad(const char *s, char pad, size_t len, int left);
+
+ft_strsplitlen : Compte le nombre de sous-chaînes après un split.
+size_t ft_strsplitlen(char **split);
+
+ft_strreplace : Remplace toutes les occurrences d'une sous-chaîne par une autre.
+
+3. mem/ (Gestion mémoire)
+
+ft_realloc : Réalloue un bloc mémoire.
+
+ft_memswap : Échange deux blocs mémoire.
+void ft_memswap(void *a, void *b, size_t size);
+
+ft_memdup : Duplique un bloc mémoire.
+
+ft_memjoin : Concatène deux blocs mémoire.
+
+4. num/ (Fonctions liées aux nombres)
+
+ft_itoa_base : Convertit un entier en chaîne dans une base donnée.
+
+ft_atoi_base : Convertit une chaîne en entier dans une base donnée.
+
+ft_abs : Retourne la valeur absolue d'un entier.
+int ft_abs(int n);
+
+ft_pow : Calcule une puissance entière.
+int ft_pow(int base, int exp);
+
+5. lst/ (Fonctions liées aux listes chaînées)
+ft_lstmap : Transforme une liste en appliquant une fonction à chaque élément.
+
+ft_lstinsert : Insère un élément dans une liste à une position donnée.
+void ft_lstinsert(t_list **lst, t_list *new, int pos);
+
+ft_lstremove : Supprime un élément à une position donnée.
+void ft_lstremove(t_list **lst, int pos, void (*del)(void *));
+
+6. io/ (Entrée/Sortie)
+
+ft_getline : Lit une ligne depuis un descripteur de fichier.
+
+ft_putnbr_base_fd : Écrit un nombre dans une base donnée sur un descripteur.
+
+ft_printf_fd : Implemente une version réduite de printf écrivant sur un fichier.
+int ft_printf_fd(int fd, const char *fmt, ...);
+
+7. utils/ (Utilitaires divers)
+
+ft_sort_int_tab : Trie un tableau d'entiers.
+void ft_sort_int_tab(int *tab, size_t size);
+
+ft_strcasecmp : Compare deux chaînes sans distinction de casse.
+int ft_strcasecmp(const char *s1, const char *s2);
+
+ft_strdel : Libère une chaîne et met son pointeur à NULL.
+void ft_strdel(char **as);

@@ -6,109 +6,100 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 18:19:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/24 15:53:42 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/24 20:19:15 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
+
 #include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdarg.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
 
-char *capture_output(int (*func)(const char *, ...), const char *format, ...) {
-    FILE *tmp = tmpfile();
-    if (!tmp) {
-        perror("tmpfile");
-        return NULL;
+#define TEST_BUFFER_SIZE 1024
+
+// Fonction pour rediriger stdout vers un pipe
+int redirect_stdout(int *saved_stdout_fd) {
+    int pipe_fd[2];
+    if (pipe(pipe_fd) != 0) {
+        perror("pipe");
+        exit(EXIT_FAILURE);
     }
+    *saved_stdout_fd = dup(STDOUT_FILENO);
+    dup2(pipe_fd[1], STDOUT_FILENO);
+    close(pipe_fd[1]);
+    return pipe_fd[0]; // Retourne l'extrémité de lecture du pipe
+}
 
-    int stdout_fd = dup(fileno(stdout));
-    if (stdout_fd == -1) {
-        perror("dup");
-        fclose(tmp);
-        return NULL;
-    }
-
-    if (dup2(fileno(tmp), fileno(stdout)) == -1) {
-        perror("dup2");
-        fclose(tmp);
-        close(stdout_fd);
-        return NULL;
-    }
-
-    va_list args;
-    va_start(args, format);
-    func(format, args);
-    va_end(args);
-
+// Fonction pour restaurer stdout
+void restore_stdout(int saved_stdout_fd) {
     fflush(stdout);
-    if (dup2(stdout_fd, fileno(stdout)) == -1) {
-        perror("dup2 restore");
-        fclose(tmp);
-        close(stdout_fd);
-        return NULL;
-    }
-    close(stdout_fd);
-
-    fseek(tmp, 0, SEEK_END);
-    long size = ftell(tmp);
-    rewind(tmp);
-
-    char *output = malloc(size + 1);
-    if (!output) {
-        perror("malloc");
-        fclose(tmp);
-        return NULL;
-    }
-
-    fread(output, 1, size, tmp);
-    output[size] = '\0';
-
-    fclose(tmp);
-    return output;
+    dup2(saved_stdout_fd, STDOUT_FILENO);
+    close(saved_stdout_fd);
 }
 
-void test_printf(const char *description, const char *format, ...) {
-    va_list args1, args2;
-    va_start(args1, format);
-    va_start(args2, format);
-
-    char *output_std = capture_output(printf, format, args1);
-    char *output_ft = capture_output(ft_printf, format, args2);
-
-    va_end(args1);
-    va_end(args2);
-
-    if (!output_std || !output_ft) {
-        printf("[ERROR] Could not capture output for %s\n", description);
-        free(output_std);
-        free(output_ft);
-        return;
+// Fonction pour lire depuis un descripteur de fichier
+ssize_t read_from_fd(int fd, char *buffer, size_t size) {
+    ssize_t n = read(fd, buffer, size - 1);
+    if (n < 0) {
+        perror("read");
+        exit(EXIT_FAILURE);
     }
-
-    if (strcmp(output_std, output_ft) != 0) {
-        printf("[FAIL] %s\n", description);
-        printf("  Expected: \"%s\"\n", output_std);
-        printf("  Got     : \"%s\"\n", output_ft);
-    } else {
-        printf("[PASS] %s\n", description);
-    }
-	fflush(stdout);
-    free(output_std);
-    free(output_ft);
+    buffer[n] = '\0';
+    close(fd);
+    return n;
 }
 
-int main() {
-    test_printf("Basic string", "Hello, %s!", "world");
-    test_printf("Integer formatting", "Number: %d", 42);
-    test_printf("Hexadecimal", "Hex: %#x", 255);
+void TEST_PRINTF(const char *format, ...)                                           
+    {                                                                   
+        char buffer_printf[TEST_BUFFER_SIZE];                              
+        char buffer_ft_printf[TEST_BUFFER_SIZE];                           
+        int ret_printf, ret_ft_printf;                                     
+                                                                           
+        /* Capturer la sortie de printf */           
+		va
+        ret_printf = snprintf(buffer_printf, sizeof(buffer_printf), format, ...); 
+                                                                           
+        /* Rediriger stdout pour ft_printf */                              
+        int saved_stdout_fd;                                               
+        int pipe_fd = redirect_stdout(&saved_stdout_fd);                   
+                                                                           
+        /* Appeler ft_printf */                                            
+        ret_ft_printf = ft_printf(format, __VA_ARGS__);                  
+                                                                           
+        /* Restaurer stdout */                                             
+        restore_stdout(saved_stdout_fd);                                   
+                                                                          
+        /* Lire la sortie de ft_printf */                                  
+        read_from_fd(pipe_fd, buffer_ft_printf, sizeof(buffer_ft_printf)); 
+                                                                           
+        /* Comparer les résultats */                                       
+        if (ret_printf != ret_ft_printf || strcmp(buffer_printf, buffer_ft_printf) != 0) { 
+            printf("Test échoué pour le format: \"%s\"\n", format);        
+            printf("printf     renvoie %d et imprime: %s\n", ret_printf, buffer_printf); 
+            printf("ft_printf  renvoie %d et imprime: %s\n", ret_ft_printf, buffer_ft_printf); 
+        } else {                                                           
+            printf("Test réussi pour le format: \"%s\"", format);        } 
+    }
 
-    test_printf("Empty string", "%s", "");
-    test_printf("Zero integer", "%d", 0);
-    test_printf("Large integer", "%d", 9223372036854775807LL);
-    test_printf("Null pointer", "%p", NULL);
+int main(void)
+{
+    // Tests avec les spécificateurs de base
+    TEST_PRINTF("Nombre entier: %d\n", 42);
+    TEST_PRINTF("Caractère: %c\n", 'A');
+    TEST_PRINTF("Chaine: %s\n", "Bonjour");
+    TEST_PRINTF("Pointeur: %p\n", main);
+    TEST_PRINTF("Pourcentage: %%\n"); // Correction appliquée ici
+    TEST_PRINTF("Nombre négatif: %d\n", -123);
+    TEST_PRINTF("Hexadécimal minuscule: %x\n", 255);
+    TEST_PRINTF("Hexadécimal majuscule: %X\n", 255);
+    TEST_PRINTF("Unsigned: %u\n", 3000000000U);
+    TEST_PRINTF("Mixte: %d, %s, %c, %p\n", 7, "test", 'Z', &errno);
 
     return 0;
 }
+
