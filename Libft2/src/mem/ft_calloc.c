@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:51:19 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/19 13:42:24 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/25 02:38:40 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
@@ -20,7 +20,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 	if (nmemb == 0 || size == 0)
 	{
-		p = (unsigned char *)malloc(0);
+		p = (unsigned char *)malloc(1);
 		if (!p)
 			return (NULL);
 		return (p);

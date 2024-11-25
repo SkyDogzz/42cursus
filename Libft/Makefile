@@ -35,7 +35,7 @@ bonus: $(OBJS) $(OBJS_BONUS)
 	$(AR) $(NAME) $?
 
 %.o: %.c
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS)

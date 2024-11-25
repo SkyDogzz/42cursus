@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 14:10:47 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/05 14:14:29 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/05 14:11:39 by marvin            #+#    #+#             */
+/*   Updated: 2024/11/25 02:41:26 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
-int	ft_isdigit(int c)
+int	ft_isalnum(int c)
 {
-	return (c >= '0' && c <= '9');
+	return (ft_isalpha(c) || ft_isdigit(c));
 }

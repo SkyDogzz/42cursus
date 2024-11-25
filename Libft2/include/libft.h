@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:50 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/19 12:37:10 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/25 02:22:48 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ LIBC FONCTIONS
 
 // char fonctions
 int		ft_isalpha(int c);
+int		ft_isspace(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);

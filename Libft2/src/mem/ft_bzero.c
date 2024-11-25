@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:36:31 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/06 14:37:59 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/25 02:24:46 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
