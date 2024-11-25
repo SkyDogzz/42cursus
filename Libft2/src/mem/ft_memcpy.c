@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 12:34:46 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/25 12:03:43 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:27:33 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	size_t			pos;
-	unsigned char	*destuc;
-	unsigned char	*srcuc;
+	size_t				pos;
+	unsigned char		*destuc;
+	const unsigned char	*srcuc;
 
 	if (n > 0 && !dest && !src)
 		return (NULL);

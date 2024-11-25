@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:51:19 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/25 02:38:40 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:31:48 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		return (p);
 	}
 	total_size = nmemb * size;
-	if (nmemb != 0 && total_size / nmemb != size)
+	if (total_size / nmemb != size)
 		return (NULL);
 	p = (unsigned char *)malloc(total_size);
 	if (!p)

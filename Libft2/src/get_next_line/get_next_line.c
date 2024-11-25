@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:12:40 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/25 19:06:13 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:40:26 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	*read_and_store(int fd, char *store)
 	return (store);
 }
 
-static char	*extract_line(char *store)
+static char	*extract_line(const char *store)
 {
 	char	*line;
 	size_t	i;

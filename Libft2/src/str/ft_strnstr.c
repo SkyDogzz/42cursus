@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:26:37 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/25 12:04:21 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:22:51 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	if (*little == '\0')
 		return ((char *)big);
 	i = 0;
-	while (big[i] && i < len)
+	while (i < len && big[i])
 	{
 		j = 0;
 		while (little[j] && (i + j) < len && big[i + j] == little[j])

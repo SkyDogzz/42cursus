@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 14:55:08 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/25 14:15:59 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:17:02 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	ft_put_hex_ull_fd(unsigned long long p, int fd)
 	ft_putchar_fd(hex_digit, fd);
 }
 
-static void	ft_compute_caracs_pointer(t_carac *caracs, t_option *options,
+static void	ft_compute_caracs_pointer(t_carac *caracs, const t_option *options,
 	unsigned long long p)
 {
 	if (p == 0)

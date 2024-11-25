@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:01:38 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/25 12:04:07 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:34:13 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_strlcat(char *d, const char *s, size_t n)
 	size_t	i;
 
 	d_len = 0;
-	while (d[d_len] && d_len < n)
+	while (d_len < n && d[d_len])
 		d_len++;
 	s_len = 0;
 	while (s[s_len])

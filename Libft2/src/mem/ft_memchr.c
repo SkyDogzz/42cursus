@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:24:32 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/25 12:03:37 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:33:55 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	while (pos < n)
 	{
 		if (*suc == uc)
-			return ((void *)(s + pos));
+			return ((void *)suc);
 		suc++;
 		pos++;
 	}

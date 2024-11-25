@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:26:07 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/25 14:15:49 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:16:51 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void	ft_put_unsigned_fd(unsigned int n, int fd)
 	ft_putchar_fd((n % 10) + '0', fd);
 }
 
-static void	ft_compute_caracs_int(t_carac *caracs, t_option *options, int n)
+static void	ft_compute_caracs_int(t_carac *caracs, const t_option *options,
+	int n)
 {
 	if (n == 0 && options->precision == 0)
 		caracs->size = 0;

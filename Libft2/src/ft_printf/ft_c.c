@@ -6,13 +6,13 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:13:36 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/25 14:15:18 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:16:27 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/ft_printf.h"
 
-static void	ft_compute_caracs_char(t_carac *caracs, t_option *options)
+static void	ft_compute_caracs_char(t_carac *caracs, const t_option *options)
 {
 	caracs->size = 1;
 	caracs->zeros = 0;

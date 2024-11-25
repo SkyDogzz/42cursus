@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/25 19:22:18 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:18:33 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int			ft_putsoptions_fd(const char *s, struct s_option options, int fd);
 int			ft_putuoptions_fd(unsigned int u, struct s_option options, int fd);
 int			ft_putxoptions_fd(unsigned int x, struct s_option options, int fd);
 size_t		ft_printwithoptions(int fd, struct s_option options, ...);
-size_t		ft_handlespecifier(va_list ap, struct s_option *options, int fd);
+size_t		ft_handlespecifier(va_list ap, const struct s_option *options,
+				int fd);
 int			ft_vdprintf(int fd, const char *fmt, va_list ap);
 int			ft_printf(const char *fmt, ...);
 int			ft_dprintf(int fd, const char *fmt, ...);

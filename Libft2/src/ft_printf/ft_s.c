@@ -6,13 +6,13 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:56:38 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/25 14:16:24 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/25 23:41:03 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/ft_printf.h"
 
-static void	ft_handle_null_string(t_carac *caracs, t_option *options)
+static void	ft_handle_null_string(t_carac *caracs, const t_option *options)
 {
 	if (options->precision >= 0 && options->precision < 6)
 	{
@@ -26,7 +26,7 @@ static void	ft_handle_null_string(t_carac *caracs, t_option *options)
 	}
 }
 
-static void	ft_compute_string_size(t_carac *caracs, t_option *options,
+static void	ft_compute_string_size(t_carac *caracs, const t_option *options,
 	const char *s)
 {
 	int	actual_length;
@@ -39,7 +39,7 @@ static void	ft_compute_string_size(t_carac *caracs, t_option *options,
 		caracs->size = actual_length;
 }
 
-static void	ft_compute_caracs_string(t_carac *caracs, t_option *options,
+static void	ft_compute_caracs_string(t_carac *caracs, const t_option *options,
 	const char *s)
 {
 	if (s == NULL)
