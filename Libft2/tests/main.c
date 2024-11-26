@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:51:48 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/26 17:08:39 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:31:42 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	test_libft(void)
 	size_t	errors;
 
 	errors = 0;
+	errors += test_char();
 	return (errors);
 }
 

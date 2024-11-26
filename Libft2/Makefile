@@ -79,26 +79,34 @@ clean:
 	@rm -rf $(OBJ_DIR)
 	@echo "$(_BLUE)[CLEAN]$(_END) Suppression des fichiers objets."
 
-fclean: clean
+fclean: clean lclean
 	@rm -f $(NAME)
 	@echo "$(_BLUE)[FCLEAN]$(_END) Suppression de l'archive $(NAME)."
 
 re: fclean all
 
 lint: all
+	@mkdir -p $(LOG_DIR)
 	@cppcheck --enable=all --inconclusive --std=c99 -I include/ src/ \
 	--suppress=unusedFunction --suppress=unusedVariable \
 	--suppress=variableScope --suppress=missingIncludeSystem \
 	--check-level=exhaustive --suppress=unmatchedSuppression \
 	--suppress=shiftTooManyBitsSigned \
-	--suppress=checkersReport 2> lint_errors.log
+	--suppress=checkersReport 2> $(LOG_DIR)/lint_errors.log
 	@echo "$(_CYAN)Résultats de cppcheck enregistrés dans lint_errors.log$(_END)"
 
 TEST_DIR = tests
-TEST_SRC = $(TEST_DIR)/main.c
+TEST_SRC = $(TEST_DIR)/main.c $(TEST_DIR)/src/libft/char.c
 TEST_BIN = test_libft
 
+LOG_DIR = log
+
+lclean:
+	@rm -rf $(LOG_DIR) $(TEST_BIN)
+
 tests: $(NAME) $(TEST_SRC)
+	@rm -rf $(TEST_BIN)
+	@mkdir -p $(LOG_DIR)
 	$(CC) $(CFLAGS) -I$(INC_DIR) $(TEST_SRC) $(NAME) -o $(TEST_BIN)
 	@echo "$(_BOLD)$(_UNDER)$(_CYAN)Exécution des tests !$(_END)"
 	./$(TEST_BIN)

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:50 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/26 17:05:35 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:38:53 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		ft_isprint(int c);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 int		ft_isupper(int c);
+int		ft_islower(int c);
 int		ft_isblank(int c);
 int		ft_isspace(int c);
 char	*ft_swapcase(const char *s);
