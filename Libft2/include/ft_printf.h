@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:21:51 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/25 23:18:33 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:01:42 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "ft_color.h"
 # include "ft_bool.h"
 # include <stdarg.h>
-# include <stdio.h>
 
 # define SPECIFIERS "cspdiuxX%"
 # define FLAGS "# +-0"

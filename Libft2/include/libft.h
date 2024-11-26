@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:50 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/26 16:41:11 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:05:35 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		ft_abs(int n);
 char	*ft_strrev(const char *s);
 char	*ft_strpad(const char *s, char pad, size_t len, int left);
 int		ft_atoi_base(const char *s, const char *base);
+int		ft_gettotal(const int *tab, size_t len);
 
 // str fonctions
 size_t	ft_strlen(const char *s);
@@ -51,7 +52,6 @@ size_t	ft_strlcpy(char *d, const char *s, size_t n);
 size_t	ft_strlcat(char *d, const char *s, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 int		ft_atoi(const char *s);
-// all functions under => to test
 
 // mem fonctions
 void	*ft_memset(void *s, int c, size_t n);

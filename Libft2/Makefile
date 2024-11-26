@@ -32,7 +32,10 @@ SRC_STR = str/ft_split.c str/ft_strchr.c str/ft_strdup.c str/ft_striteri.c \
 		  str/ft_strmapi.c str/ft_strncmp.c str/ft_strnstr.c str/ft_strrchr.c \
 		  str/ft_strtrim.c str/ft_substr.c 
 
-SRC_LIBFT_BASE = $(SRC_CHAR) $(SRC_FD) $(SRC_LST) $(SRC_NUM) $(SRC_MEM) $(SRC_STR)
+SRC_UTILS = utils/ft_gettotal.c
+
+SRC_LIBFT_BASE = $(SRC_CHAR) $(SRC_FD) $(SRC_LST) $(SRC_NUM) $(SRC_MEM) \
+				 $(SRC_STR) $(SRC_UTILS)
 
 SRC_FT_PRINTF = ft_printf/ft_printf.c ft_printf/ft_option.c \
 				ft_printf/ft_parse.c ft_printf/ft_store.c \
@@ -82,10 +85,22 @@ fclean: clean
 
 re: fclean all
 
-lint:
+lint: all
 	@cppcheck --enable=all --inconclusive --std=c99 -I include/ src/ \
 	--suppress=unusedFunction --suppress=unusedVariable \
 	--suppress=variableScope --suppress=missingIncludeSystem \
 	--check-level=exhaustive --suppress=unmatchedSuppression \
+	--suppress=shiftTooManyBitsSigned \
 	--suppress=checkersReport 2> lint_errors.log
 	@echo "$(_CYAN)Résultats de cppcheck enregistrés dans lint_errors.log$(_END)"
+
+TEST_DIR = tests
+TEST_SRC = $(TEST_DIR)/main.c
+TEST_BIN = test_libft
+
+tests: $(NAME) $(TEST_SRC)
+	$(CC) $(CFLAGS) -I$(INC_DIR) $(TEST_SRC) $(NAME) -o $(TEST_BIN)
+	@echo "$(_BOLD)$(_UNDER)$(_CYAN)Exécution des tests !$(_END)"
+	./$(TEST_BIN)
+
+.PHONY: tests

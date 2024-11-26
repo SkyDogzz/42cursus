@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_gettotal.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 14:01:31 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/26 17:12:48 by tstephan         ###   ########.fr       */
+/*   Created: 2024/11/26 17:03:21 by tstephan          #+#    #+#             */
+/*   Updated: 2024/11/26 17:08:23 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
 
-int	ft_abs(int n)
+int	ft_gettotal(const int *tab, size_t len)
 {
-	if (n == 1 << 31)
-		return (1 << 31);
-	if (n < 0)
-		return (-n);
-	return (n);
+	int	total;
+
+	total = 0;
+	while (len > 0)
+		total += tab[len-- - 1];
+	return (total);
 }

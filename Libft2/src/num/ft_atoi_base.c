@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:16:09 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/26 14:42:53 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:15:16 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_bool	ft_isbasevalid(const char *base)
 
 static int	ft_isinbase(const char c, const char *base)
 {
-	int pos;
+	int	pos;
 
 	pos = 0;
 	while (base[pos])
@@ -54,9 +54,9 @@ static int	ft_isinbase(const char c, const char *base)
 
 int	ft_atoi_base(const char *s, const char *base)
 {
-	int	nbr;
-	int	base_len;
-	int pos;
+	int		nbr;
+	int		base_len;
+	int		pos;
 	t_bool	neg;
 
 	if (!ft_isbasevalid(base))
@@ -68,10 +68,12 @@ int	ft_atoi_base(const char *s, const char *base)
 	neg = FALSE;
 	if (*s == '-')
 		neg = TRUE;
-	while ((pos = ft_isinbase(*s, base)) >= 0)
+	pos = ft_isinbase(*s, base);
+	while (pos >= 0)
 	{
 		nbr *= base_len;
 		nbr += pos;
+		pos = ft_isinbase(*s, base);
 	}
-	return (nbr);
+	return (nbr * (neg * -1));
 }

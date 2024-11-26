@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 14:01:31 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/26 17:12:48 by tstephan         ###   ########.fr       */
+/*   Created: 2024/11/26 16:52:32 by tstephan          #+#    #+#             */
+/*   Updated: 2024/11/26 16:57:34 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#ifndef TEST_H
+# define TEST_H
 
-int	ft_abs(int n)
+# include "../../include/libft.h"
+# include "../../include/ft_printf.h"
+# include "../../include/get_next_line.h"
+
+typedef struct s_error
 {
-	if (n == 1 << 31)
-		return (1 << 31);
-	if (n < 0)
-		return (-n);
-	return (n);
-}
+	int	libft;
+	int	ft_printf;
+	int	get_next_line;
+}	t_error;
+
+int	test_libft(void);
+int	test_ftprintf(void);
+int	test_getnextline(void);
+
+#endif
