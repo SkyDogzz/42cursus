@@ -25,7 +25,7 @@ SRC_LST = lst/ft_lstadd_back.c lst/ft_lstadd_front.c lst/ft_lstclear.c \
 SRC_MEM = mem/ft_bzero.c mem/ft_calloc.c mem/ft_memchr.c mem/ft_memcmp.c \
 		  mem/ft_memcpy.c mem/ft_memmove.c mem/ft_memset.c
 
-SRC_NUM = num/ft_atoi.c num/ft_itoa.c
+SRC_NUM = num/ft_abs.c num/ft_atoi.c num/ft_itoa.c num/ft_atoi_base.c
 
 SRC_STR = str/ft_split.c str/ft_strchr.c str/ft_strdup.c str/ft_striteri.c \
 		  str/ft_strjoin.c str/ft_strlcat.c str/ft_strlcpy.c str/ft_strlen.c \

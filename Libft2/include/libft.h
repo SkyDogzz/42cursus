@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:50 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/25 23:06:20 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:41:56 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "ft_bool.h"
 
 /*
 --------------------------------------------------------------------------------
@@ -36,6 +37,10 @@ int		ft_isupper(int c);
 int		ft_isblank(int c);
 int		ft_isspace(int c);
 char	*ft_swapcase(const char *s);
+int		ft_abs(int n);
+char	*ft_strrev(const char *s);
+char	*ft_strpad(const char *s, char pad, size_t len, int left);
+int		ft_atoi_base(const char *s, const char *base);
 
 // str fonctions
 size_t	ft_strlen(const char *s);
@@ -47,8 +52,6 @@ size_t	ft_strlcat(char *d, const char *s, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 int		ft_atoi(const char *s);
 // all functions under => to test
-char	*ft_strrev(const char *s);
-char	*ft_strpad(const char *s, char pad, size_t len, int left);
 
 // mem fonctions
 void	*ft_memset(void *s, int c, size_t n);

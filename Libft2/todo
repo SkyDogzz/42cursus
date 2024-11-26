@@ -21,14 +21,6 @@ ft_memjoin : Concatène deux blocs mémoire.
 
 ft_itoa_base : Convertit un entier en chaîne dans une base donnée.
 
-ft_atoi_base : Convertit une chaîne en entier dans une base donnée.
-
-ft_abs : Retourne la valeur absolue d'un entier.
-int ft_abs(int n);
-
-ft_pow : Calcule une puissance entière.
-int ft_pow(int base, int exp);
-
 5. lst/ (Fonctions liées aux listes chaînées)
 ft_lstmap : Transforme une liste en appliquant une fonction à chaque élément.
 
