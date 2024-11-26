@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:55:52 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/25 12:59:46 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:53:04 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_swapcase(const char *s)
 	char	*swapped;
 	size_t	pos;
 
+	if (!s)
+		return (NULL);
 	swapped = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
 	pos = 0;
 	while (*s)

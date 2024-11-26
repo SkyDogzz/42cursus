@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:51:48 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/26 17:31:42 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:56:44 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ int	main(void)
 	error[1] = test_ftprintf();
 	error[2] = test_getnextline();
 	ft_printf("%d erreurs au totals!\n", ft_gettotal(error, 3));
-
 	return (EXIT_SUCCESS);
 }

@@ -14,7 +14,7 @@ INC_DIR = include
 SRC_CHAR = char/ft_isalnum.c char/ft_isalpha.c char/ft_isascii.c \
 		   char/ft_isdigit.c char/ft_isprint.c char/ft_isspace.c \
 		   char/ft_tolower.c char/ft_toupper.c char/ft_isblank.c \
-		   char/ft_islower.c char/ft_isupper.c
+		   char/ft_islower.c char/ft_isupper.c char/ft_swapcase.c
 
 SRC_FD = fd/ft_putchar_fd.c fd/ft_putendl_fd.c fd/ft_putnbr_fd.c \
 		 fd/ft_putstr_fd.c
@@ -88,7 +88,7 @@ re: fclean all
 
 lint: all
 	@mkdir -p $(LOG_DIR)
-	@cppcheck --enable=all --inconclusive --std=c99 -I include/ src/ \
+	@cppcheck --enable=all --inconclusive --std=c99 -I include/ src/ .tests \
 	--suppress=unusedFunction --suppress=unusedVariable \
 	--suppress=variableScope --suppress=missingIncludeSystem \
 	--check-level=exhaustive --suppress=unmatchedSuppression \
@@ -96,7 +96,7 @@ lint: all
 	--suppress=checkersReport 2> $(LOG_DIR)/lint_errors.log
 	@echo "$(_CYAN)Résultats de cppcheck enregistrés dans lint_errors.log$(_END)"
 
-TEST_DIR = tests
+TEST_DIR = .tests
 TEST_SRC = $(TEST_DIR)/main.c $(TEST_DIR)/src/libft/char.c
 TEST_BIN = test_libft
 

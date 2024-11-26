@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 16:52:32 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/26 17:31:56 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:56:53 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ typedef struct s_error
 int	test_libft(void);
 int	test_ftprintf(void);
 int	test_getnextline(void);
-int test_char(void);
+int	test_char(void);
 
 #endif
