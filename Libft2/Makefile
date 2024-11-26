@@ -1,16 +1,21 @@
+# Compiler and flags
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -std=c99
 
-_END=$(shell printf "\033[0m")
-_BOLD=$(shell printf "\033[1m")
-_UNDER=$(shell printf "\033[4m")
-_CYAN=$(shell printf "\033[36m")
-_BLUE=$(shell printf "\033[34m")
+# Colors for output
+_END    = $(shell printf "\033[0m")
+_BOLD   = $(shell printf "\033[1m")
+_CYAN   = $(shell printf "\033[36m")
+_BLUE   = $(shell printf "\033[34m")
 
+# Directories
 SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = include
+LOG_DIR = log
+TEST_DIR = .tests
 
+# Source files
 SRC_CHAR = char/ft_isalnum.c char/ft_isalpha.c char/ft_isascii.c \
 		   char/ft_isdigit.c char/ft_isprint.c char/ft_isspace.c \
 		   char/ft_tolower.c char/ft_toupper.c char/ft_isblank.c \
@@ -31,12 +36,9 @@ SRC_NUM = num/ft_abs.c num/ft_atoi.c num/ft_itoa.c num/ft_atoi_base.c
 SRC_STR = str/ft_split.c str/ft_strchr.c str/ft_strdup.c str/ft_striteri.c \
 		  str/ft_strjoin.c str/ft_strlcat.c str/ft_strlcpy.c str/ft_strlen.c \
 		  str/ft_strmapi.c str/ft_strncmp.c str/ft_strnstr.c str/ft_strrchr.c \
-		  str/ft_strtrim.c str/ft_substr.c 
+		  str/ft_strtrim.c str/ft_substr.c
 
 SRC_UTILS = utils/ft_gettotal.c
-
-SRC_LIBFT_BASE = $(SRC_CHAR) $(SRC_FD) $(SRC_LST) $(SRC_NUM) $(SRC_MEM) \
-				 $(SRC_STR) $(SRC_UTILS)
 
 SRC_FT_PRINTF = ft_printf/ft_printf.c ft_printf/ft_option.c \
 				ft_printf/ft_parse.c ft_printf/ft_store.c \
@@ -48,12 +50,18 @@ SRC_FT_PRINTF = ft_printf/ft_printf.c ft_printf/ft_option.c \
 SRC_GET_NEXT_LINE = get_next_line/get_next_line.c \
 					get_next_line/get_next_line_utils.c
 
+SRC_LIBFT_BASE = $(SRC_CHAR) $(SRC_FD) $(SRC_LST) $(SRC_NUM) $(SRC_MEM) \
+				 $(SRC_STR) $(SRC_UTILS)
+
+# Objects
 OBJ_LIBFT_BASE = $(addprefix $(OBJ_DIR)/, $(SRC_LIBFT_BASE:.c=.o))
 OBJ_FT_PRINTF = $(addprefix $(OBJ_DIR)/, $(SRC_FT_PRINTF:.c=.o))
 OBJ_GET_NEXT_LINE = $(addprefix $(OBJ_DIR)/, $(SRC_GET_NEXT_LINE:.c=.o))
 
+# Target name
 NAME = libft.a
 
+# ASCII Art
 ascii:
 	@echo $(_CYAN)$(_BOLD)
 	@echo " _      _____ ______ ______  _____ " 
@@ -64,6 +72,7 @@ ascii:
 	@echo "\_____/ \___/ \____/ \_|      \_/  " 
 	@echo $(_END)
 
+# Rules
 all: ascii $(NAME)
 	@echo "$(_CYAN)[BUILD COMPLET]$(_END) $(NAME) est prêt !"
 
@@ -86,9 +95,23 @@ fclean: clean lclean
 
 re: fclean all
 
-lint: all
+lclean:
+	@rm -rf $(LOG_DIR) $(TEST_BIN)
+
+# Tests
+TEST_SRC = $(TEST_DIR)/main.c $(TEST_DIR)/src/libft/char.c
+TEST_BIN = test_libft
+
+tests: $(NAME) $(TEST_SRC)
+	@rm -rf $(TEST_BIN)
 	@mkdir -p $(LOG_DIR)
-	@cppcheck --enable=all --inconclusive --std=c99 -I include/ src/ .tests \
+	@$(CC) $(CFLAGS) -I$(INC_DIR) $(TEST_SRC) $(NAME) -o $(TEST_BIN)
+	@echo "$(_BOLD)$(_UNDER)$(_CYAN)Exécution des tests !$(_END)"
+	./$(TEST_BIN)
+
+lint:
+	@mkdir -p $(LOG_DIR)
+	@cppcheck --enable=all --inconclusive --std=c99 -I $(INC_DIR) $(SRC_DIR) \
 	--suppress=unusedFunction --suppress=unusedVariable \
 	--suppress=variableScope --suppress=missingIncludeSystem \
 	--check-level=exhaustive --suppress=unmatchedSuppression \
@@ -96,20 +119,4 @@ lint: all
 	--suppress=checkersReport 2> $(LOG_DIR)/lint_errors.log
 	@echo "$(_CYAN)Résultats de cppcheck enregistrés dans lint_errors.log$(_END)"
 
-TEST_DIR = .tests
-TEST_SRC = $(TEST_DIR)/main.c $(TEST_DIR)/src/libft/char.c
-TEST_BIN = test_libft
-
-LOG_DIR = log
-
-lclean:
-	@rm -rf $(LOG_DIR) $(TEST_BIN)
-
-tests: $(NAME) $(TEST_SRC)
-	@rm -rf $(TEST_BIN)
-	@mkdir -p $(LOG_DIR)
-	$(CC) $(CFLAGS) -I$(INC_DIR) $(TEST_SRC) $(NAME) -o $(TEST_BIN)
-	@echo "$(_BOLD)$(_UNDER)$(_CYAN)Exécution des tests !$(_END)"
-	./$(TEST_BIN)
-
-.PHONY: tests
+.PHONY: all clean fclean re ascii tests lint lclean
