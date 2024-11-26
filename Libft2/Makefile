@@ -13,7 +13,8 @@ INC_DIR = include
 
 SRC_CHAR = char/ft_isalnum.c char/ft_isalpha.c char/ft_isascii.c \
 		   char/ft_isdigit.c char/ft_isprint.c char/ft_isspace.c \
-		   char/ft_tolower.c char/ft_toupper.c
+		   char/ft_tolower.c char/ft_toupper.c char/ft_isblank.c \
+		   char/ft_islower.c char/ft_isupper.c
 
 SRC_FD = fd/ft_putchar_fd.c fd/ft_putendl_fd.c fd/ft_putnbr_fd.c \
 		 fd/ft_putstr_fd.c
