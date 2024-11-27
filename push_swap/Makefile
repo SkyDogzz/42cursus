@@ -1,10 +1,10 @@
 NAME = push_swap
 
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror -std=c99 -I./ -I./libft/include/
+CFLAGS = -Wall -Wextra -Werror -std=c99 -I./ -I./libft/include/
 AR = ar rcs
 
-SRCS = push_swap.c
+SRCS = push_swap.c populate.c display.c quicksort.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
