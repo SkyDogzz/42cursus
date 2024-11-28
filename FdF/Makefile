@@ -2,10 +2,11 @@ NAME = fdf
 
 CC = cc
 # CFLAGS = -Wall -Wextra -Werror -std=c99 -I./include -I./libft/include/
-LDFLAGS = -L./libft/ -L./.minilibx-linux/ -lft -lmlx_Linux -lXext -lX11
+LDFLAGS = -L./libft/ -L./.minilibx-linux/ -lft -lmlx_Linux -lXext -lX11 -lm
 AR = ar rcs
 
-SRCS = src/main.c src/dim.c src/display.c src/event.c src/utils.c src/parse.c
+SRCS = src/main.c src/dim.c src/display.c src/event.c src/utils.c src/parse.c \
+	   src/projection.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

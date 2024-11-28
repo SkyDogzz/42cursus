@@ -6,24 +6,24 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:12:14 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/28 18:12:32 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/28 18:51:10 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-t_vector	**init_map(t_dim dims)
+t_3vector	**init_map(t_dim dims)
 {
 	int			pos;
-	t_vector	**map;
+	t_3vector	**map;
 
-	map = (t_vector **)malloc(sizeof(t_vector *) * dims.height);
+	map = (t_3vector **)malloc(sizeof(t_3vector *) * dims.height);
 	if (!map)
 		return (NULL);
 	pos = 0;
 	while (pos < dims.height)
 	{
-		map[pos] = (t_vector *)malloc(sizeof(t_vector) * dims.width);
+		map[pos] = (t_3vector *)malloc(sizeof(t_3vector) * dims.width);
 		if (!map[pos])
 		{
 			free_map(map, pos);
@@ -34,7 +34,7 @@ t_vector	**init_map(t_dim dims)
 	return (map);
 }
 
-t_vector	**fill_map(t_vector **map, t_dim dims, int fd)
+t_3vector	**fill_map(t_3vector **map, t_dim dims, int fd)
 {
 	int			pos1;
 	int			pos2;
@@ -63,10 +63,10 @@ t_vector	**fill_map(t_vector **map, t_dim dims, int fd)
 	return (map);
 }
 
-t_vector	**parse_map(const char *filename, t_dim dims)
+t_3vector	**parse_map(const char *filename, t_dim dims)
 {
 	int			fd;
-	t_vector	**map;
+	t_3vector	**map;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)

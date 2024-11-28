@@ -6,13 +6,13 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:23:35 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/28 17:26:15 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/28 18:51:16 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void	display_parsed(t_vector **map, t_dim dims)
+void	display_parsed(t_3vector **map, t_dim dims)
 {
 	int	pos1;
 	int	pos2;
@@ -31,7 +31,7 @@ void	display_parsed(t_vector **map, t_dim dims)
 	}
 }
 
-void	displaypos_parsed(t_vector **map, t_dim dims)
+void	displaypos_parsed(t_3vector **map, t_dim dims)
 {
 	int	pos1;
 	int	pos2;
