@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:16:02 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/25 12:03:54 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/28 00:41:13 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
 
-static int	ft_countwords(const char *s, char c)
+int	ft_countwords(const char *s, char c)
 {
 	int	count;
 	int	in_word;

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:07:50 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/26 17:38:53 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/28 00:41:43 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*ft_strrev(const char *s);
 char	*ft_strpad(const char *s, char pad, size_t len, int left);
 int		ft_atoi_base(const char *s, const char *base);
 int		ft_gettotal(const int *tab, size_t len);
+int		ft_countwords(const char *s, char c);
 
 // str fonctions
 size_t	ft_strlen(const char *s);
