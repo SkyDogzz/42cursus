@@ -5,7 +5,7 @@ CC = cc
 LDFLAGS = -L./libft/ -L./.minilibx-linux/ -lft -lmlx_Linux -lXext -lX11
 AR = ar rcs
 
-SRCS = src/main.c src/dim.c src/display.c src/event.c
+SRCS = src/main.c src/dim.c src/display.c src/event.c src/utils.c src/parse.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
