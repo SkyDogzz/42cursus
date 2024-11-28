@@ -6,23 +6,11 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 23:16:13 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/25 19:06:31 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/28 02:25:38 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/get_next_line.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
 
 char	*ft_strchr(const char *s, int c)
 {
