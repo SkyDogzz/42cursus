@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 00:00:27 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/28 17:08:26 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/28 18:07:19 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,17 @@
 # include "../libft/include/get_next_line.h"
 # include <errno.h>
 # include <string.h>
+# include <X11/keysym.h>
 # include "../.minilibx-linux/mlx.h"
+
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 720
+# define MLX_ERROR 2
+
+typedef enum s_key
+{
+	ESC = 65307
+}	t_key;
 
 typedef struct s_dim
 {
@@ -41,12 +51,16 @@ typedef struct s_content
 
 typedef struct s_mlx
 {
-	void	*mlx;
-	void	*win;
+	void	*mlx_ptr;
+	void	*win_ptr;
 }	t_mlx;
 
 t_dim	*get_dim(const char *filename);
 void	display_parsed(t_vector **map, t_dim dims);
-int		handle_key(int key, void *params);
+void	displaypos_parsed(t_vector **map, t_dim dims);
+int		handle_key(int key, t_mlx *mlx);
+int		handle_no_event(void);
+int		handle_mouse(int button, int x, int y, void *params);
+int		full_quit(t_mlx *data);
 
 #endif

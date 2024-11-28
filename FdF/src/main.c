@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:53:31 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/28 17:09:44 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/28 18:04:09 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_vector	**parse_map(const char *filename, t_dim dims)
 int	main(int argc, char *argv[])
 {
 	t_content	content;
-	t_mlx		mlxs;
+	t_mlx		data;
 
 	if (argc < 2)
 	{
@@ -99,13 +99,24 @@ int	main(int argc, char *argv[])
 	}
 	content.dims = get_dim(argv[1]);
 	content.map = parse_map(argv[1], *content.dims);
-	display_parsed(content.map, *content.dims);
-	mlxs.mlx = mlx_init();
-	mlxs.win = mlx_new_window(mlxs.mlx, 720, 480, "First mlx window");
-	mlx_pixel_put(mlxs.mlx, mlxs.win, 10, 20, 0xFFFFFF);
-	mlx_key_hook(mlxs.win, handle_key, &mlxs);
-	mlx_loop(mlxs.mlx);
 	free_map(content.map, content.dims->height);
 	free(content.dims);
+	data.mlx_ptr = mlx_init();
+    if (data.mlx_ptr == NULL)
+        return (MLX_ERROR);
+    data.win_ptr = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT,
+            "My first window!");
+    if (data.win_ptr == NULL)
+    {
+        free(data.win_ptr);
+        return (MLX_ERROR);
+    }
+    mlx_loop_hook(data.mlx_ptr, &handle_no_event, &data);
+    mlx_key_hook(data.win_ptr, &handle_key, &data);
+	mlx_mouse_hook(data.win_ptr, &handle_mouse, &data);
+	mlx_hook(data.win_ptr, 17, 0, &full_quit, &data);
+    mlx_loop(data.mlx_ptr);
+    mlx_destroy_display(data.mlx_ptr);
+    free(data.mlx_ptr);
 	return (EXIT_SUCCESS);
 }
