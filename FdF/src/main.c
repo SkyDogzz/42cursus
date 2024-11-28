@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:59:42 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/28 01:40:43 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:31:54 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,35 @@ t_vector	**init_map(t_dim dims)
 	return (map);
 }
 
+t_vector	**fill_map(t_vector **map, t_dim dims, int fd)
+{
+	int			pos1;
+	int			pos2;
+	char		*line;
+	char		*next;
+
+	pos1 = 0;
+	while (pos1 < dims.height)
+	{
+		line = get_next_line(fd);
+		next = line;
+		pos2 = 0;
+		while (pos2 < dims.width)
+		{
+			map[pos1][pos2].y = pos1;
+			map[pos1][pos2].x = pos2;
+			map[pos1][pos2].z = ft_atoi(next);
+			while (*next == ' ')
+				next++;
+			next = strchr(next, ' ') + sizeof(char) * 1;
+			pos2++;
+		}
+		free(line);
+		pos1++;
+	}
+	return (map);
+}
+
 t_vector	**parse_map(const char *filename, t_dim dims)
 {
 	int			fd;
@@ -53,6 +82,8 @@ t_vector	**parse_map(const char *filename, t_dim dims)
 		exit(EXIT_FAILURE);
 	}
 	map = init_map(dims);
+	map = fill_map(map, dims, fd);
+	full_close(fd);
 	return (map);
 }
 
@@ -67,8 +98,8 @@ int	main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	dims = get_dim(argv[1]);
-	ft_printf("width = %d, height = %d\n", dims->width, dims->height);
 	map = parse_map(argv[1], *dims);
+	display_parsed(map, *dims);
 	free_map(map, dims->height);
 	free(dims);
 	return (EXIT_SUCCESS);

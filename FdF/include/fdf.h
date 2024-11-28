@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 00:00:27 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/28 01:36:59 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:00:10 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ typedef struct s_dim
 
 typedef struct s_vector
 {
-	float	x;
-	float	y;
-	float	z;
+	int	x;
+	int	y;
+	int	z;
 }	t_vector;
 
 t_dim	*get_dim(const char *filename);
+void	display_parsed(t_vector **map, t_dim dims);
 
 #endif

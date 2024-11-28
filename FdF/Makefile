@@ -4,7 +4,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -std=c99 -I./include -I./libft/include/
 AR = ar rcs
 
-SRCS = src/main.c src/dim.c
+SRCS = src/main.c src/dim.c src/display.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
@@ -31,6 +31,10 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+
+reft:
+	rm -rf $(LIBFT_DIR) libft.a
+	cp -r ../Libft2 ./libft
 
 re: fclean all
 
