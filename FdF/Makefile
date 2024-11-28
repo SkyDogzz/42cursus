@@ -1,10 +1,11 @@
 NAME = fdf
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -std=c99 -I./include -I./libft/include/
+# CFLAGS = -Wall -Wextra -Werror -std=c99 -I./include -I./libft/include/
+LDFLAGS = -L./libft/ -L./.minilibx-linux/ -lft -lmlx_Linux -lXext -lX11
 AR = ar rcs
 
-SRCS = src/main.c src/dim.c src/display.c
+SRCS = src/main.c src/dim.c src/display.c src/event.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
@@ -17,8 +18,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 bonus: all
 
 $(NAME): $(LIBFT) $(OBJS)
-	@cp $(LIBFT) ./
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) libft.a
+	$(CC) -o $(NAME) $(OBJS) $(LDFLAGS) 
 
 $(LIBFT):
 	@$(MAKE) all -C $(LIBFT_DIR)
@@ -33,8 +33,9 @@ fclean: clean
 	rm -f $(NAME)
 
 reft:
-	rm -rf $(LIBFT_DIR) libft.a
+	rm -rf $(LIBFT_DIR)
 	cp -r ../Libft2 ./libft
+
 
 re: fclean all
 

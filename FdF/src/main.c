@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
+/*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 23:59:42 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/28 15:31:54 by tstephan         ###   ########.fr       */
+/*   Created: 2024/11/28 16:53:31 by tstephan          #+#    #+#             */
+/*   Updated: 2024/11/28 17:09:44 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,18 +89,23 @@ t_vector	**parse_map(const char *filename, t_dim dims)
 
 int	main(int argc, char *argv[])
 {
-	t_vector	**map;
-	t_dim		*dims;
+	t_content	content;
+	t_mlx		mlxs;
 
 	if (argc < 2)
 	{
 		ft_dprintf(2, "Usage: %s <input_file>\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}
-	dims = get_dim(argv[1]);
-	map = parse_map(argv[1], *dims);
-	display_parsed(map, *dims);
-	free_map(map, dims->height);
-	free(dims);
+	content.dims = get_dim(argv[1]);
+	content.map = parse_map(argv[1], *content.dims);
+	display_parsed(content.map, *content.dims);
+	mlxs.mlx = mlx_init();
+	mlxs.win = mlx_new_window(mlxs.mlx, 720, 480, "First mlx window");
+	mlx_pixel_put(mlxs.mlx, mlxs.win, 10, 20, 0xFFFFFF);
+	mlx_key_hook(mlxs.win, handle_key, &mlxs);
+	mlx_loop(mlxs.mlx);
+	free_map(content.map, content.dims->height);
+	free(content.dims);
 	return (EXIT_SUCCESS);
 }
