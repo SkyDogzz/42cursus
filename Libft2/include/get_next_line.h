@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:06:57 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/28 02:24:28 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:14:51 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ char		*ft_strchr(const char *s, int c);
 char		*ft_strjoin(char const *s1, char const *s2);
 t_fd_node	*get_fd_node(t_fd_node **fd_list, int fd);
 void		remove_fd_node(t_fd_node **fd_list, int fd);
+void		full_close(int fd);
 
 #endif

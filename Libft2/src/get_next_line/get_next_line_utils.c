@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 23:16:13 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/28 02:25:38 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:17:28 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,20 @@ void	remove_fd_node(t_fd_node **fd_list, int fd)
 		prev = current;
 		current = current->next;
 	}
+}
+
+void	full_close(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	if (!line)
+		return ;
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	close(fd);
 }
