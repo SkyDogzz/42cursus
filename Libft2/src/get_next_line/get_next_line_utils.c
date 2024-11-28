@@ -6,13 +6,13 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 23:16:13 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/28 15:17:28 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:11:01 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr2(const char *s, int c)
 {
 	if (!s)
 		return (NULL);
@@ -25,29 +25,6 @@ char	*ft_strchr(const char *s, int c)
 	if (c == '\0')
 		return ((char *)s);
 	return (NULL);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*joined;
-	size_t	len1;
-	size_t	len2;
-	size_t	i;
-	size_t	j;
-
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	joined = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
-	if (!joined)
-		return (NULL);
-	i = -1;
-	while (++i < len1)
-		joined[i] = s1[i];
-	j = 0;
-	while (j < len2)
-		joined[i++] = s2[j++];
-	joined[i] = '\0';
-	return (joined);
 }
 
 t_fd_node	*get_fd_node(t_fd_node **fd_list, int fd)

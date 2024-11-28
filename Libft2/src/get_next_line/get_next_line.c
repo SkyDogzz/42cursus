@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:12:40 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/25 23:40:26 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:09:45 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*read_and_store(int fd, char *store)
 	ssize_t	bytes_read;
 
 	bytes_read = 1;
-	while (!ft_strchr(store, '\n') && bytes_read != 0)
+	while (!ft_strchr2(store, '\n') && bytes_read != 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
