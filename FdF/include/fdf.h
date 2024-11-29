@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 00:00:27 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/29 16:42:25 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:07:25 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_mlx
 t_dim		*get_dim(const char *filename);
 void		display_parsed(t_3vector **map, t_dim dims);
 void		displaypos_parsed(t_3vector **map, t_dim dims);
-int			handle_key(int key, t_mlx *mlx);
+int			handle_key(int keysym, t_mlx *data);
 int			handle_no_event(void);
 int			handle_mouse(int button, int x, int y, void *params);
 int			full_quit(t_mlx *data);

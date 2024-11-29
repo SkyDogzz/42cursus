@@ -15,6 +15,7 @@ $(NAME): $(OBJS)
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
+LOG_DIR = log
 
 bonus: all
 
@@ -31,7 +32,7 @@ clean:
 	rm -f $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(TEST_DIR)
 
 reft:
 	rm -rf $(LIBFT_DIR)
@@ -39,5 +40,15 @@ reft:
 
 
 re: fclean all
+
+lint:
+	@mkdir -p $(LOG_DIR)
+	@cppcheck --enable=all --inconclusive --std=c99 src \
+	--suppress=unusedFunction --suppress=unusedVariable \
+	--suppress=variableScope --suppress=missingIncludeSystem \
+	--check-level=exhaustive --suppress=unmatchedSuppression \
+	--suppress=shiftTooManyBitsSigned \
+	--suppress=checkersReport 2> $(LOG_DIR)/lint_errors.log
+	@echo "$(_CYAN)Résultats de cppcheck enregistrés dans lint_errors.log$(_END)"
 
 .PHONY: all clean fclean re
