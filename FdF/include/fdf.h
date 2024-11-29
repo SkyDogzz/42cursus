@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 00:00:27 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/29 16:26:19 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:42:25 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ typedef struct s_camera
 	t_3vector	look;
 }	t_camera;
 
-typedef	struct s_render
+typedef struct s_render
 {
-	t_scene scene;
-	t_camera camera;
+	t_scene		scene;
+	t_camera	camera;
 }	t_render;	
 
 typedef struct s_content
