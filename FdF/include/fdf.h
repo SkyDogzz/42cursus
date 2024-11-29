@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 00:00:27 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/28 19:55:28 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:11:15 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ int			full_quit(t_mlx *data);
 void		free_map(t_3vector **map, int size);
 t_3vector	**parse_map(const char *filename, t_dim dims);
 void		projection(t_3vector p3d, t_2vector *p2d, float focal);
+void		draw_line(t_mlx mlxs, t_2vector start, t_2vector end, int color);
 
 #endif

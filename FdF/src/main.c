@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:53:31 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/28 18:16:34 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:10:37 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ int	setup_mlx(t_mlx data)
 	mlx_key_hook(data.win_ptr, &handle_key, &data);
 	mlx_mouse_hook(data.win_ptr, &handle_mouse, &data);
 	mlx_hook(data.win_ptr, 17, 0, &full_quit, &data);
+	t_2vector start, end;
+	start.x = 10;
+	start.y = 10;
+	end.x = 500;
+	end.y = 500;
+	draw_line(data, start, end, 0xFF0000);
 	mlx_loop(data.mlx_ptr);
 	mlx_destroy_display(data.mlx_ptr);
 	free(data.mlx_ptr);
