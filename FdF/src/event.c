@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:55:54 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/28 19:36:46 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:20:00 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	handle_mouse(int button, int x, int y, void *params)
 {
 	ft_printf("%d button pressed at %d %d\n", button, x, y);
 	return (0);
+	(void) params;
 }
 
 int	handle_no_event(void)
