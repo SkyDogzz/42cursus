@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/02 02:36:15 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/02 02:41:45 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include "../libft/include/get_next_line.h"
 # include "keycode.h"
 # include <mlx.h>
+
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 720
 
 typedef struct s_mlx
 {

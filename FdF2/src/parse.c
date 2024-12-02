@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:24:16 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/02 02:39:31 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/02 02:49:14 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ t_map	*parse_map(const char *filename)
 	if (fd == -1)
 		exit_msg_code("File not opened\n", 1);
 	fill_map(map, fd);
-	print_map(map);
 	close(fd);
 	return (map);
 }
