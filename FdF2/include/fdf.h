@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/02 02:41:45 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:52:25 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "../libft/include/ft_printf.h"
 # include "../libft/include/get_next_line.h"
 # include "keycode.h"
-# include <mlx.h>
+# include "../.minilibx/mlx.h"
 
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 720

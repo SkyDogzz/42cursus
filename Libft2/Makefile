@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -std=c99 -O2 -march=native -flto -MMD
+CFLAGS = -Wall -Wextra -Werror -std=c99 -O2 -march=native -MMD
 LDFLAGS = -flto
 
 _END    = $(shell printf "\033[0m")
