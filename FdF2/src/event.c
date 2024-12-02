@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/30 14:25:55 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/02 02:14:00 by skydogzz         ###   ########.fr       */
+/*   Created: 2024/12/02 01:36:47 by skydogzz          #+#    #+#             */
+/*   Updated: 2024/12/02 02:07:32 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void	exit_msg_code(const char *message, int code)
+int	full_quit(t_mlx *data)
 {
-	ft_dprintf(2, "%s", message);
-	exit(code);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	return (0);
 }
 
-void	print_map(t_map *map)
+int	handle_key(int keycode, t_mlx *data)
 {
-	t_2vec	pos;
+	if (keycode == ESC_CODE)
+		full_quit(data);
+	return (0);
+}
 
-	pos.y = 0;
-	while (pos.y < map->dims.height)
-	{
-		pos.x = 0;
-		while (pos.x < map->dims.width)
-		{
-			ft_printf("%d ", (int) map->content[pos.y][pos.x].height);
-			if (map->content[pos.y][pos.x].color)
-				ft_printf("%p ", map->content[pos.y][pos.x].color);
-			pos.x++;
-		}
-		ft_printf("\n");
-		pos.y++;
-	}
+int	handle_no_event(void)
+{
+	return (0);
+}
+
+int	handle_mouse(void)
+{
+	return (0);
 }

@@ -6,27 +6,11 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:24:16 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/01 14:25:48 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/02 02:15:25 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/fdf.h"
-
-int	get_width(const char *line)
-{
-	int	width;
-
-	width = 0;
-	if (*line++ != ' ')
-		width++;
-	while (*line)
-	{
-		if (*line != ' ' && *(line - 1) == ' ' && *line != '\n')
-			width++;
-		line++;
-	}
-	return (width);
-}
+#include "../include/fdf.h"
 
 int	get_height(int fd)
 {
@@ -77,97 +61,33 @@ t_map	*init_map(t_map *map)
 	return (map);
 }
 
-int atoi_base(const char *s, const char *base, const char *base2)
-{
-	int	nbr;
-	int	pos;
-	int	flag;
-	ft_printf("atoi base %s\n", s);
-
-	nbr = 0;
-	while (*s)
-	{
-		pos = 0;
-		flag = 0;
-		while (base[pos] && base2[pos])
-		{
-			if (base[pos] == *s || base2[pos] == *s)
-			{
-				nbr *= ft_strlen(base);
-				nbr += pos;
-				flag = 1;
-			}
-			pos++;
-		}
-		if (flag == 0)
-			return (nbr);
-		s++;	
-	}
-	return (nbr);
-}
-
-int	get_color(const char *s)
-{
-	int	color = 0;
-	while (ft_isdigit(*s))
-		s++;
-	if (*s != ',')
-		return (color);
-	color = atoi_base((s + 3), "0123456789abcdef", "0123456789ABCDEF");
-	return (color);
-}
-
 void	fill_map(t_map *map, int fd)
 {
-	int		posx;
-	int		posy;
-	char	*line;
-	char	*next;
+	t_2vec		pos;
+	char		*line;
+	char		*next;
 
-	posy = 0;
-	while (posy < map->dims.height)
+	pos.y = 0;
+	while (pos.y < map->dims.height)
 	{
 		line = get_next_line(fd);
-		posx = 0;
+		pos.x = 0;
 		next = line;
-		while (posx < map->dims.width)
+		while (pos.x < map->dims.width)
 		{
-			while (*next == ' ' && posx < map->dims.width - 1)
+			while (*next == ' ' && pos.x < map->dims.width - 1)
 				next++;
-			map->content[posy][posx].height = ft_atoi(next);
-			map->content[posy][posx].color = get_color(next);
+			map->content[pos.y][pos.x].height = ft_atoi(next);
+			map->content[pos.y][pos.x].color = get_color(next);
 			next = ft_strchr(next, ' ');
-			posx++;
+			pos.x++;
 		}
 		free(line);
-		posy++;
+		pos.y++;
 	}
 	line = get_next_line(fd);
 	if (line)
 		free(line);
-}
-
-void	print_map(t_map *map)
-{
-	int	posx;
-	int	posy;
-
-	posy = 0;
-	while (posy < map->dims.height)
-	{
-		posx = 0;
-		while (posx < map->dims.width)
-		{
-			/*printf("%d:%d %.1f %x ", posx, posy, map->content[posy][posx].height, map->content[posy][posx].color);*/
-			ft_printf("%d ", (int) map->content[posy][posx].height);
-			if (map->content[posy][posx].color)
-				ft_printf("%p ", map->content[posy][posx].color);
-			/*ft_printf("%d ", (int) map->content[posy][posx].height);*/
-			posx++;
-		}
-		ft_printf("\n");
-		posy++;
-	}
 }
 
 t_map	*parse_map(const char *filename)
@@ -186,14 +106,12 @@ t_map	*parse_map(const char *filename)
 	map->dims.width = get_width(line);
 	free(line);
 	map->dims.height = get_height(fd);
-	ft_printf("%d %d\n", map->dims.width, map->dims.height);
 	map = init_map(map);
 	close(fd);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		exit_msg_code("File not opened\n", 1);
 	fill_map(map, fd);
-	print_map(map);
 	close(fd);
 	return (map);
 }

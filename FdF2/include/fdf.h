@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/11/30 17:21:20 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/02 02:14:59 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/include/libft.h"
 # include "../libft/include/ft_printf.h"
 # include "../libft/include/get_next_line.h"
+# include "keycode.h"
 # include <mlx.h>
 
 typedef struct s_mlx
@@ -23,6 +24,12 @@ typedef struct s_mlx
 	void	*mlx_ptr;
 	void	*win_ptr;
 }	t_mlx;
+
+typedef struct s_2vec
+{
+	int	x;
+	int	y;
+}	t_2vec;
 
 typedef struct s_3vec
 {
@@ -50,6 +57,13 @@ typedef struct s_map
 }	t_map;
 
 t_map	*parse_map(const char *filename);
+int		full_quit(t_mlx *data);
 void	exit_msg_code(const char *message, int code);
+int		handle_key(int keycode, t_mlx *data);
+int		handle_no_event(void);
+int		handle_mouse(void);
+int		get_color(const char *s);
+int		atoi_base(const char *s, const char *base, const char *base2);
+int		get_width(const char *line);
 
 #endif

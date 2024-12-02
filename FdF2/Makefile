@@ -14,7 +14,7 @@ LIBFT_SRC_DIR = ../Libft2
 LIBFT_DIR = libft
 MLX_DIR = /usr/local/lib
 
-SRC_FILES = main.c parse/parse.c utils.c
+SRC_FILES = main.c parse.c utils.c event.c str.c
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 NAME = fdf
@@ -40,7 +40,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@make -C $(LIBFT_DIR) clean
+	@if [ -d "$(LIBFT_DIR)" ]; then \
+		make -C $(LIBFT_DIR) clean; \
+	fi
 	@echo "$(_BLUE)[CLEAN]$(_END) Suppression des fichiers objets."
 
 fclean: clean
