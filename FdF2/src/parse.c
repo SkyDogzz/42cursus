@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:24:16 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/02 02:15:25 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/02 02:39:31 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	fill_map(t_map *map, int fd)
 		next = line;
 		while (pos.x < map->dims.width)
 		{
-			while (*next == ' ' && pos.x < map->dims.width - 1)
+			while (*next == ' ' && pos.x < map->dims.width)
 				next++;
 			map->content[pos.y][pos.x].height = ft_atoi(next);
 			map->content[pos.y][pos.x].color = get_color(next);
@@ -112,6 +112,7 @@ t_map	*parse_map(const char *filename)
 	if (fd == -1)
 		exit_msg_code("File not opened\n", 1);
 	fill_map(map, fd);
+	print_map(map);
 	close(fd);
 	return (map);
 }

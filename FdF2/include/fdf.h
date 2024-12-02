@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/02 02:14:59 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/02 02:36:15 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_map
 }	t_map;
 
 t_map	*parse_map(const char *filename);
+void	print_map(t_map *map);
 int		full_quit(t_mlx *data);
 void	exit_msg_code(const char *message, int code);
 int		handle_key(int keycode, t_mlx *data);
@@ -65,5 +66,6 @@ int		handle_mouse(void);
 int		get_color(const char *s);
 int		atoi_base(const char *s, const char *base, const char *base2);
 int		get_width(const char *line);
+void	display_map(t_mlx data, t_map map);
 
 #endif

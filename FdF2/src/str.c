@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 02:12:32 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/02 02:14:45 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/02 02:38:47 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ int	get_color(const char *s)
 
 	while (ft_isdigit(*s))
 		s++;
+	ft_printf("%s\n", s);
 	color = 0;
 	if (*s != ',')
-		return (color);
+		return (0xFFFFFF);
 	color = atoi_base((s + 3), "0123456789abcdef", "0123456789ABCDEF");
 	return (color);
 }

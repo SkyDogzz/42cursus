@@ -14,7 +14,7 @@ LIBFT_SRC_DIR = ../Libft2
 LIBFT_DIR = libft
 MLX_DIR = /usr/local/lib
 
-SRC_FILES = main.c parse.c utils.c event.c str.c
+SRC_FILES = main.c parse.c utils.c event.c str.c test.c
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 NAME = fdf
