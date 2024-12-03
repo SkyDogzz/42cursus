@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:44:02 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 14:31:33 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:51:16 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ int	main(int argc, char *argv[])
 	mlx_key_hook(wrapper.data.win_ptr, &handle_key, &wrapper);
 	mlx_mouse_hook(wrapper.data.win_ptr, &handle_mouse, &wrapper.data);
 	mlx_hook(wrapper.data.win_ptr, 17, 0, &full_quit, &wrapper.data);
+	rotatex_map(wrapper.map, PI / 16);
+	rotatey_map(wrapper.map, PI / 16);
 	display_map(wrapper.data, *wrapper.map);
 	mlx_loop(wrapper.data.mlx_ptr);
 	mlx_destroy_display(wrapper.data.mlx_ptr);
 	free(wrapper.data.mlx_ptr);
 	free_map_full(wrapper.map);
-	ft_printf("%x\n", 0xFF00FF >> 8 & 0xFF);
 	return (EXIT_SUCCESS);
 }

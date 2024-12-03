@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 14:31:40 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:01:01 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define WINDOW_WIDTH 1280.0
 # define WINDOW_HEIGHT 720.0
 # define PI 3.1415
+# define HEIGHT_DIV 1.
+# define ZOOM 10
 
 typedef struct s_mlx
 {
@@ -66,6 +68,7 @@ typedef struct s_map
 {
 	t_cont	**content;
 	t_dim	dims;
+	float	zoom;
 }	t_map;
 
 typedef struct s_wrapper
@@ -93,5 +96,8 @@ int		atoi_base(const char *s, const char *base, const char *base2);
 int		get_width(const char *line);
 void	draw_line(t_2vec start, t_2vec end, t_2color color, t_wrapper wrapper);
 void	display_map(t_mlx data, t_map map);
+void	rotatex_map(t_map *map, float angle);
+void	rotatey_map(t_map *map, float angle);
+void	rotatez_map(t_map *map, float angle);
 
 #endif

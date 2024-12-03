@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 01:36:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 14:32:16 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:00:12 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ void	rotatez_map(t_map *map, float angle)
 void	rotate(t_wrapper *wrapper, int keycode)
 {
 	if (keycode == X_CODE)
-		rotatex_map(wrapper->map, PI / 8);
+		rotatex_map(wrapper->map, PI / 16);
 	if (keycode == Y_CODE)
-		rotatey_map(wrapper->map, PI / 8);
+		rotatey_map(wrapper->map, PI / 16);
 	if (keycode == Z_CODE)
-		rotatez_map(wrapper->map, PI / 8);
+		rotatez_map(wrapper->map, PI / 16);
 
 }
 
@@ -94,6 +94,16 @@ int	handle_key(int keycode, t_wrapper *wrapper)
 		display_map(wrapper->data, *wrapper->map);
 		return (0);
 	}
+	if (keycode == PAGEUP || keycode == PAGEDOWN)
+	{
+		if (keycode == PAGEUP)
+			wrapper->map->zoom += 0.5;
+		else
+			wrapper->map->zoom -= 0.5;
+		mlx_clear_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
+		display_map(wrapper->data, *wrapper->map);
+	}
+	ft_printf("keycode %d\n", keycode);
 	return (0);
 }
 

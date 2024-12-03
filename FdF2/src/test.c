@@ -6,14 +6,11 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 02:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 14:31:53 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:55:24 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
-#define MULT 40
-
 
 
 int	colormid(t_2color color, int total, int act)
@@ -46,7 +43,7 @@ void	draw_line (t_2vec start, t_2vec end, t_2color color, t_wrapper wrapper)
 
 	while(pos++){
 		mlx_pixel_put(wrapper.data.mlx_ptr, wrapper.data.win_ptr, start.x, start.y,
-				colormid(color, MULT + 2, pos));
+				colormid(color, ZOOM + 2, pos));
 		if (start.x == end.x && start.y == end.y) break;
 		e2 = 2 * err;
 		if (e2 >= dy) { err += dy; start.x += sx; }
@@ -82,20 +79,20 @@ void	display_map(t_mlx data, t_map map)
 	{
 		for (int y = 0; y < map.dims.height; y++)
 		{
-			start.x = map.content[y][x].pos.x * MULT + WINDOW_WIDTH / 2;
-			start.y = map.content[y][x].pos.y * MULT + WINDOW_HEIGHT / 2;
+			start.x = map.content[y][x].pos.x * map.zoom + WINDOW_WIDTH / 2;
+			start.y = map.content[y][x].pos.y * map.zoom + WINDOW_HEIGHT / 2;
 			color.start = map.content[y][x].color;
 			if (y < map.dims.height - 1)
 			{
-				end.x = map.content[y + 1][x].pos.x * MULT + WINDOW_WIDTH / 2;
-				end.y = map.content[y + 1][x].pos.y * MULT + WINDOW_HEIGHT / 2;
+				end.x = map.content[y + 1][x].pos.x * map.zoom + WINDOW_WIDTH / 2;
+				end.y = map.content[y + 1][x].pos.y * map.zoom + WINDOW_HEIGHT / 2;
 				color.end = map.content[y + 1][x].color;
 				draw_line(start, end, color, wrapper);
 			}
 			if (x < map.dims.width - 1)
 			{
-				end.x = map.content[y][x + 1].pos.x * MULT + WINDOW_WIDTH / 2;;
-				end.y = map.content[y][x + 1].pos.y * MULT + WINDOW_HEIGHT / 2;
+				end.x = map.content[y][x + 1].pos.x * map.zoom + WINDOW_WIDTH / 2;;
+				end.y = map.content[y][x + 1].pos.y * map.zoom + WINDOW_HEIGHT / 2;
 				color.end = map.content[y][x + 1].color;
 				draw_line(start, end, color, wrapper);
 			}
