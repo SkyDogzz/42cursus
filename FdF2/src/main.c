@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:44:02 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 13:13:31 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:31:33 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,9 @@ void	free_map_full(t_map *map)
 	free(map);
 }
 
-
-
-
 int	main(int argc, char *argv[])
 {
-	t_wrapper wrapper;
+	t_wrapper	wrapper;
 
 	if (argc <= 1)
 	{
@@ -46,5 +43,6 @@ int	main(int argc, char *argv[])
 	mlx_destroy_display(wrapper.data.mlx_ptr);
 	free(wrapper.data.mlx_ptr);
 	free_map_full(wrapper.map);
+	ft_printf("%x\n", 0xFF00FF >> 8 & 0xFF);
 	return (EXIT_SUCCESS);
 }
