@@ -6,18 +6,17 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 02:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 14:55:24 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/03 19:46:09 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-
 int	colormid(t_2color color, int total, int act)
 {
-	t_color start;
+	t_color	start;
 	t_color	end;
-	t_color mid;
+	t_color	mid;
 
 	if (total <= 1)
 		return (color.start);
@@ -33,15 +32,15 @@ int	colormid(t_2color color, int total, int act)
 	return ((mid.r << 16) | (mid.g << 8) | mid.b);
 }
 
-
-void	draw_line (t_2vec start, t_2vec end, t_2color color, t_wrapper wrapper)
+void	draw_line(t_2vec start, t_2vec end, t_2color color, t_wrapper wrapper)
 {
 	int dx =  abs (end.x - start.x), sx = start.x < end.x ? 1 : -1;
 	int dy = -abs (end.y - start.y), sy = start.y < end.y ? 1 : -1; 
 	int err = dx + dy, e2;
 	int pos = 1;
 
-	while(pos++){
+	while(pos++)
+	{
 		mlx_pixel_put(wrapper.data.mlx_ptr, wrapper.data.win_ptr, start.x, start.y,
 				colormid(color, ZOOM + 2, pos));
 		if (start.x == end.x && start.y == end.y) break;
@@ -49,7 +48,6 @@ void	draw_line (t_2vec start, t_2vec end, t_2color color, t_wrapper wrapper)
 		if (e2 >= dy) { err += dy; start.x += sx; }
 		if (e2 <= dx) { err += dx; start.y += sy; }
 	}
-	(void) color;
 }
 
 // void	display_map(t_mlx data, t_map map)
@@ -91,7 +89,7 @@ void	display_map(t_mlx data, t_map map)
 			}
 			if (x < map.dims.width - 1)
 			{
-				end.x = map.content[y][x + 1].pos.x * map.zoom + WINDOW_WIDTH / 2;;
+				end.x = map.content[y][x + 1].pos.x * map.zoom + WINDOW_WIDTH / 2;
 				end.y = map.content[y][x + 1].pos.y * map.zoom + WINDOW_HEIGHT / 2;
 				color.end = map.content[y][x + 1].color;
 				draw_line(start, end, color, wrapper);
