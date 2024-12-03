@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 01:36:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/02 14:09:48 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/02 15:43:40 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,12 @@ int	handle_key(int keycode, t_mlx *data)
 
 int	handle_no_event(t_wrapper *wrapper)
 {
+	t_mlx	data;
+	t_map	*map;
+
+	data = wrapper->data;
+	map = wrapper->map;
 	return 0;
-	(void) wrapper;
 }
 
 int	handle_mouse(void)

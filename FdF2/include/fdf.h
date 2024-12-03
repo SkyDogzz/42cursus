@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/02 14:05:49 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:32:03 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 # include "../libft/include/get_next_line.h"
 # include "keycode.h"
 # include "../.minilibx/mlx.h"
+# include <math.h>
 
-# define WINDOW_WIDTH 1280
-# define WINDOW_HEIGHT 720
+# define WINDOW_WIDTH 1280.0
+# define WINDOW_HEIGHT 720.0
 
 typedef struct s_mlx
 {
@@ -43,7 +44,7 @@ typedef struct s_3vec
 
 typedef struct s_cont
 {
-	float	height;
+	t_3vec	pos;
 	int		color;
 }	t_cont;
 

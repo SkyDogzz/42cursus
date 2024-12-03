@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:25:55 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/02 02:14:00 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/02 15:42:43 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_map(t_map *map)
 		pos.x = 0;
 		while (pos.x < map->dims.width)
 		{
-			ft_printf("%d ", (int) map->content[pos.y][pos.x].height);
+			ft_printf("%d ", (int) map->content[pos.y][pos.x].pos.z);
 			if (map->content[pos.y][pos.x].color)
 				ft_printf("%p ", map->content[pos.y][pos.x].color);
 			pos.x++;
