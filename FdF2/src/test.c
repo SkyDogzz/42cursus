@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 02:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/02 17:31:54 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:05:06 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	display_map(t_mlx data, t_map map)
 		{
 			pos.x = (( map.content[y][x].pos.x - (float) map.dims.width / 2) * MULT) + WINDOW_WIDTH / 2;
 			pos.y = (( map.content[y][x].pos.y - (float) map.dims.height / 2) * MULT) + WINDOW_HEIGHT / 2;
-			ft_printf("%d ");
+			// pos.x = (( map.content[y][x].pos.x - (float) map.dims.width / 2)) + WINDOW_WIDTH / 2;
+			// pos.y = (( map.content[y][x].pos.y - (float) map.dims.height / 2)) + WINDOW_HEIGHT / 2;
 			mlx_pixel_put(data.mlx_ptr, data.win_ptr, pos.x, pos.y, map.content[y][x].color);
 		}
 }
