@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 15:01:01 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:36:30 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_map
 	t_cont	**content;
 	t_dim	dims;
 	float	zoom;
+	float	height_div;
 }	t_map;
 
 typedef struct s_wrapper
@@ -99,5 +100,6 @@ void	display_map(t_mlx data, t_map map);
 void	rotatex_map(t_map *map, float angle);
 void	rotatey_map(t_map *map, float angle);
 void	rotatez_map(t_map *map, float angle);
+void	fill_map(t_map *map, int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:24:16 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 14:53:48 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:35:43 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_map	*init_map(t_map *map)
 	int	pos;
 
 	map->zoom = ZOOM;
+	map->height_div = HEIGHT_DIV;
 	map->content = (t_cont **)malloc(sizeof(t_cont *) * map->dims.height);
 	if (!map->content)
 		return (NULL);
@@ -80,7 +81,7 @@ void	fill_map(t_map *map, int fd)
 				next++;
 			map->content[pos.y][pos.x].pos.x = pos.x - map->dims.width / 2.0 + 0.5;
 			map->content[pos.y][pos.x].pos.y = pos.y - map->dims.height / 2.0 + 0.5;
-			map->content[pos.y][pos.x].pos.z = ft_atoi(next) / HEIGHT_DIV;
+			map->content[pos.y][pos.x].pos.z = ft_atoi(next) / map->height_div;
 			map->content[pos.y][pos.x].color = get_color(next);
 			next = ft_strchr(next, ' ');
 			pos.x++;

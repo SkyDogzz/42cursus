@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 01:39:17 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 14:56:39 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:35:10 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define KEYCODE_H
 
 # define ESC_CODE 65307
+# define C_CODE 99
+# define J_CODE 106
+# define K_CODE 107
 # define X_CODE 120
 # define Y_CODE 121
 # define Z_CODE 122
