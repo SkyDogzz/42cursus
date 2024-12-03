@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 19:35:42 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/03 19:41:37 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/03 23:01:10 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	change_all_color(t_wrapper *wrapper)
 		}
 	}		
 	mlx_clear_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
-	display_map(wrapper->data, *wrapper->map);
+	display_map(wrapper);
 }
 
 unsigned int	pseudo_random(unsigned int seed)
@@ -59,5 +59,5 @@ void	randomize_color(t_wrapper *wrapper)
 		}
 	}
 	mlx_clear_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
-	display_map(wrapper->data, *wrapper->map);
+	display_map(wrapper);
 }

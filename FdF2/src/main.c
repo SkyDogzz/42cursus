@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:44:02 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 19:10:45 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/03 23:47:52 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	main(int argc, char *argv[])
 		ft_dprintf(2, "Usage: %s <input_file>\n", argv[0]);
 		exit(0);
 	}
+	wrapper.menu = FALSE;
 	wrapper.map = parse_map(argv[1]);
 	wrapper.data.mlx_ptr = mlx_init();
 	wrapper.data.win_ptr = mlx_new_window(wrapper.data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "FdF Goes Brrr!!!");
@@ -38,9 +39,9 @@ int	main(int argc, char *argv[])
 	mlx_key_hook(wrapper.data.win_ptr, &handle_key, &wrapper);
 	// mlx_mouse_hook(wrapper.data.win_ptr, &handle_mouse, &wrapper.data);
 	mlx_hook(wrapper.data.win_ptr, 17, 0, &full_quit, &wrapper.data);
-	rotatex_map(wrapper.map, PI / 16);
-	rotatey_map(wrapper.map, PI / 16);
-	display_map(wrapper.data, *wrapper.map);
+	rotatex_map(wrapper.map, M_PI / 16);
+	rotatey_map(wrapper.map, M_PI / 16);
+	display_map(&wrapper);
 	mlx_loop(wrapper.data.mlx_ptr);
 	mlx_destroy_display(wrapper.data.mlx_ptr);
 	free(wrapper.data.mlx_ptr);

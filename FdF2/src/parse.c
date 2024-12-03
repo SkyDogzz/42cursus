@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:24:16 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 18:35:43 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/03 23:35:16 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ t_map	*init_map(t_map *map)
 {
 	int	pos;
 
-	map->zoom = ZOOM;
 	map->height_div = HEIGHT_DIV;
 	map->content = (t_cont **)malloc(sizeof(t_cont *) * map->dims.height);
 	if (!map->content)
@@ -110,6 +109,7 @@ t_map	*parse_map(const char *filename)
 	map->dims.width = get_width(line);
 	free(line);
 	map->dims.height = get_height(fd);
+	map->zoom = WINDOW_WIDTH / map->dims.height / 3;
 	map = init_map(map);
 	close(fd);
 	fd = open(filename, O_RDONLY);

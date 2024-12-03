@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 02:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 19:46:09 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/03 23:24:15 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,36 +64,51 @@ void	draw_line(t_2vec start, t_2vec end, t_2color color, t_wrapper wrapper)
 // 		}
 // }
 
-void	display_map(t_mlx data, t_map map)
+void	display_menu(t_wrapper *wrapper)
 {
-	t_wrapper	wrapper;
+	int	y;
+
+	y = 20;
+	mlx_string_put(wrapper->data.mlx_ptr, wrapper->data.win_ptr, 20, 20, 0xFFFFFF, "Menu");
+	mlx_string_put(wrapper->data.mlx_ptr, wrapper->data.win_ptr, 20, y += 15, 0xFFFFFF, "x to rotate around x axis");
+	mlx_string_put(wrapper->data.mlx_ptr, wrapper->data.win_ptr, 20, y += 15, 0xFFFFFF, "y to rotate around y axis");
+	mlx_string_put(wrapper->data.mlx_ptr, wrapper->data.win_ptr, 20, y += 15, 0xFFFFFF, "z to rotate around z axis");
+	mlx_string_put(wrapper->data.mlx_ptr, wrapper->data.win_ptr, 20, y += 15, 0xFFFFFF, "page_up to zoom in");
+	mlx_string_put(wrapper->data.mlx_ptr, wrapper->data.win_ptr, 20, y += 15, 0xFFFFFF, "page_down to zoom out");
+	mlx_string_put(wrapper->data.mlx_ptr, wrapper->data.win_ptr, 20, y += 15, 0xFFFFFF, "space to toggle menu");
+	mlx_string_put(wrapper->data.mlx_ptr, wrapper->data.win_ptr, 20, y += 15, 0xFFFFFF, "c to bitwise color");
+	mlx_string_put(wrapper->data.mlx_ptr, wrapper->data.win_ptr, 20, y += 15, 0xFFFFFF, "r to randomise (seeded) color");
+}
+
+void	display_map(t_wrapper *wrapper)
+{
 	t_2vec		start;
 	t_2vec		end;
 	t_2color	color;
 
-	wrapper.map = &map;
-	wrapper.data = data;
-	for (int x = 0; x < map.dims.width; x++)
+	for (int x = 0; x < wrapper->map->dims.width; x++)
 	{
-		for (int y = 0; y < map.dims.height; y++)
+		for (int y = 0; y < wrapper->map->dims.height; y++)
 		{
-			start.x = map.content[y][x].pos.x * map.zoom + WINDOW_WIDTH / 2;
-			start.y = map.content[y][x].pos.y * map.zoom + WINDOW_HEIGHT / 2;
-			color.start = map.content[y][x].color;
-			if (y < map.dims.height - 1)
+			start.x = wrapper->map->content[y][x].pos.x * wrapper->map->zoom + WINDOW_WIDTH / 2;
+			start.y = wrapper->map->content[y][x].pos.y * wrapper->map->zoom + WINDOW_HEIGHT / 2;
+			color.start = wrapper->map->content[y][x].color;
+			if (y < wrapper->map->dims.height - 1)
 			{
-				end.x = map.content[y + 1][x].pos.x * map.zoom + WINDOW_WIDTH / 2;
-				end.y = map.content[y + 1][x].pos.y * map.zoom + WINDOW_HEIGHT / 2;
-				color.end = map.content[y + 1][x].color;
-				draw_line(start, end, color, wrapper);
+				end.x = wrapper->map->content[y + 1][x].pos.x * wrapper->map->zoom + WINDOW_WIDTH / 2;
+				end.y = wrapper->map->content[y + 1][x].pos.y * wrapper->map->zoom + WINDOW_HEIGHT / 2;
+				color.end = wrapper->map->content[y + 1][x].color;
+				draw_line(start, end, color, *wrapper);
 			}
-			if (x < map.dims.width - 1)
+			if (x < wrapper->map->dims.width - 1)
 			{
-				end.x = map.content[y][x + 1].pos.x * map.zoom + WINDOW_WIDTH / 2;
-				end.y = map.content[y][x + 1].pos.y * map.zoom + WINDOW_HEIGHT / 2;
-				color.end = map.content[y][x + 1].color;
-				draw_line(start, end, color, wrapper);
+				end.x = wrapper->map->content[y][x + 1].pos.x * wrapper->map->zoom + WINDOW_WIDTH / 2;
+				end.y = wrapper->map->content[y][x + 1].pos.y * wrapper->map->zoom + WINDOW_HEIGHT / 2;
+				color.end = wrapper->map->content[y][x + 1].color;
+				draw_line(start, end, color, *wrapper);
 			}
 		}
 	}
+	if (wrapper->menu)
+		display_menu(wrapper);
 }
