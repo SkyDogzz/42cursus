@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 02:54:53 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:48:40 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define ZOOM_MODIFIER 0.8
 # define SEED 123456
 # define ROTATE_DIV 32
+# define OFFSET_DIV 20
 # define HELPER FALSE
 
 typedef struct s_mlx
@@ -75,6 +76,7 @@ typedef struct s_map
 	float	zoom;
 	float	height_div;
 	char	*filename;
+	t_2vec	offset;
 }	t_map;
 
 typedef struct s_wrapper
@@ -115,5 +117,6 @@ void			randomize_color(t_wrapper *wrapper);
 void			refill_map(t_wrapper *wrapper);
 void			change_height(t_wrapper *wrapper, int keycode);
 void			base_rotate(t_wrapper *wrapper);
+void			translate_camera(t_wrapper *wrapper, int keycode);
 
 #endif

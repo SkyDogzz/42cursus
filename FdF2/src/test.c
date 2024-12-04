@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 02:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 02:55:43 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:49:05 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,20 +97,20 @@ void	display_map(t_wrapper *wrapper)
 	{
 		for (int y = 0; y < wrapper->map->dims.height; y++)
 		{
-			start.x = wrapper->map->content[y][x].pos.x * wrapper->map->zoom + WINDOW_WIDTH / 2;
-			start.y = wrapper->map->content[y][x].pos.y * wrapper->map->zoom + WINDOW_HEIGHT / 2;
+			start.x = wrapper->map->content[y][x].pos.x * wrapper->map->zoom + WINDOW_WIDTH / 2 + wrapper->map->offset.x;
+			start.y = wrapper->map->content[y][x].pos.y * wrapper->map->zoom + WINDOW_HEIGHT / 2 + wrapper->map->offset.y;
 			color.start = wrapper->map->content[y][x].color;
 			if (y < wrapper->map->dims.height - 1)
 			{
-				end.x = wrapper->map->content[y + 1][x].pos.x * wrapper->map->zoom + WINDOW_WIDTH / 2;
-				end.y = wrapper->map->content[y + 1][x].pos.y * wrapper->map->zoom + WINDOW_HEIGHT / 2;
+				end.x = wrapper->map->content[y + 1][x].pos.x * wrapper->map->zoom + WINDOW_WIDTH / 2 + wrapper->map->offset.x;
+				end.y = wrapper->map->content[y + 1][x].pos.y * wrapper->map->zoom + WINDOW_HEIGHT / 2 + wrapper->map->offset.y;
 				color.end = wrapper->map->content[y + 1][x].color;
 				draw_line(start, end, color, *wrapper);
 			}
 			if (x < wrapper->map->dims.width - 1)
 			{
-				end.x = wrapper->map->content[y][x + 1].pos.x * wrapper->map->zoom + WINDOW_WIDTH / 2;
-				end.y = wrapper->map->content[y][x + 1].pos.y * wrapper->map->zoom + WINDOW_HEIGHT / 2;
+				end.x = wrapper->map->content[y][x + 1].pos.x * wrapper->map->zoom + WINDOW_WIDTH / 2 + wrapper->map->offset.x;
+				end.y = wrapper->map->content[y][x + 1].pos.y * wrapper->map->zoom + WINDOW_HEIGHT / 2 + wrapper->map->offset.y;
 				color.end = wrapper->map->content[y][x + 1].color;
 				draw_line(start, end, color, *wrapper);
 			}

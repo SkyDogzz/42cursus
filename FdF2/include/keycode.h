@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 01:39:17 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 01:00:09 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:33:40 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # define Y_CODE 121
 # define Z_CODE 122
 # define ESC_CODE 65307
+# define LEFT_ARROW_CODE 65361
+# define UP_ARROW_CODE 65362
+# define RIGHT_ARROW_CODE 65363
+# define DOWN_ARROW_CODE 65364
 # define PAGEUP 65365
 # define PAGEDOWN 65366
 

@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 01:36:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 02:44:29 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:51:04 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,14 @@ void	change_height(t_wrapper *wrapper, int keycode)
 	display_map(wrapper);
 }
 
+void	reset_map(t_wrapper *wrapper)
+{
+	refill_map(wrapper);
+	base_rotate(wrapper);
+	mlx_clear_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
+	display_map(wrapper);
+}
+
 int	handle_key(int keycode, t_wrapper *wrapper)
 {
 	if (keycode == ESC_CODE)
@@ -72,14 +80,12 @@ int	handle_key(int keycode, t_wrapper *wrapper)
 	else if (keycode == SPACE_CODE)
 		toggle_menu(wrapper);
 	else if (keycode == W_CODE)
-	{
-		refill_map(wrapper);
-		base_rotate(wrapper);
-		mlx_clear_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
-		display_map(wrapper);
-	}
+		reset_map(wrapper);
 	else if (keycode == J_CODE || keycode == K_CODE)
 		change_height(wrapper, keycode);
+	else if (keycode >= LEFT_ARROW_CODE && keycode <= DOWN_ARROW_CODE)
+		translate_camera(wrapper, keycode);
+	// ft_printf("keycode %d\n", keycode);
 	return (0);
 }
 
