@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:29:56 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/04 15:41:48 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:51:57 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	toggle_menu(t_wrapper *wrapper)
 		wrapper->menu = FALSE;
 	else
 		wrapper->menu = TRUE;
-	mlx_clear_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
 	display_map(wrapper);
 }
 
@@ -56,7 +55,6 @@ void	toggle_helper(t_wrapper *wrapper)
 		wrapper->map->helper = FALSE;
 	else
 		wrapper->map->helper = TRUE;
-	mlx_clear_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
 	display_map(wrapper);
 }
 
@@ -79,8 +77,8 @@ void	draw_helper(t_wrapper *wrapper)
 
 	if (!wrapper->map->helper)
 		return ;
-	color.start = 0xFF0000;
-	color.end = 0x00FF00;
+	color.start = HELPER_START;
+	color.end = HELPER_END;
 	line[0].x = WINDOW_WIDTH / 2;
 	line[0].y = 0;
 	line[1].x = WINDOW_WIDTH / 2;

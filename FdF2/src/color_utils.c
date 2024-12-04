@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:09:46 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/04 15:44:26 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:30:20 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	change_all_color(t_wrapper *wrapper)
 		}
 		x++;
 	}
-	mlx_clear_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
 	display_map(wrapper);
 }
 
@@ -94,6 +93,5 @@ void	randomize_color(t_wrapper *wrapper)
 		}
 		pos.x++;
 	}
-	mlx_clear_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
 	display_map(wrapper);
 }

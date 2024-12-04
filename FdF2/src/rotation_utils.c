@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:25:52 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/04 15:26:56 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:30:25 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	rotate(t_wrapper *wrapper, int keycode)
 		rotatey_map(wrapper->map, M_PI / ROTATE_DIV);
 	if (keycode == Z_CODE)
 		rotatez_map(wrapper->map, M_PI / ROTATE_DIV);
-	mlx_clear_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
 	display_map(wrapper);
 }
 

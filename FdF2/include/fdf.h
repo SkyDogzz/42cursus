@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 15:54:44 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:52:40 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define ROTATE_DIV 32
 # define OFFSET_DIV 20
 # define HELPER FALSE
+# define HELPER_START 0xFF00FF
+# define HELPER_END 0x00FF00
 # define MENU TRUE
 
 # define SPACE_CODE 32
@@ -48,12 +50,6 @@
 # define DOWN_ARROW_CODE 65364
 # define PAGEUP 65365
 # define PAGEDOWN 65366
-
-typedef struct s_mlx
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-}	t_mlx;
 
 typedef struct s_2vec
 {
@@ -96,6 +92,22 @@ typedef struct s_map
 	t_2vec	offset;
 	int		helper;
 }	t_map;
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
+typedef struct s_mlx
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_img	img;
+}	t_mlx;
 
 typedef struct s_wrapper
 {
@@ -173,7 +185,9 @@ void	update_position(t_2vec *start, t_2vec *s, t_2vec *e, t_2vec *d);
 int		get_height(int fd);
 
 // main.c
-int		main(int argc, char *argv[]);
+// int		main(int argc, char *argv[]);
 void	print_map(t_map *map);
 
-#endif
+void	img_pix_put(t_img *img, int x, int y, int color);
+
+#endif // 0#endif
