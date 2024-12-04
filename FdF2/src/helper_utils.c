@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:29:56 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/04 17:51:57 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 19:36:42 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,17 @@ void	toggle_helper(t_wrapper *wrapper)
 
 int	handle_no_event(t_wrapper *wrapper)
 {
-	t_mlx	data;
-	t_map	*map;
-
-	data = wrapper->data;
-	map = wrapper->map;
 	return (0);
-	(void) data;
-	(void) map;
+	(void) wrapper;
 }
+// int	handle_no_event(t_wrapper *wrapper)
+// {
+// 	rotatey_map(wrapper->map, M_PI / 512);
+// 	display_map(wrapper);
+// 	usleep(10000);
+// 	return (0);
+// 	(void) wrapper;
+// }
 
 void	draw_helper(t_wrapper *wrapper)
 {

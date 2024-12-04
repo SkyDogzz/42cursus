@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 17:52:40 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 18:24:06 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ void	draw_line(t_2vec start, t_2vec end, t_2color color, t_wrapper wrapper);
 void	draw_vertical_lines(t_wrapper *wrapper, int x, int y, t_2vec start);
 void	draw_horizontal_lines(t_wrapper *wrapper, int x, int y, t_2vec start);
 void	display_map(t_wrapper *wrapper);
+void	display_map_loop(t_wrapper *wrap, t_2vec *pos);
 
 // helper_utils.c
 void	toggle_menu(t_wrapper *wrapper);
@@ -185,9 +186,8 @@ void	update_position(t_2vec *start, t_2vec *s, t_2vec *e, t_2vec *d);
 int		get_height(int fd);
 
 // main.c
-// int		main(int argc, char *argv[]);
+int		main(int argc, char *argv[]);
 void	print_map(t_map *map);
-
 void	img_pix_put(t_img *img, int x, int y, int color);
 
 #endif // 0#endif

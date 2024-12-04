@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:44:02 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 17:38:25 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 19:33:37 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,3 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 		i -= 8;
 	}
 }
-
-// int main(void)
-// {
-// 	// t_mlx	data;
-// 	// data.mlx_ptr = mlx_init();
-// 	// data.win_ptr = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH,
-// 		// WINDOW_HEIGHT, "FdF Goes Brrr!!!");
-// 	// data.img.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH,
-// 	WINDOW_HEIGHT);
-// 	// data.img.addr = mlx_get_data_addr(data.img.mlx_img, &data.img.bpp,
-// 	&data.img.line_len, &data.img.endian);
-// 	img_pix_put(&data.img, 100, 100, 0xFFFFFF);
-// 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img.mlx_img, 0, 0);
-// 	mlx_loop(data.mlx_ptr);
-// 	return (0);
-// }

@@ -6,16 +6,36 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:27:23 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/04 18:03:33 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 18:57:55 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
+void	display_map_loop(t_wrapper *wrap, t_2vec *pos)
+{
+	t_2vec	start;
+
+	while (++pos->x < wrap->map->dims.width)
+	{
+		pos->y = -1;
+		while (++pos->y < wrap->map->dims.height)
+		{
+			start.x = wrap->map->content[pos->y][pos->x].pos.x
+				* wrap->map->zoom + WINDOW_WIDTH / 2 + wrap->map->offset.x;
+			start.y = wrap->map->content[pos->y][pos->x].pos.y
+				* wrap->map->zoom + WINDOW_HEIGHT / 2 + wrap->map->offset.y;
+			if (pos->y < wrap->map->dims.height - 1)
+				draw_vertical_lines(wrap, pos->x, pos->y, start);
+			if (pos->x < wrap->map->dims.width - 1)
+				draw_horizontal_lines(wrap, pos->x, pos->y, start);
+		}
+	}
+}
+
 void	display_map(t_wrapper *wrap)
 {
-	t_2vec		start;
-	t_2vec		pos;
+	t_2vec	pos;
 
 	wrap->data.img.mlx_img = mlx_new_image(wrap->data.mlx_ptr,
 			WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -23,21 +43,7 @@ void	display_map(t_wrapper *wrap)
 			&wrap->data.img.bpp, &wrap->data.img.line_len,
 			&wrap->data.img.endian);
 	pos.x = -1;
-	while (++pos.x < wrap->map->dims.width)
-	{
-		pos.y = -1;
-		while (++pos.y < wrap->map->dims.height)
-		{
-			start.x = wrap->map->content[pos.y][pos.x].pos.x
-				* wrap->map->zoom + WINDOW_WIDTH / 2 + wrap->map->offset.x;
-			start.y = wrap->map->content[pos.y][pos.x].pos.y
-				* wrap->map->zoom + WINDOW_HEIGHT / 2 + wrap->map->offset.y;
-			if (pos.y < wrap->map->dims.height - 1)
-				draw_vertical_lines(wrap, pos.x, pos.y, start);
-			if (pos.x < wrap->map->dims.width - 1)
-				draw_horizontal_lines(wrap, pos.x, pos.y, start);
-		}
-	}
+	display_map_loop(wrap, &pos);
 	draw_helper(wrap);
 	mlx_clear_window(wrap->data.mlx_ptr, wrap->data.win_ptr);
 	mlx_put_image_to_window(wrap->data.mlx_ptr, wrap->data.win_ptr,
@@ -45,15 +51,6 @@ void	display_map(t_wrapper *wrap)
 	mlx_destroy_image(wrap->data.mlx_ptr, wrap->data.img.mlx_img);
 	if (wrap->menu)
 		display_menu(wrap);
-}
-
-int	get_pixel_image_color(t_wrapper wrapper, t_2vec pos)
-{
-	char	*pixel;
-
-	pixel = wrapper.data.img.addr + pos.x * wrapper.data.img.line_len + pos.y
-		* (wrapper.data.img.bpp / 8);
-	return (*(int *) pixel);
 }
 
 void	draw_line(t_2vec start, t_2vec end, t_2color color, t_wrapper wrapper)
