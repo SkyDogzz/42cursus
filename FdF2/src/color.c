@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 19:35:42 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/04 02:54:37 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/04 14:56:25 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	change_all_color(t_wrapper *wrapper)
 	display_map(wrapper);
 }
 
-unsigned int	pseudo_random(unsigned int seed)
+int	pseudo_random(int seed)
 {
 	unsigned int	a;
 	unsigned int	c;
@@ -53,16 +53,21 @@ unsigned int	pseudo_random(unsigned int seed)
 
 void	randomize_color(t_wrapper *wrapper)
 {
-	int	pseudo;
+	int		pseudo;
+	t_2vec	pos;
 
 	pseudo = SEED;
-	for (int x = 0; x < wrapper->map->dims.width; x++)
+	pos.x = 0;
+	while (pos.x < wrapper->map->dims.width)
 	{
-		for (int y = 0; y < wrapper->map->dims.height; y++)
-		{
+		pos.y = 0;
+		while (pos.y < wrapper->map->dims.height)
+		{			
 			pseudo = pseudo_random(pseudo);
-			wrapper->map->content[y][x].color = pseudo;
+			wrapper->map->content[pos.y][pos.x].color = pseudo;
+			pos.y++;
 		}
+		pos.x++;
 	}
 	mlx_clear_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
 	display_map(wrapper);

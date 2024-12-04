@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:44:02 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 13:13:34 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 14:06:54 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ void	free_map_full(t_map *map)
 	free(map);
 }
 
+void	setup_map(t_wrapper *wrapper)
+{	
+	wrapper->map->offset.x = 0;
+	wrapper->map->offset.y = 0;
+	wrapper->map->helper = HELPER;
+}
+
 int	main(int argc, char *argv[])
 {
 	t_wrapper	wrapper;
@@ -34,12 +41,10 @@ int	main(int argc, char *argv[])
 	wrapper.menu = FALSE;
 	wrapper.map = parse_map(argv[1]);
 	wrapper.map->filename = argv[1];
-	wrapper.map->offset.x = 0;
-	wrapper.map->offset.y = 0;
-	wrapper.map->helper = HELPER;
+	setup_map(&wrapper);
 	wrapper.data.mlx_ptr = mlx_init();
 	wrapper.data.win_ptr = mlx_new_window(wrapper.data.mlx_ptr, WINDOW_WIDTH,
-		WINDOW_HEIGHT, "FdF Goes Brrr!!!");
+			WINDOW_HEIGHT, "FdF Goes Brrr!!!");
 	mlx_loop_hook(wrapper.data.mlx_ptr, &handle_no_event, &wrapper);
 	mlx_key_hook(wrapper.data.win_ptr, &handle_key, &wrapper);
 	mlx_hook(wrapper.data.win_ptr, 17, 0, &full_quit, &wrapper.data);

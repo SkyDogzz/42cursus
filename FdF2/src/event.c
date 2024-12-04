@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 01:36:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 13:11:56 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:29:04 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	handle_key(int keycode, t_wrapper *wrapper)
 		translate_camera(wrapper, keycode);
 	else if (keycode == H_CODE)
 		toggle_helper(wrapper);
-	// ft_printf("keycode %d\n", keycode);
 	return (0);
 }
 

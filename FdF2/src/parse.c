@@ -6,28 +6,11 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:24:16 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 02:45:51 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/04 14:25:05 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
-int	get_height(int fd)
-{
-	int		height;
-	char	*line;
-
-	height = 1;
-	line = get_next_line(fd);
-	while (line)
-	{
-		free(line);
-		line = get_next_line(fd);
-		height++;
-	}
-	free(line);
-	return (height);
-}
 
 void	free_map_content(t_map *map, int pos)
 {
@@ -62,37 +45,50 @@ t_map	*init_map(t_map *map)
 	return (map);
 }
 
+void	fill_point(t_map *map, t_2vec pos, char **next, t_dim dims)
+{
+	map->content[pos.y][pos.x].pos.x = pos.x - dims.width / 2.0 + 0.5;
+	map->content[pos.y][pos.x].pos.y = pos.y - dims.height / 2.0 + 0.5;
+	map->content[pos.y][pos.x].pos.z = ft_atoi(*next) / map->height_div;
+	map->content[pos.y][pos.x].color = get_color(*next);
+	*next = ft_strchr(*next, ' ');
+}
+
+void	process_line(t_map *map, char *line, int y, t_dim dims)
+{
+	t_2vec	pos;
+	char	*next;
+
+	pos.y = y;
+	pos.x = 0;
+	next = line;
+	while (pos.x < dims.width)
+	{
+		while (*next == ' ' && pos.x < dims.width)
+			next++;
+		fill_point(map, pos, &next, dims);
+		pos.x++;
+	}
+}
+
 void	fill_map(t_map *map, int fd)
 {
-	t_2vec		pos;
-	t_dim		dims;
-	char		*line;
-	char		*next;
+	t_dim	dims;
+	char	*line;
+	int		y;
 
 	dims = map->dims;
-	pos.y = 0;
-	while (pos.y < map->dims.height)
+	y = 0;
+	while (y < dims.height)
 	{
 		line = get_next_line(fd);
-		pos.x = 0;
-		next = line;
-		while (pos.x < map->dims.width)
-		{
-			while (*next == ' ' && pos.x < map->dims.width)
-				next++;
-			map->content[pos.y][pos.x].pos.x = pos.x - dims.width / 2.0 + 0.5;
-			map->content[pos.y][pos.x].pos.y = pos.y - dims.height / 2.0 + 0.5;
-			map->content[pos.y][pos.x].pos.z = ft_atoi(next) / map->height_div;
-			map->content[pos.y][pos.x].color = get_color(next);
-			next = ft_strchr(next, ' ');
-			pos.x++;
-		}
+		if (!line)
+			break ;
+		process_line(map, line, y, dims);
 		free(line);
-		pos.y++;
+		y++;
 	}
 	line = get_next_line(fd);
-	if (line)
-		free(line);
 }
 
 void	refill_map(t_wrapper *wrapper)
@@ -104,13 +100,6 @@ void	refill_map(t_wrapper *wrapper)
 		exit_msg_code("File not opened\n", 1);
 	fill_map(wrapper->map, fd);
 	close(fd);
-}
-
-float	min(float f1, float f2)
-{
-	if (f1 < f2)
-		return (f1);
-	return (f2);
 }
 
 t_map	*parse_map(const char *filename)

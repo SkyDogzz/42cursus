@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:25:55 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 13:15:41 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 14:08:24 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,28 @@ void	print_map(t_map *map)
 		ft_printf("\n");
 		pos.y++;
 	}
+}
+
+float	min(float f1, float f2)
+{
+	if (f1 < f2)
+		return (f1);
+	return (f2);
+}
+
+int	get_height(int fd)
+{
+	int		height;
+	char	*line;
+
+	height = 1;
+	line = get_next_line(fd);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+		height++;
+	}
+	free(line);
+	return (height);
 }
