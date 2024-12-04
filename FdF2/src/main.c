@@ -6,28 +6,11 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:44:02 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 14:06:54 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:54:32 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
-void	free_map_full(t_map *map)
-{
-	while (map->dims.height--)
-	{
-		free(map->content[map->dims.height]);
-	}
-	free(map->content);
-	free(map);
-}
-
-void	setup_map(t_wrapper *wrapper)
-{	
-	wrapper->map->offset.x = 0;
-	wrapper->map->offset.y = 0;
-	wrapper->map->helper = HELPER;
-}
 
 int	main(int argc, char *argv[])
 {
@@ -38,7 +21,7 @@ int	main(int argc, char *argv[])
 		ft_dprintf(2, "Usage: %s <input_file>\n", argv[0]);
 		exit(0);
 	}
-	wrapper.menu = FALSE;
+	wrapper.menu = MENU;
 	wrapper.map = parse_map(argv[1]);
 	wrapper.map->filename = argv[1];
 	setup_map(&wrapper);

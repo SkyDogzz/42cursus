@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   color_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 19:35:42 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/04 14:56:25 by tstephan         ###   ########.fr       */
+/*   Created: 2024/12/04 15:09:46 by tstephan          #+#    #+#             */
+/*   Updated: 2024/12/04 15:44:26 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,31 @@ int	pseudo_random(int seed)
 	m = 1 << 31;
 	seed = (a * seed + c) % m;
 	return (seed);
+}
+
+int	colormid(t_2color color, int total, int act)
+{
+	t_color	start;
+	t_color	end;
+	t_color	mid;
+
+	if (total <= 1)
+		return (color.start);
+	start.r = (color.start >> 16) & 0xFF;
+	start.g = (color.start >> 8) & 0xFF;
+	start.b = color.start & 0xFF;
+	end.r = (color.end >> 16) & 0xFF;
+	end.g = (color.end >> 8) & 0xFF;
+	end.b = color.end & 0xFF;
+	mid.r = start.r + ((end.r - start.r) * act) / (total - 1);
+	mid.g = start.g + ((end.g - start.g) * act) / (total - 1);
+	mid.b = start.b + ((end.b - start.b) * act) / (total - 1);
+	return ((mid.r << 16) | (mid.g << 8) | mid.b);
+}
+
+int	get_color2(t_2color color, double line_length, int pos)
+{
+	return (colormid(color, line_length + 2, pos));
 }
 
 void	randomize_color(t_wrapper *wrapper)

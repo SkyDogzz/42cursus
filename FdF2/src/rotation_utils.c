@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   rotation_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 19:22:42 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/04 02:53:51 by skydogzz         ###   ########.fr       */
+/*   Created: 2024/12/04 15:25:52 by tstephan          #+#    #+#             */
+/*   Updated: 2024/12/04 15:26:56 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,11 @@ void	rotate(t_wrapper *wrapper, int keycode)
 		rotatez_map(wrapper->map, M_PI / ROTATE_DIV);
 	mlx_clear_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
 	display_map(wrapper);
+}
+
+void	base_rotate(t_wrapper *wrapper)
+{
+	rotatex_map(wrapper->map, M_PI / 32 * 10);
+	rotatey_map(wrapper->map, M_PI / 32 * 7);
+	rotatez_map(wrapper->map, -M_PI / 32 * 4);
 }

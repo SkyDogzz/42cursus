@@ -1,0 +1,94 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helper_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/04 15:29:56 by tstephan          #+#    #+#             */
+/*   Updated: 2024/12/04 15:41:48 by tstephan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/fdf.h"
+
+void	display_menu(t_wrapper *wrapper)
+{
+	int		y;
+	int		c;
+	void	*m;
+	void	*w;
+
+	y = 5;
+	m = wrapper->data.mlx_ptr;
+	w = wrapper->data.win_ptr;
+	c = 0xFFFFFF;
+	mlx_string_put(m, w, 20, y += 15, c, "Keybinds :");
+	mlx_string_put(m, w, 20, y += 15, c, "x to rotate around x axis");
+	mlx_string_put(m, w, 20, y += 15, c, "y to rotate around y axis");
+	mlx_string_put(m, w, 20, y += 15, c, "z to rotate around z axis");
+	mlx_string_put(m, w, 20, y += 15, c, "arrows to translate");
+	mlx_string_put(m, w, 20, y += 15, c, "page_up to zoom in");
+	mlx_string_put(m, w, 20, y += 15, c, "page_down to zoom out");
+	mlx_string_put(m, w, 20, y += 15, c, "j to increase height multiplier");
+	mlx_string_put(m, w, 20, y += 15, c, "k to decrease height multiplier");
+	mlx_string_put(m, w, 20, y += 15, c, "w to reset map");
+	mlx_string_put(m, w, 20, y += 15, c, "space to toggle menu");
+	mlx_string_put(m, w, 20, y += 15, c, "c to bitwise color");
+	mlx_string_put(m, w, 20, y += 15, c, "r to randomise (seeded) color");
+	mlx_string_put(m, w, 20, y += 15, c, "h to toggle helpers");
+	mlx_string_put(m, w, 20, y += 15, c, "esc to quit");
+}
+
+void	toggle_menu(t_wrapper *wrapper)
+{
+	if (wrapper->menu == TRUE)
+		wrapper->menu = FALSE;
+	else
+		wrapper->menu = TRUE;
+	mlx_clear_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
+	display_map(wrapper);
+}
+
+void	toggle_helper(t_wrapper *wrapper)
+{
+	if (wrapper->map->helper == TRUE)
+		wrapper->map->helper = FALSE;
+	else
+		wrapper->map->helper = TRUE;
+	mlx_clear_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
+	display_map(wrapper);
+}
+
+int	handle_no_event(t_wrapper *wrapper)
+{
+	t_mlx	data;
+	t_map	*map;
+
+	data = wrapper->data;
+	map = wrapper->map;
+	return (0);
+	(void) data;
+	(void) map;
+}
+
+void	draw_helper(t_wrapper *wrapper)
+{
+	t_2vec		line[2];
+	t_2color	color;
+
+	if (!wrapper->map->helper)
+		return ;
+	color.start = 0xFF0000;
+	color.end = 0x00FF00;
+	line[0].x = WINDOW_WIDTH / 2;
+	line[0].y = 0;
+	line[1].x = WINDOW_WIDTH / 2;
+	line[1].y = WINDOW_HEIGHT;
+	draw_line(line[0], line[1], color, *wrapper);
+	line[0].x = 0;
+	line[0].y = WINDOW_HEIGHT / 2;
+	line[1].x = WINDOW_WIDTH;
+	line[1].y = WINDOW_HEIGHT / 2;
+	draw_line(line[0], line[1], color, *wrapper);
+}

@@ -1,49 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
+/*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/30 14:24:16 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 14:25:05 by tstephan         ###   ########.fr       */
+/*   Created: 2024/12/04 15:15:25 by tstephan          #+#    #+#             */
+/*   Updated: 2024/12/04 15:41:37 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
-
-void	free_map_content(t_map *map, int pos)
-{
-	pos--;
-	while (pos >= 0)
-	{
-		free(map->content[pos]);
-		pos--;
-	}
-	free(map->content);
-}
-
-t_map	*init_map(t_map *map)
-{
-	int	pos;
-
-	map->height_div = HEIGHT_DIV;
-	map->content = (t_cont **)malloc(sizeof(t_cont *) * map->dims.height);
-	if (!map->content)
-		return (NULL);
-	pos = 0;
-	while (pos < map->dims.height)
-	{
-		map->content[pos] = (t_cont *)malloc(sizeof(t_cont) * map->dims.width);
-		if (!map->content[pos])
-		{
-			free_map_content(map, pos);
-			return (NULL);
-		}
-		pos++;
-	}
-	return (map);
-}
 
 void	fill_point(t_map *map, t_2vec pos, char **next, t_dim dims)
 {
@@ -91,17 +58,6 @@ void	fill_map(t_map *map, int fd)
 	line = get_next_line(fd);
 }
 
-void	refill_map(t_wrapper *wrapper)
-{
-	int	fd;
-
-	fd = open(wrapper->map->filename, O_RDONLY);
-	if (fd == -1)
-		exit_msg_code("File not opened\n", 1);
-	fill_map(wrapper->map, fd);
-	close(fd);
-}
-
 t_map	*parse_map(const char *filename)
 {
 	int		fd;
@@ -127,4 +83,20 @@ t_map	*parse_map(const char *filename)
 	fill_map(map, fd);
 	close(fd);
 	return (map);
+}
+
+int	get_width(const char *line)
+{
+	int	width;
+
+	width = 0;
+	if (*line++ != ' ')
+		width++;
+	while (*line)
+	{
+		if (*line != ' ' && *(line - 1) == ' ' && *line != '\n')
+			width++;
+		line++;
+	}
+	return (width);
 }

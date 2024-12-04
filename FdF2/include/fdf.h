@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 14:57:00 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:54:44 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@
 # include "../libft/include/libft.h"
 # include "../libft/include/ft_printf.h"
 # include "../libft/include/get_next_line.h"
-# include "keycode.h"
 # include "../.minilibx/mlx.h"
 # include <math.h>
-# include <stdio.h>
 
 # define WINDOW_WIDTH 1280.0
 # define WINDOW_HEIGHT 720.0
@@ -30,7 +28,26 @@
 # define SEED 123456
 # define ROTATE_DIV 32
 # define OFFSET_DIV 20
-# define HELPER TRUE
+# define HELPER FALSE
+# define MENU TRUE
+
+# define SPACE_CODE 32
+# define C_CODE 99
+# define H_CODE 104
+# define J_CODE 106
+# define K_CODE 107
+# define R_CODE 114
+# define W_CODE 119
+# define X_CODE 120
+# define Y_CODE 121
+# define Z_CODE 122
+# define ESC_CODE 65307
+# define LEFT_ARROW_CODE 65361
+# define UP_ARROW_CODE 65362
+# define RIGHT_ARROW_CODE 65363
+# define DOWN_ARROW_CODE 65364
+# define PAGEUP 65365
+# define PAGEDOWN 65366
 
 typedef struct s_mlx
 {
@@ -106,7 +123,6 @@ void	change_zoom(t_wrapper *wrapper, int keycode);
 void	translate_camera(t_wrapper *wrapper, int keycode);
 void	change_height(t_wrapper *wrapper, int keycode);
 void	reset_map(t_wrapper *wrapper);
-void	base_rotate(t_wrapper *wrapper);
 
 // map_utils.x
 t_map	*init_map(t_map *map);
@@ -134,7 +150,6 @@ void	draw_line(t_2vec start, t_2vec end, t_2color color, t_wrapper wrapper);
 void	draw_vertical_lines(t_wrapper *wrapper, int x, int y, t_2vec start);
 void	draw_horizontal_lines(t_wrapper *wrapper, int x, int y, t_2vec start);
 void	display_map(t_wrapper *wrapper);
-void	update_position(t_2vec *start, t_2vec *s, t_2vec *e, t_2vec *d);
 
 // helper_utils.c
 void	toggle_menu(t_wrapper *wrapper);
