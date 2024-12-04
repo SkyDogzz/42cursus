@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 12:48:40 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:12:40 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define SEED 123456
 # define ROTATE_DIV 32
 # define OFFSET_DIV 20
-# define HELPER FALSE
+# define HELPER TRUE
 
 typedef struct s_mlx
 {
@@ -77,6 +77,7 @@ typedef struct s_map
 	float	height_div;
 	char	*filename;
 	t_2vec	offset;
+	int	helper;
 }	t_map;
 
 typedef struct s_wrapper

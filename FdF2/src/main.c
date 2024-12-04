@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:44:02 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 12:47:35 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:13:34 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int argc, char *argv[])
 	wrapper.map->filename = argv[1];
 	wrapper.map->offset.x = 0;
 	wrapper.map->offset.y = 0;
+	wrapper.map->helper = HELPER;
 	wrapper.data.mlx_ptr = mlx_init();
 	wrapper.data.win_ptr = mlx_new_window(wrapper.data.mlx_ptr, WINDOW_WIDTH,
 		WINDOW_HEIGHT, "FdF Goes Brrr!!!");

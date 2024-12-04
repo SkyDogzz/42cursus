@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 01:36:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 12:51:04 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:11:56 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,16 @@ void	reset_map(t_wrapper *wrapper)
 	display_map(wrapper);
 }
 
+void	toggle_helper(t_wrapper *wrapper)
+{
+	if (wrapper->map->helper == TRUE)
+		wrapper->map->helper = FALSE;
+	else
+		wrapper->map->helper = TRUE;
+	mlx_clear_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
+	display_map(wrapper);
+}
+
 int	handle_key(int keycode, t_wrapper *wrapper)
 {
 	if (keycode == ESC_CODE)
@@ -85,6 +95,8 @@ int	handle_key(int keycode, t_wrapper *wrapper)
 		change_height(wrapper, keycode);
 	else if (keycode >= LEFT_ARROW_CODE && keycode <= DOWN_ARROW_CODE)
 		translate_camera(wrapper, keycode);
+	else if (keycode == H_CODE)
+		toggle_helper(wrapper);
 	// ft_printf("keycode %d\n", keycode);
 	return (0);
 }

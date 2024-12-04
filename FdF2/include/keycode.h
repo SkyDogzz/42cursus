@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 01:39:17 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 12:33:40 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:04:33 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define SPACE_CODE 32
 # define C_CODE 99
+# define H_CODE 104
 # define J_CODE 106
 # define K_CODE 107
 # define R_CODE 114
