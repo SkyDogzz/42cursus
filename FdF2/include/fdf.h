@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 18:24:06 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 20:32:21 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../libft/include/get_next_line.h"
 # include "../.minilibx/mlx.h"
 # include <math.h>
+# include <X11/X.h>
 
 # define WINDOW_WIDTH 1280.0
 # define WINDOW_HEIGHT 720.0
@@ -175,7 +176,7 @@ int		handle_no_event(t_wrapper *wrapper);
 int		handle_key(int keycode, t_wrapper *wrapper);
 int		handle_mouse(void);
 void	exit_msg_code(const char *message, int code);
-int		full_quit(t_mlx *data);
+int		full_quit(t_wrapper *wrapper);
 int		atoi_base(const char *s, const char *base, const char *base2);
 
 // math_utils.c
@@ -190,4 +191,4 @@ int		main(int argc, char *argv[]);
 void	print_map(t_map *map);
 void	img_pix_put(t_img *img, int x, int y, int color);
 
-#endif // 0#endif
+#endif

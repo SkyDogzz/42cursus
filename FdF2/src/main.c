@@ -6,11 +6,27 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:44:02 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 19:33:37 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/04 20:31:10 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+
+int	on_keydown(int keycode, void *wrapper)
+{
+	ft_printf("keydown %d\n", keycode);
+	return (0);
+	(void) wrapper;
+}
+
+void	set_hook(t_wrapper *wrapper)
+{
+	mlx_loop_hook(wrapper->data.mlx_ptr, &handle_no_event, wrapper);
+	// mlx_key_hook(wrapper->data.win_ptr, &handle_key, wrapper);
+	mlx_hook(wrapper->data.win_ptr, 17, 0, &full_quit, wrapper);
+	mlx_hook(wrapper->data.win_ptr, KeyPress, KeyPressMask, &handle_key, wrapper);
+	mlx_do_key_autorepeaton(wrapper->data.mlx_ptr);
+}
 
 int	main(int argc, char *argv[])
 {
@@ -28,9 +44,7 @@ int	main(int argc, char *argv[])
 	wrapper.data.mlx_ptr = mlx_init();
 	wrapper.data.win_ptr = mlx_new_window(wrapper.data.mlx_ptr, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "FdF Goes Brrr!!!");
-	mlx_loop_hook(wrapper.data.mlx_ptr, &handle_no_event, &wrapper);
-	mlx_key_hook(wrapper.data.win_ptr, &handle_key, &wrapper);
-	mlx_hook(wrapper.data.win_ptr, 17, 0, &full_quit, &wrapper.data);
+	set_hook(&wrapper);
 	base_rotate(&wrapper);
 	display_map(&wrapper);
 	mlx_loop(wrapper.data.mlx_ptr);
