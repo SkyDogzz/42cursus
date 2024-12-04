@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 01:36:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 02:32:29 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/04 02:44:29 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	base_rotate(t_wrapper *wrapper)
 {
 	rotatex_map(wrapper->map, M_PI / 32 * 10);
 	rotatey_map(wrapper->map, M_PI / 32 * 7);
-	rotatez_map(wrapper->map, - M_PI / 32 * 4);
+	rotatez_map(wrapper->map, -M_PI / 32 * 4);
 }
 
 void	change_height(t_wrapper *wrapper, int keycode)

@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 02:33:57 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/04 02:54:53 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define ZOOM_MODIFIER 0.8
 # define SEED 123456
 # define ROTATE_DIV 32
+# define HELPER FALSE
 
 typedef struct s_mlx
 {
@@ -100,7 +101,8 @@ int				handle_mouse(void);
 int				get_color(const char *s);
 int				atoi_base(const char *s, const char *base, const char *base2);
 int				get_width(const char *line);
-void			draw_line(t_2vec start, t_2vec end, t_2color color, t_wrapper wrapper);
+void			draw_line(t_2vec start, t_2vec end, t_2color color,
+					t_wrapper wrapper);
 void			display_map(t_wrapper *wrapper);
 void			rotatex_map(t_map *map, float angle);
 void			rotatey_map(t_map *map, float angle);
@@ -113,5 +115,5 @@ void			randomize_color(t_wrapper *wrapper);
 void			refill_map(t_wrapper *wrapper);
 void			change_height(t_wrapper *wrapper, int keycode);
 void			base_rotate(t_wrapper *wrapper);
-	
+
 #endif

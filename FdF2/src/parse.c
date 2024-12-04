@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:24:16 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 02:19:52 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/04 02:45:51 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ t_map	*init_map(t_map *map)
 void	fill_map(t_map *map, int fd)
 {
 	t_2vec		pos;
+	t_dim		dims;
 	char		*line;
 	char		*next;
 
+	dims = map->dims;
 	pos.y = 0;
 	while (pos.y < map->dims.height)
 	{
@@ -78,8 +80,8 @@ void	fill_map(t_map *map, int fd)
 		{
 			while (*next == ' ' && pos.x < map->dims.width)
 				next++;
-			map->content[pos.y][pos.x].pos.x = pos.x - map->dims.width / 2.0 + 0.5;
-			map->content[pos.y][pos.x].pos.y = pos.y - map->dims.height / 2.0 + 0.5;
+			map->content[pos.y][pos.x].pos.x = pos.x - dims.width / 2.0 + 0.5;
+			map->content[pos.y][pos.x].pos.y = pos.y - dims.height / 2.0 + 0.5;
 			map->content[pos.y][pos.x].pos.z = ft_atoi(next) / map->height_div;
 			map->content[pos.y][pos.x].color = get_color(next);
 			next = ft_strchr(next, ' ');
@@ -96,7 +98,7 @@ void	fill_map(t_map *map, int fd)
 void	refill_map(t_wrapper *wrapper)
 {
 	int	fd;
-	
+
 	fd = open(wrapper->map->filename, O_RDONLY);
 	if (fd == -1)
 		exit_msg_code("File not opened\n", 1);

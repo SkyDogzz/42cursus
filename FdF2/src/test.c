@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 02:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 02:13:40 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/04 02:55:43 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,16 @@ int	colormid(t_2color color, int total, int act)
 
 void	draw_line(t_2vec start, t_2vec end, t_2color color, t_wrapper wrapper)
 {
-	int dx =  abs (end.x - start.x), sx = start.x < end.x ? 1 : -1;
-	int dy = -abs (end.y - start.y), sy = start.y < end.y ? 1 : -1; 
-	double line_length = sqrt(pow(end.x - start.x, 2) + pow(end.y - start.y, 2));
-	int err = dx + dy, e2;
-	int pos = 1;
+	int dx, dy, sx, sy, err, e2, pos;
+	double line_length;
 
+	dx =  abs (end.x - start.x);
+	sx = start.x < end.x ? 1 : -1;
+	dy = -abs (end.y - start.y);
+	sy = start.y < end.y ? 1 : -1; 
+	line_length = sqrt(pow(end.x - start.x, 2) + pow(end.y - start.y, 2));
+	err = dx + dy;
+	pos = 1;
 	while(pos++)
 	{
 		mlx_pixel_put(wrapper.data.mlx_ptr, wrapper.data.win_ptr, start.x, start.y,
@@ -72,6 +76,8 @@ void	draw_helper(t_wrapper *wrapper)
 	t_2vec		line[2];
 	t_2color	color;
 
+	if (!HELPER)
+		return ;
 	line[0].x = WINDOW_WIDTH / 2;
 	line[0].y = 0;
 	line[1].x = WINDOW_WIDTH / 2;
@@ -110,8 +116,7 @@ void	display_map(t_wrapper *wrapper)
 			}
 		}
 	}
-	/*draw_helper(wrapper);*/
+	draw_helper(wrapper);
 	if (wrapper->menu)
 		display_menu(wrapper);
-
 }
