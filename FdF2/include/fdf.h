@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 23:47:01 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/04 02:33:57 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@
 
 # define WINDOW_WIDTH 1280.0
 # define WINDOW_HEIGHT 720.0
-/*# define PI 3.1415*/
-# define HEIGHT_DIV 1.
-# define ZOOM 10.0
+# define HEIGHT_DIV 1.0
+# define HEIGHT_MODIFIER 0.8
+# define ZOOM 0.25
+# define ZOOM_MODIFIER 0.8
 # define SEED 123456
+# define ROTATE_DIV 32
 
 typedef struct s_mlx
 {
@@ -71,6 +73,7 @@ typedef struct s_map
 	t_dim	dims;
 	float	zoom;
 	float	height_div;
+	char	*filename;
 }	t_map;
 
 typedef struct s_wrapper
@@ -107,5 +110,8 @@ void			rotate(t_wrapper *wrapper, int keycode);
 void			change_all_color(t_wrapper *wrapper);
 unsigned int	pseudo_random(unsigned int seed);
 void			randomize_color(t_wrapper *wrapper);
+void			refill_map(t_wrapper *wrapper);
+void			change_height(t_wrapper *wrapper, int keycode);
+void			base_rotate(t_wrapper *wrapper);
 	
 #endif

@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 02:17:59 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 23:24:15 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/04 02:13:40 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,33 +36,20 @@ void	draw_line(t_2vec start, t_2vec end, t_2color color, t_wrapper wrapper)
 {
 	int dx =  abs (end.x - start.x), sx = start.x < end.x ? 1 : -1;
 	int dy = -abs (end.y - start.y), sy = start.y < end.y ? 1 : -1; 
+	double line_length = sqrt(pow(end.x - start.x, 2) + pow(end.y - start.y, 2));
 	int err = dx + dy, e2;
 	int pos = 1;
 
 	while(pos++)
 	{
 		mlx_pixel_put(wrapper.data.mlx_ptr, wrapper.data.win_ptr, start.x, start.y,
-				colormid(color, ZOOM + 2, pos));
+				colormid(color, line_length + 2, pos));
 		if (start.x == end.x && start.y == end.y) break;
 		e2 = 2 * err;
 		if (e2 >= dy) { err += dy; start.x += sx; }
 		if (e2 <= dx) { err += dx; start.y += sy; }
 	}
 }
-
-// void	display_map(t_mlx data, t_map map)
-// {
-// 	t_2vec pos;
-// 	for (int x = 0; x < map.dims.width; x++)
-// 		for (int y = 0; y < map.dims.height; y++)
-// 		{
-// 			pos.x = (( map.content[y][x].pos.x - (float) map.dims.width / 2) * MULT) + WINDOW_WIDTH / 2;
-// 			pos.y = (( map.content[y][x].pos.y - (float) map.dims.height / 2) * MULT) + WINDOW_HEIGHT / 2;
-// 			// pos.x = (( map.content[y][x].pos.x - (float) map.dims.width / 2)) + WINDOW_WIDTH / 2;
-// 			// pos.y = (( map.content[y][x].pos.y - (float) map.dims.height / 2)) + WINDOW_HEIGHT / 2;
-// 			mlx_pixel_put(data.mlx_ptr, data.win_ptr, pos.x, pos.y, map.content[y][x].color);
-// 		}
-// }
 
 void	display_menu(t_wrapper *wrapper)
 {
@@ -78,6 +65,20 @@ void	display_menu(t_wrapper *wrapper)
 	mlx_string_put(wrapper->data.mlx_ptr, wrapper->data.win_ptr, 20, y += 15, 0xFFFFFF, "space to toggle menu");
 	mlx_string_put(wrapper->data.mlx_ptr, wrapper->data.win_ptr, 20, y += 15, 0xFFFFFF, "c to bitwise color");
 	mlx_string_put(wrapper->data.mlx_ptr, wrapper->data.win_ptr, 20, y += 15, 0xFFFFFF, "r to randomise (seeded) color");
+}
+
+void	draw_helper(t_wrapper *wrapper)
+{
+	t_2vec		line[2];
+	t_2color	color;
+
+	line[0].x = WINDOW_WIDTH / 2;
+	line[0].y = 0;
+	line[1].x = WINDOW_WIDTH / 2;
+	line[1].y = WINDOW_HEIGHT;
+	color.start = 0xFF0000;
+	color.end = 0x00FF00;
+	draw_line(line[0], line[1], color, *wrapper);
 }
 
 void	display_map(t_wrapper *wrapper)
@@ -109,6 +110,8 @@ void	display_map(t_wrapper *wrapper)
 			}
 		}
 	}
+	/*draw_helper(wrapper);*/
 	if (wrapper->menu)
 		display_menu(wrapper);
+
 }

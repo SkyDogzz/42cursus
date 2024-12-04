@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:44:02 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 23:47:52 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/04 01:43:07 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ int	main(int argc, char *argv[])
 	}
 	wrapper.menu = FALSE;
 	wrapper.map = parse_map(argv[1]);
+	wrapper.map->filename = argv[1];
 	wrapper.data.mlx_ptr = mlx_init();
 	wrapper.data.win_ptr = mlx_new_window(wrapper.data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "FdF Goes Brrr!!!");
 	mlx_loop_hook(wrapper.data.mlx_ptr, &handle_no_event, &wrapper);
 	mlx_key_hook(wrapper.data.win_ptr, &handle_key, &wrapper);
 	// mlx_mouse_hook(wrapper.data.win_ptr, &handle_mouse, &wrapper.data);
 	mlx_hook(wrapper.data.win_ptr, 17, 0, &full_quit, &wrapper.data);
-	rotatex_map(wrapper.map, M_PI / 16);
-	rotatey_map(wrapper.map, M_PI / 16);
+	base_rotate(&wrapper);
 	display_map(&wrapper);
 	mlx_loop(wrapper.data.mlx_ptr);
 	mlx_destroy_display(wrapper.data.mlx_ptr);

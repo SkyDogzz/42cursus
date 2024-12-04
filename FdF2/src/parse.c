@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:24:16 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/03 23:35:16 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/04 02:19:52 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,24 @@ void	fill_map(t_map *map, int fd)
 		free(line);
 }
 
+void	refill_map(t_wrapper *wrapper)
+{
+	int	fd;
+	
+	fd = open(wrapper->map->filename, O_RDONLY);
+	if (fd == -1)
+		exit_msg_code("File not opened\n", 1);
+	fill_map(wrapper->map, fd);
+	close(fd);
+}
+
+float	min(float f1, float f2)
+{
+	if (f1 < f2)
+		return (f1);
+	return (f2);
+}
+
 t_map	*parse_map(const char *filename)
 {
 	int		fd;
@@ -109,7 +127,7 @@ t_map	*parse_map(const char *filename)
 	map->dims.width = get_width(line);
 	free(line);
 	map->dims.height = get_height(fd);
-	map->zoom = WINDOW_WIDTH / map->dims.height / 3;
+	map->zoom = WINDOW_WIDTH / min(map->dims.height, map->dims.width) * ZOOM;
 	map = init_map(map);
 	close(fd);
 	fd = open(filename, O_RDONLY);
