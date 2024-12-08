@@ -6,13 +6,13 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:29:56 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 17:02:29 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:53:33 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void	display_menu(t_wrapper *wrapper)
+void	display_menutop(t_wrapper *wrapper)
 {
 	int		y;
 	int		c;
@@ -38,6 +38,28 @@ void	display_menu(t_wrapper *wrapper)
 	mlx_string_put(m, w, 20, y += 15, c, "r to randomise (seeded) color");
 	mlx_string_put(m, w, 20, y += 15, c, "h to toggle helpers");
 	mlx_string_put(m, w, 20, y += 15, c, "esc to quit");
+}
+
+void	display_menudown(t_wrapper *w)
+{
+	int		y;
+	int		c;
+	char	*num;
+	char	*joined;
+
+	y = WINDOW_HEIGHT;
+	c = 0xFFFFFF;
+	num = ft_itoa(w->offset_div);
+	joined = ft_strjoin("(shift - ctrl / , - .)OFFSET DIV ", num);
+	mlx_string_put(w->data.mlx_ptr, w->data.win_ptr, 20, y -= 15, c, joined);
+	free(num);
+	free(joined);
+}
+
+void	display_menu(t_wrapper *wrapper)
+{
+	display_menutop(wrapper);
+	display_menudown(wrapper);
 }
 
 void	toggle_menu(t_wrapper *wrapper)

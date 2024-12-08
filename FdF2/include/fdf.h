@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/08 17:17:40 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:36:20 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define MENU TRUE
 
 # define SPACE_CODE 32
+# define COMMA_CODE 44
+# define DOT_CODE 46
 # define C_CODE 99
 # define H_CODE 104
 # define J_CODE 106
@@ -118,6 +120,7 @@ typedef struct s_wrapper
 	t_mlx	data;
 	t_bool	menu;
 	t_list	*keys;
+	int		offset_div;
 }	t_wrapper;
 
 typedef struct s_color

@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:11:36 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 17:19:27 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:27:13 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	translate_camera(t_wrapper *wrapper)
 
 	keys = wrapper->keys;
 	if (inlist(keys, UP_ARROW_CODE))
-		wrapper->map->offset.y += WINDOW_HEIGHT / OFFSET_DIV;
+		wrapper->map->offset.y += WINDOW_HEIGHT / wrapper->offset_div;
 	if (inlist(keys, DOWN_ARROW_CODE))
-		wrapper->map->offset.y -= WINDOW_HEIGHT / OFFSET_DIV;
+		wrapper->map->offset.y -= WINDOW_HEIGHT / wrapper->offset_div;
 	if (inlist(keys, LEFT_ARROW_CODE))
-		wrapper->map->offset.x += WINDOW_WIDTH / OFFSET_DIV;
+		wrapper->map->offset.x += WINDOW_WIDTH / wrapper->offset_div;
 	if (inlist(keys, RIGHT_ARROW_CODE))
-		wrapper->map->offset.x -= WINDOW_WIDTH / OFFSET_DIV;
+		wrapper->map->offset.x -= WINDOW_WIDTH / wrapper->offset_div;
 	display_map(wrapper);
 }
 
