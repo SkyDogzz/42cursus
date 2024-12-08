@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:32:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 16:59:59 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:08:24 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,15 @@ int	full_quit(t_wrapper *wrapper)
 
 int	handle_rotation_translation(t_wrapper *wrapper)
 {
-	if (inlist(wrapper->keys, X_CODE) || inlist(wrapper->keys, Y_CODE) ||
-		inlist(wrapper->keys, Z_CODE))
+	t_list	*keys;
+
+	keys = wrapper->keys;
+	if (inlist(keys, X_CODE) || inlist(keys, Y_CODE) ||
+		inlist(keys, Z_CODE))
 			rotate(wrapper);
+	if (inlist(keys, LEFT_ARROW_CODE) || inlist(keys, UP_ARROW_CODE) ||
+		inlist(keys, RIGHT_ARROW_CODE) || inlist(keys, DOWN_ARROW_CODE))
+			translate_camera(wrapper);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/08 17:00:52 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:06:13 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int		get_color2(t_2color color, double line_length, int pos);
 
 // zoom_utils.c
 void	change_zoom(t_wrapper *wrapper, int keycode);
-void	translate_camera(t_wrapper *wrapper, int keycode);
+void	translate_camera(t_wrapper *wrapper);
 void	change_height(t_wrapper *wrapper, int keycode);
 void	reset_map(t_wrapper *wrapper);
 

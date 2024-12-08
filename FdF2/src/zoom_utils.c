@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:11:36 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/04 17:30:54 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:07:47 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,18 @@ void	change_zoom(t_wrapper *wrapper, int keycode)
 	display_map(wrapper);
 }
 
-void	translate_camera(t_wrapper *wrapper, int keycode)
+void	translate_camera(t_wrapper *wrapper)
 {
-	if (keycode == UP_ARROW_CODE)
+	t_list	*keys;
+
+	keys = wrapper->keys;
+	if (inlist(keys, UP_ARROW_CODE))
 		wrapper->map->offset.y += WINDOW_HEIGHT / OFFSET_DIV;
-	else if (keycode == DOWN_ARROW_CODE)
+	if (inlist(keys, DOWN_ARROW_CODE))
 		wrapper->map->offset.y -= WINDOW_HEIGHT / OFFSET_DIV;
-	else if (keycode == LEFT_ARROW_CODE)
+	if (inlist(keys, LEFT_ARROW_CODE))
 		wrapper->map->offset.x += WINDOW_WIDTH / OFFSET_DIV;
-	else if (keycode == RIGHT_ARROW_CODE)
+	if (inlist(keys, RIGHT_ARROW_CODE))
 		wrapper->map->offset.x -= WINDOW_WIDTH / OFFSET_DIV;
 	display_map(wrapper);
 }
