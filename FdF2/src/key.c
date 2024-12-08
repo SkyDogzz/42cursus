@@ -6,13 +6,13 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 16:41:45 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/08 16:44:34 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:55:26 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-t_bool	is_key_in_list(t_list *keys, int keycode)
+t_bool	inlist(t_list *keys, int keycode)
 {
 	while (keys)
 	{

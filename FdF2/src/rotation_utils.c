@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:25:52 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/04 17:30:25 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:01:09 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,19 @@ void	rotatez_map(t_map *map, float angle)
 	}
 }
 
-void	rotate(t_wrapper *wrapper, int keycode)
+void	rotate(t_wrapper *wrapper)
 {
-	if (keycode == X_CODE)
-		rotatex_map(wrapper->map, M_PI / ROTATE_DIV);
-	if (keycode == Y_CODE)
-		rotatey_map(wrapper->map, M_PI / ROTATE_DIV);
-	if (keycode == Z_CODE)
-		rotatez_map(wrapper->map, M_PI / ROTATE_DIV);
+	float	angle;
+
+	angle = M_PI / ROTATE_DIV;
+	if (inlist(wrapper->keys, SHIFT_CODE))
+		angle = -angle;
+	if (inlist(wrapper->keys, X_CODE))
+		rotatex_map(wrapper->map, angle);
+	if (inlist(wrapper->keys, Y_CODE))
+		rotatey_map(wrapper->map, angle);
+	if (inlist(wrapper->keys, Z_CODE))
+		rotatez_map(wrapper->map, angle);
 	display_map(wrapper);
 }
 

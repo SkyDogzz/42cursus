@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/08 16:46:14 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:00:52 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 # define DOWN_ARROW_CODE 65364
 # define PAGEUP 65365
 # define PAGEDOWN 65366
+# define SHIFT_CODE 65505
+# define CTRL_CODE 65507
 
 typedef struct s_2vec
 {
@@ -156,7 +158,7 @@ int		get_width(const char *line);
 void	rotatex_map(t_map *map, float angle);
 void	rotatey_map(t_map *map, float angle);
 void	rotatez_map(t_map *map, float angle);
-void	rotate(t_wrapper *wrapper, int keycode);
+void	rotate(t_wrapper *wrapper);
 void	base_rotate(t_wrapper *wrapper);
 
 // draw_utils.c
@@ -195,7 +197,7 @@ int		handle_keypress(int keycode, t_wrapper *wrapper);
 int		handle_keyrelease(int keycode, t_wrapper *wrapper);
 void	add_key(t_list **keys, int keycode);
 void	remove_key(t_list **keys, int keycode);
-t_bool	is_key_in_list(t_list *keys, int keycode);
+t_bool	inlist(t_list *keys, int keycode);
 void	free_keys(t_list **keys);
 
 #endif

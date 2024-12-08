@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:29:56 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/04 19:36:42 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:02:29 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	display_menu(t_wrapper *wrapper)
 	w = wrapper->data.win_ptr;
 	c = 0xFFFFFF;
 	mlx_string_put(m, w, 20, y += 15, c, "Keybinds :");
-	mlx_string_put(m, w, 20, y += 15, c, "x to rotate around x axis");
-	mlx_string_put(m, w, 20, y += 15, c, "y to rotate around y axis");
-	mlx_string_put(m, w, 20, y += 15, c, "z to rotate around z axis");
+	mlx_string_put(m, w, 20, y += 15, c, "(shift) x to rotate around x axis");
+	mlx_string_put(m, w, 20, y += 15, c, "(shift) y to rotate around y axis");
+	mlx_string_put(m, w, 20, y += 15, c, "(shift) z to rotate around z axis");
 	mlx_string_put(m, w, 20, y += 15, c, "arrows to translate");
 	mlx_string_put(m, w, 20, y += 15, c, "page_up to zoom in");
 	mlx_string_put(m, w, 20, y += 15, c, "page_down to zoom out");

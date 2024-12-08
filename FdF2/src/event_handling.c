@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:32:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 16:46:41 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:59:59 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,21 @@ int	full_quit(t_wrapper *wrapper)
 	return (0);
 }
 
+int	handle_rotation_translation(t_wrapper *wrapper)
+{
+	if (inlist(wrapper->keys, X_CODE) || inlist(wrapper->keys, Y_CODE) ||
+		inlist(wrapper->keys, Z_CODE))
+			rotate(wrapper);
+	return (0);
+}
+
 int	handle_keypress(int keycode, t_wrapper *wrapper)
 {
+	ft_printf("keycode = %d\n", keycode);
 	add_key(&wrapper->keys, keycode);
-	if (is_key_in_list(wrapper->keys, ESC_CODE))
+	if (keycode == ESC_CODE)
 		full_quit(wrapper);
+	handle_rotation_translation(wrapper);
 	return (0);
 }
 
