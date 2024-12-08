@@ -6,15 +6,15 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:11:36 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 17:07:47 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:19:27 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void	change_zoom(t_wrapper *wrapper, int keycode)
+void	change_zoom(t_wrapper *wrapper)
 {
-	if (keycode == PAGEUP)
+	if (inlist(wrapper->keys, PAGEUP))
 		wrapper->map->zoom *= ZOOM_MODIFIER;
 	else
 		wrapper->map->zoom /= ZOOM_MODIFIER;
@@ -37,9 +37,9 @@ void	translate_camera(t_wrapper *wrapper)
 	display_map(wrapper);
 }
 
-void	change_height(t_wrapper *wrapper, int keycode)
+void	change_height(t_wrapper *wrapper)
 {
-	if (keycode == K_CODE)
+	if (inlist(wrapper->keys, K_CODE))
 		wrapper->map->height_div *= HEIGHT_MODIFIER;
 	else
 		wrapper->map->height_div /= HEIGHT_MODIFIER;

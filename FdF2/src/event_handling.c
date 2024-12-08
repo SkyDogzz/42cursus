@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:32:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 17:12:37 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:18:09 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,16 @@ int	handle_misc(t_wrapper *wrapper)
 		toggle_helper(wrapper);
 	if (inlist(keys, SPACE_CODE))
 		toggle_menu(wrapper);
+	if (inlist(keys, C_CODE))
+		change_all_color(wrapper);
+	if (inlist(keys, R_CODE))
+		randomize_color(wrapper);
+	if (inlist(keys, W_CODE))
+		reset_map(wrapper);
+	if (inlist(keys, J_CODE) || inlist(keys, K_CODE))
+ 		change_height(wrapper);
+	if (inlist(keys, PAGEUP) || inlist(keys, PAGEDOWN))
+ 		change_zoom(wrapper);
 	return (0);
 }
 
@@ -67,21 +77,6 @@ int	handle_keyrelease(int keycode, t_wrapper *wrapper)
 	remove_key(&wrapper->keys, keycode);
 	return (0);
 }
-// int	handle_key(int keycode, t_wrapper *wrapper)
-// {
-// 	else if (keycode == PAGEUP || keycode == PAGEDOWN)
-// 		change_zoom(wrapper, keycode);
-// 	else if (keycode == C_CODE)
-// 		change_all_color(wrapper);
-// 	else if (keycode == R_CODE)
-// 		randomize_color(wrapper);
-// 	else if (keycode == W_CODE)
-// 		reset_map(wrapper);
-// 	else if (keycode == J_CODE || keycode == K_CODE)
-// 		change_height(wrapper, keycode);
-// 	return (0);
-// }
-//
 
 int	atoi_base(const char *s, const char *base, const char *base2)
 {
