@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:44:02 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 20:37:59 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:42:56 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ int	on_keydown(int keycode, void *wrapper)
 void	set_hook(t_wrapper *wrapper)
 {
 	mlx_loop_hook(wrapper->data.mlx_ptr, &handle_no_event, wrapper);
+	wrapper->keys = NULL;
 	mlx_hook(wrapper->data.win_ptr, 17, 0, &full_quit, wrapper);
-	mlx_hook(wrapper->data.win_ptr, KeyPress, KeyPressMask, &handle_key,
+	mlx_hook(wrapper->data.win_ptr, KeyPress, KeyPressMask, &handle_keypress,
 		wrapper);
+	mlx_hook(wrapper->data.win_ptr, KeyRelease, KeyReleaseMask,
+		&handle_keyrelease, wrapper);
 	mlx_do_key_autorepeaton(wrapper->data.mlx_ptr);
 }
 

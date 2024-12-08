@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:09:46 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/04 17:30:20 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:46:59 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	randomize_color(t_wrapper *wrapper)
 	{
 		pos.y = 0;
 		while (pos.y < wrapper->map->dims.height)
-		{			
+		{
 			pseudo = pseudo_random(pseudo);
 			wrapper->map->content[pos.y][pos.x].color = pseudo;
 			pos.y++;

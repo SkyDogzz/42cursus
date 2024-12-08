@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:27:23 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/04 18:57:55 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:46:55 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	draw_line(t_2vec start, t_2vec end, t_2color color, t_wrapper wrapper)
 	d.x = abs(end.x - start.x);
 	d.y = -abs(end.y - start.y);
 	s = get_step(start, end);
-		e.x = d.x + d.y;
+	e.x = d.x + d.y;
 	line_length = sqrt(pow(end.x - start.x, 2) + pow(end.y - start.y, 2));
 	pos = 1;
 	while (1)

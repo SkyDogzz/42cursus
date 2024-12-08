@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/04 20:32:21 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:46:14 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct s_wrapper
 	t_map	*map;
 	t_mlx	data;
 	t_bool	menu;
+	t_list	*keys;
 }	t_wrapper;
 
 typedef struct s_color
@@ -190,5 +191,11 @@ int		get_height(int fd);
 int		main(int argc, char *argv[]);
 void	print_map(t_map *map);
 void	img_pix_put(t_img *img, int x, int y, int color);
+int		handle_keypress(int keycode, t_wrapper *wrapper);
+int		handle_keyrelease(int keycode, t_wrapper *wrapper);
+void	add_key(t_list **keys, int keycode);
+void	remove_key(t_list **keys, int keycode);
+t_bool	is_key_in_list(t_list *keys, int keycode);
+void	free_keys(t_list **keys);
 
 #endif

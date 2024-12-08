@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:09:17 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/04 15:15:01 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/08 16:46:50 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_map_full(t_map *map)
 }
 
 void	setup_map(t_wrapper *wrapper)
-{	
+{
 	wrapper->map->offset.x = 0;
 	wrapper->map->offset.y = 0;
 	wrapper->map->helper = HELPER;

@@ -1,5 +1,5 @@
 *.o
-*.a
+# *.a
 *.out
 libft
 vgcore.*
