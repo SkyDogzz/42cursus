@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:32:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 17:08:24 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 17:12:37 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,18 @@ int	handle_rotation_translation(t_wrapper *wrapper)
 	return (0);
 }
 
+int	handle_misc(t_wrapper *wrapper)
+{
+	t_list	*keys;
+
+	keys = wrapper->keys;
+	if (inlist(keys, H_CODE))
+		toggle_helper(wrapper);
+	if (inlist(keys, SPACE_CODE))
+		toggle_menu(wrapper);
+	return (0);
+}
+
 int	handle_keypress(int keycode, t_wrapper *wrapper)
 {
 	ft_printf("keycode = %d\n", keycode);
@@ -46,6 +58,7 @@ int	handle_keypress(int keycode, t_wrapper *wrapper)
 	if (keycode == ESC_CODE)
 		full_quit(wrapper);
 	handle_rotation_translation(wrapper);
+	handle_misc(wrapper);
 	return (0);
 }
 
@@ -56,26 +69,16 @@ int	handle_keyrelease(int keycode, t_wrapper *wrapper)
 }
 // int	handle_key(int keycode, t_wrapper *wrapper)
 // {
-// 	if (keycode == ESC_CODE)
-// 		full_quit(wrapper);
-// 	else if (keycode == X_CODE || keycode == Y_CODE || keycode == Z_CODE)
-// 		rotate(wrapper, keycode);
 // 	else if (keycode == PAGEUP || keycode == PAGEDOWN)
 // 		change_zoom(wrapper, keycode);
 // 	else if (keycode == C_CODE)
 // 		change_all_color(wrapper);
 // 	else if (keycode == R_CODE)
 // 		randomize_color(wrapper);
-// 	else if (keycode == SPACE_CODE)
-// 		toggle_menu(wrapper);
 // 	else if (keycode == W_CODE)
 // 		reset_map(wrapper);
 // 	else if (keycode == J_CODE || keycode == K_CODE)
 // 		change_height(wrapper, keycode);
-// 	else if (keycode >= LEFT_ARROW_CODE && keycode <= DOWN_ARROW_CODE)
-// 		translate_camera(wrapper, keycode);
-// 	else if (keycode == H_CODE)
-// 		toggle_helper(wrapper);
 // 	return (0);
 // }
 //
