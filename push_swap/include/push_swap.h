@@ -5,26 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/27 14:38:14 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/27 15:16:44 by tstephan         ###   ########.fr       */
+/*   Created: 2024/12/09 14:37:37 by tstephan          #+#    #+#             */
+/*   Updated: 2024/12/09 15:43:30 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "libft/include/libft.h"
-# include "libft/include/ft_printf.h"
+# include "../libft/include/libft.h"
+# include "../libft/include/ft_printf.h"
 
-typedef struct s_number
-{
-	int				number;
-	unsigned int	indice;
-}	t_number;
-
-void	ft_check_populate(t_number *numbers, int argc, char *argv[]);
-void	ft_displaypile(t_number *pile, size_t n);
-void	ft_displaypileindice(t_number *pile, size_t n);
-void	quicksort(int *arr, int low, int high);
+char	*get_to_next(char *args);
+void	print(void *content);
+void	print_tlist(t_list *list);
+t_list	*parse_input(char *args);
+void	free_list(t_list *list);
 
 #endif

@@ -1,37 +1,59 @@
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -O2 -march=native -I$(INC_DIR) -I$(LIBFT_DIR)/include
+LDFLAGS = -L$(LIBFT_DIR) -lft
+
+_END    = $(shell printf "\033[0m")
+_BOLD   = $(shell printf "\033[1m")
+_CYAN   = $(shell printf "\033[36m")
+_BLUE   = $(shell printf "\033[34m")
+
+SRC_DIR = src
+OBJ_DIR = obj
+INC_DIR = include
+LIBFT_SRC_DIR = ../Libft2
+LIBFT_DIR = libft
+
+SRC_FILES = parse.c main.c
+OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
+
 NAME = push_swap
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -std=c99 -I./ -I./libft/include/
-AR = ar rcs
+all: ascii libft $(NAME)
+	@echo "$(_CYAN)[BUILD COMPLET]$(_END) $(NAME) est prêt !"
 
-SRCS = push_swap.c populate.c display.c quicksort.c
-OBJS = $(SRCS:.c=.o)
+libft: $(LIBFT_DIR)/libft.a
 
-all: $(NAME)
+$(LIBFT_DIR)/libft.a:
+	@rm -rf $(LIBFT_DIR)
+	@cp -r $(LIBFT_SRC_DIR) $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJ_FILES)
+	@$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
+	@echo "$(_CYAN)[LINKING]$(_END) $(NAME) est créé !"
 
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
-
-bonus: all
-
-$(NAME): $(LIBFT) $(OBJS)
-	@cp $(LIBFT) ./
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) libft.a
-
-$(LIBFT):
-	@$(MAKE) all -C $(LIBFT_DIR)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(_CYAN)[COMPILATION]$(_END) Création de l'objet : $@"
 
 clean:
-	rm -f $(OBJS)
+	@rm -rf $(OBJ_DIR)
+	@if [ -d "$(LIBFT_DIR)" ]; then \
+		make -C $(LIBFT_DIR) clean; \
+	fi
+	@echo "$(_BLUE)[CLEAN]$(_END) Suppression des fichiers objets."
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -rf $(LIBFT_DIR)
+	@rm -f $(NAME)
+	@echo "$(_BLUE)[FCLEAN]$(_END) Suppression de $(NAME) et de la copie de libft."
 
 re: fclean all
 
-.PHONY: all clean fclean re
+ascii:
+	@echo $(_CYAN)$(_BOLD)
+	@echo "PUSH SWAP"
+	@echo $(_END)
+
+.PHONY: all clean fclean re ascii
