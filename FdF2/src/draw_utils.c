@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:27:23 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 16:46:55 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:26:28 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,28 @@ void	display_map(t_wrapper *wrap)
 		display_menu(wrap);
 }
 
+int img_pix_get(t_img *img, int x, int y)
+{
+    char    *pixel;
+    int     i;
+    int     color;
+
+    color = 0;
+    i = img->bpp - 8;
+    pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+    
+    while (i >= 0)
+    {
+        if (img->endian != 0)
+            color |= (*pixel++ & 0xFF) << i;
+        else
+            color |= (*pixel++ & 0xFF) << (img->bpp - 8 - i);
+        i -= 8;
+    }
+    
+    return color;
+}
+
 void	draw_line(t_2vec start, t_2vec end, t_2color color, t_wrapper wrapper)
 {
 	t_2vec	d;
@@ -71,7 +93,8 @@ void	draw_line(t_2vec start, t_2vec end, t_2color color, t_wrapper wrapper)
 	{
 		if (start.x >= 0 && start.x <= WINDOW_WIDTH && start.y >= 0 && start.y
 			<= WINDOW_HEIGHT)
-			img_pix_put(&wrapper.data.img, start.x, start.y, get_color2(color,
+			if (img_pix_get(&wrapper.data.img, start.x, start.y) == 0)
+				img_pix_put(&wrapper.data.img, start.x, start.y, get_color2(color,
 					line_length, pos));
 		if (start.x == end.x && start.y == end.y)
 			break ;
