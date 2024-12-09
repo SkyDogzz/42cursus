@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:29:56 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 21:40:48 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 22:14:58 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,65 @@ void	display_menutop(t_wrapper *wrapper)
 	mlx_string_put(m, w, 20, y += 15, c, "esc to quit");
 }
 
-void	display_menudown(t_wrapper *w)
+char *get_2decimal(float nbr)
 {
-	int		y;
+	char	*dec;
+
+	dec = (char *)malloc(sizeof(char) * 4);
+	dec[0] = '.';
+	dec[1] = ((int)(nbr * 100) % 10) + '0';
+	dec[2] = ((int)(nbr * 10) % 10) + '0';
+	dec[3] = 0;
+	return (dec);
+}
+
+void	display_menudown2(t_wrapper *w, int y)
+{
 	int		c;
 	char	*num;
 	char	*joined;
+	char	*joined2;
 
-	y = WINDOW_HEIGHT;
 	c = 0xFFFFFF;
-	num = ft_itoa(w->rotate_div);
-	joined = ft_strjoin("(shift - ctrl / '[' - ']') ROTATION ", num);
-	joined = ft_strjoin(joined, " / PI");
-	mlx_string_put(w->data.mlx_ptr, w->data.win_ptr, 20, y -= 15, c, joined);
+	num = ft_itoa((int)w->map->zoom);
+	joined = ft_strjoin("ZOOM = ", num);
+	free(num);
+	num = get_2decimal(w->map->zoom);
+	joined2 = ft_strjoin(joined, num);
+	free(joined);
+	free(num);
+	mlx_string_put(w->data.mlx_ptr, w->data.win_ptr, 20, y -= 15, c, joined2);
+	free(joined2);
+}
+
+void	display_menudown(t_wrapper *w, int y)
+{
+	int		c;
+	char	*num;
+	char	*joined;
+	char	*joined2;
+
+	c = 0xFFFFFF;
 	num = ft_itoa(w->offset_div);
 	joined = ft_strjoin("(shift - ctrl / ',' - '.') OFFSET DIV ", num);
-	mlx_string_put(w->data.mlx_ptr, w->data.win_ptr, 20, y -= 15, c, joined);
 	free(num);
+	mlx_string_put(w->data.mlx_ptr, w->data.win_ptr, 20, y -= 15, c, joined);	
 	free(joined);
+	num = ft_itoa(w->rotate_div);
+	joined = ft_strjoin("(shift - ctrl / '[' - ']') ROTATION ", num);
+	free(num);
+	joined2 = ft_strjoin(joined, " / PI");
+	free(joined);
+	mlx_string_put(w->data.mlx_ptr, w->data.win_ptr, 20, y -= 15, c, joined2);
+	free(joined2);
+	display_menudown2(w, y);
+
 }
 
 void	display_menu(t_wrapper *wrapper)
 {
 	display_menutop(wrapper);
-	display_menudown(wrapper);
+	display_menudown(wrapper, WINDOW_HEIGHT);
 }
 
 void	toggle_menu(t_wrapper *wrapper)
