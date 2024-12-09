@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:11:36 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 21:46:05 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 22:41:07 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 void	change_zoom(t_wrapper *wrapper)
 {
+	float	before;
+
+	before = wrapper->map->zoom;
 	if (inlist(wrapper->keys, PAGEUP))
 		wrapper->map->zoom *= ZOOM_MODIFIER;
 	else
 		wrapper->map->zoom /= ZOOM_MODIFIER;
+	if (wrapper->map->zoom < 0.5)
+		wrapper->map->zoom = before;
 	display_map(wrapper);
 }
 
@@ -39,10 +44,15 @@ void	translate_camera(t_wrapper *wrapper)
 
 void	change_height(t_wrapper *wrapper)
 {
+	float	before;
+
+	before = wrapper->map->height_div;
 	if (inlist(wrapper->keys, K_CODE))
 		wrapper->map->height_div *= HEIGHT_MODIFIER;
 	else
 		wrapper->map->height_div /= HEIGHT_MODIFIER;
+	if (wrapper->map->height_div > 100)
+		wrapper->map->height_div = before;	
 	refill_map(wrapper);
 	base_rotate(wrapper);
 	display_map(wrapper);

@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:32:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 21:38:53 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 22:33:21 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	change_translate_div(t_wrapper *wrapper)
 	if (inlist(keys, SHIFT_CODE))
 		mult = 5;
 	else if (inlist(keys, CTRL_CODE))
-			mult = 25;
+		mult = 25;
 	if (inlist(keys, COMMA_CODE))
 		wrapper->offset_div -= mult;
 	else
@@ -63,8 +63,6 @@ int	change_rotation_div(t_wrapper *wrapper)
 		wrapper->rotate_div += mult;
 	if (wrapper->rotate_div < 2)
 		wrapper->rotate_div = 2;
-
-
 	display_map(wrapper);
 	return (0);
 }
