@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:32:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 17:41:56 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 21:38:53 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,29 @@ int	change_translate_div(t_wrapper *wrapper)
 	return (0);
 }
 
+int	change_rotation_div(t_wrapper *wrapper)
+{	
+	t_list	*keys;
+	int		mult;
+
+	keys = wrapper->keys;
+	mult = 1;
+	if (inlist(keys, SHIFT_CODE))
+		mult = 10;
+	else if (inlist(keys, CTRL_CODE))
+			mult = 100;
+	if (inlist(keys, BRACE_O_CODE))
+		wrapper->rotate_div -= mult;
+	else
+		wrapper->rotate_div += mult;
+	if (wrapper->rotate_div < 2)
+		wrapper->rotate_div = 2;
+
+
+	display_map(wrapper);
+	return (0);
+}
+
 int	handle_rotation_translation(t_wrapper *wrapper)
 {
 	t_list	*keys;
@@ -59,6 +82,8 @@ int	handle_rotation_translation(t_wrapper *wrapper)
 			translate_camera(wrapper);
 	if (inlist(keys, COMMA_CODE) || inlist(keys, DOT_CODE))
 		change_translate_div(wrapper);
+	if (inlist(keys, BRACE_O_CODE) || inlist(keys, BRACE_C_CODE))
+		change_rotation_div(wrapper);
 	return (0);
 }
 

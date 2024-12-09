@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:25:52 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 17:01:09 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 21:39:34 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	rotate(t_wrapper *wrapper)
 {
 	float	angle;
 
-	angle = M_PI / ROTATE_DIV;
+	angle = M_PI / wrapper->rotate_div;
 	if (inlist(wrapper->keys, SHIFT_CODE))
 		angle = -angle;
 	if (inlist(wrapper->keys, X_CODE))

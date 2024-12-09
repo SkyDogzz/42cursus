@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:09:17 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 17:28:02 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 21:32:50 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	setup_map(t_wrapper *wrapper)
 	wrapper->map->offset.y = 0;
 	wrapper->map->helper = HELPER;
 	wrapper->offset_div = OFFSET_DIV;
+	wrapper->rotate_div = ROTATE_DIV;
 }
 
 t_map	*init_map(t_map *map)

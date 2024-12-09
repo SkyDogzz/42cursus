@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:29:56 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 17:53:33 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/08 21:40:48 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,12 @@ void	display_menudown(t_wrapper *w)
 
 	y = WINDOW_HEIGHT;
 	c = 0xFFFFFF;
+	num = ft_itoa(w->rotate_div);
+	joined = ft_strjoin("(shift - ctrl / '[' - ']') ROTATION ", num);
+	joined = ft_strjoin(joined, " / PI");
+	mlx_string_put(w->data.mlx_ptr, w->data.win_ptr, 20, y -= 15, c, joined);
 	num = ft_itoa(w->offset_div);
-	joined = ft_strjoin("(shift - ctrl / , - .)OFFSET DIV ", num);
+	joined = ft_strjoin("(shift - ctrl / ',' - '.') OFFSET DIV ", num);
 	mlx_string_put(w->data.mlx_ptr, w->data.win_ptr, 20, y -= 15, c, joined);
 	free(num);
 	free(joined);
@@ -85,14 +89,6 @@ int	handle_no_event(t_wrapper *wrapper)
 	return (0);
 	(void) wrapper;
 }
-// int	handle_no_event(t_wrapper *wrapper)
-// {
-// 	rotatey_map(wrapper->map, M_PI / 512);
-// 	display_map(wrapper);
-// 	usleep(10000);
-// 	return (0);
-// 	(void) wrapper;
-// }
 
 void	draw_helper(t_wrapper *wrapper)
 {
