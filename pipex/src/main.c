@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:17:42 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/09 19:06:05 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:22:49 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	print_pipex(t_pipex pipex)
 	ft_printf("\n");
 }
 
+#include <stdio.h>
+
 int main(int argc, char *argv[], char *env[])
 {
 	t_pipex	pipex;
@@ -70,6 +72,11 @@ int main(int argc, char *argv[], char *env[])
 		exit(0);
 	}
 	parse_args(&pipex, argc, argv);
+	if (access(pipex.infile, R_OK) != 0)
+	{
+		perror("Error");
+		exit(0);
+	}	
 	print_pipex(pipex);
 	free_full(&pipex);
 	(void) env;
