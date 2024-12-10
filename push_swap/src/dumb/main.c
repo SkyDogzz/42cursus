@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 18:37:04 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/10 20:29:54 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:36:49 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,23 +93,6 @@ void	dumb_sort_2(t_wrapper *wrapper, t_list **l1, t_list **l2)
 				revrotate(wrapper, l1);
 		push(wrapper, l1, l2);
 		size--;
-	}
-	while (*l2)
-		push(wrapper, l2, l1);
-}
-
-void	dumb_sort_3(t_wrapper *wrapper, t_list **l1, t_list **l2)
-{
-	int	indexmin;
-	int	indexmax;
-	int	size;
-
-	size = ft_lstsize(*l1);
-	while (*l1)
-	{
-		indexmin = find_min_index(*l1);
-		indexmax = find_max_index(*l1);
-		push(wrapper, l1, l2);
 	}
 	while (*l2)
 		push(wrapper, l2, l1);

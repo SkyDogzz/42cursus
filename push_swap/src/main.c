@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:36:57 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/10 20:30:02 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:16:30 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,12 @@ int	main(int argc, char *argv[])
 	}
 	l1 = parse_input(argv[1]);
 	l2 = NULL;
-	display_full(l1, l2);
+	// display_full(l1, l2);
 	wrapper.count = 0;
-	dumb_sort(&wrapper, &l1, &l2);
-	dumb_sort_2(&wrapper, &l1, &l2);
-	display_full(l1, l2);
+	// dumb_sort(&wrapper, &l1, &l2);
+	// dumb_sort_2(&wrapper, &l1, &l2);
+	dumb_sort_3(&wrapper, &l1, &l2);
+	// display_full(l1, l2);
 	free_list(l1);
 	free_list(l2);
 	ft_printf("%d instructions\n", wrapper.count);

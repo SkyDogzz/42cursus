@@ -6,13 +6,11 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:43:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/10 20:09:13 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:18:21 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-
 
 void	revrotate(t_wrapper *wrapper, t_list **list)
 {

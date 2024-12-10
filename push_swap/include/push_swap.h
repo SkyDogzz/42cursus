@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:37:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/10 20:15:20 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:18:53 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	rotate(t_wrapper *wrapper, t_list **list);
 void	push(t_wrapper *wrapper, t_list **l1, t_list **l2);
 void	swap(t_wrapper *wrapper, t_list **list);
 void	display_full(t_list *l1, t_list *l2);
+int		find_max_index(t_list *l1);
+int		find_min_index(t_list *l1);
 void	dumb_sort(t_wrapper *wrapper, t_list **l1, t_list **l2);
 void	dumb_sort_2(t_wrapper *wrapper, t_list **l1, t_list **l2);
+void	dumb_sort_3(t_wrapper *wrapper, t_list **l1, t_list **l2);
 
 #endif
