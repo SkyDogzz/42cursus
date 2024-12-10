@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:43:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/10 21:18:21 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:25:51 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	revrotate(t_wrapper *wrapper, t_list **list)
 	free(act->next);
 	act->next = NULL;
 	wrapper->count++;
+	ft_printf("rra\n");
 }
 
 void	rotate(t_wrapper *wrapper, t_list **list)
@@ -40,6 +41,7 @@ void	rotate(t_wrapper *wrapper, t_list **list)
 	(*list) = (*list)->next;
 	free(old);
 	wrapper->count++;
+	ft_printf("ra\n");
 }
 
 void	push(t_wrapper *wrapper, t_list **l1, t_list **l2)
@@ -55,6 +57,7 @@ void	push(t_wrapper *wrapper, t_list **l1, t_list **l2)
 	(*l1) = (*l1)->next;
 	free(old);
 	wrapper->count++;
+	ft_printf("pa\n");
 }
 
 void	swap(t_wrapper *wrapper, t_list **list)
@@ -70,4 +73,5 @@ void	swap(t_wrapper *wrapper, t_list **list)
 	(*list)->next = store[0];
 	store[0]->next = store[2];
 	wrapper->count++;
+	ft_printf("sa\n");
 }

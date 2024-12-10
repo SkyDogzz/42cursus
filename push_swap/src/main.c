@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:36:57 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/10 21:16:30 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:23:50 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int	main(int argc, char *argv[])
 	// display_full(l1, l2);
 	free_list(l1);
 	free_list(l2);
-	ft_printf("%d instructions\n", wrapper.count);
+	// ft_printf("%d instructions\n", wrapper.count);
 	return (EXIT_SUCCESS);
 }

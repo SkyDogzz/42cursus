@@ -8,7 +8,8 @@ total=0
 
 for i in $(seq 1 $RUNS); do
     echo "Run $i / $RUNS"
-    result=$(./push_swap "$(shuf -i 1-500 -n 500)" | grep -o '^[^ ]*')
+    # result=$(./push_swap "$(shuf -i 1-500 -n 500)" | grep -o '^[^ ]*')
+    result=$(./push_swap "$(shuf -i 1-500 -n 500)" | wc -l)
     echo "Instructions: $result"
     if [ "$result" -lt "$min" ]; then
         min=$result
