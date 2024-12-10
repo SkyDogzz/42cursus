@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:15:25 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/04 15:41:37 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/10 06:15:17 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	fill_point(t_map *map, t_2vec pos, char **next, t_dim dims)
 {
-	map->content[pos.y][pos.x].pos.x = pos.x - dims.width / 2.0 + 0.5;
-	map->content[pos.y][pos.x].pos.y = pos.y - dims.height / 2.0 + 0.5;
-	map->content[pos.y][pos.x].pos.z = ft_atoi(*next) / map->height_div;
-	map->content[pos.y][pos.x].color = get_color(*next);
+	map->content[pos.y * map->dims.width + pos.x].pos.x = pos.x - dims.width / 2.0 + 0.5;
+	map->content[pos.y * map->dims.width + pos.x].pos.y = pos.y - dims.height / 2.0 + 0.5;
+	map->content[pos.y * map->dims.width + pos.x].pos.z = ft_atoi(*next) / map->height_div;
+	map->content[pos.y * map->dims.width + pos.x].color = get_color(*next);
 	*next = ft_strchr(*next, ' ');
 }
 

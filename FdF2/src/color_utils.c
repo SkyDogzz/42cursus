@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:09:46 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 16:46:59 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/10 06:06:03 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	change_all_color(t_wrapper *wrapper)
 		y = 0;
 		while (y < wrapper->map->dims.height)
 		{
-			color.r = wrapper->map->content[y][x].color & 0xff;
-			color.g = (wrapper->map->content[y][x].color >> 8) & 0xff;
-			color.b = (wrapper->map->content[y][x].color >> 16) & 0xff;
+			color.r = wrapper->map->content[y * wrapper->map->dims.width + x].color & 0xff;
+			color.g = (wrapper->map->content[y * wrapper->map->dims.width + x].color >> 8) & 0xff;
+			color.b = (wrapper->map->content[y * wrapper->map->dims.width + x].color >> 16) & 0xff;
 			colint = color.b + (color.r << 8) + (color.g << 16);
-			wrapper->map->content[y][x].color = colint;
+			wrapper->map->content[y * wrapper->map->dims.width + x].color = colint;
 			y++;
 		}
 		x++;
@@ -88,7 +88,7 @@ void	randomize_color(t_wrapper *wrapper)
 		while (pos.y < wrapper->map->dims.height)
 		{
 			pseudo = pseudo_random(pseudo);
-			wrapper->map->content[pos.y][pos.x].color = pseudo;
+			wrapper->map->content[pos.y * wrapper->map->dims.width + pos.x].color = pseudo;
 			pos.y++;
 		}
 		pos.x++;

@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:27:23 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/09 14:26:28 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/10 06:12:18 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	display_map_loop(t_wrapper *wrap, t_2vec *pos)
 		pos->y = -1;
 		while (++pos->y < wrap->map->dims.height)
 		{
-			start.x = wrap->map->content[pos->y][pos->x].pos.x
+			start.x = wrap->map->content[pos->y * wrap->map->dims.width + pos->x].pos.x
 				* wrap->map->zoom + WINDOW_WIDTH / 2 + wrap->map->offset.x;
-			start.y = wrap->map->content[pos->y][pos->x].pos.y
+			start.y = wrap->map->content[pos->y * wrap->map->dims.width + pos->x].pos.y
 				* wrap->map->zoom + WINDOW_HEIGHT / 2 + wrap->map->offset.y;
 			if (pos->y < wrap->map->dims.height - 1)
 				draw_vertical_lines(wrap, pos->x, pos->y, start);
@@ -108,12 +108,12 @@ void	draw_vertical_lines(t_wrapper *wrapper, int x, int y, t_2vec start)
 	t_2vec		end;
 	t_2color	color;
 
-	end.x = wrapper->map->content[y + 1][x].pos.x * wrapper->map->zoom
+	end.x = wrapper->map->content[(y + 1) * wrapper->map->dims.width + x].pos.x * wrapper->map->zoom
 		+ WINDOW_WIDTH / 2 + wrapper->map->offset.x;
-	end.y = wrapper->map->content[y + 1][x].pos.y * wrapper->map->zoom
+	end.y = wrapper->map->content[(y + 1) * wrapper->map->dims.width + x].pos.y * wrapper->map->zoom
 		+ WINDOW_HEIGHT / 2 + wrapper->map->offset.y;
-	color.start = wrapper->map->content[y][x].color;
-	color.end = wrapper->map->content[y + 1][x].color;
+	color.start = wrapper->map->content[y * wrapper->map->dims.width + x].color;
+	color.end = wrapper->map->content[(y + 1) * wrapper->map->dims.width + x].color;
 	draw_line(start, end, color, *wrapper);
 }
 
@@ -122,11 +122,11 @@ void	draw_horizontal_lines(t_wrapper *wrapper, int x, int y, t_2vec start)
 	t_2vec		end;
 	t_2color	color;
 
-	end.x = wrapper->map->content[y][x + 1].pos.x * wrapper->map->zoom
+	end.x = wrapper->map->content[y * wrapper->map->dims.width + x + 1].pos.x * wrapper->map->zoom
 		+ WINDOW_WIDTH / 2 + wrapper->map->offset.x;
-	end.y = wrapper->map->content[y][x + 1].pos.y * wrapper->map->zoom
+	end.y = wrapper->map->content[y * wrapper->map->dims.width + x + 1].pos.y * wrapper->map->zoom
 		+ WINDOW_HEIGHT / 2 + wrapper->map->offset.y;
-	color.start = wrapper->map->content[y][x].color;
-	color.end = wrapper->map->content[y][x + 1].color;
+	color.start = wrapper->map->content[y * wrapper->map->dims.width + x].color;
+	color.end = wrapper->map->content[y * wrapper->map->dims.width + x + 1].color;
 	draw_line(start, end, color, *wrapper);
 }

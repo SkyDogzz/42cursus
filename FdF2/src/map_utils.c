@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:09:17 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 21:46:23 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/10 06:16:14 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 void	free_map_full(t_map *map)
 {
-	while (map->dims.height--)
-	{
-		free(map->content[map->dims.height]);
-	}
 	free(map->content);
 	free(map);
 }
@@ -33,23 +29,10 @@ void	setup_map(t_wrapper *wrapper)
 
 t_map	*init_map(t_map *map)
 {
-	int	pos;
-
 	map->height_div = HEIGHT_DIV;
-	map->content = (t_cont **)malloc(sizeof(t_cont *) * map->dims.height);
+	map->content = malloc(sizeof(t_cont) * (map->dims.width * map->dims.height));
 	if (!map->content)
-		return (NULL);
-	pos = 0;
-	while (pos < map->dims.height)
-	{
-		map->content[pos] = (t_cont *)malloc(sizeof(t_cont) * map->dims.width);
-		if (!map->content[pos])
-		{
-			free_map_content(map, pos);
-			return (NULL);
-		}
-		pos++;
-	}
+		exit_msg_code("Allocation error\n", 1);
 	return (map);
 }
 
@@ -64,13 +47,3 @@ void	refill_map(t_wrapper *wrapper)
 	close(fd);
 }
 
-void	free_map_content(t_map *map, int pos)
-{
-	pos--;
-	while (pos >= 0)
-	{
-		free(map->content[pos]);
-		pos--;
-	}
-	free(map->content);
-}

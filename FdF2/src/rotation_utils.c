@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:25:52 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 21:39:34 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/10 06:09:10 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	rotatex_map(t_map *map, float angle)
 		y = 0;
 		while (y < map->dims.height)
 		{
-			pos = map->content[y][x].pos;
+			pos = map->content[y * map->dims.width + x].pos;
 			yp = pos.y * cos(angle) - pos.z * sin(angle);
 			zp = pos.y * sin(angle) + pos.z * cos(angle);
-			map->content[y][x].pos.y = yp;
-			map->content[y][x].pos.z = zp;
+			map->content[y * map->dims.width + x].pos.y = yp;
+			map->content[y * map->dims.width + x].pos.z = zp;
 			y++;
 		}
 		x++;
@@ -51,11 +51,11 @@ void	rotatey_map(t_map *map, float angle)
 		y = 0;
 		while (y < map->dims.height)
 		{
-			pos = map->content[y][x].pos;
+			pos = map->content[y * map->dims.width + x].pos;
 			xp = pos.x * cos(angle) + pos.z * sin(angle);
 			zp = -pos.x * sin(angle) + pos.z * cos(angle);
-			map->content[y][x].pos.x = xp;
-			map->content[y][x].pos.z = zp;
+			map->content[y * map->dims.width + x].pos.x = xp;
+			map->content[y * map->dims.width + x].pos.z = zp;
 			y++;
 		}
 		x++;
@@ -76,11 +76,11 @@ void	rotatez_map(t_map *map, float angle)
 		y = 0;
 		while (y < map->dims.height)
 		{
-			pos = map->content[y][x].pos;
+			pos = map->content[y * map->dims.width + x].pos;
 			xp = pos.x * cos(angle) - pos.y * sin(angle);
-			map->content[y][x].pos.x = xp;
+			map->content[y * map->dims.width + x].pos.x = xp;
 			yp = pos.x * sin(angle) + pos.y * cos(angle);
-			map->content[y][x].pos.y = yp;
+			map->content[y * map->dims.width + x].pos.y = yp;
 			y++;
 		}
 		x++;

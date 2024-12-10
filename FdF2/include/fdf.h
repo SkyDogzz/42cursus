@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/08 22:16:10 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/10 06:04:19 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_dim
 
 typedef struct s_map
 {
-	t_cont	**content;
+	t_cont	*content;
 	t_dim	dims;
 	float	zoom;
 	float	height_div;
