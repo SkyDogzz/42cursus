@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:42:33 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/09 15:42:33 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:49:30 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	free_list(t_list *list)
 {
 	t_list	*temp;
 
-	while (list)
+	while (list && list->content)
 	{
 		temp = list;
 		free(list->content);

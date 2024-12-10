@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O2 -march=native -I$(INC_DIR) -I$(LIBFT_DIR)/include
+# CFLAGS = -Wall -Wextra -Werror -O2 -march=native -I$(INC_DIR) -I$(LIBFT_DIR)/include
 LDFLAGS = -L$(LIBFT_DIR) -lft
 
 _END    = $(shell printf "\033[0m")
@@ -13,7 +13,7 @@ INC_DIR = include
 LIBFT_SRC_DIR = ../Libft2
 LIBFT_DIR = libft
 
-SRC_FILES = parse.c utils.c main.c
+SRC_FILES = parse.c utils.c dumb/main.c main.c
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 NAME = push_swap
