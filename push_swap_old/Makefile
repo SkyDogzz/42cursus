@@ -13,8 +13,7 @@ INC_DIR = include
 LIBFT_SRC_DIR = ../Libft2
 LIBFT_DIR = libft
 
-SRC_FILES = parse.c utils.c math_utils.c base.c dumb_sort.c dumb_sort2.c \
-			dumb_sort3.c better/algo.c main.c
+SRC_FILES = parse.c utils.c dumb/main.c dumb/3.c chunky/main.c main.c
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 NAME = push_swap

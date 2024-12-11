@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:42:33 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/11 18:47:00 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/11 15:27:35 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,27 @@ t_list	*parse_input(char *args)
 			exit(EXIT_FAILURE);
 		}
 		*nbr = ft_atoi(args);
-		ft_lstadd_back(&parsed, ft_lstnew(nbr));
+		ft_lstadd_front(&parsed, ft_lstnew(nbr));
 		args = get_to_next(args);
 	}
 	return (parsed);
+}
+
+void	free_list(t_list *list)
+{
+	t_list	*temp;
+
+	while (list && list->content)
+	{
+		temp = list;
+		free(list->content);
+		list = list->next;
+		free(temp);
+	}
+}
+
+void	free_wrapper(t_wrapper wrapper)
+{
+	free_list(wrapper.l1);
+	free_list(wrapper.l1);
 }
