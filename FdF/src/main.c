@@ -3,66 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 16:53:31 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/29 19:22:35 by tstephan         ###   ########.fr       */
+/*   Created: 2024/11/30 14:44:02 by skydogzz          #+#    #+#             */
+/*   Updated: 2024/12/08 16:42:56 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-int	setup_mlx(t_mlx data)
+int	on_keydown(int keycode, void *wrapper)
 {
-	data.mlx_ptr = mlx_init();
-	if (data.mlx_ptr == NULL)
-		return (MLX_ERROR);
-	data.win_ptr = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT,
-			"FdF goes brrrr!");
-	if (data.win_ptr == NULL)
-	{
-		free(data.win_ptr);
-		return (MLX_ERROR);
-	}
-	mlx_loop_hook(data.mlx_ptr, &handle_no_event, &data);
-	mlx_key_hook(data.win_ptr, &handle_key, &data);
-	mlx_mouse_hook(data.win_ptr, &handle_mouse, &data);
-	mlx_hook(data.win_ptr, 17, 0, &full_quit, &data);
-	mlx_loop(data.mlx_ptr);
-	mlx_destroy_display(data.mlx_ptr);
-	free(data.mlx_ptr);
+	ft_printf("keydown %d\n", keycode);
 	return (0);
+	(void) wrapper;
 }
 
-void	init_render(t_render *render)
+void	set_hook(t_wrapper *wrapper)
 {
-	render->camera.pos.x = CAMERA_POS_X;
-	render->camera.pos.y = CAMERA_POS_Y;
-	render->camera.pos.z = CAMERA_POS_Z;
-	render->scene.center.x = SCENE_POS_X;
-	render->scene.center.y = SCENE_POS_Y;
-	render->scene.center.z = SCENE_POS_Z;
+	mlx_loop_hook(wrapper->data.mlx_ptr, &handle_no_event, wrapper);
+	wrapper->keys = NULL;
+	mlx_hook(wrapper->data.win_ptr, 17, 0, &full_quit, wrapper);
+	mlx_hook(wrapper->data.win_ptr, KeyPress, KeyPressMask, &handle_keypress,
+		wrapper);
+	mlx_hook(wrapper->data.win_ptr, KeyRelease, KeyReleaseMask,
+		&handle_keyrelease, wrapper);
+	mlx_do_key_autorepeaton(wrapper->data.mlx_ptr);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_content	content;
-	t_mlx		*data;
-	// t_render	render;
+	t_wrapper	wrapper;
 
-	if (argc < 2)
+	if (argc <= 1)
 	{
 		ft_dprintf(2, "Usage: %s <input_file>\n", argv[0]);
-		exit(EXIT_FAILURE);
+		exit(0);
 	}
-	data = (t_mlx *)malloc(sizeof(t_mlx) * 1);
-	if (!data)
-		return (EXIT_FAILURE);
-	setup_mlx(*data);
-	content.dims = get_dim(argv[1]);
-	content.map = parse_map(argv[1], *content.dims);
-	free_map(content.map, content.dims->height);
-	free(content.dims);
-	free(data);
+	wrapper.menu = MENU;
+	wrapper.map = parse_map(argv[1]);
+	wrapper.map->filename = argv[1];
+	setup_map(&wrapper);
+	wrapper.data.mlx_ptr = mlx_init();
+	wrapper.data.win_ptr = mlx_new_window(wrapper.data.mlx_ptr, WINDOW_WIDTH,
+			WINDOW_HEIGHT, "FdF Goes Brrr!!!");
+	set_hook(&wrapper);
+	base_rotate(&wrapper);
+	display_map(&wrapper);
+	mlx_loop(wrapper.data.mlx_ptr);
+	mlx_destroy_display(wrapper.data.mlx_ptr);
+	free(wrapper.data.mlx_ptr);
+	free_map_full(wrapper.map);
 	return (EXIT_SUCCESS);
+}
+
+void	img_pix_put(t_img *img, int x, int y, int color)
+{
+	char	*pixel;
+	int		i;
+
+	i = img->bpp - 8;
+	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	while (i >= 0)
+	{
+		if (img->endian != 0)
+			*pixel++ = (color >> i) & 0xFF;
+		else
+			*pixel++ = (color >> (img->bpp - 8 - i)) & 0xFF;
+		i -= 8;
+	}
 }
