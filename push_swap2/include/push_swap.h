@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:02:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/12 04:32:20 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:55:47 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,8 @@ void	print_stack(t_stack *stack);
 
 // parse related
 t_stack	*parse_args(t_stack *stack, int argc, char *argv[]);
+
+// sort stack
+void	sort_stack(t_stack *stack, t_stack *temp);
 
 #endif
