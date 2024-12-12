@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:07:25 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/12 04:22:20 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:14:14 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,16 @@ void	print_stack(t_stack *stack)
 		node = node->next;
 	}
 	ft_printf("\n");
+}
+
+int	get_value(t_stack *stack, int index)
+{
+	t_node	*node;
+
+	if (!stack->top)
+		return (0);
+	node = stack->top;
+	while (index-- > 0 && node->next)
+		node = node->next;
+	return (node->value);
 }

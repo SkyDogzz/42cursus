@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:02:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/12 13:55:47 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:47:43 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,20 @@ int		pop(t_stack *stack);
 void	rotate(t_stack *stack);
 void	reverse_rotate(t_stack *stack);
 void	print_stack(t_stack *stack);
+int		get_value(t_stack *stack, int index);
 
 // parse related
 t_stack	*parse_args(t_stack *stack, int argc, char *argv[]);
 
 // sort stack
 void	sort_stack(t_stack *stack, t_stack *temp);
+
+// push_swap utils
+void	execpa(t_stack *stack, int value);
+void	execpb(t_stack *stack, int value);
+void	execra(t_stack *stack);
+void	execrb(t_stack *stack);
+void	execrra(t_stack *stack);
+void	execrrb(t_stack *stack);
 
 #endif
