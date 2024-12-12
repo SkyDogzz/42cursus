@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:56:05 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/12 17:04:25 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:30:35 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	find_cheapest(t_stack *s1, t_stack *s2)
 {
-	return (0);
+	return (s1->size - 1);
 	(void) s1;
 	(void) s2;
 }
