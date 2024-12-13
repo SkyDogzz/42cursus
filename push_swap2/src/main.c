@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:01:56 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/12 16:56:21 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/13 01:28:31 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int	main(int argc, char *argv[])
 	print_stack(stack);
 	sort_stack(stack, temp);
 	print_stack(stack);
+	optimize_instructions();
+	print_instructions();
 	free_stack(stack);
 	free_stack(temp);
 	return (EXIT_SUCCESS);
 }
+
