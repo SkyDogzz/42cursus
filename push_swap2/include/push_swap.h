@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:02:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/13 02:00:36 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/13 02:40:27 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,18 @@ typedef struct s_stack
 	size_t	size;
 }	t_stack;
 
-typedef struct s_instruction
+typedef struct s_inode
 {
-	t_list	*top;
+	char			*value;
+	struct s_inode	*next;
+}	t_inode;
+
+typedef struct s_inst
+{
+	t_inode	*top;
 	size_t	size;
-}	t_instruction;
+}	t_inst;
+
 
 typedef struct s_cheap
 {
@@ -58,7 +65,7 @@ int		get_value(t_stack *stack, int index);
 t_stack	*parse_args(t_stack *stack, int argc, char *argv[]);
 
 // sort stack
-void	sort_stack(t_stack *stack, t_stack *temp);
+void	sort_stack(t_inst *inst, t_stack *stack, t_stack *temp);
 
 // instructions
 void	optimize_instructions(void);
@@ -66,11 +73,11 @@ void	print_instructions(void);
 void	add_instruction(const char *ins);
 
 // push_swap utils
-void	execpa(t_stack *stack, int value);
-void	execpb(t_stack *stack, int value);
-void	execra(t_stack *stack);
-void	execrb(t_stack *stack);
-void	execrra(t_stack *stack);
-void	execrrb(t_stack *stack);
+void	execpa(t_inst *inst, t_stack *stack, int value);
+void	execpb(t_inst *inst, t_stack *stack, int value);
+void	execra(t_inst *inst, t_stack *stack);
+void	execrb(t_inst *inst, t_stack *stack);
+void	execrra(t_inst *inst, t_stack *stack);
+void	execrrb(t_inst *inst, t_stack *stack);
 
 #endif

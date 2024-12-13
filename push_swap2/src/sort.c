@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:56:05 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/13 02:00:28 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/13 02:40:09 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ int	find_cheapest(t_stack *s1, t_stack *s2)
 	return (best_index);
 }
 
-void	get_on_top(t_stack *stack, int value)
+void	get_on_top(t_inst *inst, t_stack *stack, int value)
 {
 	t_node	*node;
 	int		index;
@@ -159,18 +159,18 @@ void	get_on_top(t_stack *stack, int value)
 	{
 		i = index;
 		while (i--)
-			execrb(stack);
+			execrb(inst, stack);
 	}
 	else
 	{
 		i = (int)stack->size - index;
 		while (i--)
-			execrrb(stack);
+			execrrb(inst, stack);
 	}
 }
 
-void	rotate_to_top(t_stack *stack, int index, void (*rotate)(t_stack *),
-	void (*rev_rotate)(t_stack *))
+void	rotate_to_top(t_inst *inst, t_stack *stack, int index, void (*rotate)
+	(t_inst *, t_stack *), void (*rev_rotate)(t_inst *, t_stack *))
 {
 	int	iter;
 
@@ -178,54 +178,54 @@ void	rotate_to_top(t_stack *stack, int index, void (*rotate)(t_stack *),
 	{
 		iter = index;
 		while (iter--)
-			rotate(stack);
+			rotate(inst, stack);
 	}
 	else
 	{
 		iter = (int)stack->size - index;
 		while (iter--)
-			rev_rotate(stack);
+			rev_rotate(inst, stack);
 	}
 }
 
-void	move_cheapest(int index, t_stack *stack, t_stack *temp)
+void	move_cheapest(t_inst *inst, int index, t_stack *stack, t_stack *temp)
 {
 	int	value;
 	int	insert_pos;
 
-	rotate_to_top(stack, index, execra, execrra);
+	rotate_to_top(inst, stack, index, execra, execrra);
 	value = get_value(stack, 0);
 	insert_pos = insertion_index(temp, value);
-	rotate_to_top(temp, insert_pos, execrb, execrrb);
-	execpb(temp, pop(stack));
+	rotate_to_top(inst, temp, insert_pos, execrb, execrrb);
+	execpb(inst, temp, pop(stack));
 }
 
-void	repush(t_stack *stack, t_stack *temp)
+void	repush(t_inst *inst, t_stack *stack, t_stack *temp)
 {
 	int	min;
 	int	max;
 
 	get_borne(temp, &min, &max);
-	get_on_top(temp, max);
+	get_on_top(inst, temp, max);
 	while (temp->top)
-		execpb(stack, pop(temp));
+		execpb(inst, stack, pop(temp));
 }
 
-void	sort_stack(t_stack *stack, t_stack *temp)
+void	sort_stack(t_inst *inst, t_stack *stack, t_stack *temp)
 {
 	int	cheapest_index;
 
 	if (!stack->top)
 		return ;
 	if (stack->top->next)
-		execpa(temp, pop(stack));
+		execpa(inst, temp, pop(stack));
 	if (stack->top)
-		execpa(temp, pop(stack));
+		execpa(inst, temp, pop(stack));
 	while (stack->top)
 	{
 		cheapest_index = find_cheapest(stack, temp);
-		move_cheapest(cheapest_index, stack, temp);
+		move_cheapest(inst ,cheapest_index, stack, temp);
 	}
-	repush(stack, temp);
-	execrra(stack);
+	repush(inst, stack, temp);
+	execrra(inst, stack);
 }
