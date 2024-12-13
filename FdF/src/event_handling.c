@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:32:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 22:33:21 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:52:46 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,7 @@ int	handle_keypress(int keycode, t_wrapper *wrapper)
 	add_key(&wrapper->keys, keycode);
 	if (keycode == ESC_CODE)
 		full_quit(wrapper);
-	handle_rotation_translation(wrapper);
-	handle_misc(wrapper);
+
 	return (0);
 }
 

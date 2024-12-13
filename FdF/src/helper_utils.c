@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:29:56 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 22:38:01 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/13 19:53:18 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void	toggle_helper(t_wrapper *wrapper)
 
 int	handle_no_event(t_wrapper *wrapper)
 {
+	handle_rotation_translation(wrapper);
+	handle_misc(wrapper);
 	return (0);
 	(void) wrapper;
 }
