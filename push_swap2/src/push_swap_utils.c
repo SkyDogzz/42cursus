@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:30:55 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/13 01:29:56 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/13 01:44:27 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,3 @@ void	execrrb(t_stack *stack)
 	reverse_rotate(stack);
 	add_instruction("rrb");
 }
-

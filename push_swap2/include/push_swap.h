@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:02:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/13 01:34:18 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/13 02:00:36 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,20 @@ typedef struct s_stack
 	size_t	size;
 }	t_stack;
 
-typedef	struct s_instruction
+typedef struct s_instruction
 {
 	t_list	*top;
 	size_t	size;
 }	t_instruction;
+
+typedef struct s_cheap
+{
+	int	value;
+	int	insert_pos;
+	int	cost_s1;
+	int	cost_s2;
+	int	total_cost;
+}	t_cheap;
 
 // stack related
 t_stack	*init_stack(void);
@@ -52,9 +61,9 @@ t_stack	*parse_args(t_stack *stack, int argc, char *argv[]);
 void	sort_stack(t_stack *stack, t_stack *temp);
 
 // instructions
-void optimize_instructions(void);
-void print_instructions(void);
-void add_instruction(const char *ins);
+void	optimize_instructions(void);
+void	print_instructions(void);
+void	add_instruction(const char *ins);
 
 // push_swap utils
 void	execpa(t_stack *stack, int value);

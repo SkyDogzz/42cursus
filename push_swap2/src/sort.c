@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:56:05 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/13 01:31:46 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/13 02:00:28 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,42 +49,67 @@ void	get_borne(t_stack *stack, int *min, int *max)
 	}
 }
 
+int	find_insert_position(t_node *node, int value, t_stack *s2)
+{
+	t_node	*next_node;
+	int		i;
+
+	i = 0;
+	while (node)
+	{
+		if (node->next)
+			next_node = node->next;
+		else
+			next_node = s2->top;
+		if ((node->value < value && value < next_node->value)
+			|| (node->value > next_node->value
+				&& (value < next_node->value || value > node->value)))
+			return (i + 1);
+		node = node->next;
+		i++;
+	}
+	return (-1);
+}
+
 int	insertion_index(t_stack *s2, int value)
 {
 	int		min;
 	int		max;
-	t_node	*node;
-	t_node	*next_node;
-	int		i;
+	int		pos;
 
 	if (!s2->top)
 		return (0);
 	get_borne(s2, &min, &max);
-	node = s2->top;
-	i = 0;
-	while (node)
-	{
-		next_node = node->next;
-		if (!next_node)
-			next_node = s2->top;
-		if ((node->value < value && value < next_node->value) 
-			|| (node->value > next_node->value && (value \
-			< next_node->value || value > node->value)))
-				return (i + 1);
-		node = node->next;
-		i++;
-	}
-	{
-		int max_i = index_of(s2, max);
-		return (max_i + 1 >= (int)s2->size) ? 0 : max_i + 1;
-	}
+	pos = find_insert_position(s2->top, value, s2);
+	if (pos != -1)
+		return (pos);
+	pos = index_of(s2, max) + 1;
+	if (pos >= (int)s2->size)
+		return (0);
+	return (pos);
 }
 
 int	min_rotation_cost(t_stack *stack, int pos)
 {
-	int rotate_up = pos;
-	int rotate_down = (int)stack->size - pos;
-	return (rotate_up < rotate_down) ? rotate_up : rotate_down;
+	int	rotate_up;
+	int	rotate_down;
+
+	rotate_up = pos;
+	rotate_down = (int)stack->size - pos;
+	if (rotate_up <= rotate_down)
+		return (rotate_up);
+	return (rotate_down);
+}
+
+int	calculate_total_cost(t_stack *s1, t_stack *s2, int value, int index)
+{
+	t_cheap	cheap;
+
+	cheap.value = value;
+	cheap.insert_pos = insertion_index(s2, cheap.value);
+	cheap.cost_s1 = min_rotation_cost(s1, index);
+	cheap.cost_s2 = min_rotation_cost(s2, cheap.insert_pos);
+	return (cheap.cost_s1 + cheap.cost_s2);
 }
 
 int	find_cheapest(t_stack *s1, t_stack *s2)
@@ -93,25 +118,20 @@ int	find_cheapest(t_stack *s1, t_stack *s2)
 	int		i;
 	int		best_index;
 	int		best_cost;
+	int		current_cost;
 
 	if (!s1->top)
 		return (-1);
-
 	best_cost = INT_MAX;
 	best_index = 0;
 	node = s1->top;
 	i = 0;
 	while (node)
 	{
-		int value = node->value;
-		int insert_pos = insertion_index(s2, value);
-		int cost_s1 = min_rotation_cost(s1, i);
-		int cost_s2 = min_rotation_cost(s2, insert_pos);
-		int total_cost = cost_s1 + cost_s2;
-
-		if (total_cost < best_cost)
+		current_cost = calculate_total_cost(s1, s2, node->value, i);
+		if (current_cost < best_cost)
 		{
-			best_cost = total_cost;
+			best_cost = current_cost;
 			best_index = i;
 		}
 		node = node->next;
@@ -149,42 +169,34 @@ void	get_on_top(t_stack *stack, int value)
 	}
 }
 
-void	move_cheapest(int index, t_stack *stack, t_stack *temp)
+void	rotate_to_top(t_stack *stack, int index, void (*rotate)(t_stack *),
+	void (*rev_rotate)(t_stack *))
 {
-	int	min;
-	int	max;
-	int	value;
 	int	iter;
 
-	iter = index;
-	if (iter < (int)stack->size / 2)
+	if (index < (int)stack->size / 2)
+	{
+		iter = index;
 		while (iter--)
-			execra(stack);
+			rotate(stack);
+	}
 	else
 	{
-		iter = (int)stack->size - iter;
+		iter = (int)stack->size - index;
 		while (iter--)
-			execrra(stack);
+			rev_rotate(stack);
 	}
-	min = 0;
-	max = 0;
-	get_borne(temp, &min, &max);
+}
+
+void	move_cheapest(int index, t_stack *stack, t_stack *temp)
+{
+	int	value;
+	int	insert_pos;
+
+	rotate_to_top(stack, index, execra, execrra);
 	value = get_value(stack, 0);
-	{
-		int insert_pos = insertion_index(temp, value);
-		if (insert_pos < (int)temp->size / 2)
-		{
-			int r = insert_pos;
-			while (r--)
-				execrb(temp);
-		}
-		else
-		{
-			int r = (int)temp->size - insert_pos;
-			while (r--)
-				execrrb(temp);
-		}
-	}
+	insert_pos = insertion_index(temp, value);
+	rotate_to_top(temp, insert_pos, execrb, execrrb);
 	execpb(temp, pop(stack));
 }
 
