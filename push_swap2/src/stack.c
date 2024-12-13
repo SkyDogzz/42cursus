@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:07:25 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/12 16:14:14 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/13 06:01:37 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_node	*new_node(int value)
 {
 	t_node	*new;
 
-	new = (t_node *)malloc(sizeof(t_stack) * 1);
+	new = (t_node *)malloc(sizeof(t_node) * 1);
 	if (!new)
 		return (NULL);
 	new->value = value;

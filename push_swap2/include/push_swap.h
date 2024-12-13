@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:02:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/13 02:40:27 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/13 07:22:30 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ t_stack	*parse_args(t_stack *stack, int argc, char *argv[]);
 void	sort_stack(t_inst *inst, t_stack *stack, t_stack *temp);
 
 // instructions
-void	optimize_instructions(void);
-void	print_instructions(void);
-void	add_instruction(const char *ins);
+void	optimize_instructions(t_inst *inst);
+void	print_instructions(t_inst *inst);
+void	add_instruction(t_inst *inst, const char *ins);
 
 // push_swap utils
 void	execpa(t_inst *inst, t_stack *stack, int value);
@@ -79,5 +79,7 @@ void	execra(t_inst *inst, t_stack *stack);
 void	execrb(t_inst *inst, t_stack *stack);
 void	execrra(t_inst *inst, t_stack *stack);
 void	execrrb(t_inst *inst, t_stack *stack);
+
+void	exit_with_error(const char *s);
 
 #endif
