@@ -13,7 +13,7 @@ INC_DIR = include
 LIBFT_SRC_DIR = ../Libft2
 LIBFT_DIR = libft
 
-SRC_FILES = main.c stack.c stack_utils.c parse.c sort.c push_swap_utils.c instruction.c
+SRC_FILES = main.c stack.c stack_utils.c parse.c sort.c push_swap_utils.c instruction.c chunk.c
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 NAME = push_swap

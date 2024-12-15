@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:02:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/13 07:22:30 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:16:50 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,8 @@ void	execrrb(t_inst *inst, t_stack *stack);
 
 void	exit_with_error(const char *s);
 
+void	get_on_top(t_inst *inst, t_stack *stack, int value);
+void sort_stack_with_chunks(t_inst *inst, t_stack *stack, t_stack *temp, int number_of_chunks);
+int	index_of(t_stack *stack, int value);
+	
 #endif

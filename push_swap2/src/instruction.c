@@ -6,10 +6,10 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:00:03 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/13 08:35:48 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:16:35 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include <string.h>
 #include "../include/push_swap.h"
 
 void add_instruction(t_inst *inst, const char *ins)
@@ -36,11 +36,12 @@ void add_instruction(t_inst *inst, const char *ins)
     inst->size++;
 }
 
-#include <string.h>
 void replace_instruction(t_inode *node, const char *new_value) {
     free(node->value);
     node->value = ft_strdup(new_value);
-}void remove_next_node(t_inode *current) {
+}
+
+void remove_next_node(t_inode *current) {
     if (current->next) {
         t_inode *temp = current->next;
         current->next = temp->next;
@@ -48,13 +49,13 @@ void replace_instruction(t_inode *node, const char *new_value) {
         free(temp);
     }
 }
+
 void optimize_instructions(t_inst *inst)
 {
     if (!inst || !inst->top)
         return;
 
     int optimized = 1;
-
     while (optimized)
     {
         optimized = 0;
@@ -63,35 +64,39 @@ void optimize_instructions(t_inst *inst)
 
         while (current && current->next)
         {
+            char *cur = current->value;
+            char *nxt = current->next->value;
+
             // Combine ra and rb into rr
-            if (((strcmp(current->value, "ra") == 0 && strcmp(current->next->value, "rb") == 0) ||
-                 (strcmp(current->value, "rb") == 0 && strcmp(current->next->value, "ra") == 0)) &&
-                !(strcmp(current->value, "rr") == 0)) { // Ensure not already "rr"
+            if (((strcmp(cur, "ra") == 0 && strcmp(nxt, "rb") == 0) ||
+                 (strcmp(cur, "rb") == 0 && strcmp(nxt, "ra") == 0)) &&
+                !(strcmp(cur, "rr") == 0))
+            {
                 replace_instruction(current, "rr");
                 remove_next_node(current);
                 inst->size--;
                 optimized = 1;
                 continue;
             }
-            else if (((strcmp(current->value, "rra") == 0 && strcmp(current->next->value, "rrb") == 0) ||
-                      (strcmp(current->value, "rrb") == 0 && strcmp(current->next->value, "rra") == 0)) &&
-                     !(strcmp(current->value, "rrr") == 0)) { // Ensure not already "rrr"
+            // Combine rra and rrb into rrr
+            else if (((strcmp(cur, "rra") == 0 && strcmp(nxt, "rrb") == 0) ||
+                      (strcmp(cur, "rrb") == 0 && strcmp(nxt, "rra") == 0)) &&
+                     !(strcmp(cur, "rrr") == 0))
+            {
                 replace_instruction(current, "rrr");
                 remove_next_node(current);
                 inst->size--;
                 optimized = 1;
                 continue;
             }
-            // Cancel out ra followed by rra
-            else if ((strcmp(current->value, "ra") == 0 && strcmp(current->next->value, "rra") == 0) ||
-                     (strcmp(current->value, "rra") == 0 && strcmp(current->next->value, "ra") == 0))
+            // Cancel out ra and rra
+            else if ((strcmp(cur, "ra") == 0 && strcmp(nxt, "rra") == 0) ||
+                     (strcmp(cur, "rra") == 0 && strcmp(nxt, "ra") == 0))
             {
-                // Remove both instructions
                 if (prev)
                     prev->next = current->next->next;
                 else
                     inst->top = current->next->next;
-
                 free(current->value);
                 free(current->next->value);
                 free(current->next);
@@ -101,16 +106,14 @@ void optimize_instructions(t_inst *inst)
                 current = prev ? prev->next : inst->top;
                 continue;
             }
-            // Similarly, cancel out rb and rrb
-            else if ((strcmp(current->value, "rb") == 0 && strcmp(current->next->value, "rrb") == 0) ||
-                     (strcmp(current->value, "rrb") == 0 && strcmp(current->next->value, "rb") == 0))
+            // Cancel out rb and rrb
+            else if ((strcmp(cur, "rb") == 0 && strcmp(nxt, "rrb") == 0) ||
+                     (strcmp(cur, "rrb") == 0 && strcmp(nxt, "rb") == 0))
             {
-                // Remove both instructions
                 if (prev)
                     prev->next = current->next->next;
                 else
                     inst->top = current->next->next;
-
                 free(current->value);
                 free(current->next->value);
                 free(current->next);
@@ -120,8 +123,97 @@ void optimize_instructions(t_inst *inst)
                 current = prev ? prev->next : inst->top;
                 continue;
             }
-            // Add more optimization rules as needed
+            // Remove double swaps (sa+sa, sb+sb, ss+ss)
+            else if ((strcmp(cur, "sa") == 0 && strcmp(nxt, "sa") == 0) ||
+                     (strcmp(cur, "sb") == 0 && strcmp(nxt, "sb") == 0) ||
+                     (strcmp(cur, "ss") == 0 && strcmp(nxt, "ss") == 0))
+            {
+                if (prev)
+                    prev->next = current->next->next;
+                else
+                    inst->top = current->next->next;
+                free(current->value);
+                free(current->next->value);
+                free(current->next);
+                free(current);
+                inst->size -= 2;
+                optimized = 1;
+                current = prev ? prev->next : inst->top;
+                continue;
+            }
+            // Cancel out pa followed by pb (and pb followed by pa)
+            else if ((strcmp(cur, "pa") == 0 && strcmp(nxt, "pb") == 0) ||
+                     (strcmp(cur, "pb") == 0 && strcmp(nxt, "pa") == 0))
+            {
+                if (prev)
+                    prev->next = current->next->next;
+                else
+                    inst->top = current->next->next;
+                free(current->value);
+                free(current->next->value);
+                free(current->next);
+                free(current);
+                inst->size -= 2;
+                optimized = 1;
+                current = prev ? prev->next : inst->top;
+                continue;
+            }
+            // Nouvelles optimisations :
+            // rr + rra => rb (on tourne les deux piles en avant, puis on inverse A)
+            else if (strcmp(cur, "rr") == 0 && strcmp(nxt, "rra") == 0)
+            {
+                replace_instruction(current, "rb");
+                remove_next_node(current);
+                inst->size--;
+                optimized = 1;
+                continue;
+            }
+            // rr + rrb => ra
+            else if (strcmp(cur, "rr") == 0 && strcmp(nxt, "rrb") == 0)
+            {
+                replace_instruction(current, "ra");
+                remove_next_node(current);
+                inst->size--;
+                optimized = 1;
+                continue;
+            }
+            // rrr + ra => rrb
+            else if (strcmp(cur, "rrr") == 0 && strcmp(nxt, "ra") == 0)
+            {
+                replace_instruction(current, "rrb");
+                remove_next_node(current);
+                inst->size--;
+                optimized = 1;
+                continue;
+            }
+            // rrr + rb => rra
+            else if (strcmp(cur, "rrr") == 0 && strcmp(nxt, "rb") == 0)
+            {
+                replace_instruction(current, "rra");
+                remove_next_node(current);
+                inst->size--;
+                optimized = 1;
+                continue;
+            }
+            // rr + rrr => annule tout
+            else if ((strcmp(cur, "rr") == 0 && strcmp(nxt, "rrr") == 0) ||
+                     (strcmp(cur, "rrr") == 0 && strcmp(nxt, "rr") == 0))
+            {
+                if (prev)
+                    prev->next = current->next->next;
+                else
+                    inst->top = current->next->next;
+                free(current->value);
+                free(current->next->value);
+                free(current->next);
+                free(current);
+                inst->size -= 2;
+                optimized = 1;
+                current = prev ? prev->next : inst->top;
+                continue;
+            }
 
+            // If no optimization pattern matched, move forward
             prev = current;
             current = current->next;
         }
@@ -141,3 +233,4 @@ void	print_instructions(t_inst *inst)
 		inode = inode->next;
 	}
 }
+
