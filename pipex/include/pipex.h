@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:29 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/09 20:08:22 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/15 20:48:31 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,15 @@
 # define PIPEX_H
 
 # include "../libft/include/libft.h"
-# include "../libft/include/ft_printf.h"
+# include <stdio.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 
-typedef struct s_cmd
-{
-	int		fd;
-	char	**args;
-}	t_cmd;
-
-typedef struct s_pipex
-{
-	char	*infile;
-	char	*outfile;
-	t_cmd	*cmds;
-	int		cmds_num;
-}	t_pipex;
+void	error_msg(const char *msg);
+void	execute_cmd(char *cmd, char **envp);
+void	close_pipes(int *pipes, int n);
+int		*init_pipes(int nb_cmds);
+void	wait_for_children(int nb_cmds);
+void	free_str_array(char **array);
 
 #endif
