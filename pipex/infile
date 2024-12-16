@@ -28,3 +28,35 @@ Nemo quaeso miretur, si post exsudatos labores
 Raptim igitur properantes ut motus sui rumores
 Quae dum ita struuntur, indicatum est apud Tyrum
 Ardeo, mihi credite, Patres conscripti (id quod
+Mensarum enim voragines et varias voluptatum
+Saepissime igitur mihi de amicitia cogitanti
+Quapropter a natura mihi videtur potius quam ab
+Circa hos dies Lollianus primae lanuginis
+Et hanc quidem praeter oppida multa duae civitates
+Emensis itaque difficultatibus multis et nive
+Eo adducta re per Isauriam, rege Persarum bellis
+Raptim igitur properantes ut motus sui rumores
+Oportunum est, ut arbitror, explanare nunc causam,
+Eminuit autem inter humilia supergressa iam
+Nec minus feminae quoque calamitatum participes
+Siquis enim militarium vel honoratorum aut nobilis
+Et quoniam mirari posse quosdam peregrinos
+Orientis vero limes in longum protentus et rectum
+Haec igitur prima lex amicitiae sanciatur, ut ab
+Quam quidem partem accusationis admiratus sum et
+Unde Rufinus ea tempestate praefectus praetorio ad
+Sin autem ad adulescentiam perduxissent, dirimi
+Quo cognito Constantius ultra mortalem modum
+Quod si rectum statuerimus vel concedere amicis,
+Proinde concepta rabie saeviore, quam desperatio
+Utque aegrum corpus quassari etiam levibus solet
+Post hoc impie perpetratum quod in aliis quoque
+Dumque ibi diu moratur commeatus opperiens, quorum
+Martinus agens illas provincias pro praefectis
+Hoc inmaturo interitu ipse quoque sui pertaesus
+Nemo quaeso miretur, si post exsudatos labores
+Raptim igitur properantes ut motus sui rumores
+Quae dum ita struuntur, indicatum est apud Tyrum
+Ardeo, mihi credite, Patres conscripti (id quod
+
+./pipex infile "cut -d ' ' -f 1" "sort -r" "tr '[:lower:]' '[:upper:]'" outfile
