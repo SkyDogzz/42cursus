@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/13 19:53:56 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:40:41 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 # define HEIGHT_DIV 1.0
 # define HEIGHT_MODIFIER 0.8
 # define ZOOM 0.25
-# define ZOOM_MODIFIER 0.8
+# define ZOOM_MODIFIER 0.95
 # define SEED 123456
-# define ROTATE_DIV 32
-# define OFFSET_DIV 20
+# define ROTATE_DIV 320
+# define OFFSET_DIV 200
 # define HELPER FALSE
 # define HELPER_START 0xFF00FF
 # define HELPER_END 0x00FF00

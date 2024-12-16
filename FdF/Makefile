@@ -16,6 +16,7 @@ MLX_DIR = ./.minilibx
 
 SRC_FILES = color_utils.c zoom_utils.c map_utils.c map_parsing.c rotation_utils.c draw_utils.c helper_utils.c event_handling.c math_utils.c key.c main.c
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
+INC_FILES = include/fdf.h
 
 NAME = fdf
 
@@ -33,7 +34,7 @@ $(NAME): $(OBJ_FILES)
 	@$(CC) $(CFLAGS) $^ $(LDFLAGS) -o $@
 	@echo "$(_CYAN)[LINKING]$(_END) $(NAME) est créé !"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_FILES)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "$(_CYAN)[COMPILATION]$(_END) Création de l'objet : $@"

@@ -1,6 +1,0 @@
-==2089669== Memcheck, a memory error detector
-==2089669== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==2089669== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==2089669== Command: ./pipex file1 wc file5
-==2089669== Parent PID: 2020980
-==2089669== 
