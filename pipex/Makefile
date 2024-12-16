@@ -13,7 +13,7 @@ INC_DIR = include
 LIBFT_SRC_DIR = ../Libft2
 LIBFT_DIR = libft
 
-SRC_FILES = main.c
+SRC_FILES = parse.c path.c pipex.c process.c utils.c
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 NAME = pipex
