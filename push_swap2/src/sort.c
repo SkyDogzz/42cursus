@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:56:05 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/13 02:40:09 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/13 07:55:19 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,12 @@ int	find_insert_position(t_node *node, int value, t_stack *s2)
 			next_node = node->next;
 		else
 			next_node = s2->top;
-		if ((node->value < value && value < next_node->value)
-			|| (node->value > next_node->value
-				&& (value < next_node->value || value > node->value)))
-			return (i + 1);
+	
+if ((node->value > value && value > next_node->value)
+    || (node->value < next_node->value
+        && (value > next_node->value || value < node->value)))
+    return (i + 1);
+
 		node = node->next;
 		i++;
 	}
@@ -208,7 +210,7 @@ void	repush(t_inst *inst, t_stack *stack, t_stack *temp)
 	get_borne(temp, &min, &max);
 	get_on_top(inst, temp, max);
 	while (temp->top)
-		execpb(inst, stack, pop(temp));
+		execpa(inst, stack, pop(temp));
 }
 
 void	sort_stack(t_inst *inst, t_stack *stack, t_stack *temp)
@@ -218,14 +220,13 @@ void	sort_stack(t_inst *inst, t_stack *stack, t_stack *temp)
 	if (!stack->top)
 		return ;
 	if (stack->top->next)
-		execpa(inst, temp, pop(stack));
+		execpb(inst, temp, pop(stack));
 	if (stack->top)
-		execpa(inst, temp, pop(stack));
+		execpb(inst, temp, pop(stack));
 	while (stack->top)
 	{
 		cheapest_index = find_cheapest(stack, temp);
 		move_cheapest(inst ,cheapest_index, stack, temp);
 	}
 	repush(inst, stack, temp);
-	execrra(inst, stack);
 }

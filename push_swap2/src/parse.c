@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 04:26:37 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/12 13:40:32 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/13 07:51:49 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,33 @@ t_bool	args_valid(const char *args)
 	return (TRUE);
 }
 
+void push_bottom(t_stack *stack, int value) {
+    t_node *new_node = malloc(sizeof(t_node));
+    if (!new_node) {
+        exit(EXIT_FAILURE);
+    }
+    new_node->value = value;
+    new_node->next = NULL;
+
+    if (stack->top == NULL) {
+        // If the stack is empty, set top to the new node
+        stack->top = new_node;
+    } else {
+        // Traverse to the last node
+        t_node *current = stack->top;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        // Link the new node at the end
+        current->next = new_node;
+    }
+
+    stack->size++;
+}
+
 void	get_args(t_stack *stack, const char *s)
 {
-	push(stack, ft_atoi(s));
+	push_bottom(stack, ft_atoi(s));
 	while (*s)
 	{
 		while (ft_isdigit(*s))
@@ -44,7 +68,7 @@ void	get_args(t_stack *stack, const char *s)
 			s++;
 		if (*s == 0)
 			return ;
-		push(stack, ft_atoi(s));
+		push_bottom(stack, ft_atoi(s));
 	}
 }
 
