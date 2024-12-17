@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:01:56 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/17 17:38:17 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:24:33 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,13 @@ void	free_inst(t_inst *inst)
 	if (!inst)
 		return ;
 	current = inst->top;
-	while (current)
+	while (inst->size)
 	{
 		temp = current;
 		current = current->next;
 		free(temp->value);
 		free(temp);
+		inst->size--;
 	}
 	free(inst);
 }
@@ -62,9 +63,10 @@ int	main(int argc, char *argv[])
 	stack = parse_args(stack, argc, argv);
 	print_stack(stack);
 	sort_stack(inst, stack, temp);
-	print_stack(stack);
 	optimize_instructions(inst);
 	print_instructions(inst);
+	print_stack(stack);
+	print_stack(temp);
 	free_stack(stack);
 	free_stack(temp);
 	free_inst(inst);
