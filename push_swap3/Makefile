@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Ofast -march=native -I$(INC_DIR) -I$(LIBFT_DIR)/include
+# CFLAGS = -Wall -Wextra -Werror -Ofast -march=native -I$(INC_DIR) -I$(LIBFT_DIR)/include
 LDFLAGS = -L$(LIBFT_DIR) -lft
 
 _END    = $(shell printf "\033[0m")
@@ -57,7 +57,7 @@ ascii:
 	@echo $(_END)
 
 MAX=500
-run_valgrind:
+run_valgrind: all
 	@ARG="$$(shuf -i 1-$(MAX) -n $(MAX) | tr '\n' ' ' | sed 's/ $$//')"; \
 	valgrind -s --leak-check=full ./push_swap $$ARG
 
