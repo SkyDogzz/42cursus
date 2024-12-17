@@ -65,4 +65,7 @@ run:
 	@ARG="$$(shuf -i 1-$(MAX) -n $(MAX) | tr '\n' ' ' | sed 's/ $$//')"; \
 	./$(NAME) $$ARG
 
+lint:
+	@cppcheck --enable=all --inconclusive --std=c99 $(INC_DIR) $(SRC_DIR)
+
 .PHONY: all clean fclean re ascii
