@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:00:03 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/17 19:35:40 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:45:09 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <string.h>
@@ -39,7 +39,7 @@ void	remove_node(t_inst *inst, t_inode *previous)
 	t_inode	*tmp;
 
 	if (!inst || !inst->top)
-		return;
+		return ;
 	if (!previous)
 	{
 		tmp = inst->top;
@@ -49,12 +49,33 @@ void	remove_node(t_inst *inst, t_inode *previous)
 	{
 		tmp = previous->next;
 		if (!tmp)
-			return;
+			return ;
 		previous->next = tmp->next;
 	}
 	free(tmp->value);
 	free(tmp);
 	inst->size--;
+}
+
+int	adjacent_pushs(t_inst *inst, t_inode **node, t_inode **previous)
+{
+	if (*previous && *node && (*node)->next)
+	{
+		if ((!ft_strncmp((*node)->value, "pb", 2)
+				&& !ft_strncmp((*node)->next->value, "pa", 2))
+			|| (!ft_strncmp((*node)->value, "pa", 2)
+				&& !ft_strncmp((*node)->next->value, "pb", 2)))
+		{
+			remove_node(inst, *previous);
+			remove_node(inst, *previous);
+			if (*previous)
+				*node = (*previous)->next;
+			else
+				*node = inst->top;
+			return (1);
+		}
+	}
+	return (0);
 }
 
 void	optimize_instructions(t_inst *inst)
@@ -70,18 +91,10 @@ void	optimize_instructions(t_inst *inst)
 		node = inst->top;
 		previous = NULL;
 		if (!node)
-			break;
+			break ;
 		while (node && node->next)
 		{
-			if (previous)
-				if ((!ft_strncmp(node->value, "pb", 2) && !ft_strncmp(node->next->value, "pa", 2))|
-				(!ft_strncmp(node->value, "pa", 2) && !ft_strncmp(node->next->value, "pb", 2)))
-				{
-					remove_node(inst, previous);
-					remove_node(inst, previous);
-					optimized = 1;
-					node = (previous) ? previous->next : inst->top;
-				}
+			optimized += adjacent_pushs(inst, &node, &previous);
 			previous = node;
 			node = node->next;
 		}
