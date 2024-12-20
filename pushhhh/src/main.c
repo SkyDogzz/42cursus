@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 17:57:31 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/20 20:05:03 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/20 20:14:57 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char *argv[])
 	rotate_stack(wrapper->main);
 	print_stack(wrapper->main);
 	rotate_stack(wrapper->main);
-	print_stack(wrapper->main);	
+	print_stack(wrapper->main);
 	rev_rotate_stack(wrapper->main);
 	print_stack(wrapper->main);
 	rev_rotate_stack(wrapper->main);

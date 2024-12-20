@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 18:05:58 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/20 18:52:59 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/20 20:14:51 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_bool	push_stack(t_stack *stack, t_snode *node)
 	stack->top = node;
 	stack->top->next = mem;
 	stack->size++;
-		return (TRUE);
+	return (TRUE);
 }
 
 int	pop_stack(t_stack	*stack)
@@ -92,25 +92,25 @@ int	pop_stack(t_stack	*stack)
 
 void	print_stack(t_stack *stack)
 {
-    t_snode	*current;
+	t_snode	*current;
 
-    if (is_empty_stack(stack))
-    {
-        ft_printf("Stack is empty\n");
-        return;
-    }
-    current = stack->top;
-    while (current != NULL)
-    {
-        ft_printf("%d ", current->value);
-        current = current->next;
-    }
-    ft_printf("\n");
+	if (is_empty_stack(stack))
+	{
+		ft_printf("Stack is empty\n");
+		return ;
+	}
+	current = stack->top;
+	while (current != NULL)
+	{
+		ft_printf("%d ", current->value);
+		current = current->next;
+	}
+	ft_printf("\n");
 }
 
 void	free_stack(t_stack *stack)
 {
-	t_snode *current;
+	t_snode	*current;
 	t_snode	*next;
 
 	next = stack->top;

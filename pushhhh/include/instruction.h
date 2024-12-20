@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 19:44:23 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/20 20:05:25 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/20 20:13:29 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 # include <stddef.h>
 # include "../libft/include/libft.h"
 
-typedef	struct s_inode
+typedef struct s_inode
 {
 	char			*value;
 	struct s_inode	*next;
 }	t_inode;
 
-typedef	struct s_inst
+typedef struct s_inst
 {
 	t_inode	*top;
 	size_t	size;

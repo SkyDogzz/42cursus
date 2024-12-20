@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 19:51:36 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/20 20:11:44 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/20 20:15:05 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_inst	*create_inst(void)
 
 t_inode	*create_inode(char *value)
 {
-t_inode	*node;
+	t_inode	*node;
 
 	node = (t_inode *)malloc(sizeof(t_inode));
 	if (!node)
@@ -44,7 +44,7 @@ t_inode	*node;
 
 void	free_inst(t_inst *inst)
 {
-	t_inode *current;
+	t_inode	*current;
 	t_inode	*next;
 
 	next = inst->top;
