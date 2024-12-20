@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   instruction.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/20 17:58:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/20 20:02:35 by tstephan         ###   ########.fr       */
+/*   Created: 2024/12/20 19:44:23 by tstephan          #+#    #+#             */
+/*   Updated: 2024/12/20 20:05:25 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef INSTRUCTION_H
+# define INSTRUCTION_H
 
+# include <stddef.h>
 # include "../libft/include/libft.h"
-# include "../libft/include/ft_printf.h"
-# include "../include/stack.h"
-# include "../include/instruction.h"
 
-typedef	struct s_wrapper
+typedef	struct s_inode
 {
-	t_stack	*main;
-	t_stack *temp;
-	t_inst	*inst;
-}	t_wrapper;
+	char			*value;
+	struct s_inode	*next;
+}	t_inode;
 
-t_wrapper	*create_wrapper();
-void	free_wrapper(t_wrapper *wrapper);
+typedef	struct s_inst
+{
+	t_inode	*top;
+	size_t	size;
+}	t_inst;
+
+t_inst	*create_inst(void);
+t_inode	*create_inode(char *value);
+void	free_inst(t_inst *inst);
+void	add_inst(t_inst *inst, char *value);
+void	print_inst(t_inst *inst);
 
 #endif

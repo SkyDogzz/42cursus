@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 17:57:31 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/20 19:25:35 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/20 20:05:03 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ int	main(int argc, char *argv[])
 	ft_printf("%d popped of the stack\n", pop_stack(wrapper->main));
 	print_stack(wrapper->main);
 	ft_printf("Stack size = %d\n", size_stack(wrapper->main));
+	add_inst(wrapper->inst, "first inst");
+	add_inst(wrapper->inst, "second inst");
+	add_inst(wrapper->inst, "third inst");
+	print_inst(wrapper->inst);
 	free_wrapper(wrapper);
 	return (EXIT_SUCCESS);
 }

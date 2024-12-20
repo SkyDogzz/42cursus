@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 18:00:06 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/20 19:22:36 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/20 19:45:27 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,6 @@ typedef struct s_stack
 	size_t	size;
 }	t_stack;
 
-typedef	struct s_wrapper
-{
-	t_stack	*main;
-	t_stack *temp;
-}	t_wrapper;
-
 t_stack	*create_stack();
 t_bool	is_empty_stack(t_stack *stack);
 int		size_stack(t_stack	*stack);
@@ -48,7 +42,5 @@ void	rotate_stack(t_stack *stack);
 void	rev_rotate_stack(t_stack *stack);
 void	swap(t_stack *stack);
 
-t_wrapper	*create_wrapper();
-void	free_wrapper(t_wrapper *wrapper);
 
 #endif
