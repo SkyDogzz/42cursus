@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/20 17:58:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/20 20:21:30 by tstephan         ###   ########.fr       */
+/*   Created: 2024/12/20 20:19:20 by tstephan          #+#    #+#             */
+/*   Updated: 2024/12/20 20:32:16 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef PARSE_H
+# define PARSE_H
 
-# include "../libft/include/libft.h"
-# include "../libft/include/ft_printf.h"
 # include "../include/stack.h"
-# include "../include/instruction.h"
-# include "../include/parse.h"
 
-typedef struct s_wrapper
-{
-	t_stack	*main;
-	t_stack	*temp;
-	t_inst	*inst;
-}	t_wrapper;
-
-t_wrapper	*create_wrapper(void);
-void		free_wrapper(t_wrapper *wrapper);
+t_bool	parse_arg(t_stack *stack, int argc, char *argv[]);
+t_bool	check_stack(t_stack *stack);
 
 #endif

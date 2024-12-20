@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/20 17:58:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/20 20:21:30 by tstephan         ###   ########.fr       */
+/*   Created: 2024/12/20 20:22:19 by tstephan          #+#    #+#             */
+/*   Updated: 2024/12/20 20:32:53 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "../include/push_swap.h"
 
-# include "../libft/include/libft.h"
-# include "../libft/include/ft_printf.h"
-# include "../include/stack.h"
-# include "../include/instruction.h"
-# include "../include/parse.h"
-
-typedef struct s_wrapper
+t_bool	parse_arg(t_stack *stack, int argc, char *argv[])
 {
-	t_stack	*main;
-	t_stack	*temp;
-	t_inst	*inst;
-}	t_wrapper;
+	int pos;
 
-t_wrapper	*create_wrapper(void);
-void		free_wrapper(t_wrapper *wrapper);
+	pos = 1;
+	while (pos < argc)
+	{
+		push_stack(stack, create_node(ft_atoi(argv[pos])));
+		pos++;
+	}
+	return (TRUE);
+}
 
-#endif
+t_bool	check_stack(t_stack *stack)
+{
+	// TODO
+	return (TRUE);
+}
