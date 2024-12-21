@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 17:57:31 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/20 20:32:56 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:03:46 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	wrapper = create_wrapper();
-	if (!parse_arg(wrapper->main, argc, argv) || !check_stack(wrapper->main))
+	if (!parse_arg(wrapper->main, argc, argv) || !check_stack(wrapper->main,
+			argc, argv))
 	{
 		ft_dprintf(2, "Args not correct\n");
 		free_wrapper(wrapper);
