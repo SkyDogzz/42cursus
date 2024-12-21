@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 17:58:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/21 23:03:37 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/21 23:12:03 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@ typedef struct s_wrapper
 t_wrapper	*create_wrapper(void);
 void		free_wrapper(t_wrapper *wrapper);
 
-void	execsa(t_wrapper *wrapper);
-void	execsb(t_wrapper *wrapper);
-void	execss(t_wrapper *wrapper);
-void	execpa(t_wrapper *wrapper);
-void	execpb(t_wrapper *wrapper);
-void	execra(t_wrapper *wrapper);
-void	execrb(t_wrapper *wrapper);
-void	execrr(t_wrapper *wrapper);
-void	execrra(t_wrapper *wrapper);
-void	execrrb(t_wrapper *wrapper);
-	
+void		execsa(t_wrapper *wrapper);
+void		execsb(t_wrapper *wrapper);
+void		execss(t_wrapper *wrapper);
+void		execpa(t_wrapper *wrapper);
+void		execpb(t_wrapper *wrapper);
+void		execra(t_wrapper *wrapper);
+void		execrb(t_wrapper *wrapper);
+void		execrr(t_wrapper *wrapper);
+void		execrra(t_wrapper *wrapper);
+void		execrrb(t_wrapper *wrapper);
+
 void		sort_stack(t_wrapper *wrapper);
 
 #endif

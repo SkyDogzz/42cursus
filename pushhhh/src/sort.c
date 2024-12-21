@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:19:26 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/21 23:06:15 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/21 23:13:40 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ static void	sort_three(t_wrapper *wrapper)
 	node[0] = wrapper->main->top->value;
 	node[1] = wrapper->main->top->next->value;
 	node[2] = wrapper->main->top->next->next->value;
-	if (node[0] < node[1] && node[1] > node[2] && node[2] > node[0])
-	{
-		execsa(wrapper);
-		execra(wrapper);
-	}
-	else if (node[0] < node[1] && node[1] > node[2] && node[2] < node[0])
+	if (node[0] < node[1] && node[1] > node[2] && node[2] < node[0])
 		execrra(wrapper);
 	else if (node[0] > node[1] && node[1] < node[2] && node[2] < node[0])
 		execra(wrapper);
-	else if (node[0] > node[1] && node[1] > node[2] && node[2] < node[0])
-	{
-	execsa(wrapper);
-	execrra(wrapper);
-	}
 	else if (node[0] > node[1] && node[1] < node[2] && node[2] > node[0])
 		execsa(wrapper);
+	else if (node[0] < node[1] && node[1] > node[2] && node[2] > node[0])
+	{
+		execsa(wrapper);
+		execra(wrapper);
+	}
+	else if (node[0] > node[1] && node[1] > node[2] && node[2] < node[0])
+	{
+		execsa(wrapper);
+		execrra(wrapper);
+	}
 }
 
 void	sort_stack(t_wrapper *wrapper)
