@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 19:51:36 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/20 20:15:05 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/21 23:07:09 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	print_inst(t_inst *inst)
 	current = inst->top;
 	while (current)
 	{
-		ft_printf("%s\n", current->value);
+		ft_printf("%s", current->value);
 		current = current->next;
 	}
 }

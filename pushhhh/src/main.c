@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 17:57:31 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/21 14:03:46 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/21 22:25:59 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int	main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	print_stack(wrapper->main);
+	sort_stack(wrapper);
+	print_stack(wrapper->main);
+	print_inst(wrapper->inst);
 	free_wrapper(wrapper);
 	return (EXIT_SUCCESS);
 }
