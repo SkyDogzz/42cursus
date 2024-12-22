@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:49:38 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/21 23:02:53 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/22 00:21:55 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ void	execss(t_wrapper *wrapper)
 	add_inst(wrapper->inst, "ss\n");
 }
 
-void	execpa(t_wrapper *wrapper)
+void	execpb(t_wrapper *wrapper)
 {
 	push_stack(wrapper->temp, create_node(pop_stack(wrapper->main)));
 	add_inst(wrapper->inst, "pa\n");
 }
 
-void	execpb(t_wrapper *wrapper)
+void	execpa(t_wrapper *wrapper)
 {
 	push_stack(wrapper->main, create_node(pop_stack(wrapper->temp)));
 	add_inst(wrapper->inst, "pb\n");

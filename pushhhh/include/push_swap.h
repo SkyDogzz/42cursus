@@ -6,13 +6,14 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 17:58:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/21 23:12:03 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/22 02:08:31 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include <limits.h>
 # include "../libft/include/libft.h"
 # include "../libft/include/ft_printf.h"
 # include "../include/stack.h"
