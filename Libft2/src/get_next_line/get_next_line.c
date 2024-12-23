@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 12:12:40 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/28 16:09:45 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/23 17:43:08 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static char	*read_and_store(int fd, char *store)
 		if (!store)
 		{
 			store = (char *)malloc(1);
+			if (!store)
+				return (NULL);
 			store[0] = '\0';
 		}
 		temp = ft_strjoin(store, buffer);
