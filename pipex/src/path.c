@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 23:13:30 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/16 23:13:31 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/23 16:26:13 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*construct_full_path(char *path, char *cmd)
 
 	path_len = ft_strlen(path);
 	cmd_len = ft_strlen(cmd);
-	full_path = malloc(path_len + 1 + cmd_len + 1);
+	full_path = (char *)malloc(path_len + 1 + cmd_len + 1);
 	if (!full_path)
 		return (NULL);
 	ft_strlcpy(full_path, path, path_len + 1);

@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 23:13:50 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/23 16:14:33 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/23 16:27:33 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	setup_pipes(int **pipes, int nb_cmds)
 {
 	int	i;
 
-	*pipes = malloc(sizeof(int) * 2 * (nb_cmds - 1));
+	*pipes = (int *)malloc(sizeof(int) * 2 * (nb_cmds - 1));
 	if (!*pipes)
 		error_msg("malloc pipes");
 	i = 0;
