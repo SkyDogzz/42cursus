@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 23:15:10 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/16 23:06:49 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/23 16:22:04 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	add_char_to_arg(char **arg, size_t *arg_len, char c)
 {
 	char	*new_arg;
 
-	new_arg = realloc(*arg, (*arg_len + 2) * sizeof(char));
+	new_arg = ft_realloc(*arg, (*arg_len + 1) * sizeof(char),
+			(*arg_len + 2) * sizeof(char));
 	if (!new_arg)
 	{
 		free(*arg);
@@ -33,7 +34,8 @@ void	add_arg_to_list(char ***args, int *count, char *arg)
 {
 	char	**new_args;
 
-	new_args = realloc(*args, (*count + 2) * sizeof(char *));
+	new_args = ft_realloc(*args, (*count + 1) * sizeof(char *),
+			(*count + 2) * sizeof(char *));
 	if (!new_args)
 	{
 		perror("realloc");

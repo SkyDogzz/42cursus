@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 23:38:07 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/23 15:21:50 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/23 16:14:18 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc < 5)
 	{
-		ft_dprintf(2 , "Usage: %s infile cmd1 cmd2 [cmd3 ... cmdN] outfile\n",
+		ft_dprintf(2, "Usage: %s infile cmd1 cmd2 [cmd3 ... cmdN] outfile\n",
 			argv[0]);
 		return (1);
 	}

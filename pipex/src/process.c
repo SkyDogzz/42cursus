@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 23:13:50 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/23 15:19:58 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/23 16:14:33 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@ void	wait_for_processes(int nb_cmds)
 {
 	int	i;
 	int	status;
-	int	exit_code = 0;
+	int	exit_code;
 
+	exit_code = 0;
 	i = 0;
 	while (i < nb_cmds)
 	{
@@ -73,7 +74,8 @@ void	wait_for_processes(int nb_cmds)
 			exit_code = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
 		{
-			ft_dprintf(2, "Process terminated by signal: %d\n", WTERMSIG(status));
+			ft_dprintf(2, "Process terminated by signal: %d\n",
+				WTERMSIG(status));
 			exit_code = 128 + WTERMSIG(status);
 		}
 		i++;

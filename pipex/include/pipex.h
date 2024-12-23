@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:29 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/23 15:21:17 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/23 16:20:09 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ char	**parse_args(const char *cmd_line);
 void	setup_pipes(int **pipes, int nb_cmds);
 void	wait_for_processes(int nb_cmds);
 void	spawn_processes(int nb_cmds, char **argv, char **envp, int *pipes);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 #endif
