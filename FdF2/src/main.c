@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:44:02 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/23 17:46:26 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/23 18:26:06 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	set_hook(t_wrapper *wrapper)
 	mlx_hook(wrapper->data.win_ptr, KeyRelease, KeyReleaseMask,
 		&handle_keyrelease, wrapper);
 	mlx_do_key_autorepeatoff(wrapper->data.mlx_ptr);
+	base_rotate(wrapper);
 }
 
 int	main(int argc, char *argv[])
