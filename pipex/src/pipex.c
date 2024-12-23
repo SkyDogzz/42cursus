@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 23:38:07 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/16 23:40:58 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/23 15:21:50 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	execute_cmd(char *cmd, char **envp)
 	args = parse_args(cmd);
 	if (!args || !args[0])
 	{
-		fprintf(stderr, "Command not found: %s\n", cmd);
+		ft_dprintf(2, "Command not found: %s\n", cmd);
 		exit(EXIT_FAILURE);
 	}
 	if (ft_strchr(args[0], '/'))
@@ -30,7 +30,7 @@ void	execute_cmd(char *cmd, char **envp)
 		path = get_path(args[0], envp);
 		if (!path)
 		{
-			fprintf(stderr, "Command not found: %s\n", args[0]);
+			ft_dprintf(2, "Command not found: %s\n", args[0]);
 			exit(EXIT_FAILURE);
 		}
 		execve(path, args, envp);
@@ -47,7 +47,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc < 5)
 	{
-		fprintf(stderr, "Usage: %s infile cmd1 cmd2 [cmd3 ... cmdN] outfile\n",
+		ft_dprintf(2 , "Usage: %s infile cmd1 cmd2 [cmd3 ... cmdN] outfile\n",
 			argv[0]);
 		return (1);
 	}
@@ -56,5 +56,5 @@ int	main(int argc, char **argv, char **envp)
 	spawn_processes(nb_cmds, argv, envp, pipes);
 	free(pipes);
 	wait_for_processes(nb_cmds);
-	return (0);
+	return (EXIT_SUCCESS);
 }

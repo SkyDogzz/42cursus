@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:18:29 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/16 23:40:24 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/23 15:21:17 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_H
 
 # include "../libft/include/libft.h"
+# include "../libft/include/ft_printf.h"
 # include <stdio.h>
 # include <fcntl.h>
 # include <sys/wait.h>
