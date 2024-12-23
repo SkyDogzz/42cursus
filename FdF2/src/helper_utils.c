@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:29:56 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/17 16:22:03 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/23 17:47:07 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	display_menudown(t_wrapper *w, int y)
 	num = ft_itoa(w->offset_div);
 	joined = ft_strjoin("(shift - ctrl / ',' - '.') OFFSET DIV ", num);
 	free(num);
-	mlx_string_put(w->data.mlx_ptr, w->data.win_ptr, 20, y -= 15, c, joined);	
+	mlx_string_put(w->data.mlx_ptr, w->data.win_ptr, 20, y -= 15, c, joined);
 	free(joined);
 	num = ft_itoa(w->rotate_div);
 	joined = ft_strjoin("(shift - ctrl / '[' - ']') ROTATION ", num);
@@ -80,7 +80,6 @@ void	display_menudown(t_wrapper *w, int y)
 	mlx_string_put(w->data.mlx_ptr, w->data.win_ptr, 20, y -= 15, c, joined2);
 	free(joined2);
 	display_menudown2(w, y);
-
 }
 
 void	display_menu(t_wrapper *wrapper)

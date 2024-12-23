@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:11:36 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/08 22:41:07 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/23 17:47:42 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	change_height(t_wrapper *wrapper)
 	else
 		wrapper->map->height_div /= HEIGHT_MODIFIER;
 	if (wrapper->map->height_div > 100)
-		wrapper->map->height_div = before;	
+		wrapper->map->height_div = before;
 	refill_map(wrapper);
 	base_rotate(wrapper);
 	display_map(wrapper);

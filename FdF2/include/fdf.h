@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/16 15:40:41 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/23 17:45:10 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,7 @@ void	add_key(t_list **keys, int keycode);
 void	remove_key(t_list **keys, int keycode);
 t_bool	inlist(t_list *keys, int keycode);
 void	free_keys(t_list **keys);
-int	handle_rotation_translation(t_wrapper *wrapper);
-int	handle_misc(t_wrapper *wrapper);
+int		handle_rotation_translation(t_wrapper *wrapper);
+int		handle_misc(t_wrapper *wrapper);
 
 #endif

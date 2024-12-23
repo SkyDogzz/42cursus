@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:44:02 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/17 16:12:15 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/23 17:46:26 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,13 @@ int	main(int argc, char *argv[])
 	wrapper.map->filename = argv[1];
 	setup_map(&wrapper);
 	wrapper.data.mlx_ptr = mlx_init();
+	if (!wrapper.data.mlx_ptr)
+		return (EXIT_FAILURE);
 	wrapper.data.win_ptr = mlx_new_window(wrapper.data.mlx_ptr, WINDOW_WIDTH,
 			WINDOW_HEIGHT, "FdF Goes Brrr!!!");
+	if (!wrapper.data.win_ptr)
+		return (EXIT_FAILURE);
 	set_hook(&wrapper);
-	base_rotate(&wrapper);
 	display_map(&wrapper);
 	mlx_loop(wrapper.data.mlx_ptr);
 	mlx_destroy_display(wrapper.data.mlx_ptr);

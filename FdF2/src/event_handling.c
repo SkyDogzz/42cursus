@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:32:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/17 16:06:31 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/23 17:52:44 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ int	handle_rotation_translation(t_wrapper *wrapper)
 	t_list	*keys;
 
 	keys = wrapper->keys;
-	if (inlist(keys, X_CODE) || inlist(keys, Y_CODE) ||
-		inlist(keys, Z_CODE))
-			rotate(wrapper);
-	if (inlist(keys, LEFT_ARROW_CODE) || inlist(keys, UP_ARROW_CODE) ||
-		inlist(keys, RIGHT_ARROW_CODE) || inlist(keys, DOWN_ARROW_CODE))
-			translate_camera(wrapper);
+	if (inlist(keys, X_CODE) || inlist(keys, Y_CODE)
+		|| inlist(keys, Z_CODE))
+		rotate(wrapper);
+	if (inlist(keys, LEFT_ARROW_CODE) || inlist(keys, UP_ARROW_CODE)
+		|| inlist(keys, RIGHT_ARROW_CODE) || inlist(keys, DOWN_ARROW_CODE))
+		translate_camera(wrapper);
 	if (inlist(keys, COMMA_CODE) || inlist(keys, DOT_CODE))
 		change_translate_div(wrapper);
 	if (inlist(keys, BRACE_O_CODE) || inlist(keys, BRACE_C_CODE))
@@ -101,9 +101,9 @@ int	handle_misc(t_wrapper *wrapper)
 	if (inlist(keys, W_CODE))
 		reset_map(wrapper);
 	if (inlist(keys, J_CODE) || inlist(keys, K_CODE))
- 		change_height(wrapper);
+		change_height(wrapper);
 	if (inlist(keys, PAGEUP) || inlist(keys, PAGEDOWN))
- 		change_zoom(wrapper);
+		change_zoom(wrapper);
 	return (0);
 }
 
@@ -113,7 +113,6 @@ int	handle_keypress(int keycode, t_wrapper *wrapper)
 	handle_misc(wrapper);
 	if (keycode == ESC_CODE)
 		full_quit(wrapper);
-
 	return (0);
 }
 

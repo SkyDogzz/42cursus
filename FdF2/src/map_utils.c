@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:09:17 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/10 06:16:14 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/23 17:53:38 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	setup_map(t_wrapper *wrapper)
 t_map	*init_map(t_map *map)
 {
 	map->height_div = HEIGHT_DIV;
-	map->content = malloc(sizeof(t_cont) * (map->dims.width * map->dims.height));
+	map->content = malloc(sizeof(t_cont) * (map->dims.width
+				* map->dims.height));
 	if (!map->content)
 		exit_msg_code("Allocation error\n", 1);
 	return (map);
@@ -46,4 +47,3 @@ void	refill_map(t_wrapper *wrapper)
 	fill_map(wrapper->map, fd);
 	close(fd);
 }
-
