@@ -6,29 +6,11 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/25 16:24:29 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/25 17:14:01 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
-
-void	toggle_menu(t_wrapper *wrapper)
-{
-	if (wrapper->menu == 1)
-		wrapper->menu = 0;
-	else
-		wrapper->menu = 1;
-	display_map(wrapper);
-}
-
-void	toggle_helper(t_wrapper *wrapper)
-{
-	if (wrapper->map->helper == 1)
-		wrapper->map->helper = 0;
-	else
-		wrapper->map->helper = 1;
-	display_map(wrapper);
-}
 
 static void	display_menutop(t_wrapper *w, int *y)
 {
@@ -112,23 +94,20 @@ void	display_menu(t_wrapper *wrapper)
 
 void	draw_helper(t_wrapper *wrapper)
 {
-	t_2vec		line[2];
-	t_2color	clr;
+	t_lineinfo	info;
 
 	if (!wrapper->map->helper)
 		return ;
-	clr.start = HELPER_START;
-	clr.end = HELPER_END;
-	line[0].x = WINDOW_WIDTH / 2;
-	line[0].y = 0;
-	line[1].x = WINDOW_WIDTH / 2;
-	line[1].y = WINDOW_HEIGHT;
-	draw_line_zbuffer(line[0].x, line[0].y, 0,
-		line[1].x, line[1].y, 0, clr, wrapper);
-	line[0].x = 0;
-	line[0].y = WINDOW_HEIGHT / 2;
-	line[1].x = WINDOW_WIDTH;
-	line[1].y = WINDOW_HEIGHT / 2;
-	draw_line_zbuffer(line[0].x, line[0].y, 0,
-		line[1].x, line[1].y, 0, clr, wrapper);
+	info.color.start = HELPER_START;
+	info.color.end = HELPER_END;
+	info.start.x = (float) WINDOW_WIDTH / 2;
+	info.start.y = 0;
+	info.end.x = (float) WINDOW_WIDTH / 2;
+	info.end.y = WINDOW_HEIGHT;
+	draw_line_zbuffer(&info, wrapper);
+	info.start.x = 0;
+	info.start.y = (float) WINDOW_HEIGHT / 2;
+	info.end.x = WINDOW_WIDTH;
+	info.end.y = (float) WINDOW_HEIGHT / 2;
+	draw_line_zbuffer(&info, wrapper);
 }

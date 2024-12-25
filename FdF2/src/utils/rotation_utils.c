@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/25 16:16:07 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/25 16:55:40 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void	base_rotate(t_wrapper *wrapper)
 	rotatex_map(wrapper->map, (float)M_PI / 32.0f * 10.0f);
 	rotatey_map(wrapper->map, (float)M_PI / 32.0f * 7.0f);
 	rotatez_map(wrapper->map, -(float)M_PI / 32.0f * 4.0f);
+	rotatex_map(wrapper->map, (float)M_PI / 32.0f * 10.0f);
 }

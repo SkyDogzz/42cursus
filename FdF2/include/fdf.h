@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/25 16:08:03 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/25 17:17:43 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,27 +146,25 @@ typedef struct s_color
 
 typedef struct s_line_params
 {
-	int		x0;
-	int		y0;
-	int		x1;
-	int		y1;
-	int		dx;
-	int		dy;
-	int		sxstep;
-	int		systep;
-	int		err;
-	int		e2;
+	t_2vec	p0;
+	t_2vec	p1;
+	t_2vec	d;
+	t_2vec	step;
+	t_2vec	err;
 	float	steps;
 	float	dz;
 	float	current_z;
 	float	t;
-	int		sr;
-	int		sg;
-	int		sb;
-	int		er;
-	int		eg;
-	int		eb;
+	t_color	start;
+	t_color	end;
 }	t_line_params;
+
+typedef struct s_lineinfo
+{
+	t_3vec	start;
+	t_3vec	end;
+	t_2color color;
+}	t_lineinfo;
 
 /*
 **  Function Prototypes
@@ -189,7 +187,8 @@ int		handle_keyrelease(int keycode, t_wrapper *wrapper);
 
 /* event_handlers.c */
 int		handle_no_event(t_wrapper *wrapper);
-int		handle_rotation_translation(t_wrapper *wrapper);
+int		handle_rotation(t_wrapper *wrapper);
+int		handle_translation(t_wrapper *wrapper);
 int		handle_misc(t_wrapper *wrapper);
 
 /* key_utils.c */
@@ -254,14 +253,8 @@ void	display_map_loop(t_wrapper *wrap, t_2vec *pos);
 void	clear_zbuffer(float *zbuffer, int width, int height);
 
 /* draw_line.c */
-void	draw_line_zbuffer(
-		float sx, float sy, float sz,
-		float ex, float ey, float ez,
-		t_2color color, t_wrapper *wrapper
-	);
-void	init_line_params(t_line_params *p,
-			float sx, float sy, float sz,
-			float ex, float ey, float ez);
+void	draw_line_zbuffer(t_lineinfo *info, t_wrapper *wrapper);
+void	init_line_params(t_line_params *p, t_3vec s, t_3vec e);
 void	compute_color(t_line_params *p, t_2color color);
 void	draw_pixel(t_line_params *p, t_wrapper *w);
 void	img_pix_put(t_img *img, int x, int y, int color);

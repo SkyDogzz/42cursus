@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/25 16:12:06 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/25 17:13:09 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,33 @@
 
 int	handle_no_event(t_wrapper *wrapper)
 {
-	handle_rotation_translation(wrapper);
+	handle_rotation(wrapper);
+	handle_translation(wrapper);
 	return (0);
 }
 
-int	handle_rotation_translation(t_wrapper *wrapper)
+int	handle_rotation(t_wrapper *wrapper)
 {
 	if (inlist(wrapper->keys, X_CODE)
 		|| inlist(wrapper->keys, Y_CODE)
 		|| inlist(wrapper->keys, Z_CODE))
 		rotate(wrapper);
+	if (inlist(wrapper->keys, BRACE_O_CODE)
+		|| inlist(wrapper->keys, BRACE_C_CODE))
+	{
+		if (inlist(wrapper->keys, BRACE_O_CODE))
+			wrapper->rotate_div -= 1;
+		else
+			wrapper->rotate_div += 1;
+		if (wrapper->rotate_div < 2)
+			wrapper->rotate_div = 2;
+		display_map(wrapper);
+	}
+	return (0);
+}
+
+int	handle_translation(t_wrapper *wrapper)
+{
 	if (inlist(wrapper->keys, LEFT_ARROW_CODE)
 		|| inlist(wrapper->keys, UP_ARROW_CODE)
 		|| inlist(wrapper->keys, RIGHT_ARROW_CODE)
@@ -38,17 +55,6 @@ int	handle_rotation_translation(t_wrapper *wrapper)
 			wrapper->offset_div += 1;
 		if (wrapper->offset_div < 2)
 			wrapper->offset_div = 2;
-		display_map(wrapper);
-	}
-	if (inlist(wrapper->keys, BRACE_O_CODE)
-		|| inlist(wrapper->keys, BRACE_C_CODE))
-	{
-		if (inlist(wrapper->keys, BRACE_O_CODE))
-			wrapper->rotate_div -= 1;
-		else
-			wrapper->rotate_div += 1;
-		if (wrapper->rotate_div < 2)
-			wrapper->rotate_div = 2;
 		display_map(wrapper);
 	}
 	return (0);

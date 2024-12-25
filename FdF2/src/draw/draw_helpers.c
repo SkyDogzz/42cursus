@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/25 16:17:42 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/25 17:03:51 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,52 +35,46 @@ int	img_pix_get(t_img *img, int x, int y)
 
 void	draw_vertical_lines(t_wrapper *w, int x, int y, t_2vec start2d)
 {
-	t_3vec	start3d;
-	t_3vec	end3d;
-	t_2vec	end2d;
-	t_2color color;
-	int		i1;
-	int		i2;
+	t_lineinfo	info;
+	t_3vec		end;
+	int			i1;
+	int			i2;
 
 	i1 = y * w->map->dims.width + x;
 	i2 = (y + 1) * w->map->dims.width + x;
-	start3d = w->map->content[i1].pos;
-	end3d = w->map->content[i2].pos;
-	color.start = w->map->content[i1].color;
-	color.end = w->map->content[i2].color;
-	end2d.x = (int)(end3d.x * w->map->zoom
-			+ WINDOW_WIDTH / 2 + w->map->offset.x);
-	end2d.y = (int)(end3d.y * w->map->zoom
-			+ WINDOW_HEIGHT / 2 + w->map->offset.y);
-	draw_line_zbuffer(
-		(float)start2d.x, (float)start2d.y, start3d.z,
-		(float)end2d.x,   (float)end2d.y,   end3d.z,
-		color, w
-	);
+	info.color.start = w->map->content[i1].color;
+	info.color.end = w->map->content[i2].color;
+	info.start.x = start2d.x;
+	info.start.y = start2d.y;
+	info.start.z = w->map->content[i1].pos.z;
+	end = w->map->content[i2].pos;
+	info.end.x = (int)(end.x * w->map->zoom
+			+ (float) WINDOW_WIDTH / 2 + w->map->offset.x);
+	info.end.y = (int)(end.y * w->map->zoom
+			+ (float) WINDOW_HEIGHT / 2 + w->map->offset.y);
+	info.end.z = end.z;
+	draw_line_zbuffer(&info, w);
 }
 
 void	draw_horizontal_lines(t_wrapper *w, int x, int y, t_2vec start2d)
 {
-	t_3vec	start3d;
-	t_3vec	end3d;
-	t_2vec	end2d;
-	t_2color color;
-	int		i1;
-	int		i2;
+	t_lineinfo	info;
+	t_3vec		end;
+	int			i1;
+	int			i2;
 
 	i1 = y * w->map->dims.width + x;
 	i2 = y * w->map->dims.width + (x + 1);
-	start3d = w->map->content[i1].pos;
-	end3d = w->map->content[i2].pos;
-	color.start = w->map->content[i1].color;
-	color.end = w->map->content[i2].color;
-	end2d.x = (int)(end3d.x * w->map->zoom
-			+ WINDOW_WIDTH / 2 + w->map->offset.x);
-	end2d.y = (int)(end3d.y * w->map->zoom
-			+ WINDOW_HEIGHT / 2 + w->map->offset.y);
-	draw_line_zbuffer(
-		(float)start2d.x, (float)start2d.y, start3d.z,
-		(float)end2d.x, (float)end2d.y, end3d.z,
-		color, w
-	);
+	end = w->map->content[i2].pos;
+	info.color.start = w->map->content[i1].color;
+	info.color.end = w->map->content[i2].color;
+	info.start.x = start2d.x;
+	info.start.y = start2d.y;
+	info.start.z = w->map->content[i1].pos.z;
+	info.end.x = (int)(end.x * w->map->zoom
+			+ (float) WINDOW_WIDTH / 2 + w->map->offset.x);
+	info.end.y = (int)(end.y * w->map->zoom
+			+ (float) WINDOW_HEIGHT / 2 + w->map->offset.y);
+	info.end.z = end.z;
+	draw_line_zbuffer(&info, w);
 }

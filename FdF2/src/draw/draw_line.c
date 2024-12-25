@@ -6,94 +6,91 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/25 16:17:21 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/25 17:28:50 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
 
-void	init_line_params(t_line_params *p,
-	float sx, float sy, float sz,
-	float ex, float ey, float ez)
+void	init_line_params(t_line_params *p, t_3vec s, t_3vec e)
 {
-	p->x0 = (int)sx;
-	p->y0 = (int)sy;
-	p->x1 = (int)ex;
-	p->y1 = (int)ey;
-	p->dx = ft_abs(p->x1 - p->x0);
-	p->sxstep = (p->x0 < p->x1) ? 1 : -1;
-	p->dy = -ft_abs(p->y1 - p->y0);
-	p->systep = (p->y0 < p->y1) ? 1 : -1;
-	p->err = p->dx + p->dy;
-	p->steps = sqrtf((ex - sx) * (ex - sx)
-			+ (ey - sy) * (ey - sy));
+	p->p0.x = (int)s.x;
+	p->p0.y = (int)s.y;
+	p->p1.x = (int)e.x;
+	p->p1.y = (int)e.y;
+	p->d.x = ft_abs(p->p1.x - p->p0.x);
+	if (p->p0.x < p->p1.x)
+		p->step.x = 1;
+	else
+		p->step.x = -1;
+	p->d.y = -ft_abs(p->p1.y - p->p0.y);
+	if (p->p0.y < p->p1.y)
+		p->step.y = 1;
+	else
+		p->step.y = -1;
+	p->err.x = p->d.x + p->d.y;
+	p->steps = sqrtf((e.x - s.x) * (e.x - s.x) + (e.y - s.y) * (e.y - s.y));
 	if (p->steps < 1.0f)
 		p->steps = 1.0f;
-	p->dz = (ez - sz) / p->steps;
-	p->current_z = sz;
+	p->dz = (e.z - s.z) / p->steps;
+	p->current_z = s.z;
 	p->t = 0.0f;
 }
 
 void	compute_color(t_line_params *p, t_2color color)
 {
-	p->sr = (color.start >> 16) & 0xFF;
-	p->sg = (color.start >> 8) & 0xFF;
-	p->sb = color.start & 0xFF;
-	p->er = (color.end >> 16) & 0xFF;
-	p->eg = (color.end >> 8) & 0xFF;
-	p->eb = color.end & 0xFF;
+	p->start.r = (color.start >> 16) & 0xFF;
+	p->start.g = (color.start >> 8) & 0xFF;
+	p->start.b = color.start & 0xFF;
+	p->end.r = (color.end >> 16) & 0xFF;
+	p->end.g = (color.end >> 8) & 0xFF;
+	p->end.b = color.end & 0xFF;
 }
 
 void	draw_pixel(t_line_params *p, t_wrapper *w)
 {
 	float	fraction;
 	int		final_color;
-	int		idx;
+	int		id;
 
-	if (p->x0 >= 0 && p->x0 < WINDOW_WIDTH
-		&& p->y0 >= 0 && p->y0 < WINDOW_HEIGHT)
+	if (p->p0.x >= 0 && p->p0.x < WINDOW_WIDTH
+		&& p->p0.y >= 0 && p->p0.y < WINDOW_HEIGHT)
 	{
 		fraction = p->t / p->steps;
-		final_color = ((p->sr + (int)((p->er - p->sr)
-				* fraction)) << 16)
-			| ((p->sg + (int)((p->eg - p->sg)
-				* fraction)) << 8)
-			| (p->sb + (int)((p->eb - p->sb)
-				* fraction));
-		idx = p->y0 * WINDOW_WIDTH + p->x0;
-		if (p->current_z < w->z_buffer[idx])
+		final_color = ((p->start.r + (int)((p->end.r - p->start.r)
+						* fraction)) << 17)
+			| ((p->start.g + (int)((p->end.g - p->start.g) * fraction)) << 8)
+			| (p->start.b + (int)((p->end.b - p->start.b) * fraction));
+		id = p->p0.y * WINDOW_WIDTH + p->p0.x;
+		if (p->current_z < w->z_buffer[id])
 		{
-			img_pix_put(&w->data.img, p->x0, p->y0,
-				final_color);
-			w->z_buffer[idx] = p->current_z;
+			img_pix_put(&w->data.img, p->p0.x, p->p0.y, final_color);
+			w->z_buffer[id] = p->current_z;
 		}
 	}
 }
 
-void	draw_line_zbuffer(
-	float sx, float sy, float sz,
-	float ex, float ey, float ez,
-	t_2color color, t_wrapper *w)
+void	draw_line_zbuffer(t_lineinfo *i, t_wrapper *w)
 {
 	t_line_params	p;
 
-	init_line_params(&p, sx, sy, sz, ex, ey, ez);
-	compute_color(&p, color);
+	init_line_params(&p, i->start, i->end);
+	compute_color(&p, i->color);
 	while (1)
 	{
 		draw_pixel(&p, w);
-		if (p.x0 == p.x1 && p.y0 == p.y1)
+		if (p.p0.x == p.p1.x && p.p0.y == p.p1.y)
 			break ;
-		p.e2 = p.err * 2;
-		if (p.e2 >= p.dy)
+		p.err.y = p.err.x * 2;
+		if (p.err.y >= p.d.y)
 		{
-			p.err += p.dy;
-			p.x0 += p.sxstep;
+			p.err.x += p.d.y;
+			p.p0.x += p.step.x;
 		}
-		if (p.e2 <= p.dx)
+		if (p.err.y <= p.d.x)
 		{
-			p.err += p.dx;
-			p.y0 += p.systep;
+			p.err.x += p.d.x;
+			p.p0.y += p.step.y;
 		}
 		p.t += 1.0f;
 		p.current_z += p.dz;

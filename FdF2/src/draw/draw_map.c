@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/25 16:16:55 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/25 16:56:53 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void	display_map_loop(t_wrapper *wrap, t_2vec *pos)
 		while (++pos->y < wrap->map->dims.height)
 		{
 			start2d.x = (int)(wrap->map->content[pos->y
-				* wrap->map->dims.width + pos->x].pos.x
-				* wrap->map->zoom
-				+ WINDOW_WIDTH / 2 + wrap->map->offset.x);
+					* wrap->map->dims.width + pos->x].pos.x
+					* wrap->map->zoom
+					+ (float) WINDOW_WIDTH / 2 + wrap->map->offset.x);
 			start2d.y = (int)(wrap->map->content[pos->y
-				* wrap->map->dims.width + pos->x].pos.y
-				* wrap->map->zoom
-				+ WINDOW_HEIGHT / 2 + wrap->map->offset.y);
+					* wrap->map->dims.width + pos->x].pos.y
+					* wrap->map->zoom
+					+ (float) WINDOW_HEIGHT / 2 + wrap->map->offset.y);
 			if (pos->y < wrap->map->dims.height - 1)
 				draw_vertical_lines(wrap, pos->x, pos->y, start2d);
 			if (pos->x < wrap->map->dims.width - 1)
