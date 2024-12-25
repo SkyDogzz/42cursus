@@ -14,7 +14,8 @@ LIBFT_SRC_DIR = ../Libft2
 LIBFT_DIR = libft
 MLX_DIR = ./.minilibx
 
-SRC_FILES = color_utils.c zoom_utils.c map_utils.c map_parsing.c rotation_utils.c draw_utils.c helper_utils.c event_handling.c math_utils.c key.c main.c
+SRC_FILES = main.c setup.c draw/draw_helpers.c draw/draw_line.c draw/draw_map.c event/event_exit.c event/event_handlers.c event/event_key.c map/map_parse.c map/map_refill.c map/map_utils.c utils/color_utils.c utils/helper_utils.c utils/key_utils.c utils/math_utils.c utils/rotation_ops.c utils/rotation_utils.c  zoom_utils.c
+
 OBJ_FILES = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 INC_FILES = include/fdf.h
 

@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/04 15:11:36 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/23 17:47:42 by tstephan         ###   ########.fr       */
+/*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
+/*   Updated: 2024/12/25 16:15:20 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
+#include "../../include/fdf.h"
 
 void	change_zoom(t_wrapper *wrapper)
 {
@@ -21,23 +21,20 @@ void	change_zoom(t_wrapper *wrapper)
 		wrapper->map->zoom *= ZOOM_MODIFIER;
 	else
 		wrapper->map->zoom /= ZOOM_MODIFIER;
-	if (wrapper->map->zoom < 0.5)
+	if (wrapper->map->zoom < 0.5f)
 		wrapper->map->zoom = before;
 	display_map(wrapper);
 }
 
 void	translate_camera(t_wrapper *wrapper)
 {
-	t_list	*keys;
-
-	keys = wrapper->keys;
-	if (inlist(keys, UP_ARROW_CODE))
+	if (inlist(wrapper->keys, UP_ARROW_CODE))
 		wrapper->map->offset.y += WINDOW_HEIGHT / wrapper->offset_div;
-	if (inlist(keys, DOWN_ARROW_CODE))
+	if (inlist(wrapper->keys, DOWN_ARROW_CODE))
 		wrapper->map->offset.y -= WINDOW_HEIGHT / wrapper->offset_div;
-	if (inlist(keys, LEFT_ARROW_CODE))
+	if (inlist(wrapper->keys, LEFT_ARROW_CODE))
 		wrapper->map->offset.x += WINDOW_WIDTH / wrapper->offset_div;
-	if (inlist(keys, RIGHT_ARROW_CODE))
+	if (inlist(wrapper->keys, RIGHT_ARROW_CODE))
 		wrapper->map->offset.x -= WINDOW_WIDTH / wrapper->offset_div;
 	display_map(wrapper);
 }

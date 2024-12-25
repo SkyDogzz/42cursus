@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key.c                                              :+:      :+:    :+:   */
+/*   key_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/08 16:41:45 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/08 16:55:26 by skydogzz         ###   ########.fr       */
+/*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
+/*   Updated: 2024/12/25 16:12:34 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
+#include "../../include/fdf.h"
 
 t_bool	inlist(t_list *keys, int keycode)
 {
@@ -35,7 +35,7 @@ void	add_key(t_list **keys, int keycode)
 			return ;
 		temp = temp->next;
 	}
-	new = malloc(sizeof(t_list));
+	new = (t_list *)malloc(sizeof(t_list));
 	if (!new)
 		return ;
 	new->content = malloc(sizeof(int));
