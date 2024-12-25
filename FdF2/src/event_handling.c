@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:32:37 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/23 17:52:44 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/25 15:19:44 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	full_quit(t_wrapper *wrapper)
 {
 	mlx_destroy_window(wrapper->data.mlx_ptr, wrapper->data.win_ptr);
 	free_keys(&wrapper->keys);
+	if (wrapper->z_buffer)
+		free(wrapper->z_buffer);
 	return (0);
 }
 
@@ -47,7 +49,7 @@ int	change_translate_div(t_wrapper *wrapper)
 }
 
 int	change_rotation_div(t_wrapper *wrapper)
-{	
+{
 	t_list	*keys;
 	int		mult;
 
@@ -56,7 +58,7 @@ int	change_rotation_div(t_wrapper *wrapper)
 	if (inlist(keys, SHIFT_CODE))
 		mult = 10;
 	else if (inlist(keys, CTRL_CODE))
-			mult = 100;
+		mult = 100;
 	if (inlist(keys, BRACE_O_CODE))
 		wrapper->rotate_div -= mult;
 	else

@@ -6,13 +6,13 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:44:02 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/23 18:26:06 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/25 16:01:29 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void	set_hook(t_wrapper *wrapper)
+void	setup(t_wrapper *wrapper)
 {
 	mlx_loop_hook(wrapper->data.mlx_ptr, &handle_no_event, wrapper);
 	wrapper->keys = NULL;
@@ -23,6 +23,10 @@ void	set_hook(t_wrapper *wrapper)
 		&handle_keyrelease, wrapper);
 	mlx_do_key_autorepeatoff(wrapper->data.mlx_ptr);
 	base_rotate(wrapper);
+	wrapper->z_buffer = malloc(sizeof(float) * (int)WINDOW_WIDTH
+			* (int)WINDOW_HEIGHT);
+	if (!wrapper->z_buffer)
+		exit_msg_code("Cannot allocate z-buffer\n", 1);
 }
 
 int	main(int argc, char *argv[])
@@ -45,7 +49,7 @@ int	main(int argc, char *argv[])
 			WINDOW_HEIGHT, "FdF Goes Brrr!!!");
 	if (!wrapper.data.win_ptr)
 		return (EXIT_FAILURE);
-	set_hook(&wrapper);
+	setup(&wrapper);
 	display_map(&wrapper);
 	mlx_loop(wrapper.data.mlx_ptr);
 	mlx_destroy_display(wrapper.data.mlx_ptr);

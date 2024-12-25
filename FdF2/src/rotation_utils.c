@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:25:52 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/10 06:09:10 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/25 14:56:59 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	rotatex_map(t_map *map, float angle)
 		{
 			pos = map->content[y * map->dims.width + x].pos;
 			yp = pos.y * cos(angle) - pos.z * sin(angle);
+			zp = pos.y * sin(angle) + pos.z * cos(angle);
 			zp = pos.y * sin(angle) + pos.z * cos(angle);
 			map->content[y * map->dims.width + x].pos.y = yp;
 			map->content[y * map->dims.width + x].pos.z = zp;

@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/23 17:45:10 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/25 15:50:12 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../libft/include/get_next_line.h"
 # include "../.minilibx/mlx.h"
 # include <math.h>
+# include <float.h>
 # include <X11/X.h>
 
 # define WINDOW_WIDTH 1280.0
@@ -124,6 +125,7 @@ typedef struct s_wrapper
 	t_list	*keys;
 	int		offset_div;
 	int		rotate_div;
+	float	*z_buffer; 
 }	t_wrapper;
 
 typedef struct s_color
@@ -132,6 +134,30 @@ typedef struct s_color
 	int	g;
 	int	b;
 }	t_color;
+
+typedef struct s_line_params
+{
+    int     x0;
+    int     y0;
+    int     x1;
+    int     y1;
+    int     dx;
+    int     dy;
+    int     sxstep;
+    int     systep;
+    int     err;
+    int     e2;
+    float   steps;
+    float   dz;
+    float   current_z;
+    float   t;
+    int     sr;
+    int     sg;
+    int     sb;
+    int     er;
+    int     eg;
+    int     eb;
+}   t_line_params;
 
 // color_utils.c
 void	change_all_color(t_wrapper *wrapper);
