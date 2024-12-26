@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 14:01:31 by tstephan          #+#    #+#             */
-/*   Updated: 2024/11/26 17:12:48 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/26 10:29:14 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_abs(int n)
 {
-	if (n == 1 << 31)
-		return (1 << 31);
+	if (n == INT_MIN)
+		return (INT_MIN);
 	if (n < 0)
 		return (-n);
 	return (n);
