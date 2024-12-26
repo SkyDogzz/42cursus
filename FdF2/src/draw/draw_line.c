@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/25 17:28:50 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/26 02:06:17 by skydogzz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	draw_pixel(t_line_params *p, t_wrapper *w)
 	{
 		fraction = p->t / p->steps;
 		final_color = ((p->start.r + (int)((p->end.r - p->start.r)
-						* fraction)) << 17)
+						* fraction)) << 16)
 			| ((p->start.g + (int)((p->end.g - p->start.g) * fraction)) << 8)
 			| (p->start.b + (int)((p->end.b - p->start.b) * fraction));
 		id = p->p0.y * WINDOW_WIDTH + p->p0.x;
