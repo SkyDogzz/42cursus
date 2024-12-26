@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/26 10:43:54 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/26 10:47:07 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ float	ft_min_float(float f1, float f2)
 }
 
 void	update_position(t_2vec *start, const t_2vec *s, t_2vec *e,
-					 const t_2vec *d)
+			const t_2vec *d)
 {
 	e->y = e->x * 2;
 	if (e->y >= d->y)

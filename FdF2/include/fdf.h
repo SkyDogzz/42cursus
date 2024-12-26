@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/26 10:43:37 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/26 10:46:16 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,9 +161,9 @@ typedef struct s_line_params
 
 typedef struct s_lineinfo
 {
-	t_3vec	start;
-	t_3vec	end;
-	t_2color color;
+	t_3vec		start;
+	t_3vec		end;
+	t_2color	color;
 }	t_lineinfo;
 
 /*
@@ -245,7 +245,7 @@ t_2vec	get_step(t_2vec start, t_2vec end);
 float	ft_min_float(float f1, float f2);
 int		get_color(const char *s);
 void	update_position(t_2vec *start, const t_2vec *s, t_2vec *e,
-		const t_2vec *d);
+			const t_2vec *d);
 int		atoi_base(const char *s, const char *b1, const char *b2);
 
 /* draw_map.c */

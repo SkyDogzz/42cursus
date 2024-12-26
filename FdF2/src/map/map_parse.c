@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/26 10:42:05 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/26 10:46:51 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ t_map	*parse_map(const char *filename)
 		exit_msg_code("File not opened\n", 1);
 	map = (t_map *)malloc(sizeof(t_map));
 	if (!map)
-		{
-			exit_msg_code("Allocation error\n", 1);
-			return (NULL);
-		}
+		exit_msg_code("Allocation error\n", 1);
 	line = get_next_line(fd);
 	map->dims.width = get_width(line);
 	free(line);
