@@ -6,13 +6,13 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/25 17:03:51 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/26 10:37:53 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
 
-int	img_pix_get(t_img *img, int x, int y)
+int	img_pix_get(const t_img *img, int x, int y)
 {
 	char	*pixel;
 	int		i;

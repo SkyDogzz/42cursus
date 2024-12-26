@@ -64,4 +64,9 @@ ascii:
 	@echo " |_|  \__,_|_|     " 
 	@echo $(_END)
 
+lint:
+	cppcheck $(SRC_DIR) --enable=all --suppress=unusedFunction \
+		--suppress=variableScope --suppress=missingIncludeSystem \
+		2>&1 > /dev/null
+
 .PHONY: all clean fclean re ascii

@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/26 02:06:17 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/26 10:40:26 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,15 @@ void	draw_pixel(t_line_params *p, t_wrapper *w)
 	}
 }
 
-void	draw_line_zbuffer(t_lineinfo *i, t_wrapper *w)
+void	draw_line_zbuffer(const t_lineinfo *info, t_wrapper *wrapper)
 {
 	t_line_params	p;
 
-	init_line_params(&p, i->start, i->end);
-	compute_color(&p, i->color);
+	init_line_params(&p, info->start, info->end);
+	compute_color(&p, info->color);
 	while (1)
 	{
-		draw_pixel(&p, w);
+		draw_pixel(&p, wrapper);
 		if (p.p0.x == p.p1.x && p.p0.y == p.p1.y)
 			break ;
 		p.err.y = p.err.x * 2;
@@ -97,7 +97,7 @@ void	draw_line_zbuffer(t_lineinfo *i, t_wrapper *w)
 	}
 }
 
-void	img_pix_put(t_img *img, int x, int y, int color)
+void	img_pix_put(const t_img *img, int x, int y, int color)
 {
 	char	*pixel;
 	int		i;

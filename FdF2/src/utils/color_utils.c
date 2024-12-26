@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/25 16:14:46 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/26 10:35:07 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	pseudo_random(int seed)
 
 	a = 1664525;
 	c = 1013904223;
-	m = 1 << 31;
+	m = INT_MIN;
 	seed = (int)((a * seed + c) % m);
 	return (seed);
 }

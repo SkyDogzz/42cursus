@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/26 02:15:18 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/26 10:43:37 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,7 +244,8 @@ void	draw_helper(t_wrapper *wrapper);
 t_2vec	get_step(t_2vec start, t_2vec end);
 float	ft_min_float(float f1, float f2);
 int		get_color(const char *s);
-void	update_position(t_2vec *start, t_2vec *s, t_2vec *e, t_2vec *d);
+void	update_position(t_2vec *start, const t_2vec *s, t_2vec *e,
+		const t_2vec *d);
 int		atoi_base(const char *s, const char *b1, const char *b2);
 
 /* draw_map.c */
@@ -253,16 +254,16 @@ void	display_map_loop(t_wrapper *wrap, t_2vec *pos);
 void	clear_zbuffer(float *zbuffer, int width, int height);
 
 /* draw_line.c */
-void	draw_line_zbuffer(t_lineinfo *info, t_wrapper *wrapper);
+void	draw_line_zbuffer(const t_lineinfo *info, t_wrapper *wrapper);
 void	init_line_params(t_line_params *p, t_3vec s, t_3vec e);
 void	compute_color(t_line_params *p, t_2color color);
 void	draw_pixel(t_line_params *p, t_wrapper *w);
-void	img_pix_put(t_img *img, int x, int y, int color);
+void	img_pix_put(const t_img *img, int x, int y, int color);
 
 /* draw_helpers.c */
 void	draw_vertical_lines(t_wrapper *wrapper, int x, int y, t_2vec start2d);
 void	draw_horizontal_lines(t_wrapper *wrapper, int x, int y, t_2vec start2d);
-int		img_pix_get(t_img *img, int x, int y);
+int		img_pix_get(const t_img *img, int x, int y);
 
 /* You might add more prototypes as needed */
 
