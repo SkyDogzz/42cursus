@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/26 11:33:37 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/26 12:42:17 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,3 +75,39 @@ void	display_map(t_wrapper *wrapper)
 	mlx_destroy_image(wrapper->data.mlx_ptr, wrapper->data.img.mlx_img);
 	ft_printf("%d Frames rendered\n", ++wrapper->total_frame);
 }
+
+// #include <time.h> 
+//
+// void	display_map(t_wrapper *wrapper)
+// {
+// 	t_2vec	pos;
+//     clock_t t; 
+//
+// 	t = clock();
+// 	wrapper->data.img.mlx_img = mlx_new_image(
+// 			wrapper->data.mlx_ptr,
+// 			WINDOW_WIDTH, WINDOW_HEIGHT);
+// 	wrapper->data.img.addr = mlx_get_data_addr(
+// 			wrapper->data.img.mlx_img,
+// 			&wrapper->data.img.bpp,
+// 			&wrapper->data.img.line_len,
+// 			&wrapper->data.img.endian);
+// 	clear_zbuffer(wrapper->z_buffer, WINDOW_WIDTH, WINDOW_HEIGHT);
+// 	pos.x = -1;
+// 	display_map_loop(wrapper, &pos);
+// 	draw_helper(wrapper);
+// 	mlx_put_image_to_window(wrapper->data.mlx_ptr,
+// 		wrapper->data.win_ptr,
+// 		wrapper->data.img.mlx_img, 0, 0);
+// 	if (wrapper->menu)
+// 		display_menu(wrapper);
+// 	mlx_destroy_image(wrapper->data.mlx_ptr, wrapper->data.img.mlx_img);
+// 	ft_printf("%d Frames rendered ", ++wrapper->total_frame);
+// 	t = clock() - t;
+// 	double time_taken = ((double)t)/CLOCKS_PER_SEC * 1000000; 
+//     ft_printf("~ %d fps, last frame took %d microsecond to render\n",
+// 			  (int)(1 / time_taken * 1000000), (int)time_taken); 	
+// 	add_key(&wrapper->keys, X_CODE);
+// 	add_key(&wrapper->keys, Y_CODE);
+// 	add_key(&wrapper->keys, Z_CODE);
+// }
