@@ -10,7 +10,6 @@ _BLUE   = $(shell printf "\033[34m")
 SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = include
-LIBFT_SRC_DIR = ../Libft2
 LIBFT_DIR = libft
 
 SRC_FILES = parse.c path.c pipex.c process.c utils.c
@@ -24,8 +23,6 @@ all: ascii libft $(NAME)
 libft: $(LIBFT_DIR)/libft.a
 
 $(LIBFT_DIR)/libft.a:
-	@rm -rf $(LIBFT_DIR)
-	@cp -r $(LIBFT_SRC_DIR) $(LIBFT_DIR)
 	@make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ_FILES)
@@ -45,7 +42,7 @@ clean:
 	@echo "$(_BLUE)[CLEAN]$(_END) Suppression des fichiers objets."
 
 fclean: clean
-	@rm -rf $(LIBFT_DIR)
+	@rm -rf $(LIBFT_DIR)/libft.a
 	@rm -f $(NAME)
 	@echo "$(_BLUE)[FCLEAN]$(_END) Suppression de $(NAME) et de la copie de libft."
 

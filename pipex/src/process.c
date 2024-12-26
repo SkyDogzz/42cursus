@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 23:13:50 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/23 16:27:33 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/26 14:48:46 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	spawn_processes(int nb_cmds, char **argv, char **envp, int *pipes)
 	data.fd_in = open(argv[1], O_RDONLY);
 	data.fd_out = open(argv[data.nb_cmds + 2], O_WRONLY | O_CREAT | O_TRUNC,
 			0644);
+	if (data.fd_out == -1)
+		error_msg(argv[data.nb_cmds + 2]);
 	data.pipes = pipes;
 	data.i = 0;
 	while (data.i < data.nb_cmds)

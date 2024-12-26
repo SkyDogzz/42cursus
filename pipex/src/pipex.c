@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 23:38:07 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/23 16:14:18 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/26 15:28:31 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	}
 	nb_cmds = argc - 3;
+	if (access(argv[1], R_OK) == -1)
+		error_msg(argv[1]);
 	setup_pipes(&pipes, nb_cmds);
 	spawn_processes(nb_cmds, argv, envp, pipes);
 	free(pipes);
