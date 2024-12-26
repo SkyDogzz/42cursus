@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/25 16:11:19 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/26 11:46:12 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	full_quit(t_wrapper *wrapper)
 	if (wrapper->z_buffer)
 		free(wrapper->z_buffer);
 	free_map_full(wrapper->map);
+	mlx_destroy_display(wrapper->data.mlx_ptr);
+	free(wrapper->data.mlx_ptr);
 	exit(0);
 	return (0);
 }

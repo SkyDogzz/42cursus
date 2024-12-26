@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/26 10:50:28 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/26 11:33:37 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,5 @@ void	display_map(t_wrapper *wrapper)
 	if (wrapper->menu)
 		display_menu(wrapper);
 	mlx_destroy_image(wrapper->data.mlx_ptr, wrapper->data.img.mlx_img);
+	ft_printf("%d Frames rendered\n", ++wrapper->total_frame);
 }

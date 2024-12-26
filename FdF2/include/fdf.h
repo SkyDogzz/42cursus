@@ -6,7 +6,7 @@
 /*   By: skydogzz </var/spool/mail/skydogzz>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:09:46 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/26 10:46:16 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/26 11:31:49 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ typedef struct s_wrapper
 	int		offset_div;
 	int		rotate_div;
 	float	*z_buffer;
+	int		total_frame;
 }	t_wrapper;
 
 typedef struct s_color

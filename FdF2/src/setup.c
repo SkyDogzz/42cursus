@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/25 16:10:41 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/26 11:32:43 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	setup_map(t_wrapper *wrapper)
 	wrapper->map->helper = HELPER;
 	wrapper->offset_div = OFFSET_DIV;
 	wrapper->rotate_div = ROTATE_DIV;
+	wrapper->total_frame = 0;
 }
 
 void	setup(t_wrapper *wrapper)
