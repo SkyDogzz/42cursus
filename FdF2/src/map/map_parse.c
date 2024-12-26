@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/26 10:46:51 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/26 10:57:13 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ int	get_height(int fd)
 	return (height);
 }
 
+void	verif_map(const t_map *map)
+{
+	if (map->dims.height <= 0 || map->dims.width <= 0)
+		exit_msg_code("Either width or height not correct\n", 1);
+	ft_printf("Map: Parsed\n");
+	ft_printf("Height %d Width %d\n", map->dims.height, map->dims.width);
+}
+
 t_map	*parse_map(const char *filename)
 {
 	t_map	*map;
@@ -76,6 +84,7 @@ t_map	*parse_map(const char *filename)
 	map = init_map(map);
 	fd = open(filename, O_RDONLY);
 	fill_map(map, fd);
+	verif_map(map);
 	close(fd);
 	return (map);
 }

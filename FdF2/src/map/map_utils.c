@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/26 02:13:49 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/26 11:24:26 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,31 @@ t_map	*init_map(t_map *map)
 	return (map);
 }
 
+int	forbidden_char(const char *s)
+{
+	char	*charset;
+	int		pos;
+	int		find;
+
+	charset = ft_strdup(" ,-xXabcdefABCDEF0123456789\n");
+	while (*s)
+	{
+		pos = 0;
+		find = 0;
+		while (charset[pos])
+		{
+			if (charset[pos] == *s)
+				find = 1;
+			pos++;
+		}
+		if (find == 0)
+			return (1);
+		s++;
+	}
+	free(charset);
+	return (0);
+}
+
 void	process_line(t_map *map, char *line, int y, t_dim dims)
 {
 	t_2vec	p;
@@ -29,6 +54,10 @@ void	process_line(t_map *map, char *line, int y, t_dim dims)
 	p.y = y;
 	p.x = 0;
 	next = line;
+	if (forbidden_char(line))
+	{
+		exit_msg_code(ft_strjoin("Could not parse line\n", line), 1);
+	}
 	while (p.x < dims.width)
 	{
 		while (*next == ' ')
