@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/26 10:37:53 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/26 10:49:44 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	draw_vertical_lines(t_wrapper *w, int x, int y, t_2vec start2d)
 	info.start.z = w->map->content[i1].pos.z;
 	end = w->map->content[i2].pos;
 	info.end.x = (int)(end.x * w->map->zoom
-			+ (float) WINDOW_WIDTH / 2 + w->map->offset.x);
+			+ (float)WINDOW_WIDTH / 2 + w->map->offset.x);
 	info.end.y = (int)(end.y * w->map->zoom
-			+ (float) WINDOW_HEIGHT / 2 + w->map->offset.y);
+			+ (float)WINDOW_HEIGHT / 2 + w->map->offset.y);
 	info.end.z = end.z;
 	draw_line_zbuffer(&info, w);
 }
@@ -72,9 +72,9 @@ void	draw_horizontal_lines(t_wrapper *w, int x, int y, t_2vec start2d)
 	info.start.y = start2d.y;
 	info.start.z = w->map->content[i1].pos.z;
 	info.end.x = (int)(end.x * w->map->zoom
-			+ (float) WINDOW_WIDTH / 2 + w->map->offset.x);
+			+ (float)WINDOW_WIDTH / 2 + w->map->offset.x);
 	info.end.y = (int)(end.y * w->map->zoom
-			+ (float) WINDOW_HEIGHT / 2 + w->map->offset.y);
+			+ (float)WINDOW_HEIGHT / 2 + w->map->offset.y);
 	info.end.z = end.z;
 	draw_line_zbuffer(&info, w);
 }

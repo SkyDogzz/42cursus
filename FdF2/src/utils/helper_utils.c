@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/25 18:00:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/25 17:14:01 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/26 10:49:14 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,14 @@ void	draw_helper(t_wrapper *wrapper)
 		return ;
 	info.color.start = HELPER_START;
 	info.color.end = HELPER_END;
-	info.start.x = (float) WINDOW_WIDTH / 2;
+	info.start.x = (float)WINDOW_WIDTH / 2;
 	info.start.y = 0;
-	info.end.x = (float) WINDOW_WIDTH / 2;
+	info.end.x = (float)WINDOW_WIDTH / 2;
 	info.end.y = WINDOW_HEIGHT;
 	draw_line_zbuffer(&info, wrapper);
 	info.start.x = 0;
-	info.start.y = (float) WINDOW_HEIGHT / 2;
+	info.start.y = (float)WINDOW_HEIGHT / 2;
 	info.end.x = WINDOW_WIDTH;
-	info.end.y = (float) WINDOW_HEIGHT / 2;
+	info.end.y = (float)WINDOW_HEIGHT / 2;
 	draw_line_zbuffer(&info, wrapper);
 }
