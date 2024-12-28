@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:56:05 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/28 06:21:31 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/28 07:19:14 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,49 @@ void	repush(t_inst *inst, t_stack *stack, t_stack *temp)
 		execpa(inst, stack, pop(temp));
 }
 
+void	sort_three(t_inst *inst, t_stack *stack)
+{
+	int	node[3];
+
+	node[0] = stack->top->value;
+	node[1] = stack->top->next->value;
+	node[2] = stack->top->next->next->value;
+	if (node[0] < node[1] && node[1] > node[2] && node[2] > node[0])
+	{
+		execsa(inst, stack);
+		execra(inst, stack);
+	}
+	else if (node[0] > node[1] && node[1] < node[2] && node[2] > node[0])
+		execsa(inst, stack);
+	else if (node[0] < node[1] && node[1] > node[2] && node[2] < node[0])
+		execrra(inst, stack);
+	else if (node[0] > node[1] && node[1] < node[2] && node[2] < node[0])
+		execra(inst, stack);
+	else if (node[0] > node[1] && node[1] > node[2] && node[2] < node[0])
+	{
+		execrra(inst, stack);
+		execsa(inst, stack);
+	}
+}
+
 void	sort_stack(t_inst *inst, t_stack *stack, t_stack *temp)
 {
 	int	cheapest_index;
 
-	if (!stack->top)
+	if (stack->size < 2)
 		return ;
 	if (stack->size == 2)
+	{
 		if (stack->top->value > stack->top->next->value)
 			execra(inst, stack);
-	while (stack->size >= 3)
+		return ;
+	}
+	while (stack->size > 3)
 	{
 		cheapest_index = find_cheapest(stack, temp);
 		move_cheapest(inst, cheapest_index, stack, temp);
 	}
+	sort_three(inst, stack);
 	if (temp->size > 0)
 		repush(inst, stack, temp);
 }

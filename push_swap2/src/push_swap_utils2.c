@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 05:09:00 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/28 05:09:01 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/28 07:03:24 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,10 @@ void	execrrb(t_inst *inst, t_stack *stack)
 {
 	reverse_rotate(stack);
 	add_instruction(inst, "rrb");
+}
+
+void	execsa(t_inst *inst, t_stack *stack)
+{
+	swap(stack);
+	add_instruction(inst, "sa");
 }

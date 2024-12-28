@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 04:05:33 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/12 04:19:13 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/28 07:05:45 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,18 @@ int	pop(t_stack *stack)
 	free(node);
 	stack->size--;
 	return (value);
+}
+
+void	swap(t_stack *stack)
+{
+	t_node	*first;
+	t_node	*second;
+
+	first = stack->top;
+	second = stack->top->next;
+	first->next = second->next;
+	stack->top = second;
+	second->next = first;
 }
 
 void	rotate(t_stack *stack)

@@ -10,7 +10,7 @@ _BLUE   = $(shell printf "\033[34m")
 SRC_DIR = src
 OBJ_DIR = obj
 INC_DIR = include
-LIBFT_SRC_DIR = ../Libft2
+# LIBFT_SRC_DIR = ../Libft2
 LIBFT_DIR = libft
 
 SRC_FILES = main.c stack.c stack_utils.c parse.c sort.c cost.c sort_utils.c push_swap_utils.c push_swap_utils2.c instruction.c utils.c
@@ -24,8 +24,10 @@ all: ascii libft $(NAME)
 libft: $(LIBFT_DIR)/libft.a
 
 $(LIBFT_DIR)/libft.a:
-	@rm -rf $(LIBFT_DIR)
-	@cp -r $(LIBFT_SRC_DIR) $(LIBFT_DIR)
+	@rm -rf $(LIBFT_DIR)/libft.a
+	@rm -rf $(LIBFT_DIR)/obj
+	# @rm -rf $(LIBFT_DIR)
+	# @cp -r $(LIBFT_SRC_DIR) $(LIBFT_DIR)
 	@make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJ_FILES)
@@ -39,13 +41,15 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@if [ -d "$(LIBFT_DIR)" ]; then \
-		make -C $(LIBFT_DIR) clean; \
-	fi
+	# @if [ -d "$(LIBFT_DIR)" ]; then \
+		# make -C $(LIBFT_DIR) clean; \
+	# fi
 	@echo "$(_BLUE)[CLEAN]$(_END) Suppression des fichiers objets."
 
 fclean: clean
-	@rm -rf $(LIBFT_DIR)
+	@rm -rf $(LIBFT_DIR)/libft.a
+	@rm -rf $(LIBFT_DIR)/obj
+	# @rm -rf $(LIBFT_DIR)
 	@rm -f $(NAME)
 	@echo "$(_BLUE)[FCLEAN]$(_END) Suppression de $(NAME) et de la copie de libft."
 

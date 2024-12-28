@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:02:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/28 06:08:13 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/28 07:05:58 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_node	*new_node(int value);
 void	free_stack(t_stack *stack);
 void	push(t_stack *stack, int value);
 int		pop(t_stack *stack);
+void	swap(t_stack *stack);
 void	rotate(t_stack *stack);
 void	reverse_rotate(t_stack *stack);
 // void	print_stack(t_stack *stack);
@@ -70,6 +71,7 @@ void	execra(t_inst *inst, t_stack *stack);
 void	execrb(t_inst *inst, t_stack *stack);
 void	execrra(t_inst *inst, t_stack *stack);
 void	execrrb(t_inst *inst, t_stack *stack);
+void	execsa(t_inst *inst, t_stack *stack);
 
 void	exit_with_error(const char *s);
 void	get_on_top(t_inst *inst, t_stack *stack, int value);
