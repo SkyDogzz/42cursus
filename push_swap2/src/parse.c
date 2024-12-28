@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 04:26:37 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/28 05:30:04 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/28 06:07:23 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_bool	args_valid(const char *args)
 {
 	while (*args)
 	{
-		if (!ft_isdigit(*args) && !ft_isspace(*args))
+		if (!ft_isdigit(*args) && !ft_isspace(*args) && *args != '-')
 			return (FALSE);
 		args++;
 	}
@@ -55,19 +55,30 @@ void	push_bottom(t_stack *stack, int value)
 	stack->size++;
 }
 
-void	get_args(t_stack *stack, const char *s)
+t_bool	get_args(t_stack *stack, const char *s)
 {
-	push_bottom(stack, ft_atoi(s));
+	long	atol;
+
+	atol = ft_atol(s);
+	if (atol > INT_MAX || atol < INT_MIN)
+		return (FALSE);
+	push_bottom(stack, (int)atol);
 	while (*s)
 	{
+		while (*s == '-')
+			s++;
 		while (ft_isdigit(*s))
 			s++;
 		while (ft_isspace(*s))
 			s++;
 		if (*s == 0)
-			return ;
-		push_bottom(stack, ft_atoi(s));
+			return (TRUE);
+		atol = ft_atol(s);
+		if (atol > INT_MAX || atol < INT_MIN)
+			return (FALSE);
+		push_bottom(stack, (int)atol);
 	}
+	return (TRUE);
 }
 
 t_stack	*parse_args(t_stack *stack, int argc, char *argv[])
@@ -85,8 +96,15 @@ t_stack	*parse_args(t_stack *stack, int argc, char *argv[])
 	while (++pos < argc)
 		strcat_space(full, argv[pos]);
 	if (!args_valid(full))
+	{
+		free(full);
 		return (NULL);
-	get_args(stack, full);
+	}
+	if (!get_args(stack, full))
+	{
+		free(full);
+		return (NULL);
+	}
 	free(full);
 	return (stack);
 }
