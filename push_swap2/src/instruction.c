@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 01:00:03 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/28 05:17:52 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/28 05:28:20 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <string.h>
@@ -14,22 +14,22 @@
 
 void	add_instruction(t_inst *inst, const char *ins)
 {
-	t_inode	*new_node;
+	t_inode	*new_nod;
 	t_inode	*temp;
 
-	new_node = malloc(sizeof(t_inode));
-	if (!new_node)
+	new_nod = malloc(sizeof(t_inode));
+	if (!new_nod)
 		exit_with_error("Memory allocation failed\n");
-	new_node->value = ft_strdup(ins);
-	new_node->next = NULL;
+	new_nod->value = ft_strdup(ins);
+	new_nod->next = NULL;
 	if (!inst->top)
-		inst->top = new_node;
+		inst->top = new_nod;
 	else
 	{
 		temp = inst->top;
 		while (temp->next)
 			temp = temp->next;
-		temp->next = new_node;
+		temp->next = new_nod;
 	}
 	inst->size++;
 }

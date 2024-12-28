@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:02:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/28 05:16:11 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/28 05:36:25 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_cheap
 	int	total_cost;
 }	t_cheap;
 
-// stack related
 t_stack	*init_stack(void);
 t_node	*new_node(int value);
 void	free_stack(t_stack *stack);
@@ -57,21 +56,14 @@ void	push(t_stack *stack, int value);
 int		pop(t_stack *stack);
 void	rotate(t_stack *stack);
 void	reverse_rotate(t_stack *stack);
-void	print_stack(t_stack *stack);
+// void	print_stack(t_stack *stack);
 int		get_value(t_stack *stack, int index);
 
-// parse related
 t_stack	*parse_args(t_stack *stack, int argc, char *argv[]);
-
-// sort stack
 void	sort_stack(t_inst *inst, t_stack *stack, t_stack *temp);
-
-// instructions
-void	optimize_instructions(t_inst *inst);
+// void	optimize_instructions(t_inst *inst);
 void	print_instructions(t_inst *inst);
 void	add_instruction(t_inst *inst, const char *ins);
-
-// push_swap utils
 void	execpa(t_inst *inst, t_stack *stack, int value);
 void	execpb(t_inst *inst, t_stack *stack, int value);
 void	execra(t_inst *inst, t_stack *stack);
@@ -80,9 +72,7 @@ void	execrra(t_inst *inst, t_stack *stack);
 void	execrrb(t_inst *inst, t_stack *stack);
 
 void	exit_with_error(const char *s);
-
 void	get_on_top(t_inst *inst, t_stack *stack, int value);
-int		index_of(t_stack *stack, int value);
 int		find_cheapest(t_stack *s1, t_stack *s2);
 void	get_borne(t_stack *stack, int *min, int *max);
 int		insertion_index(t_stack *s2, int value);

@@ -6,13 +6,13 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 05:09:36 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/28 05:16:46 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/28 05:29:21 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-int	min_rotation_cost(t_stack *stack, int pos)
+int	min_rotation_cost(const t_stack *stack, int pos)
 {
 	int	rotate_up;
 	int	rotate_down;
@@ -24,7 +24,7 @@ int	min_rotation_cost(t_stack *stack, int pos)
 	return (rotate_down);
 }
 
-int	calculate_total_cost(t_stack *s1, t_stack *s2, int value, int index)
+int	calculate_total_cost(const t_stack *s1, t_stack *s2, int value, int index)
 {
 	t_cheap	cheap;
 

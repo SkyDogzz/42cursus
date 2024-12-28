@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 04:26:37 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/28 05:20:12 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/28 05:30:04 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,22 @@ t_bool	args_valid(const char *args)
 
 void	push_bottom(t_stack *stack, int value)
 {
-	t_node	*new_node;
+	t_node	*new_nod;
 	t_node	*current;
 
-	new_node = malloc(sizeof(t_node));
-	if (!new_node)
+	new_nod = malloc(sizeof(t_node));
+	if (!new_nod)
 		exit(EXIT_FAILURE);
-	new_node->value = value;
-	new_node->next = NULL;
+	new_nod->value = value;
+	new_nod->next = NULL;
 	if (stack->top == NULL)
-		stack->top = new_node;
+		stack->top = new_nod;
 	else
 	{
 		current = stack->top;
 		while (current->next != NULL)
 			current = current->next;
-		current->next = new_node;
+		current->next = new_nod;
 	}
 	stack->size++;
 }

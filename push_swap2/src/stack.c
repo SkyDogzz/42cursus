@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:07:25 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/13 06:01:37 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/28 05:31:33 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,6 @@ void	free_stack(t_stack *stack)
 	free(stack);
 }
 
-void	print_stack(t_stack *stack)
-{
-	t_node	*node;
-
-	node = stack->top;
-	if (!node)
-		return ;
-	while (node)
-	{
-		ft_printf("%d ", node->value);
-		node = node->next;
-	}
-	ft_printf("\n");
-}
-
 int	get_value(t_stack *stack, int index)
 {
 	t_node	*node;
@@ -79,3 +64,18 @@ int	get_value(t_stack *stack, int index)
 		node = node->next;
 	return (node->value);
 }
+
+// void	print_stack(t_stack *stack)
+// {
+// 	t_node	*node;
+//
+// 	node = stack->top;
+// 	if (!node)
+// 		return ;
+// 	while (node)
+// 	{
+// 		ft_printf("%d ", node->value);
+// 		node = node->next;
+// 	}
+// 	ft_printf("\n");
+// }
