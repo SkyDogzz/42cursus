@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:30:55 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/13 07:29:56 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/28 05:08:41 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,4 @@ void	execrb(t_inst *inst, t_stack *stack)
 {
 	rotate(stack);
 	add_instruction(inst, "rb");
-}
-
-void	execrra(t_inst *inst, t_stack *stack)
-{
-	reverse_rotate(stack);
-	add_instruction(inst, "rra");
-}
-
-void	execrrb(t_inst *inst, t_stack *stack)
-{
-	reverse_rotate(stack);
-	add_instruction(inst, "rrb");
 }

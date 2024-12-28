@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:02:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/15 19:16:50 by skydogzz         ###   ########.fr       */
+/*   Updated: 2024/12/28 05:16:11 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_inst
 	t_inode	*top;
 	size_t	size;
 }	t_inst;
-
 
 typedef struct s_cheap
 {
@@ -83,7 +82,9 @@ void	execrrb(t_inst *inst, t_stack *stack);
 void	exit_with_error(const char *s);
 
 void	get_on_top(t_inst *inst, t_stack *stack, int value);
-void sort_stack_with_chunks(t_inst *inst, t_stack *stack, t_stack *temp, int number_of_chunks);
-int	index_of(t_stack *stack, int value);
-	
+int		index_of(t_stack *stack, int value);
+int		find_cheapest(t_stack *s1, t_stack *s2);
+void	get_borne(t_stack *stack, int *min, int *max);
+int		insertion_index(t_stack *s2, int value);
+
 #endif

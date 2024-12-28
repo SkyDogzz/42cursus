@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:01:56 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/17 15:48:50 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/28 05:07:49 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,7 @@ int	main(int argc, char *argv[])
 	temp = init_stack();
 	inst = init_inst();
 	stack = parse_args(stack, argc, argv);
-	// print_stack(stack);
-	// sort_stack(inst, stack, temp);
-    sort_stack_with_chunks(inst, stack, temp, 9); // Par exemple, 5 chunks
-	// print_stack(stack);
-	optimize_instructions(inst);
+	sort_stack(inst, stack, temp);
 	print_instructions(inst);
 	free_stack(stack);
 	free_stack(temp);
