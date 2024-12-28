@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 04:26:37 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/28 06:07:23 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/28 06:25:11 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,10 @@ t_stack	*parse_args(t_stack *stack, int argc, char *argv[])
 	pos = 0;
 	while (++pos < argc)
 		strcat_space(full, argv[pos]);
-	if (!args_valid(full))
+	if (!args_valid(full) || !get_args(stack, full))
 	{
 		free(full);
-		return (NULL);
-	}
-	if (!get_args(stack, full))
-	{
-		free(full);
+		free(stack);
 		return (NULL);
 	}
 	free(full);
