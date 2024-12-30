@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:56:05 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/28 07:19:14 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/28 10:36:07 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,25 @@ void	sort_three(t_inst *inst, t_stack *stack)
 		execra(inst, stack);
 	else if (node[0] > node[1] && node[1] > node[2] && node[2] < node[0])
 	{
-		execrra(inst, stack);
 		execsa(inst, stack);
+		execrra(inst, stack);
 	}
+}
+
+void	sort_five(t_inst *inst, t_stack *stack, t_stack *temp)
+{
+	int	min;
+	int	max;
+
+	while (stack->size > 3)
+	{
+		get_borne(stack, &min, &max);
+		get_on_topa(inst, stack, min);
+		execpb(inst, temp, pop(stack));
+	}
+	sort_three(inst, stack);
+	execpa(inst, stack, pop(temp));
+	execpa(inst, stack, pop(temp));
 }
 
 void	sort_stack(t_inst *inst, t_stack *stack, t_stack *temp)
@@ -92,12 +108,15 @@ void	sort_stack(t_inst *inst, t_stack *stack, t_stack *temp)
 			execra(inst, stack);
 		return ;
 	}
-	while (stack->size > 3)
+	if (stack->size == 3)
+		return (sort_three(inst, stack));
+	if (stack->size <= 5)
+		return (sort_five(inst, stack, temp));
+	while (stack->size)
 	{
 		cheapest_index = find_cheapest(stack, temp);
 		move_cheapest(inst, cheapest_index, stack, temp);
 	}
-	sort_three(inst, stack);
 	if (temp->size > 0)
 		repush(inst, stack, temp);
 }

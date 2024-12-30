@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:02:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/28 07:05:58 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/28 10:21:27 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	execsa(t_inst *inst, t_stack *stack);
 
 void	exit_with_error(const char *s);
 void	get_on_top(t_inst *inst, t_stack *stack, int value);
+void	get_on_topa(t_inst *inst, t_stack *stack, int value);
 int		find_cheapest(t_stack *s1, t_stack *s2);
 void	get_borne(t_stack *stack, int *min, int *max);
 int		insertion_index(t_stack *s2, int value);

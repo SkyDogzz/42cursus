@@ -60,4 +60,14 @@ ascii:
 	@echo "PUSH SWAP"
 	@echo $(_END)
 
+test:
+	@for j in $$(seq 3 6); do \
+		echo "j = $$j"; \
+		for i in $$(seq 1 10); do \
+			ARG=$$(shuf -i 1-$$j -n 500 | tr '\n' ' '); \
+			./push_swap $$ARG | wc -l; \
+			./push_swap $$ARG | ./checker_linux $$ARG; \
+		done; \
+	done
+
 .PHONY: all clean fclean re ascii

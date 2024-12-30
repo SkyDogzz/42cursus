@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 05:10:33 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/28 05:30:41 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/28 10:21:08 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,34 @@ void	get_on_top(t_inst *inst, t_stack *stack, int value)
 		i = (int)stack->size - index;
 		while (i--)
 			execrrb(inst, stack);
+	}
+}
+
+void	get_on_topa(t_inst *inst, t_stack *stack, int value)
+{
+	t_node	*node;
+	int		index;
+	int		i;
+
+	node = stack->top;
+	index = 0;
+	while (node)
+	{
+		if (node->value == value)
+			break ;
+		node = node->next;
+		index++;
+	}
+	if (index < (int)stack->size / 2)
+	{
+		i = index;
+		while (i--)
+			execra(inst, stack);
+	}
+	else
+	{
+		i = (int)stack->size - index;
+		while (i--)
+			execrra(inst, stack);
 	}
 }
