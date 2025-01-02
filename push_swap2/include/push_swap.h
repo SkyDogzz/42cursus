@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 03:02:47 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/28 10:21:27 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/30 14:34:14 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,11 @@ int		find_cheapest(t_stack *s1, t_stack *s2);
 void	get_borne(t_stack *stack, int *min, int *max);
 int		insertion_index(t_stack *s2, int value);
 long	ft_atol(const char *s);
+int		find_insert_position(t_node *node, int value, t_stack *s2);
+void	rotate_to_top(t_inst *inst, t_stack *stack, int index, void (*rotate)
+			(t_inst *, t_stack *), void (*rev_rotate)(t_inst *, t_stack *));
+void	move_cheapest(t_inst *inst, int index, t_stack *stack, t_stack *temp);
+t_bool	args_valid(const char *args);
+t_bool	repeat(t_stack *stack);
 
 #endif

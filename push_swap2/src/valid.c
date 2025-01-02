@@ -1,38 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   valid.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 06:07:52 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/30 14:15:49 by tstephan         ###   ########.fr       */
+/*   Created: 2024/12/30 14:33:28 by tstephan          #+#    #+#             */
+/*   Updated: 2024/12/30 14:33:31 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-long	ft_atol(const char *s)
+t_bool	args_valid(const char *args)
 {
-	int		sign;
-	long	nb;
+	while (*args)
+	{
+		if (!ft_isdigit(*args) && !ft_isspace(*args) && *args != '-'
+			&& *args != '+')
+			return (FALSE);
+		args++;
+	}
+	return (TRUE);
+}
 
-	sign = 1;
-	nb = 0;
-	while (ft_isspace((int) *s))
-		s++;
-	if (*s == '-' || *s == '+')
+t_bool	repeat(t_stack *stack)
+{
+	t_node	*cursor;
+	t_node	*act;
+
+	cursor = stack->top;
+	while (cursor)
 	{
-		if (*s == '-')
-			sign = -1;
-		s++;
+		act = cursor->next;
+		while (act)
+		{
+			if (cursor->value == act->value)
+				return (TRUE);
+			act = act->next;
+		}
+		cursor = cursor->next;
 	}
-	if (!ft_isdigit((int) *s))
-		return (LONG_MIN);
-	while (ft_isdigit((int)*s))
-	{
-		nb = nb * 10 + (*s - '0');
-		s++;
-	}
-	return (nb * sign);
+	return (FALSE);
 }

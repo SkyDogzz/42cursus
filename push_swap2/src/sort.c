@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 13:56:05 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/28 10:36:07 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/30 13:10:43 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,6 @@ void	rotate_to_top(t_inst *inst, t_stack *stack, int index, void (*rotate)
 		while (iter--)
 			rev_rotate(inst, stack);
 	}
-}
-
-void	move_cheapest(t_inst *inst, int index, t_stack *stack, t_stack *temp)
-{
-	int	value;
-	int	insert_pos;
-
-	rotate_to_top(inst, stack, index, execra, execrra);
-	value = get_value(stack, 0);
-	insert_pos = insertion_index(temp, value);
-	rotate_to_top(inst, temp, insert_pos, execrb, execrrb);
-	execpb(inst, temp, pop(stack));
 }
 
 void	repush(t_inst *inst, t_stack *stack, t_stack *temp)

@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 05:10:33 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/28 10:21:08 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/30 13:09:49 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,28 +46,6 @@ void	get_borne(t_stack *stack, int *min, int *max)
 			*min = node->value;
 		node = node->next;
 	}
-}
-
-int	find_insert_position(t_node *node, int value, t_stack *s2)
-{
-	const t_node	*next_node;
-	int				i;
-
-	i = 0;
-	while (node)
-	{
-		if (node->next)
-			next_node = node->next;
-		else
-			next_node = s2->top;
-		if ((node->value > value && value > next_node->value)
-			|| (node->value < next_node->value
-				&& (value > next_node->value || value < node->value)))
-			return (i + 1);
-		node = node->next;
-		i++;
-	}
-	return (-1);
 }
 
 int	insertion_index(t_stack *s2, int value)

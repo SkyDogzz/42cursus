@@ -6,7 +6,7 @@
 /*   By: skydogzz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 04:26:37 by skydogzz          #+#    #+#             */
-/*   Updated: 2024/12/28 06:25:11 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/30 14:33:38 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,6 @@ void	strcat_space(char *dest, const char *src)
 		*dest++ = *src++;
 	*dest++ = ' ';
 	*dest = 0;
-}
-
-t_bool	args_valid(const char *args)
-{
-	while (*args)
-	{
-		if (!ft_isdigit(*args) && !ft_isspace(*args) && *args != '-')
-			return (FALSE);
-		args++;
-	}
-	return (TRUE);
 }
 
 void	push_bottom(t_stack *stack, int value)
@@ -65,7 +54,7 @@ t_bool	get_args(t_stack *stack, const char *s)
 	push_bottom(stack, (int)atol);
 	while (*s)
 	{
-		while (*s == '-')
+		while (*s == '-' || *s == '+')
 			s++;
 		while (ft_isdigit(*s))
 			s++;
@@ -95,7 +84,7 @@ t_stack	*parse_args(t_stack *stack, int argc, char *argv[])
 	pos = 0;
 	while (++pos < argc)
 		strcat_space(full, argv[pos]);
-	if (!args_valid(full) || !get_args(stack, full))
+	if (!args_valid(full) || !get_args(stack, full) || repeat(stack))
 	{
 		free(full);
 		free(stack);

@@ -6,7 +6,7 @@
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 05:09:36 by tstephan          #+#    #+#             */
-/*   Updated: 2024/12/28 05:29:21 by tstephan         ###   ########.fr       */
+/*   Updated: 2024/12/30 13:10:57 by tstephan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,40 @@ int	min_rotation_cost(const t_stack *stack, int pos)
 	if (rotate_up <= rotate_down)
 		return (rotate_up);
 	return (rotate_down);
+}
+
+void	move_cheapest(t_inst *inst, int index, t_stack *stack, t_stack *temp)
+{
+	int	value;
+	int	insert_pos;
+
+	rotate_to_top(inst, stack, index, execra, execrra);
+	value = get_value(stack, 0);
+	insert_pos = insertion_index(temp, value);
+	rotate_to_top(inst, temp, insert_pos, execrb, execrrb);
+	execpb(inst, temp, pop(stack));
+}
+
+int	find_insert_position(t_node *node, int value, t_stack *s2)
+{
+	const t_node	*next_node;
+	int				i;
+
+	i = 0;
+	while (node)
+	{
+		if (node->next)
+			next_node = node->next;
+		else
+			next_node = s2->top;
+		if ((node->value > value && value > next_node->value)
+			|| (node->value < next_node->value
+				&& (value > next_node->value || value < node->value)))
+			return (i + 1);
+		node = node->next;
+		i++;
+	}
+	return (-1);
 }
 
 int	calculate_total_cost(const t_stack *s1, t_stack *s2, int value, int index)
