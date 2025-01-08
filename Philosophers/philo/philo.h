@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo.h                                   |  __ \  ___   __ _ ________   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstephan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:02:39 by tstephan          #+#    #+#             */
-/*   Updated: 2025/01/02 12:39:43 by tstephan         ###   ########.fr       */
+/*   Updated: 2025/01/07 20:03:29 by tstephan                |___/            */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ typedef struct s_args
 	long	time_to_sleep;
 	long	nb_each_must_eat;
 }	t_args;
+
+typedef struct s_philo
+{
+	int		id;
+	long	time_to_die;
+	long	time_to_eat;
+	long	time_to_sleep;
+	long	
+}
 
 int		main(int argc, char *argv[]);
 void	exit_with_error(const char *err);
